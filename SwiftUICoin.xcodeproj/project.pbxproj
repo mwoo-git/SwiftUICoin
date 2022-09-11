@@ -11,6 +11,7 @@
 		731086CF28CE285100283FD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086CE28CE285100283FD3 /* ContentView.swift */; };
 		731086D128CE285800283FD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 731086D028CE285800283FD3 /* Assets.xcassets */; };
 		731086D428CE285800283FD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 731086D328CE285800283FD3 /* Preview Assets.xcassets */; };
+		731086DC28CE2CB300283FD3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086DB28CE2CB300283FD3 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		731086CE28CE285100283FD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		731086D028CE285800283FD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		731086D328CE285800283FD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		731086DB28CE2CB300283FD3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		731086CB28CE285100283FD3 /* SwiftUICoin */ = {
 			isa = PBXGroup;
 			children = (
+				731086DA28CE2C6F00283FD3 /* Extensions */,
 				731086CC28CE285100283FD3 /* SwiftUICoinApp.swift */,
 				731086CE28CE285100283FD3 /* ContentView.swift */,
 				731086D028CE285800283FD3 /* Assets.xcassets */,
@@ -65,6 +68,14 @@
 				731086D328CE285800283FD3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		731086DA28CE2C6F00283FD3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				731086DB28CE2CB300283FD3 /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				731086CF28CE285100283FD3 /* ContentView.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
+				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
