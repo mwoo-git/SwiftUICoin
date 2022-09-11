@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State private var showSidebar: Bool = false
+    
     var body: some View {
         ZStack {
             // Background layer
@@ -37,15 +40,23 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView {
     private var homeHeader: some View {
         HStack {
-            IconView(iconName: "person.fill")
+            IconView(iconName: showSidebar ? "arrow.left" : "person.fill")
+                .onTapGesture {
+                    showSidebar.toggle()
+                }
             
             Spacer()
             
-            HStack {
-                IconView(iconName: "magnifyingglass")
-                    .padding(.trailing, -20)
-                
-                IconView(iconName: "qrcode.viewfinder")
+            if showSidebar == false {
+                HStack {
+                    IconView(iconName: "magnifyingglass")
+                        .padding(.trailing, -20)
+                    
+                    IconView(iconName: "qrcode.viewfinder")
+                }
+            } else {
+                IconView(iconName: "sun.min.fill")
+                    .padding(.trailing, 18)
             }
         }
     }
