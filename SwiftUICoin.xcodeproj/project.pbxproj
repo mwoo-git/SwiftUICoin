@@ -15,6 +15,7 @@
 		731086E328CE37D000283FD3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086E228CE37D000283FD3 /* HomeView.swift */; };
 		731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086E628CE3AD900283FD3 /* CircleButtonView.swift */; };
 		731086EC28CE45B200283FD3 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086EB28CE45B200283FD3 /* IconView.swift */; };
+		731086EE28CF106F00283FD3 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086ED28CF106F00283FD3 /* CoinModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		731086E228CE37D000283FD3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		731086E628CE3AD900283FD3 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		731086EB28CE45B200283FD3 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		731086ED28CF106F00283FD3 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +61,9 @@
 		731086CB28CE285100283FD3 /* SwiftUICoin */ = {
 			isa = PBXGroup;
 			children = (
-				731086DE28CE375B00283FD3 /* New Group */,
-				731086DD28CE375100283FD3 /* Core */,
 				731086DA28CE2C6F00283FD3 /* Extensions */,
+				731086DE28CE375B00283FD3 /* Models */,
+				731086DD28CE375100283FD3 /* Core */,
 				731086CC28CE285100283FD3 /* SwiftUICoinApp.swift */,
 				731086CE28CE285100283FD3 /* ContentView.swift */,
 				731086D028CE285800283FD3 /* Assets.xcassets */,
@@ -95,11 +97,12 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		731086DE28CE375B00283FD3 /* New Group */ = {
+		731086DE28CE375B00283FD3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				731086ED28CF106F00283FD3 /* CoinModel.swift */,
 			);
-			path = "New Group";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		731086DF28CE376000283FD3 /* Home */ = {
@@ -227,6 +230,7 @@
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
+				731086EE28CF106F00283FD3 /* CoinModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,7 +40,7 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView {
     private var homeHeader: some View {
         HStack {
-            IconView(iconName: showSidebar ? "arrow.left" : "person.fill")
+            IconView(iconName: showSidebar ? "arrow.left" : "person.circle")
                 .onTapGesture {
                     showSidebar.toggle()
                 }
