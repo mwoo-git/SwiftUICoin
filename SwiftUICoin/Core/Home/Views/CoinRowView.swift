@@ -17,7 +17,7 @@ struct CoinRowView: View {
             Spacer()
             rightColmn
         }
-        .padding(.horizontal)
+        .padding()
     }
 }
 
@@ -31,7 +31,6 @@ struct CoinRowView_Previews: PreviewProvider {
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
-        
     }
 }
 

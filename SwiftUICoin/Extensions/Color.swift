@@ -22,4 +22,6 @@ struct ColorTheme {
     let red = Color("RedColor")
     let secondaryText = Color("SecondaryTextColor")
     let arrowButton = Color("ArrowButtonColor")
+    let sortOption = Color("SortOptionColor")
+    let BinanceColor = Color("BinanceColor")
 }

@@ -19,6 +19,7 @@
 		731086F028CF1D0D00283FD3 /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086EF28CF1D0B00283FD3 /* CoinRowView.swift */; };
 		731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F328CF1E9100283FD3 /* PreviewProvider.swift */; };
 		731086F628CF2DB400283FD3 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F528CF2DB300283FD3 /* Double.swift */; };
+		731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F728CF790900283FD3 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		731086EF28CF1D0B00283FD3 /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		731086F328CF1E9100283FD3 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		731086F528CF2DB300283FD3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		731086F728CF790900283FD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +118,8 @@
 		731086DF28CE376000283FD3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				731086E128CE378300283FD3 /* ViewModels */,
 				731086E028CE377900283FD3 /* Views */,
+				731086E128CE378300283FD3 /* ViewModels */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -134,6 +136,7 @@
 		731086E128CE378300283FD3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				731086F728CF790900283FD3 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				731086F028CF1D0D00283FD3 /* CoinRowView.swift in Sources */,
+				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				731086CF28CE285100283FD3 /* ContentView.swift in Sources */,
 				731086EC28CE45B200283FD3 /* IconView.swift in Sources */,
 				731086E328CE37D000283FD3 /* HomeView.swift in Sources */,
