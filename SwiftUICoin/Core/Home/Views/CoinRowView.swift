@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CoinRowView: View {
     
@@ -38,9 +39,13 @@ extension CoinRowView {
     
     private var leftColumn: some View {
         HStack(alignment: .top, spacing: 0) {
-            Circle()
-                .frame(width: 30, height: 30)
-                .padding(.top, 4)
+            
+            KFImage(URL(string: coin.image))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 32, height: 32)
+                .foregroundColor(.orange)
+                .padding(.top, 6)
                 
             VStack(alignment: .leading, spacing: 4) {
                 Text(coin.symbol.uppercased())
@@ -49,7 +54,7 @@ extension CoinRowView {
                     .foregroundColor(Color.theme.accent)
                     .font(.subheadline)
             }
-            .padding(.leading, 12)
+            .padding(.leading, 14)
         }
     }
     
