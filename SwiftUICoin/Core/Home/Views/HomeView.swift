@@ -56,9 +56,11 @@ extension HomeView {
             
             if !showMenu {
                 HStack {
-                    IconView(iconName: "magnifyingglass")
-                        .padding(.trailing, -20)
-                    
+                    NavigationLink(
+                        destination: SearchView()) {
+                            IconView(iconName: "magnifyingglass")
+                                .padding(.trailing, -20)
+                        }
                     IconView(iconName: "qrcode.viewfinder")
                 }
             } else {
@@ -75,7 +77,7 @@ extension HomeView {
                 Text("Coin")
                     .foregroundColor(Color.white)
                 Capsule()
-                    .fill(Color.theme.BinanceColor)
+                    .fill(Color.theme.binanceColor)
                     .frame(width: 30, height: 3)
             }
             Spacer()

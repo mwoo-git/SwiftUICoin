@@ -12,8 +12,7 @@ struct IconView: View {
     
     var body: some View {
         Image(systemName: iconName)
-            .padding()
-            .foregroundColor(Color.theme.accent)
+            .foregroundColor(Color.theme.iconColor)
             .font(.headline)
             .frame(width: 50, height: 50)
     }
