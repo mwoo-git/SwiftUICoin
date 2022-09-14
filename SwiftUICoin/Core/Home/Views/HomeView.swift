@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
+    @State private var showSearchView: Bool = false
     
     var body: some View {
         ZStack {
@@ -23,9 +24,10 @@ struct HomeView: View {
                 homeHeader
                 listOptionBar
                 sortOptionList
-                allCoinList
+                AllCoinListView(viewModel: viewModel)
                 Spacer(minLength: 0)
             }
+            searchView
         }
     }
 }
@@ -56,10 +58,12 @@ extension HomeView {
             
             if !showMenu {
                 HStack {
-                    NavigationLink(
-                        destination: SearchView()) {
-                            IconView(iconName: "magnifyingglass")
-                                .padding(.trailing, -20)
+                    IconView(iconName: "magnifyingglass")
+                        .padding(.trailing, -20)
+                        .onTapGesture {
+                            withAnimation {
+                                showSearchView.toggle()
+                            }
                         }
                     IconView(iconName: "qrcode.viewfinder")
                 }
@@ -123,13 +127,11 @@ extension HomeView {
         .padding()
     }
     
-    private var allCoinList: some View {
-        ScrollView {
-            VStack {
-                ForEach(viewModel.allCoins) { coin in
-                    CoinRowView(coin: coin)
-                }
-            }
+    private var searchView: some View {
+        GeometryReader {_ in
+            SearchView(showSearchView: $showSearchView)
+                .offset(x: showSearchView ? 0 : UIScreen.main.bounds.width)
+                .animation(.easeInOut(duration: 0.2), value: showSearchView)
         }
     }
 }

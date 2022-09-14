@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @StateObject private var viewModel = HomeViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var showSearchView: Bool
     
     var body: some View {
         ZStack {
@@ -18,7 +18,10 @@ struct SearchView: View {
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 searchBar
-                Spacer()
+                listOptionBar
+                AllCoinListView(viewModel: viewModel)
+                    .padding(.top, 10)
+                Spacer(minLength: 0)
             }
         }
         .navigationBarHidden(true)
@@ -27,7 +30,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(showSearchView: .constant(true))
             .preferredColorScheme(.dark)
     }
 }
@@ -43,10 +46,28 @@ extension SearchView {
                 .foregroundColor(Color.theme.binanceColor)
                 .font(.subheadline)
                 .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
+                    withAnimation {
+                        showSearchView.toggle()
+                    }
                 }
         }
         .padding()
     }
     
+    private var listOptionBar: some View {
+        HStack(alignment: .top, spacing: 30) {
+            VStack() {
+                Text("Markets")
+                    .foregroundColor(Color.white)
+                Capsule()
+                    .fill(Color.theme.binanceColor)
+                    .frame(width: 25, height: 3)
+            }
+            Spacer()
+        }
+        .padding(.top, 10)
+        .padding(.horizontal)
+        .font(.headline)
+        .foregroundColor(Color.theme.accent)
+    }
 }

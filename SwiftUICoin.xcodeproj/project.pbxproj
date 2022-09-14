@@ -25,6 +25,7 @@
 		73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */; };
 		73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */; };
 		73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE728D1EF280041A7C3 /* SearchView.swift */; };
+		73E6BEEA28D21FF10041A7C3 /* AllCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE928D21FF10041A7C3 /* AllCoinListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		73E6BEE728D1EF280041A7C3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		73E6BEE928D21FF10041A7C3 /* AllCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				731086E228CE37D000283FD3 /* HomeView.swift */,
+				73E6BEE928D21FF10041A7C3 /* AllCoinListView.swift */,
 				731086EF28CF1D0B00283FD3 /* CoinRowView.swift */,
 				73E6BEE728D1EF280041A7C3 /* SearchView.swift */,
 			);
@@ -281,6 +284,7 @@
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */,
 				73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */,
+				73E6BEEA28D21FF10041A7C3 /* AllCoinListView.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
 				73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */,
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,
