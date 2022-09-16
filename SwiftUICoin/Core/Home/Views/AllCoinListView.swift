@@ -19,6 +19,12 @@ struct AllCoinListView: View {
                 }
             }
         }
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            UIScrollView.appearance().keyboardDismissMode = .onDrag
+        }
     }
 }
 

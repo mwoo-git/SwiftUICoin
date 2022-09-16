@@ -122,7 +122,6 @@ extension HomeView {
             }
             .font(.system(size: 15, weight: .bold))
             .foregroundColor(Color.theme.accent)
-            
         }
         .padding()
     }

@@ -30,8 +30,12 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(showSearchView: .constant(true))
-            .preferredColorScheme(.dark)
+        Group {
+            SearchView(showSearchView: .constant(true))
+                .preferredColorScheme(.dark)
+            SearchView(showSearchView: .constant(true))
+                .preferredColorScheme(.dark)
+        }
     }
 }
 
@@ -39,13 +43,14 @@ extension SearchView {
     
     private var searchBar: some View {
         HStack {
-            SearchBarView(searchText: $viewModel.searchText)
-                .frame(width: 320)
+            SearchBarView(searchText: $viewModel.searchText, showSearchView: $showSearchView)
             Spacer()
             Text("Cancel")
                 .foregroundColor(Color.theme.binanceColor)
                 .font(.subheadline)
+                .padding(.leading, 5)
                 .onTapGesture {
+                    UIApplication.shared.endEditing()
                     withAnimation {
                         showSearchView.toggle()
                     }
