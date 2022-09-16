@@ -10,16 +10,15 @@ import SwiftUI
 struct SearchBarView: View {
     
     @Binding var searchText: String
-    @Binding var showSearchView: Bool
+    @State private var clearTextField = false
     
     var body: some View {
         HStack(spacing: 0) {
             IconView(iconName: "magnifyingglass")
                 .padding(.vertical, -10)
                 .padding(.horizontal, -5)
-            
-            if !showSearchView {
-                normalTextField
+            if !clearTextField {
+                firstResponderTextField
             } else {
                 firstResponderTextField
             }
@@ -32,10 +31,10 @@ struct SearchBarView: View {
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SearchBarView(searchText: .constant(""), showSearchView: .constant(true))
+            SearchBarView(searchText: .constant(""))
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            SearchBarView(searchText: .constant(""), showSearchView: .constant(true))
+            SearchBarView(searchText: .constant(""))
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
         }
@@ -48,6 +47,11 @@ extension SearchBarView {
             .foregroundColor(Color.white)
             .accentColor(Color.theme.binanceColor)
             .frame(height: 30)
+            .overlay(
+                Image(systemName: "xmark.circle.fill")
+                    .padding()
+                    .foregroundColor(Color.theme.iconColor)
+            )
     }
     
     private var firstResponderTextField: some View {
@@ -63,6 +67,7 @@ extension SearchBarView {
                     .opacity(searchText.isEmpty ? 0.0 : 0.5)
                     .onTapGesture {
                         searchText = ""
+                        clearTextField.toggle()
                     }
                 , alignment: .trailing
             )

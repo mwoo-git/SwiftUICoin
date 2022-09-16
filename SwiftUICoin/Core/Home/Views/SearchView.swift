@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @StateObject private var viewModel = HomeViewModel()
-    @Binding var showSearchView: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
@@ -19,8 +19,10 @@ struct SearchView: View {
             VStack(spacing: 0) {
                 searchBar
                 listOptionBar
-                AllCoinListView(viewModel: viewModel)
-                    .padding(.top, 10)
+                if !viewModel.searchText.isEmpty {
+                    SearchListView(viewModel: viewModel)
+                        .padding(.top, 10)
+                }
                 Spacer(minLength: 0)
             }
         }
@@ -31,9 +33,9 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SearchView(showSearchView: .constant(true))
+            SearchView()
                 .preferredColorScheme(.dark)
-            SearchView(showSearchView: .constant(true))
+            SearchView()
                 .preferredColorScheme(.dark)
         }
     }
@@ -43,7 +45,7 @@ extension SearchView {
     
     private var searchBar: some View {
         HStack {
-            SearchBarView(searchText: $viewModel.searchText, showSearchView: $showSearchView)
+            SearchBarView(searchText: $viewModel.searchText)
             Spacer()
             Text("Cancel")
                 .foregroundColor(Color.theme.binanceColor)
@@ -51,9 +53,7 @@ extension SearchView {
                 .padding(.leading, 5)
                 .onTapGesture {
                     UIApplication.shared.endEditing()
-                    withAnimation {
-                        showSearchView.toggle()
-                    }
+                    presentationMode.wrappedValue.dismiss()
                 }
         }
         .padding()
