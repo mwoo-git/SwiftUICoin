@@ -14,7 +14,8 @@ class HomeViewModel: ObservableObject {
     @Published var searchCoins: [CoinModel] = []
     @Published var portfolioCoins: [CoinModel] = []
     
-    @Published var searchText: String = "" //1. 검색창에서 데이터 받음
+    @Published var searchText: String = ""
+    @Published var totalBalance: String = "$12,345.67"
     
     private let dataService = CoinDataService()
     private var cancellables = Set<AnyCancellable>()
@@ -26,7 +27,7 @@ class HomeViewModel: ObservableObject {
     func addSubscribers() {
         
         // AllCoins Update
-        dataService.$allCoins // Subcriber
+        dataService.$allCoins
             .sink { [weak self] (returnedCoins) in
                 self?.allCoins = returnedCoins
             }
@@ -46,7 +47,7 @@ class HomeViewModel: ObservableObject {
     
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
         
-        // text가 비어있지 않을 때만 더 진행, 비어있다면 StartingCoins를 리턴하라
+        // text가 비어있지 않을 때만 계속 진행, 비어있다면 coins를 리턴하라
         guard !text.isEmpty else {
             return coins
         }

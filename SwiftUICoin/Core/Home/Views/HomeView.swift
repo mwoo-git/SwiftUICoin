@@ -11,6 +11,8 @@ struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
+    @State private var scrollViewOffset: CGFloat = 0
+    @State private var startOffset: CGFloat = 0
     
     var body: some View {
         ZStack {
@@ -20,10 +22,9 @@ struct HomeView: View {
             
             // content layer
             VStack(spacing: 0) {
+                
                 homeHeader
-                listOptionBar
-                sortOptionList
-                AllCoinListView(viewModel: viewModel)
+                homeBody
                 Spacer(minLength: 0)
             }
         }
@@ -68,6 +69,37 @@ extension HomeView {
         }
     }
     
+    private var homeBody: some View {
+        ScrollViewReader {proxyReader in
+            ScrollView() {
+                VStack {
+                    TotalBalanceView()
+                    LazyVStack(pinnedViews: [.sectionHeaders]) {
+                        Section(header: VStack(spacing: 0) {
+                            listOptionBar
+                            sortOptionList
+                        }.background(Color.theme.background)
+                        ) {
+                            AllCoinListView(viewModel: viewModel)
+                        }
+                    }
+                }
+                .id("SCROLL_TO_TOP")
+                .overlay(scrollToTopGeometryReader)
+            }
+            .overlay(
+                scrollToTopButton
+                    .onTapGesture {
+                        withAnimation {
+                            proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
+                        }
+                    }
+                ,alignment: .bottomTrailing
+            )
+        }
+        
+    }
+    
     private var listOptionBar: some View {
         HStack(alignment: .top, spacing: 30) {
             Text("Watchlist")
@@ -81,7 +113,7 @@ extension HomeView {
             Spacer()
         }
         .padding(.horizontal)
-        .padding(.top, 15)
+        .padding(.top, 10)
         .font(.headline)
         .foregroundColor(Color.theme.accent)
     }
@@ -119,4 +151,31 @@ extension HomeView {
         }
         .padding()
     }
+    
+    private var scrollToTopGeometryReader: some View {
+        GeometryReader{proxy -> Color in
+            DispatchQueue.main.async {
+                if startOffset == 0 {
+                    self.startOffset = proxy.frame(in: .global).minY
+                }
+                let offset = proxy.frame(in: .global).minY
+                self.scrollViewOffset = offset - startOffset
+            }
+            return Color.clear
+        }
+    }
+    
+    private var scrollToTopButton: some View {
+        Image(systemName: "arrow.up")
+            .font(.title2)
+            .foregroundColor(Color.white)
+            .frame(width: 40, height: 40)
+            .background(
+                Circle()
+                    .foregroundColor(Color.theme.arrowButton)
+            )
+            .padding(.trailing, 30)
+            .opacity(-scrollViewOffset > 145 ? 1: 0)
+    }
 }
+

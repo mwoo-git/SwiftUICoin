@@ -14,15 +14,13 @@ struct CircleButtonView: View {
     
     var body: some View {
         Image(systemName: iconName)
-            .font(.headline)
+            .font(.subheadline)
             .foregroundColor(Color.white)
-            .frame(width: 50, height: 50)
+            .frame(width: 30, height: 30)
             .background(
                 Circle()
                     .foregroundColor(Color.theme.arrowButton)
             )
-            .padding()
-            
     }
 }
 

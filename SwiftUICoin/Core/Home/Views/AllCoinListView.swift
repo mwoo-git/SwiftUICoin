@@ -12,7 +12,7 @@ struct AllCoinListView: View {
     @StateObject var viewModel: HomeViewModel
     
     var body: some View {
-        ScrollView {
+        ScrollView() {
             // LazyStack은 iOS 14이상부터 지원합니다.
             LazyVStack {
                 ForEach(viewModel.allCoins) { coin in
