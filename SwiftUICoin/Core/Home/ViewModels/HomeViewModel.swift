@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var portfolioCoins: [CoinModel] = []
     @Published var searchText: String = ""
     @Published var totalBalance: String = "$12,345.67"
-    @Published var sortOption: SortOption = .price
+    @Published var sortOption: SortOption = .rank
     
     private let dataService = CoinDataService()
     private var cancellables = Set<AnyCancellable>()
@@ -67,23 +67,6 @@ class HomeViewModel: ObservableObject {
             return coins.sorted(by: { $0.priceChangePercentage24H < $1.priceChangePercentage24H})
         }
     }
-    
-    /*
-     private func sortCoins(coins: [CoinModel], sort: SortOption) -> [CoinModel] {
-         switch sort {
-         case .rank, .holdings:
-             return coins.sorted(by: { $0.rank < $1.rank }) // return과 sorted-> return 삭제, sort로
-         case .price:
-             return coins.sorted(by: { $0.currentPrice < $1.currentPrice })
-         case .pricereversed:
-             return coins.sorted(by: { $0.currentPrice > $1.currentPrice })
-         case .priceChangePercentage24H:
-             return coins.sorted(by: { $0.priceChangePercentage24H < $1.priceChangePercentage24H})
-         case .priceChangePercentage24HReversed:
-             return coins.sorted(by: { $0.priceChangePercentage24H > $1.priceChangePercentage24H})
-         }
-     }
-     */
     
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
         

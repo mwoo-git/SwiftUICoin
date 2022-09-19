@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject private var vm: HomeViewModel
+    @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
     @State private var scrollViewOffset: CGFloat = 0
     @State private var startOffset: CGFloat = 0
@@ -76,10 +76,10 @@ extension HomeView {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         Section(header: VStack(spacing: 0) {
                             listOptionBar
-                            sortOptionBar
+                            SortOptionBarView(viewModel: viewModel)
                         }.background(Color.theme.background)
                         ) {
-                            AllCoinListView(viewModel: vm)
+                            AllCoinListView(viewModel: viewModel)
                         }
                     }
                 }
@@ -96,7 +96,6 @@ extension HomeView {
                 ,alignment: .bottomTrailing
             )
         }
-        
     }
     
     private var listOptionBar: some View {
@@ -115,83 +114,6 @@ extension HomeView {
         .padding(.top, 10)
         .font(.headline)
         .foregroundColor(Color.theme.accent)
-    }
-    
-    private var sortOptionBar: some View {
-        ScrollViewReader { proxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 30) {
-                    HStack(spacing: 0) {
-                        Text("Market Cap")
-                            .foregroundColor((vm.sortOption == .rank) ? Color.white : Color.theme.accent)
-                    }
-                    .id("MARKET_CAP")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 10)
-                    .background(
-                        Capsule()
-                            .fill(vm.sortOption == .rank ? Color.theme.sortOptionSelected : .clear)
-                    )
-                    .onTapGesture {
-                        vm.sortOption = .rank
-                        withAnimation(.easeInOut) {
-                            proxy.scrollTo("MARKET_CAP", anchor: .topLeading)
-                        }
-                    }
-                    
-                    let iconSize = 13
-                    
-                    HStack(spacing: 0) {
-                        Text("Price")
-                            .foregroundColor((vm.sortOption == .price || vm.sortOption == .pricereversed) ? Color.white : Color.theme.accent)
-                        Image(systemName: "arrow.down")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(vm.sortOption == .price ?  Color.white : vm.sortOption == .pricereversed ? Color.theme.background : Color.theme.accent)
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(vm.sortOption == .pricereversed ?  Color.white : vm.sortOption == .price ? Color.theme.background : Color.theme.accent)
-                    }
-                    .padding(.vertical, 3)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 5)
-                    .background(
-                        Capsule()
-                            .fill((vm.sortOption == .price || vm.sortOption == .pricereversed) ? Color.theme.sortOptionSelected : .clear)
-                    )
-                    .onTapGesture {
-                        vm.sortOption = vm.sortOption == .price ? .pricereversed : .price
-                    }
-                    
-                    HStack(spacing: 0) {
-                        Text("24h Change")
-                            .foregroundColor((vm.sortOption == .priceChangePercentage24H || vm.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
-                        Image(systemName: "arrow.down")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(vm.sortOption == .priceChangePercentage24H ?  Color.white : vm.sortOption == .priceChangePercentage24HReversed ? Color.theme.background : Color.theme.accent)
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(vm.sortOption == .priceChangePercentage24HReversed ?  Color.white : vm.sortOption == .priceChangePercentage24H ? Color.theme.background : Color.theme.accent)
-                    }
-                    .id("24H_CHANGE")
-                    .padding(.vertical, 3)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 5)
-                    .background(
-                        Capsule()
-                            .fill((vm.sortOption == .priceChangePercentage24H || vm.sortOption == .priceChangePercentage24HReversed) ? Color.theme.sortOptionSelected : .clear)
-                    )
-                    .onTapGesture {
-                        vm.sortOption = vm.sortOption == .priceChangePercentage24H ? .priceChangePercentage24HReversed : .priceChangePercentage24H
-                        withAnimation(.easeInOut) {
-                            proxy.scrollTo("24H_CHANGE", anchor: .topTrailing)
-                        }
-                    }
-                }
-                .font(.system(size: 15, weight: .bold))
-                .foregroundColor(Color.theme.accent)
-            }
-            .padding()
-        }
     }
     
     private var scrollToTopGeometryReader: some View {

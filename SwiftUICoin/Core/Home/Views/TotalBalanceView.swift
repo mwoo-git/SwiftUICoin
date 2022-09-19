@@ -21,7 +21,6 @@ struct TotalBalanceView: View {
                 Text("$12,345.67")
                     .font(.title)
                     .fontWeight(.semibold)
-                
             }
             Spacer()
             CircleButtonView(iconName: "arrow.right")

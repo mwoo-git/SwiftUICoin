@@ -24,6 +24,7 @@
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
 		7351E62628D5C0E400A8383C /* TotalBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62528D5C0E200A8383C /* TotalBalanceView.swift */; };
 		7367FD5E28D30B1500E050EA /* TradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367FD5D28D30B1500E050EA /* TradingView.swift */; };
+		73C71C6228D84ADE0067167F /* SortOptionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6128D84ADD0067167F /* SortOptionBarView.swift */; };
 		73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEDD28D0B6310041A7C3 /* CoinDataService.swift */; };
 		73E6BEE128D0C3930041A7C3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 73E6BEE028D0C3930041A7C3 /* Kingfisher */; };
 		73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */; };
@@ -51,6 +52,7 @@
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7351E62528D5C0E200A8383C /* TotalBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceView.swift; sourceTree = "<group>"; };
 		7367FD5D28D30B1500E050EA /* TradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingView.swift; sourceTree = "<group>"; };
+		73C71C6128D84ADD0067167F /* SortOptionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionBarView.swift; sourceTree = "<group>"; };
 		73E6BEDD28D0B6310041A7C3 /* CoinDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDataService.swift; sourceTree = "<group>"; };
 		73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				731086E428CE3AAD00283FD3 /* Components */,
 				731086DF28CE376000283FD3 /* Home */,
+				73C71C6328D84D400067167F /* Search */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -152,10 +155,9 @@
 			children = (
 				731086E228CE37D000283FD3 /* HomeView.swift */,
 				7351E62528D5C0E200A8383C /* TotalBalanceView.swift */,
+				73C71C6128D84ADD0067167F /* SortOptionBarView.swift */,
 				73E6BEE928D21FF10041A7C3 /* AllCoinListView.swift */,
-				7351E62328D4D7D000A8383C /* SearchListView.swift */,
 				731086EF28CF1D0B00283FD3 /* CoinRowView.swift */,
-				73E6BEE728D1EF280041A7C3 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +203,23 @@
 				7367FD5D28D30B1500E050EA /* TradingView.swift */,
 			);
 			path = TradingView;
+			sourceTree = "<group>";
+		};
+		73C71C6328D84D400067167F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				73C71C6428D84DC10067167F /* Views */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		73C71C6428D84DC10067167F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73E6BEE728D1EF280041A7C3 /* SearchView.swift */,
+				7351E62328D4D7D000A8383C /* SearchListView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		73E6BEDC28D0B5F00041A7C3 /* Services */ = {
@@ -298,6 +317,7 @@
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
 				73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */,
 				7351E62628D5C0E400A8383C /* TotalBalanceView.swift in Sources */,
+				73C71C6228D84ADE0067167F /* SortOptionBarView.swift in Sources */,
 				7367FD5E28D30B1500E050EA /* TradingView.swift in Sources */,
 				7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */,
 				731086F028CF1D0D00283FD3 /* CoinRowView.swift in Sources */,
