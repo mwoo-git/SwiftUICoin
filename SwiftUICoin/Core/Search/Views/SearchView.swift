@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var viewModel = SearchViewModel()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
