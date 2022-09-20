@@ -9,15 +9,15 @@ import SwiftUI
 
 struct DetailView: View {
     
-    var coin: CoinModel
+    @StateObject var viewModel: DetailViewModel
     
     init(coin: CoinModel) {
-        self.coin = coin
+        _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정
         print("\(coin.name)")
     }
     
     var body: some View {
-        Text(coin.name)
+        Text("안녕")
     }
 }
 
