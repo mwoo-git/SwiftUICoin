@@ -50,6 +50,7 @@ extension CoinRowView {
             VStack(alignment: .leading, spacing: 4) {
                 Text(coin.symbol.uppercased())
                                 .font(.headline)
+                                .foregroundColor(Color.white)
                 Text(coin.name)
                     .foregroundColor(Color.theme.accent)
                     .font(.subheadline)
@@ -63,6 +64,7 @@ extension CoinRowView {
             Text(coin.currentPrice.asCurrencyWith6Decimals())
                 .bold()
                 .font(.headline)
+                .foregroundColor(Color.white)
             Text(coin.priceChangePercentage24H.asPercentString())
                 .foregroundColor((coin.priceChangePercentage24H) >= 0 ? Color.theme.green : Color.theme.red)
                 .font(.subheadline)

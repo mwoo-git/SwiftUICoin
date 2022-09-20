@@ -15,7 +15,10 @@ struct SearchListView: View {
         ScrollView {
             LazyVStack {
                 ForEach(viewModel.searchCoins) { coin in
-                    CoinRowView(coin: coin)
+                    NavigationLink(
+                        destination: NavigationLazyView(DetailView(coin: coin)),
+                        label: { CoinRowView(coin: coin) }
+                    )
                 }
             }
         }

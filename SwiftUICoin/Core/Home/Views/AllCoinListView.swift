@@ -3,7 +3,7 @@
 //  SwiftUICoin
 //
 //  Created by Woo Min on 2022/09/14.
-//
+//  LazyStack은 iOS 14이상부터 지원합니다.
 
 import SwiftUI
 
@@ -13,10 +13,12 @@ struct AllCoinListView: View {
     
     var body: some View {
         ScrollView() {
-            // LazyStack은 iOS 14이상부터 지원합니다.
             LazyVStack {
                 ForEach(viewModel.allCoins) { coin in
-                    CoinRowView(coin: coin)
+                    NavigationLink(
+                        destination: NavigationLazyView(DetailView(coin: coin)),
+                        label: { CoinRowView(coin: coin) }
+                    )
                 }
             }
         }
@@ -29,8 +31,11 @@ struct AllCoinListView: View {
     }
 }
 
-//struct AllCoinListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AllCoinListView()
-//    }
-//}
+struct AllCoinListView_Previews: PreviewProvider {
+    static var previews: some View {
+        AllCoinListView(viewModel: HomeViewModel())
+            .preferredColorScheme(.dark)
+    }
+}
+
+
