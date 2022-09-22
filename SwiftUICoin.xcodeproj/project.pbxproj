@@ -21,6 +21,7 @@
 		731086F628CF2DB400283FD3 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F528CF2DB300283FD3 /* Double.swift */; };
 		731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F728CF790900283FD3 /* HomeViewModel.swift */; };
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
+		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
 		7351E62628D5C0E400A8383C /* TotalBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62528D5C0E200A8383C /* TotalBalanceView.swift */; };
@@ -59,6 +60,7 @@
 		731086F528CF2DB300283FD3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		731086F728CF790900283FD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7351E62528D5C0E200A8383C /* TotalBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				731086F328CF1E9100283FD3 /* PreviewProvider.swift */,
 				731086F528CF2DB300283FD3 /* Double.swift */,
 				7351E62128D389BB00A8383C /* UIApplication.swift */,
+				733517ED28DCC4AA00A9DF37 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,
 				731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */,
 				731086F628CF2DB400283FD3 /* Double.swift in Sources */,
+				733517EE28DCC4AA00A9DF37 /* String.swift in Sources */,
 				731086EE28CF106F00283FD3 /* CoinModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

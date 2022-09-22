@@ -35,11 +35,11 @@ struct DetailView: View {
                             .padding(.bottom, 15)
                         
                         LazyVStack(
-                            pinnedViews: [.sectionFooters]) {
+                            pinnedViews: [.sectionHeaders]) {
                                 Section(header: listOptionBar) {
                                     VStack {
                                         HStack {
-                                            DetailStatsView(viewMdoel: viewModel)
+                                            DetailStatsView(viewModel: viewModel)
                                         }
                                     }
                                 }
@@ -101,7 +101,7 @@ extension DetailView {
             Spacer()
         }
         .padding(.horizontal)
-        .padding(.top, 10)
+        .padding(.top, 15)
         .font(.headline)
         .foregroundColor(Color.theme.accent)
         .background(Color.theme.background)

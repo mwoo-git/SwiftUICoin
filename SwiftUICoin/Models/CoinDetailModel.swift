@@ -119,15 +119,17 @@ struct CoinDetailModel: Codable {
         case blockTimeInMinutes = "block_time_in_minutes"
         case hashingAlgorithm = "hashing_algorithm"
     }
+    
+    var redableDescription: String? {
+        return description?.ko?.removingHTMLOccurance
+    }
 }
 
 struct Links: Codable {
     let homepage: [String]?
-    let subredditURL: String?
     
     enum CodingKeys: String, CodingKey {
         case homepage
-        case subredditURL = "subreddit_url"
     }
 }
 
