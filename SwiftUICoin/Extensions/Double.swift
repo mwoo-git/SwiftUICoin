@@ -9,7 +9,7 @@ import Foundation
 
 extension Double {
     
-    /// Converts a Double into a Currency with 2-6 decimal places
+    /// Converts a Double into a Currency with 0 decimal places
     /// ```
     /// Convert 1234.56 to 1,234
     /// Convert 12.3456 to 12
@@ -33,7 +33,7 @@ extension Double {
         return decimalFormatter.string(from: number) ?? "$0.00"
     }
     
-    /// Converts a Double into a Currency with 2-6 decimal places
+    /// Converts a Double into a Currency with 0 decimal places
     /// ```
     /// Convert 1234.56 to $1,234
     /// Convert 12.3456 to $12

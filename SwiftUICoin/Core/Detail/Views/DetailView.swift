@@ -30,29 +30,7 @@ struct DetailView: View {
                             .frame(width: UIScreen.main.bounds.width)
                             .background(Color.theme.background)
                         
-                        VStack(spacing: 15) {
-                            HStack {
-                                Text("댓글")
-                                    .foregroundColor(Color.white)
-                                Text("175")
-                                    .foregroundColor(Color.theme.accent)
-                                    .font(.subheadline)
-                                    .padding(.leading, 5)
-                                Spacer()
-                                
-                                Image(systemName: "chevron.up.chevron.down")
-                                    .font(.subheadline)
-                            }
-                            HStack {
-                                Circle()
-                                    .foregroundColor(.gray)
-                                    .frame(width: 28, height: 28)
-                                Text("비트코인 더 올라갈까요?")
-                                Spacer()
-                            }
-                        }
-                        .padding()
-                        
+                        comments
                         Divider()
                             .padding(.bottom, 15)
                         
@@ -127,6 +105,31 @@ extension DetailView {
         .font(.headline)
         .foregroundColor(Color.theme.accent)
         .background(Color.theme.background)
+    }
+    
+    private var comments: some View {
+        VStack(spacing: 15) {
+            HStack {
+                Text("댓글")
+                    .foregroundColor(Color.white)
+                Text("175")
+                    .foregroundColor(Color.theme.accent)
+                    .font(.subheadline)
+                    .padding(.leading, 5)
+                Spacer()
+                
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.subheadline)
+            }
+            HStack {
+                Circle()
+                    .foregroundColor(.gray)
+                    .frame(width: 28, height: 28)
+                Text("비트코인 더 올라갈까요?")
+                Spacer()
+            }
+        }
+        .padding()
     }
 }
 

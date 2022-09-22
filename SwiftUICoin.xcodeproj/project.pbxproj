@@ -200,6 +200,7 @@
 				731086EA28CE456A00283FD3 /* Icon */,
 				73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */,
 				73C71C6D28D899CB0067167F /* NavigationLazyView.swift */,
+				733517EB28DC4CDB00A9DF37 /* ChartView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -270,7 +271,6 @@
 				73C71C6B28D86DDD0067167F /* DetailView.swift */,
 				73D7175E28DB43360081CB2D /* DetailStatsView.swift */,
 				73D7175C28DB414A0081CB2D /* StatisticView.swift */,
-				733517EB28DC4CDB00A9DF37 /* ChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
