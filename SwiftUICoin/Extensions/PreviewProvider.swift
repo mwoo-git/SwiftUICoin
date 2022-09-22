@@ -21,6 +21,8 @@ class DeveloperPreview {
     
     private init() { }
     
+    let stat = StatisticModel(title: "Rank", value: "No. 1")
+    
     let homeVM = HomeViewModel()
     
     let coin = CoinModel(

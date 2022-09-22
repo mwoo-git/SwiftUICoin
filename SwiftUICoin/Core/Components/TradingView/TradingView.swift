@@ -10,21 +10,58 @@ import WebKit
 
 struct TradingView: View {
     
+    let symbol: String
     @State private var html = ""
     
     var body: some View {
-        VStack {
-            
-            if html.isEmpty {
-            Text("HTML is Empty")
-                    .frame(width: UIScreen.main.bounds.width, height: 700, alignment: .center)
-                    .background(Color.gray)
-            } else {
-                WebView(html: $html)
-                    .frame(height: 700)
+        WebView(html: $html)
+            .onAppear {
+                html =
+                """
+                <html><head>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,
+                    viewport-fit=cover'>
+                <style>
+                                    body {
+                                        margin: 0;
+                                        background-color: #1F2630;
+                                    }
+                                    .container {
+                                        width: 100vw;
+                                        height: 100vh;
+                                        background: pink;
+                                    }
+                </style>
+                </head>
+                <body>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div id="tradingview_e8bc1"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "autosize": true,
+                  "symbol": "\(symbol)",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "toolbar_bg": "#1F2630",
+                  "enable_publishing": false,
+                  "studies": [
+                    "Volume@tv-basicstudies"
+                  ],
+                  "container_id": "tradingview_e8bc1"
+                }
+                  );
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+                </body></html>
+                """
             }
-            changeButton
-        }
     }
     
     struct WebView: UIViewRepresentable {
@@ -42,80 +79,7 @@ struct TradingView: View {
     
     struct TradingView_Previews: PreviewProvider {
         static var previews: some View {
-            TradingView()
+            TradingView(symbol: "BTC")
         }
-    }
-}
-
-extension TradingView {
-    private var changeButton: some View {
-        Text("Change")
-            .onTapGesture {
-                self.html =
-                """
-                    <html>
-                    <head>
-                        <meta name='viewport' content='initial-scale=1, viewport-fit=cover'>
-                        <style>
-                            body {
-                                margin: 0;
-                            }
-
-                            .container {
-                                width: 100vw;
-                                height: 100vh;
-                                background: pink;
-                            }
-                        </style>
-                    </head>
-                    <body style='background: white;'>
-                        <!-- TradingView Widget BEGIN -->
-                        <div class="tradingview-widget-container">
-                            <div id="tradingview_fe825">
-                            </div>
-                            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                            <script type="text/javascript">
-                                new TradingView.widget({
-                                    "autosize": true,
-                                    "symbol": "\("BTC")USDT",
-                                    "interval": "D",
-                                    "timezone": "Etc/UTC",
-                                    "theme": "dark",
-                                    "style": "1",
-                                    "locale": "en",
-                                    "toolbar_bg": "#f1f3f6",
-                                    "enable_publishing": false,
-                                    "allow_symbol_change": true,
-                                    "studies": [{
-                                            id: "MASimple@tv-basicstudies",
-                                            inputs: {
-                                                length: 7
-                                            }
-                                        },
-                                        {
-                                            id: "MASimple@tv-basicstudies",
-                                            inputs: {
-                                                length: 25
-                                            }
-                                        },
-                                        {
-                                            id: "MASimple@tv-basicstudies",
-                                            inputs: {
-                                                length: 99
-                                            }
-                                        },
-                                        {
-                                            id: "Volume@tv-basicstudies"
-                                        }
-                                    ],
-                                    "container_id": "tradingview_a345a"
-                                });
-                            </script>
-                        </div>
-                        <!-- TradingView Widget END -->
-                    </body>
-                    </html>
-                """
-            }
     }
 }
