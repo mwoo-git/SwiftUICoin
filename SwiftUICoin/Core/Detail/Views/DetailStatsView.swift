@@ -13,51 +13,12 @@ struct DetailStatsView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Rank")
-                    .foregroundColor(Color.theme.accent)
-                Spacer()
-                HStack(alignment: .lastTextBaseline) {
-                    Image(systemName: "chart.bar.xaxis")
-                        .foregroundColor(Color.theme.binanceColor)
-                        .font(.subheadline)
-                    Text("No. \(viewModel.coin.rank)")
-                }
-                
-            }
-            .padding()
+            rank
             ForEach(viewModel.statistics) { stat in
                 StatisticView(stat: stat)
             }
-            HStack {
-                Text("Explorer")
-                    .foregroundColor(Color.theme.accent)
-                Spacer()
-                HStack(alignment: .firstTextBaseline) {
-                    if let websiteString = viewModel.websiteURL,
-                       let url = URL(string: websiteString) {
-                        Link("Website", destination: url)
-                    }
-                    Image(systemName: "arrow.up.forward.square")
-                        .font(.subheadline)
-                }
-                .foregroundColor(Color.theme.binanceColor)
-                
-            }
-            .padding()
-            VStack {
-                HStack {
-                    Text("Introduction")
-                        .foregroundColor(Color.theme.accent)
-                    Spacer()
-                }
-                .padding(.bottom)
-                
-                if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
-                    Text(coinDescription)
-                }
-            }
-            .padding()
+            explorer
+            introduction
         }
     }
 }
@@ -72,5 +33,56 @@ struct DetailStatsView_Previews: PreviewProvider {
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
         }
+    }
+}
+
+extension DetailStatsView {
+    private var rank: some View {
+        HStack {
+            Text("Rank")
+                .foregroundColor(Color.theme.accent)
+            Spacer()
+            HStack(alignment: .lastTextBaseline) {
+                Image(systemName: "chart.bar.xaxis")
+                    .foregroundColor(Color.theme.binanceColor)
+                    .font(.subheadline)
+                Text("No. \(viewModel.coin.rank)")
+            }
+        }
+        .padding()
+    }
+    
+    private var explorer: some View {
+        HStack {
+            Text("Explorer")
+                .foregroundColor(Color.theme.accent)
+            Spacer()
+            HStack(alignment: .firstTextBaseline) {
+                if let websiteString = viewModel.websiteURL,
+                   let url = URL(string: websiteString) {
+                    Link("Website", destination: url)
+                }
+                Image(systemName: "arrow.up.forward.square")
+                    .font(.subheadline)
+            }
+            .foregroundColor(Color.theme.binanceColor)
+        }
+        .padding()
+    }
+    
+    private var introduction: some View {
+        VStack {
+            HStack {
+                Text("Introduction")
+                    .foregroundColor(Color.theme.accent)
+                Spacer()
+            }
+            .padding(.bottom)
+            
+            if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
+                Text(coinDescription)
+            }
+        }
+        .padding()
     }
 }

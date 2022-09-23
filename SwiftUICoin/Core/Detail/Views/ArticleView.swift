@@ -8,13 +8,39 @@
 import SwiftUI
 
 struct ArticleView: View {
+    
+    let article: ArticleModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            VStack(alignment: .leading, spacing: 0) {
+                Text(article.title)
+                    .foregroundColor(Color.white)
+                Spacer()
+                HStack(alignment: .firstTextBaseline) {
+                    Text(article.author)
+                    Text("｜")
+                    Text(article.date)
+                    Spacer()
+                }
+                .foregroundColor(Color.theme.accent)
+                .font(.subheadline)
+            }
+            .frame(height: 90)
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+            Divider()
+                .padding(.leading)
+                .padding(.bottom, 5)
+                .foregroundColor(Color.theme.accent)
+        }
     }
 }
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleView()
+        ArticleView(article: dev.article)
+            .preferredColorScheme(.dark)
+            .previewLayout(.sizeThatFits)
     }
 }

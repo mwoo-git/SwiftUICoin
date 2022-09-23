@@ -11,16 +11,19 @@ import Combine
 class DetailViewModel: ObservableObject {
     
     @Published var statistics: [StatisticModel] = []
+    @Published var articles: [ArticleModel] = []
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
     
     @Published var coin: CoinModel
-    private let coinDatailSecvice: CoinDetailDataService
+    private let coinDatailService: CoinDetailDataService
+    private let coinDetailNewsService: ArticleDataService
     private var cancellables = Set<AnyCancellable>()
     
     init(coin: CoinModel) {
         self.coin = coin
-        self.coinDatailSecvice = CoinDetailDataService(coin: coin)
+        self.coinDatailService = CoinDetailDataService(coin: coin)
+        self.coinDetailNewsService = ArticleDataService(coin: coin)
         self.addSubscribers()
     }
     
@@ -33,10 +36,16 @@ class DetailViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        coinDatailSecvice.$coinDateils
+        coinDatailService.$coinDateils
             .sink { [weak self] (returnedCoinDetails) in
                 self?.coinDescription = returnedCoinDetails?.redableDescription
                 self?.websiteURL = returnedCoinDetails?.links?.homepage?.first
+            }
+            .store(in: &cancellables)
+        
+        coinDetailNewsService.$articles
+            .sink { [weak self] (returnedArticles) in
+                self?.articles = returnedArticles
             }
             .store(in: &cancellables)
     }

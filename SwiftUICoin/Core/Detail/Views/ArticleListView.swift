@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct ArticleListView: View {
+    
+    @StateObject var viewModel: DetailViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ForEach(viewModel.articles) { news in
+                ArticleView(article: news)
+            }
+        }
+        .padding(.top)
     }
 }
 
 struct ArticleListView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleListView()
+        ArticleListView(viewModel: DetailViewModel(coin: dev.coin))
+            .preferredColorScheme(.dark)
     }
 }

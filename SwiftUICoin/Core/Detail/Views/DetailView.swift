@@ -11,6 +11,7 @@ import Kingfisher
 struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
+    @State private var showNews: Bool = true
     @Environment(\.presentationMode) var presentationMode
     
     init(coin: CoinModel) {
@@ -25,26 +26,11 @@ struct DetailView: View {
                 datailHeader
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        TradingView(symbol: Binance.usdt.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USDT" : "\(viewModel.coin.symbol.uppercased())USD")
-                            .frame(height: 480)
-                            .frame(width: UIScreen.main.bounds.width)
-                            .background(Color.theme.background)
-                        
+                        tradingView
                         comments
                         Divider()
                             .padding(.bottom, 15)
-                        
-                        LazyVStack(
-                            pinnedViews: [.sectionHeaders]) {
-                                Section(header: listOptionBar) {
-                                    VStack {
-                                        HStack {
-                                            DetailStatsView(viewModel: viewModel)
-                                        }
-                                    }
-                                }
-                            }
-                            .background(Color.theme.background)
+                        info
                         Spacer()
                     }
                     .navigationBarHidden(true)
@@ -88,15 +74,34 @@ extension DetailView {
         .background(Color.theme.coinDetailBackground)
     }
     
+    private var tradingView: some View {
+        TradingView(symbol: NotUsdt.usd.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USD" : "\(viewModel.coin.symbol.uppercased())USDT")
+            .frame(height: 480)
+            .frame(width: UIScreen.main.bounds.width)
+            .background(Color.theme.background)
+    }
+    
     private var listOptionBar: some View {
         HStack(alignment: .top, spacing: 30) {
-            Text("News")
+            VStack {
+                Text("News")
+                    .foregroundColor(showNews ? Color.white : Color.theme.accent)
+                Capsule()
+                    .fill(showNews ? Color.theme.binanceColor : .clear)
+                    .frame(width: 30, height: 3)
+            }
+            .onTapGesture {
+                showNews.toggle()
+            }
             VStack() {
                 Text("About \(viewModel.coin.symbol.uppercased())")
-                    .foregroundColor(Color.white)
+                    .foregroundColor(!showNews ? Color.white : Color.theme.accent)
                 Capsule()
-                    .fill(Color.theme.binanceColor)
+                    .fill(!showNews ? Color.theme.binanceColor : .clear)
                     .frame(width: 30, height: 3)
+            }
+            .onTapGesture {
+                showNews.toggle()
             }
             Spacer()
         }
@@ -128,11 +133,30 @@ extension DetailView {
                 Text("비트코인 더 올라갈까요?")
                 Spacer()
             }
+            .padding(.bottom, 5)
         }
         .padding()
     }
+    
+    private var info: some View {
+        LazyVStack(
+            pinnedViews: [.sectionHeaders]) {
+                Section(header: listOptionBar) {
+                    VStack {
+                        HStack {
+                            if showNews {
+                                ArticleListView(viewModel: viewModel)
+                            } else {
+                                DetailStatsView(viewModel: viewModel)
+                            }
+                        }
+                    }
+                }
+            }
+            .background(Color.theme.background)
+    }
 }
 
-struct Binance {
-    static let usdt: [String] = ["btc", "eth", "bnb"]
+struct NotUsdt{
+    static let usd: [String] = ["usdt", "usdc", "busd"]
 }
