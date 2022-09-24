@@ -1,5 +1,5 @@
 //
-//  CoinDetailNewsDataService.swift
+//  ArticleDataService.swift
 //  SwiftUICoin
 //
 //  Created by Woo Min on 2022/09/23.
@@ -17,19 +17,16 @@ class ArticleDataService {
     
     init(coin: CoinModel) {
         self.coin = coin
-        getCoinNews()
+        getArticles()
     }
     
-    private func getCoinNews() {
+    private func getArticles() {
         
         guard let url = URL(string: "https://www.blockmedia.co.kr/?s=\(coin.symbol)") else { return }
-        var request = URLRequest(url: url)
-        request.setValue("Mozilla/5.0", forHTTPHeaderField: "User-Agent")
-        print(request)
-        self.cancellableTask?.cancel() //cancel last subscription to prevent race condition
-        self.cancellableTask = URLSession.shared.dataTaskPublisher(for: request)
+        self.cancellableTask?.cancel()
+        self.cancellableTask = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
-            .map(\.data) //extract Data() from tuple
+            .map(\.data)
             .flatMap(htmlScrapUtlity.scrapArticle(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in

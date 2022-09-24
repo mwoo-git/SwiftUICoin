@@ -12,9 +12,9 @@ struct ArticleListView: View {
     @StateObject var viewModel: DetailViewModel
     
     var body: some View {
-        VStack {
-            ForEach(viewModel.articles) { news in
-                ArticleView(article: news)
+        LazyVStack {
+            ForEach(viewModel.articles) { article in
+                ArticleView(article: article)
             }
         }
         .padding(.top)
