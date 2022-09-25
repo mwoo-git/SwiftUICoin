@@ -57,15 +57,17 @@ extension DetailStatsView {
             Text("Explorer")
                 .foregroundColor(Color.theme.accent)
             Spacer()
-            HStack(alignment: .firstTextBaseline) {
-                if let websiteString = viewModel.websiteURL,
-                   let url = URL(string: websiteString) {
-                    Link("Website", destination: url)
+            if let websiteString = viewModel.websiteURL,
+               !websiteString.isEmpty {
+                HStack {
+                    NavigationLink(destination: CoinWebView(viewModel: viewModel)) {
+                        Text("Website")
+                    }
+                    Image(systemName: "arrow.up.forward.square")
+                        .font(.subheadline)
                 }
-                Image(systemName: "arrow.up.forward.square")
-                    .font(.subheadline)
+                .foregroundColor(Color.theme.binanceColor)
             }
-            .foregroundColor(Color.theme.binanceColor)
         }
         .padding()
     }

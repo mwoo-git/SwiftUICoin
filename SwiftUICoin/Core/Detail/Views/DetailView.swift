@@ -25,7 +25,7 @@ struct DetailView: View {
             VStack(spacing: 0) {
                 datailHeader
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .center, spacing: 0) {
                         tradingView
                         comments
                         Divider()
@@ -33,13 +33,12 @@ struct DetailView: View {
                         info
                         Spacer()
                     }
-                    .navigationBarHidden(true)
                 }
             }
         }
+        .navigationBarHidden(true)
     }
 }
-
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
@@ -64,7 +63,6 @@ extension DetailView {
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.orange)
-                
                 Text(viewModel.coin.symbol.uppercased())
                     .bold()
             }
@@ -76,7 +74,7 @@ extension DetailView {
     
     private var tradingView: some View {
         TradingView(symbol: NotUsdt.usd.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USD" : "\(viewModel.coin.symbol.uppercased())USDT")
-            .frame(height: 480)
+            .frame(height: UIScreen.main.bounds.height / 1.75)
             .frame(width: UIScreen.main.bounds.width)
             .background(Color.theme.background)
     }

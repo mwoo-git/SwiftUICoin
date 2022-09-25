@@ -13,7 +13,6 @@ struct TradingView: View {
     let symbol: String
     @State private var html = ""
     
-    
     var body: some View {
         
         WebView(html: $html)
@@ -75,6 +74,7 @@ struct TradingView: View {
         func updateUIView(_ webView: WKWebView, context: Context) {
             webView.loadHTMLString(html, baseURL: nil)
             webView.scrollView.isScrollEnabled = false
+            webView.isOpaque = false
         }
     }
     

@@ -16,6 +16,7 @@ struct ArticleView: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(article.title)
                     .foregroundColor(Color.white)
+                    .multilineTextAlignment(.leading)
                 Spacer()
                 HStack(alignment: .firstTextBaseline) {
                     Text(article.author)

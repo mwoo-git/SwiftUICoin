@@ -12,9 +12,11 @@ struct ArticleListView: View {
     @StateObject var viewModel: DetailViewModel
     
     var body: some View {
-        LazyVStack {
+        LazyVStack(alignment: .leading) {
             ForEach(viewModel.articles) { article in
-                ArticleView(article: article)
+                NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
+                    ArticleView(article: article)
+                }
             }
         }
         .padding(.top)
