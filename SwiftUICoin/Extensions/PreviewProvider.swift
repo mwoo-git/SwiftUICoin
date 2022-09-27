@@ -21,6 +21,8 @@ class DeveloperPreview {
     
     private init() { }
     
+    let nft = NftModel(rank: "1", url: "https://opensea.io/collection/bvdcats", image: "https://i.seadn.io/gae/SdpY8dCNgOWZJI3InTapwx_Day4CgRw1xJK_v1emooqmVAkgzF2rUc-dP9E37oeC9j_diRaa3ZA5yx7urMfO0KnCRNmwAvRtgO5k?w=500&auto=format", name: "BVDCATs", floorPrice: "10 SOL", volume: "7,483 SOL", volumeChangePercentage: "+163%")
+    
     let stat = StatisticModel(title: "Rank", value: "No. 1")
     
     let article = ArticleModel(url: "https://www.blockmedia.co.kr/archives/258270", title: "거래소 BTC 입금 수, 2년래 최저", date: "2022년 9월 22일 오후 12:25", author: "Coinness")
@@ -223,7 +225,6 @@ class DeveloperPreview {
             57336.828870254896
             
         ]),
-        priceChangePercentage24HInCurrency: 3952.64,
-        currentHoldings: 1.5)
+        priceChangePercentage24HInCurrency: 3952.64)
     
 }

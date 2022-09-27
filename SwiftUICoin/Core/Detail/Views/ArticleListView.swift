@@ -23,9 +23,9 @@ struct ArticleListView: View {
     }
 }
 
-struct ArticleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArticleListView(viewModel: DetailViewModel(coin: dev.coin))
-            .preferredColorScheme(.dark)
-    }
-}
+//struct ArticleListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ArticleListView(viewModel: DetailViewModel(coin: dev.coin))
+//            .preferredColorScheme(.dark)
+//    }
+//}

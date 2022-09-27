@@ -12,7 +12,6 @@ import Kingfisher
 struct ArticleWebView: View {
     
     let article: ArticleModel
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,12 +31,7 @@ struct ArticleWebView_Previews: PreviewProvider {
 extension ArticleWebView {
     private var webViewHeader: some View {
         HStack {
-            IconView(iconName: "arrow.left")
-                .onTapGesture {
-                    withAnimation() {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }
+            BackButtonView()
             Text(article.title)
                 .lineLimit(1)
                 .font(.headline)

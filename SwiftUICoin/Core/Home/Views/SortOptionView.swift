@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct SortOptionBarView: View {
-    @StateObject var viewModel: HomeViewModel
+struct SortOptionView: View {
+    
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -91,9 +92,9 @@ struct SortOptionBarView: View {
 struct SortOptionBarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SortOptionBarView(viewModel: HomeViewModel())
+            SortOptionView()
                 .previewLayout(.sizeThatFits)
-            SortOptionBarView(viewModel: HomeViewModel())
+            SortOptionView()
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }

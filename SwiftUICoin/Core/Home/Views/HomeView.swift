@@ -16,17 +16,12 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            // Background layer
-            Color.theme.background
-                .ignoresSafeArea()
-            
-            // content layer
             VStack(spacing: 0) {
                 homeHeader
                 homeBody
-                Spacer(minLength: 0)
             }
         }
+        .background(Color.theme.background.ignoresSafeArea())
     }
 }
 
@@ -72,14 +67,19 @@ extension HomeView {
         ScrollViewReader {proxyReader in
             ScrollView() {
                 VStack {
-                    TotalBalanceView()
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         Section(header: VStack(spacing: 0) {
-                            listOptionBar
-                            SortOptionBarView(viewModel: viewModel)
+                            ListOptionView()
+                            if viewModel.listOption == .coin {
+                                SortOptionView()
+                            }
                         }.background(Color.theme.background)
                         ) {
-                            AllCoinListView(viewModel: viewModel)
+                            if viewModel.listOption == .watchlist {
+                                WatchCoinListView()
+                            } else {
+                                AllCoinListView()
+                            }
                         }
                     }
                 }
@@ -95,25 +95,10 @@ extension HomeView {
                     }
                 ,alignment: .bottomTrailing
             )
-        }
-    }
-    
-    private var listOptionBar: some View {
-        HStack(alignment: .top, spacing: 30) {
-            Text("Watchlist")
-            VStack() {
-                Text("Coin")
-                    .foregroundColor(Color.white)
-                Capsule()
-                    .fill(Color.theme.binanceColor)
-                    .frame(width: 30, height: 3)
+            .onChange(of: viewModel.listOption) { _ in
+                proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
             }
-            Spacer()
         }
-        .padding(.horizontal)
-        .padding(.top, 10)
-        .font(.headline)
-        .foregroundColor(Color.theme.accent)
     }
     
     private var scrollToTopGeometryReader: some View {

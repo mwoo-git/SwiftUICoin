@@ -19,7 +19,6 @@ import Kingfisher
 struct CoinWebView: View {
 
     @StateObject var viewModel: DetailViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -39,12 +38,7 @@ struct CoinWebView_Previews: PreviewProvider {
 extension CoinWebView {
     private var header: some View {
         HStack {
-            IconView(iconName: "arrow.left")
-                .onTapGesture {
-                    withAnimation() {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }
+            BackButtonView()
             Spacer()
             HStack {
                 KFImage(URL(string: viewModel.coin.image))

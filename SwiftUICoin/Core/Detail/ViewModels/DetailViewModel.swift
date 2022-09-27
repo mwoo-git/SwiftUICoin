@@ -14,11 +14,16 @@ class DetailViewModel: ObservableObject {
     @Published var articles: [ArticleModel] = []
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
+    @Published var infoOption: InfoOption = .news
     
     @Published var coin: CoinModel
     private let coinDatailService: CoinDetailDataService
     private let coinDetailNewsService: ArticleDataService
     private var cancellables = Set<AnyCancellable>()
+    
+    enum InfoOption {
+        case news, about
+    }
     
     init(coin: CoinModel) {
         self.coin = coin

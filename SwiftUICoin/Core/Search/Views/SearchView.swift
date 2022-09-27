@@ -13,19 +13,16 @@ struct SearchView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
-            VStack(spacing: 0) {
-                searchBar
-                listOptionBar
-                if !viewModel.searchText.isEmpty {
-                    SearchListView(viewModel: viewModel)
-                        .padding(.top, 10)
-                }
-                Spacer(minLength: 0)
+        VStack(spacing: 0) {
+            searchBar
+            listOptionBar
+            if !viewModel.searchText.isEmpty {
+                SearchListView(viewModel: viewModel)
+                    .padding(.top, 10)
             }
+            Spacer()
         }
+        .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
     }
 }

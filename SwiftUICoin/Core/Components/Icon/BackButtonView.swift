@@ -1,0 +1,28 @@
+//
+//  BackButtonView.swift
+//  SwiftUICoin
+//
+//  Created by Woo Min on 2022/09/27.
+//
+
+import SwiftUI
+
+struct BackButtonView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        IconView(iconName: "arrow.left")
+            .onTapGesture {
+                withAnimation() {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
+    }
+}
+
+struct BackButtonView_Previews: PreviewProvider {
+    static var previews: some View {
+        BackButtonView()
+    }
+}

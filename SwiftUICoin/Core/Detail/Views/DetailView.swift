@@ -11,31 +11,23 @@ import Kingfisher
 struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
-    @State private var showNews: Bool = true
-    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     
     init(coin: CoinModel) {
         _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정
     }
     
     var body: some View {
-        ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
-            VStack(spacing: 0) {
-                datailHeader
-                ScrollView {
-                    VStack(alignment: .center, spacing: 0) {
-                        tradingView
-                        comments
-                        Divider()
-                            .padding(.bottom, 15)
-                        info
-                        Spacer()
-                    }
+        VStack(spacing: 0) {
+            header
+            ScrollView {
+                VStack(alignment: .center, spacing: 0) {
+                    tradingView
+                    info
                 }
             }
         }
+        .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
     }
 }
@@ -48,14 +40,9 @@ struct DetailView_Previews: PreviewProvider {
 }
 
 extension DetailView {
-    private var datailHeader: some View {
+    private var header: some View {
         HStack {
-            IconView(iconName: "arrow.left")
-                .onTapGesture {
-                    withAnimation() {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
+            BackButtonView()
             Spacer()
             HStack() {
                 KFImage(URL(string: viewModel.coin.image))
@@ -67,39 +54,45 @@ extension DetailView {
                     .bold()
             }
             Spacer()
-            IconView(iconName: "star.fill")
+            Image(systemName: homeViewModel.watchlistCoins.contains(where: { $0.id == viewModel.coin.id }) ? "star.fill" : "star")
+                .foregroundColor(homeViewModel.watchlistCoins.contains(where: { $0.id == viewModel.coin.id }) ? Color.theme.binanceColor : Color.theme.accent)
+                .padding()
+                .onTapGesture {
+                    homeViewModel.updateWatchlist(coin: viewModel.coin)
+                }
         }
         .background(Color.theme.coinDetailBackground)
     }
     
     private var tradingView: some View {
-        TradingView(symbol: NotUsdt.usd.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USD" : "\(viewModel.coin.symbol.uppercased())USDT")
+        TradingView(symbol: Usd.usd.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USD" : "\(viewModel.coin.symbol.uppercased())USDT")
             .frame(height: UIScreen.main.bounds.height / 1.75)
             .frame(width: UIScreen.main.bounds.width)
+            .padding(.bottom)
             .background(Color.theme.background)
     }
     
-    private var listOptionBar: some View {
+    private var listOption: some View {
         HStack(alignment: .top, spacing: 30) {
             VStack {
                 Text("News")
-                    .foregroundColor(showNews ? Color.white : Color.theme.accent)
+                    .foregroundColor(viewModel.infoOption == .news ? Color.white : Color.theme.accent)
                 Capsule()
-                    .fill(showNews ? Color.theme.binanceColor : .clear)
+                    .fill(viewModel.infoOption == .news ? Color.theme.binanceColor : .clear)
                     .frame(width: 30, height: 3)
             }
             .onTapGesture {
-                showNews.toggle()
+                viewModel.infoOption = .news
             }
             VStack() {
                 Text("About \(viewModel.coin.symbol.uppercased())")
-                    .foregroundColor(!showNews ? Color.white : Color.theme.accent)
+                    .foregroundColor(viewModel.infoOption == .about ? Color.white : Color.theme.accent)
                 Capsule()
-                    .fill(!showNews ? Color.theme.binanceColor : .clear)
+                    .fill(viewModel.infoOption == .about ? Color.theme.binanceColor : .clear)
                     .frame(width: 30, height: 3)
             }
             .onTapGesture {
-                showNews.toggle()
+                viewModel.infoOption = .about
             }
             Spacer()
         }
@@ -110,39 +103,13 @@ extension DetailView {
         .background(Color.theme.background)
     }
     
-    private var comments: some View {
-        VStack(spacing: 15) {
-            HStack {
-                Text("댓글")
-                    .foregroundColor(Color.white)
-                Text("175")
-                    .foregroundColor(Color.theme.accent)
-                    .font(.subheadline)
-                    .padding(.leading, 5)
-                Spacer()
-                
-                Image(systemName: "chevron.up.chevron.down")
-                    .font(.subheadline)
-            }
-            HStack {
-                Circle()
-                    .foregroundColor(.gray)
-                    .frame(width: 28, height: 28)
-                Text("비트코인 더 올라갈까요?")
-                Spacer()
-            }
-            .padding(.bottom, 5)
-        }
-        .padding()
-    }
-    
     private var info: some View {
         LazyVStack(
             pinnedViews: [.sectionHeaders]) {
-                Section(header: listOptionBar) {
+                Section(header: listOption) {
                     VStack {
                         HStack {
-                            if showNews {
+                            if viewModel.infoOption == .news {
                                 ArticleListView(viewModel: viewModel)
                             } else {
                                 DetailStatsView(viewModel: viewModel)
@@ -155,6 +122,6 @@ extension DetailView {
     }
 }
 
-struct NotUsdt{
+struct Usd {
     static let usd: [String] = ["usdt", "usdc", "busd"]
 }
