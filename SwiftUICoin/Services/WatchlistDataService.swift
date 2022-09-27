@@ -27,6 +27,14 @@ class WatchlistDataService {
     
     // MARK: PUBLIC
     
+    func isWatchlistExists(coin: CoinModel) -> Bool {
+        if savedEntities.first(where: {$0.coinID == coin.id }) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func updateWatchlist(coin: CoinModel) {
         // saveEntities 어레이에 저장된 객체 중에 coinID와 coin.id가 같은 객체가 있다면 그 중 첫번째를 가져와서 저장하고 진행하라. (first(where:)는 조건에 부합하는 첫번재 원소를 가져옵니다.)
         if let entity = savedEntities.first(where: {$0.coinID == coin.id }) {

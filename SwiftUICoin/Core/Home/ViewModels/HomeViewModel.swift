@@ -12,6 +12,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var allCoins: [CoinModel] = []
     @Published var watchlistCoins: [CoinModel] = []
+    @Published var reloadWatchCoins: [CoinModel] = []
     @Published var portfolioCoins: [CoinModel] = []
     @Published var sortOption: SortOption = .rank
     @Published var listOption: ListOption = .coin
@@ -43,14 +44,24 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        // Update watchlist
         $allCoins
             .combineLatest(watchlistDataService.$savedEntities)
             .map(convertCoins)
             .sink { [weak self] (returnCoins) in
                 self?.watchlistCoins = returnCoins
+                print("Success")
             }
             .store(in: &cancellables)
+        
+    }
+    
+    // reloadWatchlist
+    func reloadWatchlist() {
+        reloadWatchCoins = watchlistCoins
+    }
+    
+    func isWatchlistExists(coin: CoinModel) -> Bool {
+        watchlistDataService.isWatchlistExists(coin: coin)
     }
     
     // Update Watchlist (Delete or add)

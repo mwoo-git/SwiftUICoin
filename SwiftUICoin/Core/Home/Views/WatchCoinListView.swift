@@ -14,13 +14,16 @@ struct WatchCoinListView: View {
     var body: some View {
         ScrollView() {
             LazyVStack {
-                ForEach(viewModel.watchlistCoins) { coin in
+                ForEach(viewModel.reloadWatchCoins) { coin in
                     NavigationLink(
                         destination: NavigationLazyView(DetailView(coin: coin)),
                         label: { CoinRowView(coin: coin) }
                     )
                 }
             }
+        }
+        .onAppear {
+            viewModel.reloadWatchlist()
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
