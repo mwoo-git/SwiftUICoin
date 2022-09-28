@@ -26,6 +26,8 @@
 		7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472328E2056800F1719E /* WatchlistDataService.swift */; };
 		7334472828E2653F00F1719E /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472728E2653F00F1719E /* BackButtonView.swift */; };
 		7334472A28E26DB800F1719E /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472928E26DB800F1719E /* CommentView.swift */; };
+		7334472E28E37D6D00F1719E /* MyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472D28E37D6B00F1719E /* MyTabView.swift */; };
+		7334473028E4887200F1719E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472F28E4887200F1719E /* UIImage.swift */; };
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
 		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
@@ -84,6 +86,8 @@
 		7334472328E2056800F1719E /* WatchlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataService.swift; sourceTree = "<group>"; };
 		7334472728E2653F00F1719E /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		7334472928E26DB800F1719E /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		7334472D28E37D6B00F1719E /* MyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabView.swift; sourceTree = "<group>"; };
+		7334472F28E4887200F1719E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				7351E62128D389BB00A8383C /* UIApplication.swift */,
 				733517ED28DCC4AA00A9DF37 /* String.swift */,
 				73B9563128DF03BC00DD4A9F /* UIColor.swift */,
+				7334472F28E4887200F1719E /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				731086DF28CE376000283FD3 /* Home */,
 				73C71C6328D84D400067167F /* Search */,
 				73C71C6828D86D760067167F /* Detail */,
+				7334472D28E37D6B00F1719E /* MyTabView.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -434,6 +440,7 @@
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
 				73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */,
 				73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */,
+				7334472E28E37D6D00F1719E /* MyTabView.swift in Sources */,
 				7351E62628D5C0E400A8383C /* TotalBalanceView.swift in Sources */,
 				73C71C6228D84ADE0067167F /* SortOptionView.swift in Sources */,
 				73B9564228E0854D00DD4A9F /* NftModel.swift in Sources */,
@@ -465,6 +472,7 @@
 				73C71C6E28D899CC0067167F /* NavigationLazyView.swift in Sources */,
 				73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */,
 				73E6BEEA28D21FF10041A7C3 /* AllCoinListView.swift in Sources */,
+				7334473028E4887200F1719E /* UIImage.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
 				73C71C7428D9910F0067167F /* CoinDetailDataService.swift in Sources */,
 				73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */,

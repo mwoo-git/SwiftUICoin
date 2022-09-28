@@ -13,7 +13,6 @@ class HomeViewModel: ObservableObject {
     @Published var allCoins: [CoinModel] = []
     @Published var watchlistCoins: [CoinModel] = []
     @Published var reloadWatchCoins: [CoinModel] = []
-    @Published var portfolioCoins: [CoinModel] = []
     @Published var sortOption: SortOption = .rank
     @Published var listOption: ListOption = .coin
     
@@ -49,7 +48,6 @@ class HomeViewModel: ObservableObject {
             .map(convertCoins)
             .sink { [weak self] (returnCoins) in
                 self?.watchlistCoins = returnCoins
-                print("Success")
             }
             .store(in: &cancellables)
         

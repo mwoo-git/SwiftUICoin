@@ -23,13 +23,11 @@ struct WatchCoinListView: View {
             }
         }
         .onAppear {
+            UIScrollView.appearance().keyboardDismissMode = .onDrag
             viewModel.reloadWatchlist()
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
-        }
-        .onAppear {
-            UIScrollView.appearance().keyboardDismissMode = .onDrag
         }
     }
 }

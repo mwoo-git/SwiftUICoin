@@ -12,7 +12,6 @@ struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
-    @State private var isListed: Bool = false
     
     init(coin: CoinModel) {
         _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정

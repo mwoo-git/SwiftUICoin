@@ -13,13 +13,15 @@ struct HomeView: View {
     @State private var showMenu: Bool = false
     @State private var scrollViewOffset: CGFloat = 0
     @State private var startOffset: CGFloat = 0
+    @State var isNavigationBarHidden = true
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                homeHeader
-                homeBody
-            }
+        
+        VStack(spacing: 0) {
+            
+            homeHeader
+            homeBody
+            
         }
         .background(Color.theme.background.ignoresSafeArea())
     }
@@ -52,9 +54,7 @@ extension HomeView {
                     NavigationLink(
                         destination: SearchView()) {
                             IconView(iconName: "magnifyingglass")
-                                .padding(.trailing, -20)
                         }
-                    IconView(iconName: "qrcode.viewfinder")
                 }
             } else {
                 IconView(iconName: "sun.min.fill")
