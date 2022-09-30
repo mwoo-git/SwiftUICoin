@@ -1,14 +1,16 @@
 //
-//  CoinRowView.swift
+//  SearchRowView.swift
 //  SwiftUICoin
 //
-//  Created by Woo Min on 2022/09/12.
+//  Created by Woo Min on 2022/09/29.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct CoinRowView: View {
+struct SearchRowView: View {
+    
+    @EnvironmentObject var viewModel: WatchlistViewModel
     
     let coin: CoinModel
     
@@ -22,7 +24,7 @@ struct CoinRowView: View {
     }
 }
 
-struct CoinRowView_Previews: PreviewProvider {
+struct SearchRowView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CoinRowView(coin: dev.coin)
@@ -35,21 +37,21 @@ struct CoinRowView_Previews: PreviewProvider {
     }
 }
 
-extension CoinRowView {
+extension SearchRowView {
     
     private var leftColumn: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .center, spacing: 0) {
             
             KFImage(URL(string: coin.image))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
                 .foregroundColor(.orange)
-                
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(coin.symbol.uppercased())
-                                .font(.headline)
-                                .foregroundColor(Color.theme.textColor)
+                    .font(.headline)
+                    .foregroundColor(Color.theme.textColor)
                 Text(coin.name)
                     .foregroundColor(Color.theme.accent)
                     .font(.subheadline)
@@ -59,14 +61,17 @@ extension CoinRowView {
     }
     
     private var rightColmn: some View {
-        VStack(alignment: .trailing, spacing: 4) {
-            Text(coin.currentPrice.asCurrencyWith6Decimals())
-                .bold()
-                .font(.headline)
-                .foregroundColor(Color.theme.textColor)
-            Text(coin.priceChangePercentage24H.asPercentString())
-                .foregroundColor((coin.priceChangePercentage24H) >= 0 ? Color.theme.green : Color.theme.red)
-                .font(.subheadline)
+        HStack {
+            if !viewModel.isWatchlistExists(coin: coin) {
+                Image(systemName: "plus.circle")
+            } else {
+                Image(systemName: "checkmark.circle")
+                    .foregroundColor(Color.theme.binanceColor)
+            }
         }
+        .onTapGesture {
+            viewModel.updateWatchlist(coin: coin)
+        }
+        .font(.subheadline)
     }
 }

@@ -15,10 +15,11 @@ class DetailViewModel: ObservableObject {
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
     @Published var infoOption: InfoOption = .news
+    @Published var isLoading: Bool = false
     
     @Published var coin: CoinModel
-    private let coinDatailService: CoinDetailDataService
-    private let coinDetailNewsService: ArticleDataService
+    private let coinDatailDataService: CoinDetailDataService
+    private let articleDataService: ArticleDataService
     private var cancellables = Set<AnyCancellable>()
     
     enum InfoOption {
@@ -27,8 +28,8 @@ class DetailViewModel: ObservableObject {
     
     init(coin: CoinModel) {
         self.coin = coin
-        self.coinDatailService = CoinDetailDataService(coin: coin)
-        self.coinDetailNewsService = ArticleDataService(coin: coin)
+        self.coinDatailDataService = CoinDetailDataService(coin: coin)
+        self.articleDataService = ArticleDataService(coin: coin)
         self.addSubscribers()
     }
     
@@ -41,18 +42,25 @@ class DetailViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        coinDatailService.$coinDateils
+        coinDatailDataService.$coinDateils
             .sink { [weak self] (returnedCoinDetails) in
                 self?.coinDescription = returnedCoinDetails?.redableDescription
                 self?.websiteURL = returnedCoinDetails?.links?.homepage?.first
             }
             .store(in: &cancellables)
         
-        coinDetailNewsService.$articles
+        articleDataService.$articles
             .sink { [weak self] (returnedArticles) in
                 self?.articles = returnedArticles
             }
             .store(in: &cancellables)
+        
+        articleDataService.$isLoading
+            .sink { [weak self] returnBool in
+                self?.isLoading = returnBool
+            }
+            .store(in: &cancellables)
+
     }
     
     private func mapDataToStatistics(coinModel: CoinModel) -> [StatisticModel] {

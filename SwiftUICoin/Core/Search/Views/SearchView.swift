@@ -15,7 +15,8 @@ struct SearchView: View {
     var body: some View {
         VStack(spacing: 0) {
             searchBar
-            listOptionBar
+            Divider()
+//            listOptionBar
             if !viewModel.searchText.isEmpty {
                 SearchListView(viewModel: viewModel)
                     .padding(.top, 10)
@@ -44,8 +45,8 @@ extension SearchView {
         HStack {
             SearchBarView(searchText: $viewModel.searchText)
             Spacer()
-            Text("Cancel")
-                .foregroundColor(Color.theme.binanceColor)
+            Text("취소")
+                .foregroundColor(Color.theme.textColor)
                 .font(.subheadline)
                 .padding(.leading, 5)
                 .onTapGesture {
@@ -54,6 +55,7 @@ extension SearchView {
                 }
         }
         .padding()
+        .padding(.bottom, -8)
     }
     
     private var listOptionBar: some View {

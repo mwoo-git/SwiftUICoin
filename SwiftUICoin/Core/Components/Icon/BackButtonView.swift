@@ -12,7 +12,7 @@ struct BackButtonView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        IconView(iconName: "arrow.left")
+        IconView(iconName: "chevron.left")
             .onTapGesture {
                 withAnimation() {
                     self.presentationMode.wrappedValue.dismiss()

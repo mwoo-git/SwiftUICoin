@@ -11,7 +11,7 @@ import Kingfisher
 struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var WatchlistViewModel: WatchlistViewModel
     
     init(coin: CoinModel) {
         _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정
@@ -54,14 +54,14 @@ extension DetailView {
                     .bold()
             }
             Spacer()
-            Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin) ? "star.fill" : "star")
-                .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin) ? Color.theme.binanceColor : Color.theme.accent)
+            Image(systemName: WatchlistViewModel.isWatchlistExists(coin: viewModel.coin) ? "star.fill" : "star")
+                .foregroundColor(WatchlistViewModel.isWatchlistExists(coin: viewModel.coin) ? Color.theme.binanceColor : Color.theme.accent)
                 .padding()
                 .onTapGesture {
-                    homeViewModel.updateWatchlist(coin: viewModel.coin)
+                    WatchlistViewModel.updateWatchlist(coin: viewModel.coin)
                 }
         }
-        .background(Color.theme.coinDetailBackground)
+        .background(Color.theme.background)
     }
     
     private var tradingView: some View {
@@ -76,7 +76,7 @@ extension DetailView {
         HStack(alignment: .top, spacing: 30) {
             VStack {
                 Text("News")
-                    .foregroundColor(viewModel.infoOption == .news ? Color.white : Color.theme.accent)
+                    .foregroundColor(viewModel.infoOption == .news ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .news ? Color.theme.binanceColor : .clear)
                     .frame(width: 30, height: 3)
@@ -86,7 +86,7 @@ extension DetailView {
             }
             VStack() {
                 Text("About \(viewModel.coin.symbol.uppercased())")
-                    .foregroundColor(viewModel.infoOption == .about ? Color.white : Color.theme.accent)
+                    .foregroundColor(viewModel.infoOption == .about ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .about ? Color.theme.binanceColor : .clear)
                     .frame(width: 30, height: 3)
@@ -110,7 +110,15 @@ extension DetailView {
                     VStack {
                         HStack {
                             if viewModel.infoOption == .news {
-                                ArticleListView(viewModel: viewModel)
+                                if viewModel.isLoading {
+                                    Text("is Loading..")
+                                } else {
+                                    VStack {
+                                        Text("Loading End")
+                                        ArticleListView(viewModel: viewModel)
+                                    }
+                                }
+                                
                             } else {
                                 DetailStatsView(viewModel: viewModel)
                             }

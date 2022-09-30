@@ -14,9 +14,11 @@ struct SearchBarView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            IconView(iconName: "magnifyingglass")
-                .padding(.vertical, -10)
-                .padding(.horizontal, -5)
+            Image(systemName: "magnifyingglass")
+                .padding(.vertical, -5)
+                .padding(.horizontal, 7)
+                .foregroundColor(Color.theme.iconColor)
+                .font(.subheadline)
             if !clearTextField {
                 firstResponderTextField
             } else {
@@ -24,7 +26,7 @@ struct SearchBarView: View {
             }
         }
         .background(Color.theme.searchBar)
-        .cornerRadius(25)
+        .cornerRadius(8)
     }
 }
 
@@ -43,7 +45,7 @@ struct SearchBarView_Previews: PreviewProvider {
 
 extension SearchBarView {
     private var normalTextField: some View {
-        TextField("Search", text: $searchText)
+        TextField("검색", text: $searchText)
             .foregroundColor(Color.white)
             .accentColor(Color.theme.binanceColor)
             .frame(height: 30)
@@ -55,9 +57,9 @@ extension SearchBarView {
     }
     
     private var firstResponderTextField: some View {
-        FirstResponderTextField(searchText: $searchText, placeHolder: "Search")
+        FirstResponderTextField(searchText: $searchText, placeHolder: "검색")
             .foregroundColor(Color.white)
-            .accentColor(Color.theme.binanceColor)
+            .accentColor(Color.theme.iconColor)
             .frame(height: 30)
             .overlay(
                 Image(systemName: "xmark.circle.fill")

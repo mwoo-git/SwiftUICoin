@@ -17,7 +17,7 @@ struct SearchListView: View {
                 ForEach(viewModel.searchCoins) { coin in
                     NavigationLink(
                         destination: NavigationLazyView(DetailView(coin: coin)),
-                        label: { CoinRowView(coin: coin) }
+                        label: { SearchRowView(coin: coin) }
                     )
                 }
             }

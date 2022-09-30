@@ -11,12 +11,10 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     @Published var allCoins: [CoinModel] = []
-    @Published var watchlistCoins: [CoinModel] = []
-    @Published var reloadWatchCoins: [CoinModel] = []
     @Published var sortOption: SortOption = .rank
     @Published var listOption: ListOption = .coin
+    @Published var isLoading: Bool = false
     
-    private let watchlistDataService = WatchlistDataService()
     private let dataService = CoinDataService()
     private var cancellables = Set<AnyCancellable>()
     
@@ -43,28 +41,12 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        $allCoins
-            .combineLatest(watchlistDataService.$savedEntities)
-            .map(convertCoins)
-            .sink { [weak self] (returnCoins) in
-                self?.watchlistCoins = returnCoins
+        dataService.$isLoading
+            .sink { [weak self] returnBool in
+                self?.isLoading = returnBool
             }
             .store(in: &cancellables)
         
-    }
-    
-    // reloadWatchlist
-    func reloadWatchlist() {
-        reloadWatchCoins = watchlistCoins
-    }
-    
-    func isWatchlistExists(coin: CoinModel) -> Bool {
-        watchlistDataService.isWatchlistExists(coin: coin)
-    }
-    
-    // Update Watchlist (Delete or add)
-    func updateWatchlist(coin: CoinModel) {
-        watchlistDataService.updateWatchlist(coin: coin)
     }
     
     // Sort AllCoins
@@ -81,15 +63,5 @@ class HomeViewModel: ObservableObject {
         case .priceChangePercentage24HReversed:
             return coins.sorted(by: { $0.priceChangePercentage24H < $1.priceChangePercentage24H})
         }
-    }
-    
-    // AllCoins 중에 Watchlist에 해당되는 코인만 리턴
-    private func convertCoins(coinModels: [CoinModel], watchlistEntities: [WatchlistEntity]) -> [CoinModel] {
-        coinModels
-            .compactMap { (coin) -> CoinModel? in
-                guard watchlistEntities.first(where: { $0.coinID == coin.id }) != nil else { return nil
-                }
-                return coin
-            }
     }
 }

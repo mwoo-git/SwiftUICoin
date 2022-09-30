@@ -27,6 +27,14 @@ class WatchlistDataService {
     
     // MARK: PUBLIC
     
+    func isWatchlistEmpty() -> Bool {
+        if savedEntities.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func isWatchlistExists(coin: CoinModel) -> Bool {
         if savedEntities.first(where: {$0.coinID == coin.id }) != nil {
             return true

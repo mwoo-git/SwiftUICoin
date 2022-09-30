@@ -28,6 +28,9 @@
 		7334472A28E26DB800F1719E /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472928E26DB800F1719E /* CommentView.swift */; };
 		7334472E28E37D6D00F1719E /* MyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472D28E37D6B00F1719E /* MyTabView.swift */; };
 		7334473028E4887200F1719E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472F28E4887200F1719E /* UIImage.swift */; };
+		7334473828E4B3C800F1719E /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473728E4B3C700F1719E /* WatchlistView.swift */; };
+		7334473A28E4BD5800F1719E /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473928E4BD5800F1719E /* WatchlistViewModel.swift */; };
+		7334473E28E4E52800F1719E /* SearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473D28E4E52700F1719E /* SearchRowView.swift */; };
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
 		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
@@ -88,6 +91,9 @@
 		7334472928E26DB800F1719E /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		7334472D28E37D6B00F1719E /* MyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabView.swift; sourceTree = "<group>"; };
 		7334472F28E4887200F1719E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		7334473728E4B3C700F1719E /* WatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
+		7334473928E4BD5800F1719E /* WatchlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModel.swift; sourceTree = "<group>"; };
+		7334473D28E4E52700F1719E /* SearchRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRowView.swift; sourceTree = "<group>"; };
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 			children = (
 				731086E428CE3AAD00283FD3 /* Components */,
 				731086DF28CE376000283FD3 /* Home */,
+				7334473328E4B36C00F1719E /* Watchlist */,
 				73C71C6328D84D400067167F /* Search */,
 				73C71C6828D86D760067167F /* Detail */,
 				7334472D28E37D6B00F1719E /* MyTabView.swift */,
@@ -232,7 +239,6 @@
 				7334471C28E19C7900F1719E /* ListOptionView.swift */,
 				73C71C6128D84ADD0067167F /* SortOptionView.swift */,
 				73E6BEE928D21FF10041A7C3 /* AllCoinListView.swift */,
-				7334471E28E19DD200F1719E /* WatchCoinListView.swift */,
 				731086EF28CF1D0B00283FD3 /* CoinRowView.swift */,
 				73B9564328E089F100DD4A9F /* NftRowView.swift */,
 				73B9564528E0911500DD4A9F /* NftDetailView.swift */,
@@ -253,7 +259,6 @@
 			children = (
 				7351E62028D3714E00A8383C /* TradingView */,
 				731086EA28CE456A00283FD3 /* Icon */,
-				73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */,
 				73C71C6D28D899CB0067167F /* NavigationLazyView.swift */,
 				733517EB28DC4CDB00A9DF37 /* ChartView.swift */,
 				73B9563528DF09CC00DD4A9F /* WebView.swift */,
@@ -269,6 +274,32 @@
 				7334472728E2653F00F1719E /* BackButtonView.swift */,
 			);
 			path = Icon;
+			sourceTree = "<group>";
+		};
+		7334473328E4B36C00F1719E /* Watchlist */ = {
+			isa = PBXGroup;
+			children = (
+				7334473628E4B3AC00F1719E /* Views */,
+				7334473428E4B38F00F1719E /* ViewModels */,
+			);
+			path = Watchlist;
+			sourceTree = "<group>";
+		};
+		7334473428E4B38F00F1719E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7334473928E4BD5800F1719E /* WatchlistViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7334473628E4B3AC00F1719E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7334473728E4B3C700F1719E /* WatchlistView.swift */,
+				7334471E28E19DD200F1719E /* WatchCoinListView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7351E62028D3714E00A8383C /* TradingView */ = {
@@ -293,6 +324,8 @@
 			children = (
 				73E6BEE728D1EF280041A7C3 /* SearchView.swift */,
 				7351E62328D4D7D000A8383C /* SearchListView.swift */,
+				7334473D28E4E52700F1719E /* SearchRowView.swift */,
+				73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -437,6 +470,7 @@
 			files = (
 				73B9564628E0911600DD4A9F /* NftDetailView.swift in Sources */,
 				73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */,
+				7334473A28E4BD5800F1719E /* WatchlistViewModel.swift in Sources */,
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
 				73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */,
 				73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */,
@@ -457,6 +491,7 @@
 				7334472A28E26DB800F1719E /* CommentView.swift in Sources */,
 				73B9562028DDABCE00DD4A9F /* ArticleDataService.swift in Sources */,
 				7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */,
+				7334473E28E4E52800F1719E /* SearchRowView.swift in Sources */,
 				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */,
 				7334472828E2653F00F1719E /* BackButtonView.swift in Sources */,
@@ -469,6 +504,7 @@
 				731086E328CE37D000283FD3 /* HomeView.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */,
+				7334473828E4B3C800F1719E /* WatchlistView.swift in Sources */,
 				73C71C6E28D899CC0067167F /* NavigationLazyView.swift in Sources */,
 				73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */,
 				73E6BEEA28D21FF10041A7C3 /* AllCoinListView.swift in Sources */,

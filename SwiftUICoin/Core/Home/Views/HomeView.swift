@@ -41,20 +41,25 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView {
     private var homeHeader: some View {
         HStack {
-            IconView(iconName: showMenu ? "arrow.left" : "person.circle")
-                .onTapGesture {
-                    withAnimation() {
-                        showMenu.toggle()
-                    }
-                }
-                .animation(.none, value: showMenu)
+            Text("Markets")
+                .font(.title2)
+                .bold()
+                .padding(.leading)
+            
             Spacer()
             if !showMenu {
-                HStack {
+                HStack(spacing: 0) {
                     NavigationLink(
                         destination: SearchView()) {
                             IconView(iconName: "magnifyingglass")
                         }
+                    IconView(iconName: showMenu ? "arrow.left" : "person.circle")
+                        .onTapGesture {
+                            withAnimation() {
+                                showMenu.toggle()
+                            }
+                        }
+                        .animation(.none, value: showMenu)
                 }
             } else {
                 IconView(iconName: "sun.min.fill")
@@ -69,15 +74,16 @@ extension HomeView {
                 VStack {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         Section(header: VStack(spacing: 0) {
-                            ListOptionView()
+                            //                            ListOptionView()
                             if viewModel.listOption == .coin {
                                 SortOptionView()
                             }
                         }.background(Color.theme.background)
                         ) {
-                            if viewModel.listOption == .watchlist {
-                                WatchCoinListView()
+                            if viewModel.isLoading {
+                                Text("is Loading..")
                             } else {
+                                Text("Loading end")
                                 AllCoinListView()
                             }
                         }
@@ -124,6 +130,7 @@ extension HomeView {
                     .foregroundColor(Color.theme.arrowButton)
             )
             .padding(.trailing, 30)
+            .padding(.bottom, 40)
             .opacity(-scrollViewOffset > 145 ? 1: 0)
     }
 }

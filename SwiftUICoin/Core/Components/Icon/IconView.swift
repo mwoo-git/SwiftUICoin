@@ -12,7 +12,7 @@ struct IconView: View {
     
     var body: some View {
         Image(systemName: iconName)
-            .foregroundColor(Color.theme.iconColor)
+            .foregroundColor(Color.theme.textColor)
             .font(.headline)
             .frame(width: 50, height: 50)
     }
