@@ -11,17 +11,11 @@ struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
-    @State private var scrollViewOffset: CGFloat = 0
-    @State private var startOffset: CGFloat = 0
-    @State var isNavigationBarHidden = true
     
     var body: some View {
-        
         VStack(spacing: 0) {
-            
             homeHeader
-            homeBody
-            
+            HomeCoinListView()
         }
         .background(Color.theme.background.ignoresSafeArea())
     }
@@ -66,72 +60,6 @@ extension HomeView {
                     .padding(.trailing, 18)
             }
         }
-    }
-    
-    private var homeBody: some View {
-        ScrollViewReader {proxyReader in
-            ScrollView() {
-                VStack {
-                    LazyVStack(pinnedViews: [.sectionHeaders]) {
-                        Section(header: VStack(spacing: 0) {
-                            //                            ListOptionView()
-                            if viewModel.listOption == .coin {
-                                SortOptionView()
-                            }
-                        }.background(Color.theme.background)
-                        ) {
-                            if viewModel.isLoading {
-                                Text("is Loading..")
-                            } else {
-                                Text("Loading end")
-                                AllCoinListView()
-                            }
-                        }
-                    }
-                }
-                .id("SCROLL_TO_TOP")
-                .overlay(scrollToTopGeometryReader)
-            }
-            .overlay(
-                scrollToTopButton
-                    .onTapGesture {
-                        withAnimation {
-                            proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
-                        }
-                    }
-                ,alignment: .bottomTrailing
-            )
-            .onChange(of: viewModel.listOption) { _ in
-                proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
-            }
-        }
-    }
-    
-    private var scrollToTopGeometryReader: some View {
-        GeometryReader{proxy -> Color in
-            DispatchQueue.main.async {
-                if startOffset == 0 {
-                    self.startOffset = proxy.frame(in: .global).minY
-                }
-                let offset = proxy.frame(in: .global).minY
-                self.scrollViewOffset = offset - startOffset
-            }
-            return Color.clear
-        }
-    }
-    
-    private var scrollToTopButton: some View {
-        Image(systemName: "arrow.up")
-            .font(.title2)
-            .foregroundColor(Color.white)
-            .frame(width: 40, height: 40)
-            .background(
-                Circle()
-                    .foregroundColor(Color.theme.arrowButton)
-            )
-            .padding(.trailing, 30)
-            .padding(.bottom, 40)
-            .opacity(-scrollViewOffset > 145 ? 1: 0)
     }
 }
 

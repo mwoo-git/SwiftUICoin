@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct SearchRowView: View {
+struct EditCoinRowView: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
     
@@ -37,7 +37,7 @@ struct SearchRowView_Previews: PreviewProvider {
     }
 }
 
-extension SearchRowView {
+extension EditCoinRowView {
     
     private var leftColumn: some View {
         HStack(alignment: .center, spacing: 0) {

@@ -19,6 +19,7 @@ struct CoinRowView: View {
             rightColmn
         }
         .padding()
+        .contentShape(Rectangle())
     }
 }
 

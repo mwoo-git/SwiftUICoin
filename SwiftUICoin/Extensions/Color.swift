@@ -29,4 +29,5 @@ struct ColorTheme {
     let coinDetailBackground = Color("CoinDetailBackgroundColor")
     let textColor = Color("TextColor")
     let openseaColor = Color("OpenSeaColor")
+    let listSelectionColor = Color("ListSelectionColor")
 }

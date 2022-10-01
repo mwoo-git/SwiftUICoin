@@ -28,15 +28,10 @@ struct WatchCoinListView: View {
             } else {
                 LazyVStack {
                     ForEach(viewModel.reloadWatchCoins) { coin in
-                        NavigationLink(
-                            destination: NavigationLazyView(DetailView(coin: coin)),
-                            label: { SearchRowView(coin: coin) }
-                        )
+                        EditCoinRowView(coin: coin)
                     }
                 }
-
             }
-            
         }
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag

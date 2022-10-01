@@ -49,6 +49,10 @@ class HomeViewModel: ObservableObject {
         
     }
     
+    func getCoin() {
+        dataService.getCoin()
+    }
+    
     // Sort AllCoins
     private func sortCoins(coins: [CoinModel], sort: SortOption) -> [CoinModel] {
         switch sort {

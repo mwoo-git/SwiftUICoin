@@ -11,6 +11,7 @@ import SwiftUI
 
 class WatchlistViewModel: ObservableObject {
 
+    @EnvironmentObject var viewModel: HomeViewModel
     @Published var reloadWatchCoins: [CoinModel] = []
     @Published var watchlistCoins: [CoinModel] = []
     @Published var isEditing: Bool = false

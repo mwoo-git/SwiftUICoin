@@ -17,9 +17,8 @@ struct WatchlistView: View {
             
             header
             if viewModel.isLoading {
-                Text("is Loading...")
+                WatchCoinListView()
             } else {
-                Text("Loading end")
                 WatchCoinListView()
             }
             Spacer()
@@ -48,19 +47,16 @@ extension WatchlistView {
             HStack(spacing: 0) {
                 
                 if !viewModel.isEditing {
-                    
                     NavigationLink(
                         destination: SearchView()) {
                             IconView(iconName: "plus")
                         }
-                    
                     IconView(iconName: "pencil")
                         .onTapGesture {
                             withAnimation {
                                 viewModel.isEditing.toggle()
                             }
                         }
-                    
                 } else {
                     
                     Text("Done")
