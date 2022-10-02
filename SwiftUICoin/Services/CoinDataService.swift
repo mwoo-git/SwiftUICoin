@@ -24,12 +24,16 @@ class CoinDataService {
         
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h") else { return }
         self.isLoading = true
+        print("is loading..")
         coinSubscription = NetWorkingManager.download(url: url)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
             .sink(receiveCompletion: NetWorkingManager.handleCompletion, receiveValue: { [weak self] (returnCoins) in
                 self?.allCoins = returnCoins
                 self?.coinSubscription?.cancel()
-                self?.isLoading = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self?.isLoading = false
+                    print("Loading end")
+                }
             })
     }
 }

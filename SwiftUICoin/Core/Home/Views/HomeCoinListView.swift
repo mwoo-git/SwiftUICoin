@@ -6,6 +6,7 @@
 //  LazyStack은 iOS 14이상부터 지원합니다.
 
 import SwiftUI
+import SwiftUIPullToRefresh
 
 struct HomeCoinListView: View {
     
@@ -15,7 +16,14 @@ struct HomeCoinListView: View {
     
     var body: some View {
         ScrollViewReader {proxyReader in
-            ScrollView {
+            RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
+                if !viewModel.isLoading {
+                    viewModel.getCoin()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    done()
+                }
+            }) {
                 LazyVStack(pinnedViews: [.sectionHeaders]) {
                     Section(header: VStack(spacing: 0) {
                         SortOptionView()
@@ -33,6 +41,7 @@ struct HomeCoinListView: View {
                 .id("SCROLL_TO_TOP")
                 .overlay(scrollToTopGeometryReader)
             }
+            .background(Color.theme.background)
             .overlay(
                 scrollToTopButton
                     .onTapGesture {
@@ -84,5 +93,4 @@ extension HomeCoinListView {
             .opacity(-scrollViewOffset > 145 ? 1: 0)
     }
 }
-
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WatchlistView: View {
     
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     @EnvironmentObject private var viewModel: WatchlistViewModel
     
     var body: some View {
@@ -16,11 +17,15 @@ struct WatchlistView: View {
         VStack(spacing: 0) {
             
             header
-            if viewModel.isLoading {
-                WatchCoinListView()
-            } else {
-                WatchCoinListView()
+            VStack{
+                if homeViewModel.isLoading {
+                    Text("is loading!!")
+                    WatchCoinListView()
+                } else {
+                    WatchCoinListView()
+                }
             }
+            
             Spacer()
             
         }

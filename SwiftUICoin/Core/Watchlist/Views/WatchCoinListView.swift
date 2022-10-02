@@ -6,16 +6,24 @@
 //
 
 import SwiftUI
+import SwiftUIPullToRefresh
 
 struct WatchCoinListView: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
     
     var body: some View {
-        ScrollView() {
+        RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
+            if !viewModel.isLoading {
+                viewModel.getCoin()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                done()
+            }
+        }) {
             if !viewModel.isEditing {
                 LazyVStack {
-                    ForEach(viewModel.reloadWatchCoins) { coin in
+                    ForEach(viewModel.loadWatchCoins) { coin in
                         NavigationLink(
                             destination: NavigationLazyView(DetailView(coin: coin)),
                             label: { CoinRowView(coin: coin) }
@@ -23,11 +31,11 @@ struct WatchCoinListView: View {
                     }
                 }
                 .onAppear {
-                    viewModel.reloadWatchlist()
+                    viewModel.loadWatchlist()
                 }
             } else {
                 LazyVStack {
-                    ForEach(viewModel.reloadWatchCoins) { coin in
+                    ForEach(viewModel.loadWatchCoins) { coin in
                         EditCoinRowView(coin: coin)
                     }
                 }

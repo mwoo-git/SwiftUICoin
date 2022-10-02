@@ -26,7 +26,7 @@ struct MyTabView: View {
             WatchlistView()
                 .tabItem {
                     Image(systemName: selection == 0 ? "heart.fill" : "heart")
-                        .environment(\.symbolVariants, .none)
+//                        .environment(\.symbolVariants, .none)
                     Text("Watchlist")
                 }
                 .environmentObject(viewModel)
@@ -41,7 +41,7 @@ struct MyTabView: View {
             HomeView()
                 .tabItem {
                     Image(systemName: selection  == 1 ? "chart.bar.fill" : "chart.bar")
-                        .environment(\.symbolVariants, .none)
+//                        .environment(\.symbolVariants, .none)
                     Text("Markets")
                 }
                 .navigationTitle("")

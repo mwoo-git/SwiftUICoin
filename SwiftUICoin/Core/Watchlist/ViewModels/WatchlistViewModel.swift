@@ -11,8 +11,7 @@ import SwiftUI
 
 class WatchlistViewModel: ObservableObject {
 
-    @EnvironmentObject var viewModel: HomeViewModel
-    @Published var reloadWatchCoins: [CoinModel] = []
+    @Published var loadWatchCoins: [CoinModel] = []
     @Published var watchlistCoins: [CoinModel] = []
     @Published var isEditing: Bool = false
     @Published var isLoading: Bool = false
@@ -43,13 +42,17 @@ class WatchlistViewModel: ObservableObject {
         
     }
     
+    func getCoin() {
+        dataService.getCoin()
+    }
+    
     func isWatchlistEmpty() -> Bool {
         watchlistDataService.isWatchlistEmpty()
     }
     
     // reloadWatchlist
-    func reloadWatchlist() {
-        reloadWatchCoins = watchlistCoins
+    func loadWatchlist() {
+        loadWatchCoins = watchlistCoins
     }
     
     func isWatchlistExists(coin: CoinModel) -> Bool {

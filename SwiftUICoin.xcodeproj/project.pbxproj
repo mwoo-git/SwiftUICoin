@@ -57,6 +57,7 @@
 		73C71C7228D990CA0067167F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C7128D990CA0067167F /* DetailViewModel.swift */; };
 		73C71C7428D9910F0067167F /* CoinDetailDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C7328D9910F0067167F /* CoinDetailDataService.swift */; };
 		73D527AC28E895CC00650679 /* ListSelectionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D527AB28E895CC00650679 /* ListSelectionStyle.swift */; };
+		73D527B628E9E77F00650679 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 73D527B528E9E77F00650679 /* SwiftUIPullToRefresh */; };
 		73D7175B28DB3E930081CB2D /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D7175A28DB3E920081CB2D /* StatisticModel.swift */; };
 		73D7175D28DB414A0081CB2D /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D7175C28DB414A0081CB2D /* StatisticView.swift */; };
 		73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D7175E28DB43360081CB2D /* DetailStatsView.swift */; };
@@ -136,6 +137,7 @@
 			files = (
 				73E6BEE128D0C3930041A7C3 /* Kingfisher in Frameworks */,
 				73B9562728DDAF8A00DD4A9F /* SwiftSoup in Frameworks */,
+				73D527B628E9E77F00650679 /* SwiftUIPullToRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +419,7 @@
 			packageProductDependencies = (
 				73E6BEE028D0C3930041A7C3 /* Kingfisher */,
 				73B9562628DDAF8A00DD4A9F /* SwiftSoup */,
+				73D527B528E9E77F00650679 /* SwiftUIPullToRefresh */,
 			);
 			productName = SwiftUICoin;
 			productReference = 731086C928CE285100283FD3 /* SwiftUICoin.app */;
@@ -449,6 +452,7 @@
 			packageReferences = (
 				73E6BEDF28D0C3930041A7C3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				73B9562528DDAF8A00DD4A9F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				73D527B428E9E77F00650679 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
 			);
 			productRefGroup = 731086CA28CE285100283FD3 /* Products */;
 			projectDirPath = "";
@@ -588,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -643,7 +647,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -669,6 +673,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -698,6 +703,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -743,6 +749,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		73D527B428E9E77F00650679 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/globulus/swiftui-pull-to-refresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.8;
+			};
+		};
 		73E6BEDF28D0C3930041A7C3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -758,6 +772,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73B9562528DDAF8A00DD4A9F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		73D527B528E9E77F00650679 /* SwiftUIPullToRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73D527B428E9E77F00650679 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
+			productName = SwiftUIPullToRefresh;
 		};
 		73E6BEE028D0C3930041A7C3 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
