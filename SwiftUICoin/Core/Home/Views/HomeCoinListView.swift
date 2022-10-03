@@ -29,7 +29,7 @@ struct HomeCoinListView: View {
                         SortOptionView()
                         LazyVStack {
                             ForEach(0..<5) { i in
-                                CoinPlaceholderView(coin: .coinPlaceholder)
+                                CoinPlaceholderView()
                             }
                         }
                     }

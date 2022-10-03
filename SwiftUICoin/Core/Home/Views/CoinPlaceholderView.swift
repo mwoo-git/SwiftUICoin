@@ -10,7 +10,6 @@ import Kingfisher
 
 struct CoinPlaceholderView: View {
     
-    let coin: CoinModel
     @State private var opacity: Double = 1
     
     var body: some View {
@@ -35,10 +34,10 @@ struct CoinPlaceholderView: View {
 struct CoinPlaceholderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinPlaceholderView(coin: dev.coin)
+            CoinPlaceholderView()
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
-            CoinPlaceholderView(coin: dev.coin)
+            CoinPlaceholderView()
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
@@ -50,7 +49,7 @@ extension CoinPlaceholderView {
     private var leftColumn: some View {
         HStack(spacing: 0) {
             
-            KFImage(URL(string: coin.image))
+            KFImage(URL(string: "url"))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
@@ -59,7 +58,7 @@ extension CoinPlaceholderView {
             VStack(alignment: .leading, spacing: 4) {
                 Text("btcbtc")
                                 .font(.headline)
-                Text("Ethereumbitcoin")
+                Text("bitcoinbitcoin")
                     .font(.subheadline)
             }
             .padding(.leading, 14)
@@ -68,10 +67,10 @@ extension CoinPlaceholderView {
     
     private var rightColmn: some View {
         VStack(alignment: .trailing, spacing: 4) {
-            Text(coin.currentPrice.asCurrencyWith6Decimals())
+            Text("$100,000")
                 .bold()
                 .font(.headline)
-            Text(coin.priceChangePercentage24H.asPercentString())
+            Text("9.00%")
                 .font(.subheadline)
         }
     }

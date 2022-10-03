@@ -19,7 +19,7 @@ struct WatchlistView: View {
             if viewModel.allCoins.isEmpty {
                 LazyVStack {
                     ForEach(0..<5) { i in
-                        CoinPlaceholderView(coin: .coinPlaceholder)
+                        CoinPlaceholderView()
                     }
                 }
             } else {
