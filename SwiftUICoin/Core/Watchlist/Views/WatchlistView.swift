@@ -16,15 +16,7 @@ struct WatchlistView: View {
         VStack(spacing: 0) {
             
             header
-            if viewModel.allCoins.isEmpty {
-                LazyVStack {
-                    ForEach(0..<5) { i in
-                        CoinPlaceholderView()
-                    }
-                }
-            } else {
-                WatchCoinListView()
-            }
+            WatchCoinListView()
             Spacer()
         }
         .background(Color.theme.background.ignoresSafeArea())

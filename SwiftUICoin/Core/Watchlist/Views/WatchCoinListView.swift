@@ -21,22 +21,30 @@ struct WatchCoinListView: View {
                 done()
             }
         }) {
-            if !viewModel.isEditing {
+            if viewModel.allCoins.isEmpty {
                 LazyVStack {
-                    ForEach(viewModel.mainWatchlist) { coin in
-                        NavigationLink(
-                            destination: NavigationLazyView(DetailView(coin: coin)),
-                            label: { CoinRowView(coin: coin) }
-                        )
+                    ForEach(0..<5) { i in
+                        CoinPlaceholderView()
                     }
                 }
-                .onAppear {
-                    viewModel.loadWatchlist()
-                }
             } else {
-                LazyVStack {
-                    ForEach(viewModel.mainWatchlist) { coin in
-                        EditCoinRowView(coin: coin)
+                if !viewModel.isEditing {
+                    LazyVStack {
+                        ForEach(viewModel.mainWatchlist) { coin in
+                            NavigationLink(
+                                destination: NavigationLazyView(DetailView(coin: coin)),
+                                label: { CoinRowView(coin: coin) }
+                            )
+                        }
+                    }
+                    .onAppear {
+                        viewModel.loadWatchlist()
+                    }
+                } else {
+                    LazyVStack {
+                        ForEach(viewModel.mainWatchlist) { coin in
+                            EditCoinRowView(coin: coin)
+                        }
                     }
                 }
             }
