@@ -10,20 +10,20 @@ import SwiftUIPullToRefresh
 
 struct WatchCoinListView: View {
     
-    @EnvironmentObject var viewModel: WatchlistViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
-            if !viewModel.isLoading {
+            if !viewModel.isRefreshing {
                 viewModel.getCoin()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 done()
             }
         }) {
             if !viewModel.isEditing {
                 LazyVStack {
-                    ForEach(viewModel.loadWatchCoins) { coin in
+                    ForEach(viewModel.mainWatchlist) { coin in
                         NavigationLink(
                             destination: NavigationLazyView(DetailView(coin: coin)),
                             label: { CoinRowView(coin: coin) }
@@ -35,7 +35,7 @@ struct WatchCoinListView: View {
                 }
             } else {
                 LazyVStack {
-                    ForEach(viewModel.loadWatchCoins) { coin in
+                    ForEach(viewModel.mainWatchlist) { coin in
                         EditCoinRowView(coin: coin)
                     }
                 }

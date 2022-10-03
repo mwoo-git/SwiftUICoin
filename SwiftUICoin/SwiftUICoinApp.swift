@@ -10,8 +10,7 @@ import SwiftUI
 @main
 struct SwiftUICoinApp: App {
     
-    @StateObject private var markets = HomeViewModel()
-    @StateObject private var Watchlist = WatchlistViewModel()
+    @StateObject private var viewModel = HomeViewModel()
     @State private var isNavigationBarHidden: Bool = true
     
     var body: some Scene {
@@ -26,8 +25,7 @@ struct SwiftUICoinApp: App {
                     }
                 
             }
-            .environmentObject(markets)// 모든 자식뷰가 viewModel에 엑세스 할 수 있습니다.
-            .environmentObject(Watchlist)
+            .environmentObject(viewModel)// 모든 자식뷰가 viewModel에 엑세스 할 수 있습니다.
             .navigationViewStyle(StackNavigationViewStyle())
         }
     }

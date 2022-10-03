@@ -17,31 +17,19 @@ struct HomeCoinListView: View {
     var body: some View {
         ScrollViewReader {proxyReader in
             RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
-                if !viewModel.isLoading {
+                if !viewModel.isRefreshing {
                     viewModel.getCoin()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     done()
                 }
             }) {
-                LazyVStack(pinnedViews: [.sectionHeaders]) {
-                    Section(header: VStack(spacing: 0) {
-                        SortOptionView()
-                    }) {
-                        ForEach(viewModel.allCoins) { coin in
-                            NavigationLink(
-                                destination: NavigationLazyView(DetailView(coin: coin)),
-                                label: {
-                                    CoinRowView(coin: coin)
-                                })
-                                .buttonStyle(ListSelectionStyle())
-                        }
-                    }
+                if viewModel.allCoins.isEmpty {
+                    Text("is empty")
+                } else {
+                    allCoinList
                 }
-                .id("SCROLL_TO_TOP")
-                .overlay(scrollToTopGeometryReader)
             }
-            .background(Color.theme.background)
             .overlay(
                 scrollToTopButton
                     .onTapGesture {
@@ -51,6 +39,7 @@ struct HomeCoinListView: View {
                     }
                 ,alignment: .bottomTrailing
             )
+            .background(Color.theme.background)
             .onAppear {
                 UIScrollView.appearance().keyboardDismissMode = .onDrag
             }
@@ -66,6 +55,26 @@ struct AllCoinListView_Previews: PreviewProvider {
 }
 
 extension HomeCoinListView {
+    
+    private var allCoinList: some View {
+        LazyVStack(pinnedViews: [.sectionHeaders]) {
+            Section(header: VStack(spacing: 0) {
+                SortOptionView()
+            }) {
+                ForEach(viewModel.allCoins) { coin in
+                    NavigationLink(
+                        destination: NavigationLazyView(DetailView(coin: coin)),
+                        label: {
+                            CoinRowView(coin: coin)
+                        })
+                        .buttonStyle(ListSelectionStyle())
+                }
+            }
+        }
+        .id("SCROLL_TO_TOP")
+        .overlay(scrollToTopGeometryReader)
+    }
+    
     private var scrollToTopGeometryReader: some View {
         GeometryReader{proxy -> Color in
             DispatchQueue.main.async {

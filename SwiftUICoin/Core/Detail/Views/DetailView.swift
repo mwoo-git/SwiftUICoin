@@ -11,7 +11,7 @@ import Kingfisher
 struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
-    @EnvironmentObject var WatchlistViewModel: WatchlistViewModel
+    @EnvironmentObject var homeViewModel: HomeViewModel
     
     init(coin: CoinModel) {
         _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정
@@ -54,11 +54,11 @@ extension DetailView {
                     .bold()
             }
             Spacer()
-            Image(systemName: WatchlistViewModel.isWatchlistExists(coin: viewModel.coin) ? "star.fill" : "star")
-                .foregroundColor(WatchlistViewModel.isWatchlistExists(coin: viewModel.coin) ? Color.theme.binanceColor : Color.theme.accent)
+            Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin) ? "star.fill" : "star")
+                .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin) ? Color.theme.binanceColor : Color.theme.accent)
                 .padding()
                 .onTapGesture {
-                    WatchlistViewModel.updateWatchlist(coin: viewModel.coin)
+                    homeViewModel.updateWatchlist(coin: viewModel.coin)
                 }
         }
         .background(Color.theme.background)

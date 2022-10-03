@@ -20,7 +20,6 @@
 		731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F328CF1E9100283FD3 /* PreviewProvider.swift */; };
 		731086F628CF2DB400283FD3 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F528CF2DB300283FD3 /* Double.swift */; };
 		731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F728CF790900283FD3 /* HomeViewModel.swift */; };
-		7334471D28E19C7900F1719E /* ListOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334471C28E19C7900F1719E /* ListOptionView.swift */; };
 		7334471F28E19DD200F1719E /* WatchCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334471E28E19DD200F1719E /* WatchCoinListView.swift */; };
 		7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */; };
 		7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472328E2056800F1719E /* WatchlistDataService.swift */; };
@@ -29,7 +28,6 @@
 		7334472E28E37D6D00F1719E /* MyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472D28E37D6B00F1719E /* MyTabView.swift */; };
 		7334473028E4887200F1719E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472F28E4887200F1719E /* UIImage.swift */; };
 		7334473828E4B3C800F1719E /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473728E4B3C700F1719E /* WatchlistView.swift */; };
-		7334473A28E4BD5800F1719E /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473928E4BD5800F1719E /* WatchlistViewModel.swift */; };
 		7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473D28E4E52700F1719E /* EditCoinRowView.swift */; };
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
 		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
@@ -84,7 +82,6 @@
 		731086F328CF1E9100283FD3 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		731086F528CF2DB300283FD3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		731086F728CF790900283FD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		7334471C28E19C7900F1719E /* ListOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOptionView.swift; sourceTree = "<group>"; };
 		7334471E28E19DD200F1719E /* WatchCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCoinListView.swift; sourceTree = "<group>"; };
 		7334472128E2048E00F1719E /* WatchlistContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchlistContainer.xcdatamodel; sourceTree = "<group>"; };
 		7334472328E2056800F1719E /* WatchlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataService.swift; sourceTree = "<group>"; };
@@ -93,7 +90,6 @@
 		7334472D28E37D6B00F1719E /* MyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabView.swift; sourceTree = "<group>"; };
 		7334472F28E4887200F1719E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		7334473728E4B3C700F1719E /* WatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
-		7334473928E4BD5800F1719E /* WatchlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModel.swift; sourceTree = "<group>"; };
 		7334473D28E4E52700F1719E /* EditCoinRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoinRowView.swift; sourceTree = "<group>"; };
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -238,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				731086E228CE37D000283FD3 /* HomeView.swift */,
-				7334471C28E19C7900F1719E /* ListOptionView.swift */,
 				73C71C6128D84ADD0067167F /* SortOptionView.swift */,
 				73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */,
 				731086EF28CF1D0B00283FD3 /* CoinRowView.swift */,
@@ -289,7 +284,6 @@
 		7334473428E4B38F00F1719E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7334473928E4BD5800F1719E /* WatchlistViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -482,7 +476,6 @@
 			files = (
 				73B9564628E0911600DD4A9F /* NftDetailView.swift in Sources */,
 				73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */,
-				7334473A28E4BD5800F1719E /* WatchlistViewModel.swift in Sources */,
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
 				73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */,
 				73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */,
@@ -528,7 +521,6 @@
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,
 				7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */,
 				73B9563628DF09CC00DD4A9F /* WebView.swift in Sources */,
-				7334471D28E19C7900F1719E /* ListOptionView.swift in Sources */,
 				731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */,
 				7334471F28E19DD200F1719E /* WatchCoinListView.swift in Sources */,
 				731086F628CF2DB400283FD3 /* Double.swift in Sources */,

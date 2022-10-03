@@ -39,7 +39,6 @@ extension HomeView {
                 .font(.title2)
                 .bold()
                 .padding(.leading)
-            
             Spacer()
             if !showMenu {
                 HStack(spacing: 0) {

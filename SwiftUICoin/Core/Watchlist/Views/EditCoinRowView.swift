@@ -10,7 +10,7 @@ import Kingfisher
 
 struct EditCoinRowView: View {
     
-    @EnvironmentObject var viewModel: WatchlistViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     let coin: CoinModel
     

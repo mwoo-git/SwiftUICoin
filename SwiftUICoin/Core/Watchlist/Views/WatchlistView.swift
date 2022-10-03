@@ -9,8 +9,7 @@ import SwiftUI
 
 struct WatchlistView: View {
     
-    @EnvironmentObject private var homeViewModel: HomeViewModel
-    @EnvironmentObject private var viewModel: WatchlistViewModel
+    @EnvironmentObject private var viewModel: HomeViewModel
     
     var body: some View {
         
@@ -18,9 +17,8 @@ struct WatchlistView: View {
             
             header
             VStack{
-                if homeViewModel.isLoading {
-                    Text("is loading!!")
-                    WatchCoinListView()
+                if viewModel.allCoins.isEmpty {
+                    Text("array is empty")
                 } else {
                     WatchCoinListView()
                 }

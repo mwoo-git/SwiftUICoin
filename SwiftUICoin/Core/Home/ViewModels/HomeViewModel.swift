@@ -11,19 +11,18 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     @Published var allCoins: [CoinModel] = []
+    @Published var mainWatchlist: [CoinModel] = []
+    @Published var subWatchlist: [CoinModel] = []
     @Published var sortOption: SortOption = .rank
-    @Published var listOption: ListOption = .coin
-    @Published var isLoading: Bool = false
+    @Published var isRefreshing: Bool = false
+    @Published var isEditing: Bool = false
     
     private let dataService = CoinDataService()
+    private let watchlistDataService = WatchlistDataService()
     private var cancellables = Set<AnyCancellable>()
     
     enum SortOption {
         case rank, price, pricereversed, priceChangePercentage24H, priceChangePercentage24HReversed
-    }
-    
-    enum ListOption {
-        case watchlist, coin
     }
     
     init() {
@@ -41,12 +40,22 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        dataService.$isLoading
-            .sink { [weak self] returnBool in
-                self?.isLoading = returnBool
+        // Watchlist Update
+        $allCoins
+            .combineLatest(watchlistDataService.$savedEntities)
+            .map(convertCoins)
+            .sink { [weak self] (returnCoins) in
+                self?.subWatchlist = returnCoins
             }
             .store(in: &cancellables)
         
+        // isRefreshing Update
+        dataService.$isRefreshing
+            .sink { [weak self] returnBool in
+                self?.isRefreshing = returnBool
+            }
+            .store(in: &cancellables)
+
     }
     
     func getCoin() {
@@ -67,5 +76,33 @@ class HomeViewModel: ObservableObject {
         case .priceChangePercentage24HReversed:
             return coins.sorted(by: { $0.priceChangePercentage24H < $1.priceChangePercentage24H})
         }
+    }
+
+    func isWatchlistEmpty() -> Bool {
+        watchlistDataService.isWatchlistEmpty()
+    }
+    
+    // reloadWatchlist
+    func loadWatchlist() {
+        mainWatchlist = subWatchlist
+    }
+    
+    func isWatchlistExists(coin: CoinModel) -> Bool {
+        watchlistDataService.isWatchlistExists(coin: coin)
+    }
+    
+    // Update Watchlist (Delete or add)
+    func updateWatchlist(coin: CoinModel) {
+        watchlistDataService.updateWatchlist(coin: coin)
+    }
+    
+    // AllCoins 중에 Watchlist에 해당되는 코인만 리턴
+    private func convertCoins(coinModels: [CoinModel], watchlistEntities: [WatchlistEntity]) -> [CoinModel] {
+        coinModels
+            .compactMap { (coin) -> CoinModel? in
+                guard watchlistEntities.first(where: { $0.coinID == coin.id }) != nil else { return nil
+                }
+                return coin
+            }
     }
 }
