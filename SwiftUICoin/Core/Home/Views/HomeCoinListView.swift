@@ -25,7 +25,14 @@ struct HomeCoinListView: View {
                 }
             }) {
                 if viewModel.allCoins.isEmpty {
-                    Text("is empty")
+                    VStack(spacing: 0) {
+                        SortOptionView()
+                        LazyVStack {
+                            ForEach(0..<5) { i in
+                                CoinPlaceholderView(coin: .coinPlaceholder)
+                            }
+                        }
+                    }
                 } else {
                     allCoinList
                 }

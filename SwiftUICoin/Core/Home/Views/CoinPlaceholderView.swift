@@ -1,16 +1,17 @@
 //
-//  CoinRowView.swift
+//  CoinPlaceholderView.swift
 //  SwiftUICoin
 //
-//  Created by Woo Min on 2022/09/12.
+//  Created by Woo Min on 2022/10/04.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct CoinRowView: View {
+struct CoinPlaceholderView: View {
     
     let coin: CoinModel
+    @State private var opacity: Double = 1
     
     var body: some View {
         HStack(spacing: 0) {
@@ -20,23 +21,31 @@ struct CoinRowView: View {
         }
         .padding()
         .contentShape(Rectangle())
+        .redacted(reason: .placeholder)
+        .opacity(opacity)
+        .onAppear {
+            withAnimation {
+                opacity = 0.2
+            }
+        }
+        .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true), value: opacity)
     }
 }
 
-struct CoinRowView_Previews: PreviewProvider {
+struct CoinPlaceholderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinRowView(coin: dev.coin)
+            CoinPlaceholderView(coin: dev.coin)
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
-            CoinRowView(coin: dev.coin)
+            CoinPlaceholderView(coin: dev.coin)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
     }
 }
 
-extension CoinRowView {
+extension CoinPlaceholderView {
     
     private var leftColumn: some View {
         HStack(spacing: 0) {
@@ -45,15 +54,12 @@ extension CoinRowView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
-                .foregroundColor(.orange)
-                .cornerRadius(5)
+                .cornerRadius(20)
                 
             VStack(alignment: .leading, spacing: 4) {
-                Text(coin.symbol.uppercased())
+                Text("btcbtc")
                                 .font(.headline)
-                                .foregroundColor(Color.theme.textColor)
-                Text(coin.name)
-                    .foregroundColor(Color.theme.accent)
+                Text("Ethereumbitcoin")
                     .font(.subheadline)
             }
             .padding(.leading, 14)
@@ -65,10 +71,9 @@ extension CoinRowView {
             Text(coin.currentPrice.asCurrencyWith6Decimals())
                 .bold()
                 .font(.headline)
-                .foregroundColor(Color.theme.textColor)
             Text(coin.priceChangePercentage24H.asPercentString())
-                .foregroundColor((coin.priceChangePercentage24H) >= 0 ? Color.theme.green : Color.theme.red)
                 .font(.subheadline)
         }
     }
 }
+

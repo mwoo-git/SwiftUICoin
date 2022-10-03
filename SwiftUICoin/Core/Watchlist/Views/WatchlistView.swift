@@ -16,16 +16,16 @@ struct WatchlistView: View {
         VStack(spacing: 0) {
             
             header
-            VStack{
-                if viewModel.allCoins.isEmpty {
-                    Text("array is empty")
-                } else {
-                    WatchCoinListView()
+            if viewModel.allCoins.isEmpty {
+                LazyVStack {
+                    ForEach(0..<5) { i in
+                        CoinPlaceholderView(coin: .coinPlaceholder)
+                    }
                 }
+            } else {
+                WatchCoinListView()
             }
-            
             Spacer()
-            
         }
         .background(Color.theme.background.ignoresSafeArea())
     }
@@ -33,7 +33,12 @@ struct WatchlistView: View {
 
 struct WatchlistView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchlistView()
+        NavigationView {
+            WatchlistView()
+                .navigationBarHidden(true)
+        }
+        .preferredColorScheme(.dark)
+        .environmentObject(dev.homeVM)
     }
 }
 

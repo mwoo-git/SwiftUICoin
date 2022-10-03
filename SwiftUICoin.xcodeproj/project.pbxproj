@@ -20,6 +20,7 @@
 		731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F328CF1E9100283FD3 /* PreviewProvider.swift */; };
 		731086F628CF2DB400283FD3 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F528CF2DB300283FD3 /* Double.swift */; };
 		731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F728CF790900283FD3 /* HomeViewModel.swift */; };
+		731A035428EB40FC00B1BC39 /* CoinPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A035328EB40FC00B1BC39 /* CoinPlaceholderView.swift */; };
 		7334471F28E19DD200F1719E /* WatchCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334471E28E19DD200F1719E /* WatchCoinListView.swift */; };
 		7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */; };
 		7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472328E2056800F1719E /* WatchlistDataService.swift */; };
@@ -82,6 +83,7 @@
 		731086F328CF1E9100283FD3 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		731086F528CF2DB300283FD3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		731086F728CF790900283FD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		731A035328EB40FC00B1BC39 /* CoinPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPlaceholderView.swift; sourceTree = "<group>"; };
 		7334471E28E19DD200F1719E /* WatchCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCoinListView.swift; sourceTree = "<group>"; };
 		7334472128E2048E00F1719E /* WatchlistContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchlistContainer.xcdatamodel; sourceTree = "<group>"; };
 		7334472328E2056800F1719E /* WatchlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataService.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				73C71C6128D84ADD0067167F /* SortOptionView.swift */,
 				73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */,
 				731086EF28CF1D0B00283FD3 /* CoinRowView.swift */,
+				731A035328EB40FC00B1BC39 /* CoinPlaceholderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				7334472A28E26DB800F1719E /* CommentView.swift in Sources */,
 				73B9562028DDABCE00DD4A9F /* ArticleDataService.swift in Sources */,
 				7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */,
+				731A035428EB40FC00B1BC39 /* CoinPlaceholderView.swift in Sources */,
 				7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */,
 				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */,
