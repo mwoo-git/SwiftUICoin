@@ -31,7 +31,7 @@ struct ArticleView: View {
             .padding(.horizontal)
             .padding(.vertical, 5)
             Divider()
-                .padding(.leading)
+                .padding(.horizontal)
                 .padding(.bottom, 5)
                 .foregroundColor(Color.theme.accent)
         }

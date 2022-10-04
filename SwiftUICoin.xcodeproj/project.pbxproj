@@ -21,6 +21,7 @@
 		731086F628CF2DB400283FD3 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F528CF2DB300283FD3 /* Double.swift */; };
 		731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731086F728CF790900283FD3 /* HomeViewModel.swift */; };
 		731A035428EB40FC00B1BC39 /* CoinPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A035328EB40FC00B1BC39 /* CoinPlaceholderView.swift */; };
+		731A035628EB5DB900B1BC39 /* ArticlePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A035528EB5DB900B1BC39 /* ArticlePlaceholderView.swift */; };
 		7334471F28E19DD200F1719E /* WatchCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334471E28E19DD200F1719E /* WatchCoinListView.swift */; };
 		7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */; };
 		7334472428E2056800F1719E /* WatchlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334472328E2056800F1719E /* WatchlistDataService.swift */; };
@@ -40,7 +41,6 @@
 		73B9562428DDAF3700DD4A9F /* HTMLScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562328DDAF3700DD4A9F /* HTMLScraperUtility.swift */; };
 		73B9562728DDAF8A00DD4A9F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 73B9562628DDAF8A00DD4A9F /* SwiftSoup */; };
 		73B9562928DDCD4100DD4A9F /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562828DDCD4100DD4A9F /* ArticleView.swift */; };
-		73B9562B28DDD0D300DD4A9F /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562A28DDD0D300DD4A9F /* ArticleListView.swift */; };
 		73B9563028DEE86200DD4A9F /* ArticleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562F28DEE86200DD4A9F /* ArticleWebView.swift */; };
 		73B9563228DF03BC00DD4A9F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9563128DF03BC00DD4A9F /* UIColor.swift */; };
 		73B9563428DF064700DD4A9F /* CoinWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9563328DF064700DD4A9F /* CoinWebView.swift */; };
@@ -84,6 +84,7 @@
 		731086F528CF2DB300283FD3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		731086F728CF790900283FD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		731A035328EB40FC00B1BC39 /* CoinPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPlaceholderView.swift; sourceTree = "<group>"; };
+		731A035528EB5DB900B1BC39 /* ArticlePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePlaceholderView.swift; sourceTree = "<group>"; };
 		7334471E28E19DD200F1719E /* WatchCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCoinListView.swift; sourceTree = "<group>"; };
 		7334472128E2048E00F1719E /* WatchlistContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchlistContainer.xcdatamodel; sourceTree = "<group>"; };
 		7334472328E2056800F1719E /* WatchlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataService.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		73B9562128DDAC7100DD4A9F /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		73B9562328DDAF3700DD4A9F /* HTMLScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLScraperUtility.swift; sourceTree = "<group>"; };
 		73B9562828DDCD4100DD4A9F /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
-		73B9562A28DDD0D300DD4A9F /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		73B9562F28DEE86200DD4A9F /* ArticleWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleWebView.swift; sourceTree = "<group>"; };
 		73B9563128DF03BC00DD4A9F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		73B9563328DF064700DD4A9F /* CoinWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinWebView.swift; sourceTree = "<group>"; };
@@ -359,11 +359,11 @@
 				73C71C6B28D86DDD0067167F /* DetailView.swift */,
 				73D7175E28DB43360081CB2D /* DetailStatsView.swift */,
 				73D7175C28DB414A0081CB2D /* StatisticView.swift */,
-				73B9562A28DDD0D300DD4A9F /* ArticleListView.swift */,
 				73B9562828DDCD4100DD4A9F /* ArticleView.swift */,
 				73B9563328DF064700DD4A9F /* CoinWebView.swift */,
 				73B9562F28DEE86200DD4A9F /* ArticleWebView.swift */,
 				7334472928E26DB800F1719E /* CommentView.swift */,
+				731A035528EB5DB900B1BC39 /* ArticlePlaceholderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -492,7 +492,6 @@
 				7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */,
 				731086F028CF1D0D00283FD3 /* CoinRowView.swift in Sources */,
 				733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */,
-				73B9562B28DDD0D300DD4A9F /* ArticleListView.swift in Sources */,
 				73B9563028DEE86200DD4A9F /* ArticleWebView.swift in Sources */,
 				73D7175B28DB3E930081CB2D /* StatisticModel.swift in Sources */,
 				7334472A28E26DB800F1719E /* CommentView.swift in Sources */,
@@ -522,6 +521,7 @@
 				73C71C7428D9910F0067167F /* CoinDetailDataService.swift in Sources */,
 				73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */,
 				73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */,
+				731A035628EB5DB900B1BC39 /* ArticlePlaceholderView.swift in Sources */,
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,
 				7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */,
 				73B9563628DF09CC00DD4A9F /* WebView.swift in Sources */,
@@ -588,7 +588,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -643,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -669,7 +669,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -699,7 +699,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

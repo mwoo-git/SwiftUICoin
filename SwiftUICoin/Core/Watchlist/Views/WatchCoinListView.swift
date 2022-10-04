@@ -16,6 +16,10 @@ struct WatchCoinListView: View {
         RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
             if !viewModel.isRefreshing {
                 viewModel.getCoin()
+                viewModel.isRefreshing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    viewModel.isRefreshing = false
+                }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 done()

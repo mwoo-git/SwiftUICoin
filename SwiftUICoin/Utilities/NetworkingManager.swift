@@ -35,6 +35,9 @@ class NetWorkingManager {
     static func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode == 200 else {
+                  if let response = output.response as? HTTPURLResponse {
+                      print("StatusCode\(response.statusCode)")
+                  }
                   throw NetworkingError.badURLResponse(url: url)
               }
         return output.data
@@ -46,6 +49,7 @@ class NetWorkingManager {
             break
         case .failure(let error):
             print(error.localizedDescription)
+            debugPrint(error)
         }
     }
 }

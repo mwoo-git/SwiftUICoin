@@ -43,9 +43,9 @@ extension DetailStatsView {
                 .foregroundColor(Color.theme.accent)
             Spacer()
             HStack(alignment: .lastTextBaseline) {
-                Image(systemName: "chart.bar.xaxis")
-                    .foregroundColor(Color.theme.binanceColor)
-                    .font(.subheadline)
+//                Image(systemName: "chart.bar.xaxis")
+//                    .foregroundColor(Color.theme.binanceColor)
+//                    .font(.subheadline)
                 Text("No. \(viewModel.coin.rank)")
             }
         }
@@ -61,12 +61,12 @@ extension DetailStatsView {
                !websiteString.isEmpty {
                 HStack {
                     NavigationLink(destination: CoinWebView(viewModel: viewModel)) {
-                        Text("Website")
+                        Text("웹사이트")
                     }
                     Image(systemName: "arrow.up.forward.square")
                         .font(.subheadline)
                 }
-                .foregroundColor(Color.theme.binanceColor)
+                .foregroundColor(Color.theme.openseaColor)
             }
         }
         .padding()

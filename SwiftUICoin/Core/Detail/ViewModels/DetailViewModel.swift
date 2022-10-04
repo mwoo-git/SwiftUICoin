@@ -15,7 +15,6 @@ class DetailViewModel: ObservableObject {
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
     @Published var infoOption: InfoOption = .news
-    @Published var isLoading: Bool = false
     
     @Published var coin: CoinModel
     private let coinDatailDataService: CoinDetailDataService
@@ -52,12 +51,6 @@ class DetailViewModel: ObservableObject {
         articleDataService.$articles
             .sink { [weak self] (returnedArticles) in
                 self?.articles = returnedArticles
-            }
-            .store(in: &cancellables)
-        
-        articleDataService.$isLoading
-            .sink { [weak self] returnBool in
-                self?.isLoading = returnBool
             }
             .store(in: &cancellables)
 

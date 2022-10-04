@@ -66,8 +66,8 @@ extension CoinRowView {
                 .bold()
                 .font(.headline)
                 .foregroundColor(Color.theme.textColor)
-            Text(coin.priceChangePercentage24H.asPercentString())
-                .foregroundColor((coin.priceChangePercentage24H) >= 0 ? Color.theme.green : Color.theme.red)
+            Text((coin.priceChangePercentage24H?.asPercentString()) ?? "" )
+                .foregroundColor((coin.priceChangePercentage24H!) >= 0 ? Color.theme.green : Color.theme.red)
                 .font(.subheadline)
         }
     }

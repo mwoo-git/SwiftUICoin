@@ -49,7 +49,7 @@ extension CoinPlaceholderView {
     private var leftColumn: some View {
         HStack(spacing: 0) {
             
-            KFImage(URL(string: "url"))
+            KFImage(URL(string: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
@@ -67,7 +67,7 @@ extension CoinPlaceholderView {
     
     private var rightColmn: some View {
         VStack(alignment: .trailing, spacing: 4) {
-            Text("$100,000")
+            Text("$10,000.00")
                 .bold()
                 .font(.headline)
             Text("9.00%")

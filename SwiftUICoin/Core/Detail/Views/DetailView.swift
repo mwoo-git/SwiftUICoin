@@ -75,21 +75,21 @@ extension DetailView {
     private var listOption: some View {
         HStack(alignment: .top, spacing: 30) {
             VStack {
-                Text("News")
+                Text("최신 뉴스")
                     .foregroundColor(viewModel.infoOption == .news ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
-                    .fill(viewModel.infoOption == .news ? Color.theme.binanceColor : .clear)
-                    .frame(width: 30, height: 3)
+                    .fill(viewModel.infoOption == .news ? Color.theme.textColor : .clear)
+                    .frame(width: 70, height: 2)
             }
             .onTapGesture {
                 viewModel.infoOption = .news
             }
             VStack() {
-                Text("About \(viewModel.coin.symbol.uppercased())")
+                Text("\(viewModel.coin.symbol.uppercased()) 정보")
                     .foregroundColor(viewModel.infoOption == .about ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
-                    .fill(viewModel.infoOption == .about ? Color.theme.binanceColor : .clear)
-                    .frame(width: 30, height: 3)
+                    .fill(viewModel.infoOption == .about ? Color.theme.textColor : .clear)
+                    .frame(width: 70, height: 2)
             }
             .onTapGesture {
                 viewModel.infoOption = .about
@@ -107,24 +107,21 @@ extension DetailView {
         LazyVStack(
             pinnedViews: [.sectionHeaders]) {
                 Section(header: listOption) {
-                    VStack {
-                        HStack {
-                            if viewModel.infoOption == .news {
-                                if viewModel.isLoading {
-                                    Text("is Loading..")
-                                } else {
-                                    VStack {
-                                        Text("Loading End")
-                                        ArticleListView(viewModel: viewModel)
-                                    }
+                    if viewModel.infoOption == .news {
+                        if viewModel.articles.isEmpty {
+                            ArticlePlaceholderView()
+                        } else {
+                            ForEach(viewModel.articles) { article in
+                                NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
+                                    ArticleView(article: article)
                                 }
-                                
-                            } else {
-                                DetailStatsView(viewModel: viewModel)
                             }
                         }
+                    } else {
+                        DetailStatsView(viewModel: viewModel)
                     }
                 }
+                
             }
             .background(Color.theme.background)
     }

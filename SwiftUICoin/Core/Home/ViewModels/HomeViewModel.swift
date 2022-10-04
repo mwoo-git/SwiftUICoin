@@ -48,13 +48,6 @@ class HomeViewModel: ObservableObject {
                 self?.subWatchlist = returnCoins
             }
             .store(in: &cancellables)
-        
-        // isRefreshing Update
-        dataService.$isRefreshing
-            .sink { [weak self] returnBool in
-                self?.isRefreshing = returnBool
-            }
-            .store(in: &cancellables)
 
     }
     
@@ -72,9 +65,9 @@ class HomeViewModel: ObservableObject {
         case .pricereversed:
             return coins.sorted(by: { $0.currentPrice < $1.currentPrice })
         case .priceChangePercentage24H:
-            return coins.sorted(by: { $0.priceChangePercentage24H > $1.priceChangePercentage24H})
+            return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0})
         case .priceChangePercentage24HReversed:
-            return coins.sorted(by: { $0.priceChangePercentage24H < $1.priceChangePercentage24H})
+            return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0})
         }
     }
 
