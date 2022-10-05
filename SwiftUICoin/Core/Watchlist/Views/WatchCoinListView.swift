@@ -14,15 +14,10 @@ struct WatchCoinListView: View {
     
     var body: some View {
         RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
-            if !viewModel.isRefreshing {
-                viewModel.getCoin()
-                viewModel.isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    viewModel.isRefreshing = false
-                }
-            }
+            viewModel.getCoin()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 done()
+                viewModel.loadWatchlist()
             }
         }) {
             if viewModel.allCoins.isEmpty {

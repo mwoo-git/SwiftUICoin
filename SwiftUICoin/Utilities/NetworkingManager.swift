@@ -36,7 +36,8 @@ class NetWorkingManager {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode == 200 else {
                   if let response = output.response as? HTTPURLResponse {
-                      print("StatusCode\(response.statusCode)")
+                      let status = response.statusCode
+                      print(status == 429 ? "StatusCode\(status), 속도 제한" : "\(status)")
                   }
                   throw NetworkingError.badURLResponse(url: url)
               }

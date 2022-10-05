@@ -1,28 +1,28 @@
 //
-//  ArticleDataService.swift
+//  HeadlineDataService.swift
 //  SwiftUICoin
 //
-//  Created by Woo Min on 2022/09/23.
+//  Created by Woo Min on 2022/10/05.
 //
 
 import Foundation
 import Combine
 
-class ArticleDataService {
-    @Published var articles: [ArticleModel] = []
+class HeadlineDataService {
     
-    var htmlScrapUtlity = ArticleScraperUtility()
+    @Published var articles: [HeadlineModel] = []
+    
+    var htmlScrapUtlity = HeadlineScraperUtility()
     var cancellableTask: AnyCancellable? = nil
-    let coin: CoinModel
     
-    init(coin: CoinModel) {
-        self.coin = coin
+    init() {
         getArticles()
     }
     
-    private func getArticles() {
+    func getArticles() {
         
-        guard let url = URL(string: "https://www.blockmedia.co.kr/?s=\(coin.symbol)") else { return }
+        guard let url = URL(string: "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8") else { return print("scrap url error")}
+        print("start scrap")
         self.cancellableTask?.cancel()
         self.cancellableTask = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
@@ -39,4 +39,3 @@ class ArticleDataService {
         cancellableTask = nil
     }
 }
-

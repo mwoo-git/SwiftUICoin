@@ -15,8 +15,8 @@ struct MyTabView: View {
     
     init() {
         let appearance = UITabBar.appearance()
-        appearance.unselectedItemTintColor = UIColor(Color.theme.textColor)
-        appearance.backgroundColor = UIColor(named: "BackgroundColor")
+//        appearance.unselectedItemTintColor = UIColor(Color.theme.textColor)
+        appearance.backgroundColor = UIColor(named: "TabbarBackgroundColor")
     }
     
     var body: some View {
@@ -50,6 +50,19 @@ struct MyTabView: View {
                     self.isNavigationBarHidden = true
                 })
                 .tag(1)
+            
+            HeadlineView()
+                .tabItem {
+                    Image(systemName: selection  == 1 ? "newspaper.fill" : "newspaper")
+//                        .environment(\.symbolVariants, .none)
+                    Text("Headline")
+                }
+                .navigationTitle("")
+                .navigationBarHidden(self.isNavigationBarHidden)
+                .onAppear(perform: {
+                    self.isNavigationBarHidden = true
+                })
+                .tag(2)
             
            
             

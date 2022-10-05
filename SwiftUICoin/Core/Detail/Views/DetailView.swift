@@ -34,8 +34,12 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(coin: dev.coin)
-            .preferredColorScheme(.dark)
+        NavigationView {
+            DetailView(coin: dev.coin)
+                .navigationBarHidden(true)
+        }
+        .preferredColorScheme(.dark)
+        .environmentObject(dev.homeVM)
     }
 }
 
@@ -79,7 +83,7 @@ extension DetailView {
                     .foregroundColor(viewModel.infoOption == .news ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .news ? Color.theme.textColor : .clear)
-                    .frame(width: 70, height: 2)
+                    .frame(width: 30, height: 2)
             }
             .onTapGesture {
                 viewModel.infoOption = .news
@@ -89,7 +93,7 @@ extension DetailView {
                     .foregroundColor(viewModel.infoOption == .about ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .about ? Color.theme.textColor : .clear)
-                    .frame(width: 70, height: 2)
+                    .frame(width: 30, height: 2)
             }
             .onTapGesture {
                 viewModel.infoOption = .about
@@ -111,11 +115,16 @@ extension DetailView {
                         if viewModel.articles.isEmpty {
                             ArticlePlaceholderView()
                         } else {
-                            ForEach(viewModel.articles) { article in
-                                NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
-                                    ArticleView(article: article)
+                            LazyVStack {
+                                ForEach(viewModel.articles.prefix(5)) { article in
+                                    NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
+                                        ArticleView(article: article)
+                                    }
+                                    .buttonStyle(ListSelectionStyle())
                                 }
+                                
                             }
+                            .padding(.top)
                         }
                     } else {
                         DetailStatsView(viewModel: viewModel)

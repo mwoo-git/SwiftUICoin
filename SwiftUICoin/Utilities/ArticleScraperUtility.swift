@@ -9,7 +9,7 @@ import Foundation
 import SwiftSoup
 import Combine
 
-class HTMLScraperUtility {
+class ArticleScraperUtility {
     
     func scrapArticle(from data:Data) -> Future<[ArticleModel], Never> {
         Future { promise in
@@ -17,7 +17,6 @@ class HTMLScraperUtility {
             var articles = [ArticleModel]()
             do {
                 let elements = try SwiftSoup.parse(html)
-    
                 let documents = try elements.getElementById("content-area")?.select("div.et_pb_extra_column_main").select("div").select("div.paginated_content").select("div").select("div").select("article")
                 documents?.forEach({ (document) in
                     let url = try? document.select("div.post-content").select("h2").select("a").attr("href")

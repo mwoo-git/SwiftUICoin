@@ -22,10 +22,12 @@ class CoinDataService {
     func getCoin() {
         
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h") else { return }
+        print("start download")
         coinSubscription = NetWorkingManager.download(url: url)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
             .sink(receiveCompletion: NetWorkingManager.handleCompletion, receiveValue: { [weak self] (returnCoins) in
                 self?.allCoins = returnCoins
+                print("end download")
                 self?.coinSubscription?.cancel()
             })
     }

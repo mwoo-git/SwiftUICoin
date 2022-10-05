@@ -17,6 +17,7 @@ struct ArticlePlaceholderView: View {
                 row
             }
         }
+        .padding(.top)
         .opacity(opacity)
         .onAppear {
             withAnimation {

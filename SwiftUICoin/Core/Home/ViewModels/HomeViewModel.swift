@@ -52,7 +52,13 @@ class HomeViewModel: ObservableObject {
     }
     
     func getCoin() {
-        dataService.getCoin()
+        if !isRefreshing {
+            dataService.getCoin()
+            isRefreshing = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                self.isRefreshing = false
+            }
+        }
     }
     
     // Sort AllCoins

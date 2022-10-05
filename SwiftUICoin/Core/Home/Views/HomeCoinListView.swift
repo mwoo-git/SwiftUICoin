@@ -17,9 +17,7 @@ struct HomeCoinListView: View {
     var body: some View {
         ScrollViewReader {proxyReader in
             RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
-                if !viewModel.isRefreshing {
-                    viewModel.getCoin()
-                }
+                viewModel.getCoin()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     done()
                 }
