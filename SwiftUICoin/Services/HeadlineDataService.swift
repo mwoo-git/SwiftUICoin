@@ -14,15 +14,19 @@ class HeadlineDataService {
     
     var htmlScrapUtlity = HeadlineScraperUtility()
     var cancellableTask: AnyCancellable? = nil
+    var keyword: String
     
-    init() {
+    init(keyword: String) {
+        self.keyword = keyword
         getArticles()
     }
     
     func getArticles() {
         
-        guard let url = URL(string: "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8") else { return print("scrap url error")}
-        print("start scrap")
+        let urlString = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=\(keyword)"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        guard let url = URL(string: encodedString) else { return print("scrap url error")}
+        print("start \(keyword) scrap")
         self.cancellableTask?.cancel()
         self.cancellableTask = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
@@ -32,6 +36,7 @@ class HeadlineDataService {
             .sink { (completion) in
             } receiveValue: { [weak self] (articles) in
                 self?.articles = articles
+                print("scrap end")
             }
     }
     

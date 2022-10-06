@@ -11,13 +11,12 @@ import Combine
 
 // Selector
 /*
- row:
- #main_pack > section.sc_new.sp_nnews._prs_nws > div > div.group_news > ul > li > div.news_wrap.api_ani_send
  
- url, title: div > a
+ row: #main_pack > section.sc_new.sp_nnews._prs_nws > div > div.group_news > ul > li > div.news_wrap.api_ani_send
+ url, title: div > a[href].news_tit
  data: div > div.news_info > div.info_group > span
  author: div > div.news_info > div.info_group > a.info.press
- imageUrl: a > img
+ imageUrl: a > img[src].api_get
  authorImageUrl: div > div.news_info > div.info_group > a.info.press > span > img
  
  */

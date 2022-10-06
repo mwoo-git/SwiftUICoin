@@ -37,6 +37,8 @@ class HomeViewModel: ObservableObject {
             .map(sortCoins)
             .sink { [weak self] (returnedCoins) in
                 self?.allCoins = returnedCoins
+                self?.loadWatchlist()
+                
             }
             .store(in: &cancellables)
         
@@ -52,11 +54,19 @@ class HomeViewModel: ObservableObject {
     }
     
     func getCoin() {
-        if !isRefreshing {
+        if allCoins.isEmpty {
             dataService.getCoin()
             isRefreshing = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.isRefreshing = false
+            }
+        } else {
+            if !isRefreshing {
+                dataService.getCoin()
+                isRefreshing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                    self.isRefreshing = false
+                }
             }
         }
     }

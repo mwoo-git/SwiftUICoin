@@ -56,7 +56,6 @@ extension ArticlePlaceholderView {
                     Text("2022년 9월 22일 오후 12:25")
                     Spacer()
                 }
-                .foregroundColor(Color.theme.accent)
                 .font(.subheadline)
             }
             .frame(height: 90)
@@ -65,8 +64,8 @@ extension ArticlePlaceholderView {
             Divider()
                 .padding(.horizontal)
                 .padding(.bottom, 5)
-                .foregroundColor(Color.theme.accent)
         }
         .redacted(reason: .placeholder)
+        .foregroundColor(Color.theme.accent)
     }
 }
