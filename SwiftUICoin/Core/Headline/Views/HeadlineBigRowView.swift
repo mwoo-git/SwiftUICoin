@@ -43,7 +43,7 @@ extension HeadlineBigRowView {
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                     .cornerRadius(5)
-                Text(headline.author.replacingOccurrences(of: "언론사 선정", with: ""))
+                Text(headline.cleanAuthor)
                     .font(.subheadline)
                     .padding(.leading, 5)
             }
@@ -52,7 +52,6 @@ extension HeadlineBigRowView {
                 .lineLimit(2)
                 .foregroundColor(Color.theme.textColor)
                 .multilineTextAlignment(.leading)
-            
             HStack {
                 Text(headline.date)
                     .font(.subheadline)

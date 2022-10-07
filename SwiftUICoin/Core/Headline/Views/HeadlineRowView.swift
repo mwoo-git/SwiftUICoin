@@ -43,7 +43,7 @@ extension HeadlineRowView {
                         .scaledToFit()
                         .frame(width: 15, height: 15)
                         .cornerRadius(5)
-                    Text(headline.author.replacingOccurrences(of: "언론사 선정", with: ""))
+                    Text(headline.cleanAuthor)
                         .font(.footnote)
                         .padding(.leading, 5)
                 }
@@ -66,7 +66,7 @@ extension HeadlineRowView {
     
     private var rowColumn: some View {
         HStack {
-            Text(headline.date)
+            Text(headline.cleanDate)
                 .font(.footnote)
             Spacer()
             Image(systemName: "ellipsis")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeadlineView: View {
     
-    @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "방탄소년단", "블랙핑크", "원신"]
+    @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT"]
     @State private var currentTab: Int = 0
     
     var body: some View {

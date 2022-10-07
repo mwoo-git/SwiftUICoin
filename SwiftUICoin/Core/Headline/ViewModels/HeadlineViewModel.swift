@@ -36,7 +36,13 @@ class HeadlineViewModel: ObservableObject {
     
     func getArticle() {
         if articles.isEmpty {
-            headlineDataService.getArticles()
+            if !isRefreshing {
+                headlineDataService.getArticles()
+                isRefreshing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.isRefreshing = false
+                }
+            }
         } else {
             if !isRefreshing {
                 headlineDataService.getArticles()

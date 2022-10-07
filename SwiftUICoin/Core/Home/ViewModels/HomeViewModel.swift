@@ -50,15 +50,17 @@ class HomeViewModel: ObservableObject {
                 self?.subWatchlist = returnCoins
             }
             .store(in: &cancellables)
-
+        
     }
     
     func getCoin() {
         if allCoins.isEmpty {
-            dataService.getCoin()
-            isRefreshing = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.isRefreshing = false
+            if !isRefreshing {
+                dataService.getCoin()
+                isRefreshing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.isRefreshing = false
+                }
             }
         } else {
             if !isRefreshing {
@@ -86,7 +88,7 @@ class HomeViewModel: ObservableObject {
             return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0})
         }
     }
-
+    
     func isWatchlistEmpty() -> Bool {
         watchlistDataService.isWatchlistEmpty()
     }
