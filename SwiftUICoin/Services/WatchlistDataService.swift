@@ -35,21 +35,30 @@ class WatchlistDataService {
         }
     }
     
-    func isWatchlistExists(coin: CoinModel) -> Bool {
-        if savedEntities.first(where: {$0.coinID == coin.id }) != nil {
+    func isWatchlistExists(coin: CoinModel?, backup: BackupCoinEntity?) -> Bool {
+        if savedEntities.first(where: {$0.coinID == coin?.id ?? backup?.id }) != nil {
             return true
         } else {
             return false
         }
     }
     
-    func updateWatchlist(coin: CoinModel) {
+    func updateWatchlist(coin: CoinModel?, backup: BackupCoinEntity?) {
         // saveEntities 어레이에 저장된 객체 중에 coinID와 coin.id가 같은 객체가 있다면 그 중 첫번째를 가져와서 저장하고 진행하라. (first(where:)는 조건에 부합하는 첫번재 원소를 가져옵니다.)
-        if let entity = savedEntities.first(where: {$0.coinID == coin.id }) {
-            delete(entity: entity)
+        if coin == nil {
+            if let entity = savedEntities.first(where: {$0.coinID == backup?.id }) {
+                delete(entity: entity)
+            } else {
+                add(coin: nil, backup: backup)
+            }
         } else {
-            add(coin: coin)
+            if let entity = savedEntities.first(where: {$0.coinID == coin?.id }) {
+                delete(entity: entity)
+            } else {
+                add(coin: coin, backup: nil)
+            }
         }
+        
     }
     
     // MARK: PRIVATE
@@ -66,9 +75,15 @@ class WatchlistDataService {
     }
     
     // Create
-    private func add(coin: CoinModel) {
-        let entity = WatchlistEntity(context: container.viewContext) // context는 조건, 환경을 의미합니다. 상수로 지정했던 container의 모델을 가져오게 됩니다.
-        entity.coinID = coin.id // entity.coinID에 coin.id를 저장하라.
+    private func add(coin: CoinModel?, backup: BackupCoinEntity?) {
+        if coin == nil {
+            let entity = WatchlistEntity(context: container.viewContext) // context는 조건, 환경을 의미합니다. 상수로 지정했던 container의 모델을 가져오게 됩니다.
+            entity.coinID = backup?.id
+        } else {
+            let entity = WatchlistEntity(context: container.viewContext) // context는 조건, 환경을 의미합니다. 상수로 지정했던 container의 모델을 가져오게 됩니다.
+            entity.coinID = coin?.id
+        }
+        // entity.coinID에 coin.id를 저장하라.
         applyChanges() // Core data에 저장하고 savedEtities 어레이에 업데이트
     }
     

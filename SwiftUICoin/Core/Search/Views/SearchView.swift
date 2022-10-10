@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @StateObject private var viewModel = SearchViewModel()
+    @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -18,10 +18,13 @@ struct SearchView: View {
             Divider()
 //            listOptionBar
             if !viewModel.searchText.isEmpty {
-                SearchListView(viewModel: viewModel)
+                SearchListView()
                     .padding(.top, 10)
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.sortOption = .rank
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
@@ -52,6 +55,7 @@ extension SearchView {
                 .onTapGesture {
                     UIApplication.shared.endEditing()
                     presentationMode.wrappedValue.dismiss()
+                    viewModel.searchText = ""
                 }
         }
         .padding()

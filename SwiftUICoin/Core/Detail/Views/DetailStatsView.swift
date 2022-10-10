@@ -12,24 +12,24 @@ struct DetailStatsView: View {
     @StateObject var viewModel: DetailViewModel
     
     var body: some View {
-        VStack {
-            rank
-            ForEach(viewModel.statistics) { stat in
-                StatisticView(stat: stat)
+            VStack {
+                rank
+                ForEach(viewModel.statistics) { stat in
+                    StatisticView(stat: stat)
+                }
+                explorer
+                introduction
             }
-            explorer
-            introduction
-        }
     }
 }
 
 struct DetailStatsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DetailStatsView(viewModel: DetailViewModel(coin: dev.coin))
+            DetailStatsView(viewModel: DetailViewModel(coin: dev.coin, backup: nil))
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            DetailStatsView(viewModel: DetailViewModel(coin: dev.coin))
+            DetailStatsView(viewModel: DetailViewModel(coin: dev.coin, backup: nil))
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
         }
@@ -46,7 +46,7 @@ extension DetailStatsView {
 //                Image(systemName: "chart.bar.xaxis")
 //                    .foregroundColor(Color.theme.binanceColor)
 //                    .font(.subheadline)
-                Text("No. \(viewModel.coin.rank)")
+                Text("No. \((viewModel.coin?.marketCapRank?.convertRank ?? viewModel.backup?.rank.convertRank) ?? 0)")
             }
         }
         .padding()

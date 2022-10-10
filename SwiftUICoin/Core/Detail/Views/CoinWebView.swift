@@ -31,7 +31,7 @@ struct CoinWebView: View {
 
 struct CoinWebView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinWebView(viewModel: DetailViewModel(coin: dev.coin))
+        CoinWebView(viewModel: DetailViewModel(coin: dev.coin, backup: nil))
     }
 }
 
@@ -41,12 +41,12 @@ extension CoinWebView {
             BackButtonView()
             Spacer()
             HStack {
-                KFImage(URL(string: viewModel.coin.image))
+                KFImage(URL(string: (viewModel.coin?.image ?? viewModel.backup?.image) ?? ""))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.orange)
-                Text(viewModel.coin.symbol.uppercased())
+                Text((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")
                     .bold()
             }
             Spacer()

@@ -9,16 +9,25 @@ import SwiftUI
 
 struct SearchListView: View {
     
-    @StateObject var viewModel: SearchViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(viewModel.searchCoins) { coin in
-                    NavigationLink(
-                        destination: NavigationLazyView(DetailView(coin: coin)),
-                        label: { EditCoinRowView(coin: coin) }
-                    )
+                if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
+                    ForEach(viewModel.searchCoinsBackup) { backup in
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
+                            label: { EditCoinRowView(backup: backup) }
+                        )
+                    }
+                } else {
+                    ForEach(viewModel.searchCoins) { coin in
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+                            label: { EditCoinRowView(coin: coin) }
+                        )
+                    }
                 }
             }
         }

@@ -141,4 +141,9 @@ extension Double {
             return "\(sign)\(self)"
         }
     }
+    
+    var convertRank: Int {
+        return Int(self)
+    }
 }
+

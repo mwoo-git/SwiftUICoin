@@ -19,7 +19,7 @@ struct ArticleView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 HStack(alignment: .firstTextBaseline) {
-                    Text(article.author)
+                    Text("블록미디어")
                     Text("｜")
                     Text(article.date)
                     Spacer()

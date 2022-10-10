@@ -22,7 +22,7 @@ struct HomeCoinListView: View {
                     done()
                 }
             }) {
-                if viewModel.allCoins.isEmpty {
+                if viewModel.allCoins.isEmpty || viewModel.allCoins.isEmpty && viewModel.backupCoins.isEmpty {
                     VStack(spacing: 0) {
                         SortOptionView()
                         LazyVStack {
@@ -66,13 +66,24 @@ extension HomeCoinListView {
             Section(header: VStack(spacing: 0) {
                 SortOptionView()
             }) {
-                ForEach(viewModel.allCoins) { coin in
-                    NavigationLink(
-                        destination: NavigationLazyView(DetailView(coin: coin)),
-                        label: {
-                            CoinRowView(coin: coin)
-                        })
-                        .buttonStyle(ListSelectionStyle())
+                if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
+                    ForEach(viewModel.backupCoins) { backup in
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
+                            label: {
+                                CoinRowView(coin: nil, backup: backup)
+                            })
+                            .buttonStyle(ListSelectionStyle())
+                    }
+                } else {
+                    ForEach(viewModel.allCoins) { coin in
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+                            label: {
+                                CoinRowView(coin: coin, backup: nil)
+                            })
+                            .buttonStyle(ListSelectionStyle())
+                    }
                 }
             }
         }

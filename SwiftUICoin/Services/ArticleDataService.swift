@@ -13,16 +13,24 @@ class ArticleDataService {
     
     var htmlScrapUtlity = ArticleScraperUtility()
     var cancellableTask: AnyCancellable? = nil
-    let coin: CoinModel
+    var coin: CoinModel?
+    var backup: BackupCoinEntity?
     
-    init(coin: CoinModel) {
-        self.coin = coin
+    init(coin: CoinModel?, backup: BackupCoinEntity?) {
+        if coin == nil {
+            self.backup = backup
+        } else {
+            self.coin = coin
+        }
         getArticles()
     }
     
     private func getArticles() {
         
-        guard let url = URL(string: "https://www.blockmedia.co.kr/?s=\(coin.symbol)") else { return }
+        
+        let urlString = "https://www.blockmedia.co.kr/?s=\((coin == nil ? backup?.symbol?.convertSymbol : coin?.symbol.convertSymbol) ?? "")"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        guard let url = URL(string: encodedString) else { return }
         self.cancellableTask?.cancel()
         self.cancellableTask = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))

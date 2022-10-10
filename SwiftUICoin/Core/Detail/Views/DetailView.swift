@@ -13,8 +13,12 @@ struct DetailView: View {
     @StateObject var viewModel: DetailViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     
-    init(coin: CoinModel) {
-        _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin)) // coin값을 초기 설정
+    init(coin: CoinModel?, backup: BackupCoinEntity?) {
+        if coin == nil {
+            _viewModel = StateObject(wrappedValue: DetailViewModel(coin: nil, backup: backup))
+        } else {
+            _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin, backup: nil))
+        }
     }
     
     var body: some View {
@@ -35,7 +39,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DetailView(coin: dev.coin)
+            DetailView(coin: dev.coin, backup: nil)
                 .navigationBarHidden(true)
         }
         .preferredColorScheme(.dark)
@@ -49,27 +53,37 @@ extension DetailView {
             BackButtonView()
             Spacer()
             HStack() {
-                KFImage(URL(string: viewModel.coin.image))
+                KFImage(URL(string: (viewModel.backup?.image ??  viewModel.coin?.image) ?? ""))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.orange)
-                Text(viewModel.coin.symbol.uppercased())
+                Text((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")
                     .bold()
             }
             Spacer()
-            Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin) ? "star.fill" : "star")
-                .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin) ? Color.theme.binanceColor : Color.theme.accent)
-                .padding()
-                .onTapGesture {
-                    homeViewModel.updateWatchlist(coin: viewModel.coin)
-                }
+            if viewModel.coin == nil {
+                Image(systemName: homeViewModel.isWatchlistExists(coin: nil, backup: viewModel.backup) ? "star.fill" : "star")
+                    .foregroundColor(homeViewModel.isWatchlistExists(coin: nil, backup: viewModel.backup) ? Color.theme.binanceColor : Color.theme.accent)
+                    .padding()
+                    .onTapGesture {
+                        homeViewModel.updateWatchlist(coin: nil, backup: viewModel.backup)
+                    }
+            } else {
+                Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin, backup: nil) ? "star.fill" : "star")
+                    .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin, backup: nil) ? Color.theme.binanceColor : Color.theme.accent)
+                    .padding()
+                    .onTapGesture {
+                        homeViewModel.updateWatchlist(coin: viewModel.coin, backup: nil)
+                    }
+            }
+            
         }
         .background(Color.theme.background)
     }
     
     private var tradingView: some View {
-        TradingView(symbol: Usd.usd.contains(viewModel.coin.symbol) ? "\(viewModel.coin.symbol.uppercased())USD" : "\(viewModel.coin.symbol.uppercased())USDT")
+        TradingView(symbol: Usd.usd.contains((viewModel.coin?.symbol ?? viewModel.backup?.symbol) ?? "") ? "\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")USD" : "\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")USDT")
             .frame(height: UIScreen.main.bounds.height / 1.75)
             .frame(width: UIScreen.main.bounds.width)
             .padding(.bottom)
@@ -79,7 +93,7 @@ extension DetailView {
     private var listOption: some View {
         HStack(alignment: .top, spacing: 30) {
             VStack {
-                Text("최신 뉴스")
+                Text("주요 뉴스")
                     .foregroundColor(viewModel.infoOption == .news ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .news ? Color.theme.textColor : .clear)
@@ -89,7 +103,7 @@ extension DetailView {
                 viewModel.infoOption = .news
             }
             VStack() {
-                Text("\(viewModel.coin.symbol.uppercased()) 정보")
+                Text("\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "") 정보")
                     .foregroundColor(viewModel.infoOption == .about ? Color.theme.textColor : Color.theme.accent)
                 Capsule()
                     .fill(viewModel.infoOption == .about ? Color.theme.textColor : .clear)
@@ -116,7 +130,7 @@ extension DetailView {
                             ArticlePlaceholderView()
                         } else {
                             LazyVStack {
-                                ForEach(viewModel.articles.prefix(5)) { article in
+                                ForEach(viewModel.articles.prefix(4)) { article in
                                     NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
                                         ArticleView(article: article)
                                     }

@@ -16,7 +16,8 @@ class DetailViewModel: ObservableObject {
     @Published var websiteURL: String? = nil
     @Published var infoOption: InfoOption = .news
     
-    @Published var coin: CoinModel
+    @Published var coin: CoinModel?
+    @Published var backup: BackupCoinEntity?
     private let coinDatailDataService: CoinDetailDataService
     private let articleDataService: ArticleDataService
     private var cancellables = Set<AnyCancellable>()
@@ -25,21 +26,21 @@ class DetailViewModel: ObservableObject {
         case news, about
     }
     
-    init(coin: CoinModel) {
-        self.coin = coin
-        self.coinDatailDataService = CoinDetailDataService(coin: coin)
-        self.articleDataService = ArticleDataService(coin: coin)
+    init(coin: CoinModel?, backup: BackupCoinEntity?) {
+        if coin == nil {
+            self.backup = backup
+            self.coinDatailDataService = CoinDetailDataService(coin: nil, backup: backup)
+            self.articleDataService = ArticleDataService(coin: nil, backup: backup)
+        } else {
+            self.coin = coin
+            self.coinDatailDataService = CoinDetailDataService(coin: coin, backup: nil)
+            self.articleDataService = ArticleDataService(coin: coin, backup: nil)
+        }
+        
         self.addSubscribers()
     }
     
     private func addSubscribers() {
-        
-        $coin
-            .map(mapDataToStatistics)
-            .sink { [weak self] (returnedArrays) in
-                self?.statistics = returnedArrays
-            }
-            .store(in: &cancellables)
         
         coinDatailDataService.$coinDateils
             .sink { [weak self] (returnedCoinDetails) in
@@ -53,21 +54,30 @@ class DetailViewModel: ObservableObject {
                 self?.articles = returnedArticles
             }
             .store(in: &cancellables)
+        
+        if coin != nil {
+            $coin
+                .map(mapDataToStatistics)
+                .sink { [weak self] (returnedArrays) in
+                    self?.statistics = returnedArrays
+                }
+                .store(in: &cancellables)
+        }
 
     }
     
-    private func mapDataToStatistics(coinModel: CoinModel) -> [StatisticModel] {
+    private func mapDataToStatistics(coinModel: CoinModel?) -> [StatisticModel] {
         
-        let marketCap = coinModel.marketCap?.asCurrency() ?? ""
+        let marketCap = coinModel?.marketCap?.asCurrency() ?? ""
         let marketCapStat = StatisticModel(title: "Market Cap", value: marketCap)
         
-        let circulationSupply = coinModel.circulatingSupply?.asNumberWithoutDecimal() ?? ""
+        let circulationSupply = coinModel?.circulatingSupply?.asNumberWithoutDecimal() ?? ""
         let circulationSupplyStat = StatisticModel(title: "Circulation Supply", value: circulationSupply)
         
-        let maxSupply = coinModel.maxSupply?.asNumberWithoutDecimal() ?? ""
+        let maxSupply = coinModel?.maxSupply?.asNumberWithoutDecimal() ?? ""
         let maxSupplyStat = StatisticModel(title: "Max Supply", value: maxSupply)
         
-        let totalSupply = coinModel.totalSupply?.asNumberWithoutDecimal() ?? ""
+        let totalSupply = coinModel?.totalSupply?.asNumberWithoutDecimal() ?? ""
         let totalSupplyStat = StatisticModel(title: "Total Supply", value: totalSupply)
         
         let statArray: [StatisticModel] = [

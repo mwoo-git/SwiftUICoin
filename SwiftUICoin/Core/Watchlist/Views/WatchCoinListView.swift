@@ -20,29 +20,51 @@ struct WatchCoinListView: View {
                 viewModel.loadWatchlist()
             }
         }) {
-            if viewModel.allCoins.isEmpty {
+            if viewModel.allCoins.isEmpty || viewModel.allCoins.isEmpty && viewModel.backupCoins.isEmpty {
                 LazyVStack {
                     ForEach(0..<5) { i in
                         CoinPlaceholderView()
                     }
                 }
             } else {
-                if !viewModel.isEditing {
-                    LazyVStack {
-                        ForEach(viewModel.mainWatchlist) { coin in
-                            NavigationLink(
-                                destination: NavigationLazyView(DetailView(coin: coin)),
-                                label: { CoinRowView(coin: coin) }
-                            )
+                if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
+                    if !viewModel.isEditing {
+                        LazyVStack {
+                            ForEach(viewModel.mainWatchlistBackup) { backup in
+                                NavigationLink(
+                                    destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
+                                    label: { CoinRowView(coin: nil, backup: backup) }
+                                )
+                            }
+                        }
+                        .onAppear {
+                            viewModel.loadWatchlist()
+                        }
+                    } else {
+                        LazyVStack {
+                            ForEach(viewModel.mainWatchlistBackup) { backup in
+                                EditCoinRowView(coin: nil, backup: backup)
+                            }
                         }
                     }
-                    .onAppear {
-                        viewModel.loadWatchlist()
-                    }
                 } else {
-                    LazyVStack {
-                        ForEach(viewModel.mainWatchlist) { coin in
-                            EditCoinRowView(coin: coin)
+                    if !viewModel.isEditing {
+                        LazyVStack {
+                            ForEach(viewModel.mainWatchlist) { coin in
+                                NavigationLink(
+                                    destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+                                    label: { CoinRowView(coin: coin, backup: nil) }
+                                )
+                            }
+                        }
+                        .onAppear {
+                            viewModel.loadWatchlist()
+                        }
+                    } else {
+                        LazyVStack {
+                            ForEach(viewModel.mainWatchlist) { coin in
+                                EditCoinRowView(coin: coin, backup: nil)
+                            }
                         }
                     }
                 }

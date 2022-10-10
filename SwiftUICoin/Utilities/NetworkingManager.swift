@@ -12,14 +12,21 @@ import Combine
 class NetWorkingManager {
     
     enum NetworkingError: LocalizedError {
-        case badURLResponse(url: URL)
+        case badURLResponse(url: URL, status: Int)
+        case internalError429(url: URL)
+        case serverError500(url: URL, status: Int)
         case unknown
         
         var errorDescription: String? {
             switch self {
-            case .badURLResponse(url: let url): return "[🔥] Bad response form URL: \(url)"
-                // \(url )로 어떤 url에서 에러가 발생했는지 알 수 있습니다.
-            case .unknown: return "[⚠️] Unknown error occured"
+            case .badURLResponse(url: let url, status: let status):
+                return "[🔥] Bad response [\(status)] form URL: \(url)"
+            case .internalError429(url: let url):
+                return "[🔥] Bad response [429] 요청이 너무 많습니다. form URL: \(url)"
+            case .serverError500(url: let url, status: let status):
+                return "[🔥] Bad response [\(status)] 서버 오류 form URL: \(url)"
+            case .unknown:
+                return "[⚠️] Unknown error occured"
             }
         }
     }
@@ -35,11 +42,14 @@ class NetWorkingManager {
     static func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode == 200 else {
-                  if let response = output.response as? HTTPURLResponse {
-                      let status = response.statusCode
-                      print(status == 429 ? "StatusCode\(status), 속도 제한" : "\(status)")
-                  }
-                  throw NetworkingError.badURLResponse(url: url)
+                      switch (output.response as! HTTPURLResponse).statusCode {
+                      case 429:
+                          throw NetworkingError.internalError429(url: url)
+                      case 500, 501, 502, 503:
+                          throw NetworkingError.serverError500(url: url, status: (output.response as? HTTPURLResponse)?.statusCode ?? 0)
+                      default:
+                          throw NetworkingError.badURLResponse(url: url, status: (output.response as? HTTPURLResponse)?.statusCode ?? 0)
+                      }
               }
         return output.data
     }

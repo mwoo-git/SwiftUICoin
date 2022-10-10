@@ -9,7 +9,7 @@ import Foundation
 
 // CoinGecko API info
 /*
- url: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h
+ url: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h
  */
 
 struct CoinModel: Identifiable, Codable {
@@ -28,7 +28,6 @@ struct CoinModel: Identifiable, Codable {
     let atl, atlChangePercentage: Double?
     let atlDate: String?
     let lastUpdated: String?
-    let sparklineIn7D: SparklineIn7D?
     let priceChangePercentage24HInCurrency: Double?
     
     enum CodingKeys: String, CodingKey {
@@ -54,16 +53,11 @@ struct CoinModel: Identifiable, Codable {
         case atlChangePercentage = "atl_change_percentage"
         case atlDate = "atl_date"
         case lastUpdated = "last_updated"
-        case sparklineIn7D = "sparkline_in_7d"
         case priceChangePercentage24HInCurrency = "price_change_percentage_24h_in_currency"
     }
     
-    var rank: Int {
-        return Int(marketCapRank ?? 0)
-    }
-}
-
-struct SparklineIn7D: Codable {
-    let price: [Double]?
+    
+    
+    
 }
 
