@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeadlineView: View {
     
-    @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT"]
+    @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @State private var currentTab: Int = 0
     
     var body: some View {
@@ -114,21 +114,5 @@ extension HeadlineView {
                 IconView(iconName:"person.circle")
             }
         }
-    }
-    
-    private var categoryOption: some View {
-        HStack {
-            VStack {
-                Text("비트코인")
-                    .foregroundColor(Color.theme.textColor)
-                Capsule()
-                    .fill(Color.theme.textColor)
-                    .frame(width: 30, height: 2)
-            }
-            Spacer()
-        }
-        .font(.headline)
-        .padding(.horizontal)
-        .padding(.top)
     }
 }

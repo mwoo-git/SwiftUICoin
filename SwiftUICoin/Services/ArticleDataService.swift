@@ -12,7 +12,8 @@ class ArticleDataService {
     @Published var articles: [ArticleModel] = []
     
     var htmlScrapUtlity = ArticleScraperUtility()
-    var cancellableTask: AnyCancellable? = nil
+    var coinSubscription: AnyCancellable?
+    
     var coin: CoinModel?
     var backup: BackupCoinEntity?
     
@@ -30,21 +31,24 @@ class ArticleDataService {
         
         let urlString = "https://www.blockmedia.co.kr/?s=\((coin == nil ? backup?.symbol?.convertSymbol : coin?.symbol.convertSymbol) ?? "")"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         guard let url = URL(string: encodedString) else { return }
-        self.cancellableTask?.cancel()
-        self.cancellableTask = URLSession.shared.dataTaskPublisher(for: url)
+        coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
             .flatMap(htmlScrapUtlity.scrapArticle(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             } receiveValue: { [weak self] (articles) in
                 self?.articles = articles
+                self?.coinSubscription?.cancel()
             }
-    }
-    
-    deinit {
-        cancellableTask = nil
     }
 }
 

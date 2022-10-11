@@ -66,6 +66,9 @@ extension HomeCoinListView {
             Section(header: VStack(spacing: 0) {
                 SortOptionView()
             }) {
+                if viewModel.status == .status429 || viewModel.status == .status500 {
+                    StatusErrorView()
+                }
                 if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
                     ForEach(viewModel.backupCoins) { backup in
                         NavigationLink(

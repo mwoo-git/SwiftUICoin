@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @EnvironmentObject var viewModel: HomeViewModel
+    @StateObject var viewModel = HomeViewModel()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -18,7 +18,7 @@ struct SearchView: View {
             Divider()
 //            listOptionBar
             if !viewModel.searchText.isEmpty {
-                SearchListView()
+                SearchListView(viewModel: viewModel)
                     .padding(.top, 10)
             }
             Spacer()

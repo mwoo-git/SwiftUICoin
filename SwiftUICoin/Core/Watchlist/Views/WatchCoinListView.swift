@@ -30,6 +30,9 @@ struct WatchCoinListView: View {
                 if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
                     if !viewModel.isEditing {
                         LazyVStack {
+                            if viewModel.status == .status429 || viewModel.status == .status500 {
+                                StatusErrorView()
+                            }
                             ForEach(viewModel.mainWatchlistBackup) { backup in
                                 NavigationLink(
                                     destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
@@ -50,6 +53,9 @@ struct WatchCoinListView: View {
                 } else {
                     if !viewModel.isEditing {
                         LazyVStack {
+                            if viewModel.status == .status429 || viewModel.status == .status500 {
+                                StatusErrorView()
+                            }
                             ForEach(viewModel.mainWatchlist) { coin in
                                 NavigationLink(
                                     destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),

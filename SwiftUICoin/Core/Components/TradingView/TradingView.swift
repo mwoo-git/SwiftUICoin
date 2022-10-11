@@ -74,7 +74,7 @@ struct TradingView: View {
         func updateUIView(_ webView: WKWebView, context: Context) {
             webView.loadHTMLString(html, baseURL: nil)
             webView.scrollView.isScrollEnabled = false
-            webView.isOpaque = false
+            webView.isOpaque = false // 로딩 시 화면 번쩍임 방지
         }
     }
     

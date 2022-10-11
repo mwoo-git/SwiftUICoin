@@ -77,7 +77,6 @@ extension DetailView {
                         homeViewModel.updateWatchlist(coin: viewModel.coin, backup: nil)
                     }
             }
-            
         }
         .background(Color.theme.background)
     }

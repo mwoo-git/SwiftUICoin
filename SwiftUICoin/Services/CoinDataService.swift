@@ -51,16 +51,25 @@ class CoinDataService {
                       response.statusCode >= 200 && response.statusCode < 300 else {
                           switch (output.response as? HTTPURLResponse)?.statusCode {
                           case 429:
-                              self.status = .status429
+                              DispatchQueue.main.async { [weak self] in
+                                  self?.status = .status429
+                              }
                               throw NetworkingError.internalError429(url: url)
-                          case 500, 501, 502, 503:
-                              self.status = .status500
+                          case 500, 501, 502, 503, 504, 505:
+                              DispatchQueue.main.async { [weak self] in
+                                  self?.status = .status500
+                              }
                               throw NetworkingError.serverError500(url: url, status: (output.response as? HTTPURLResponse)?.statusCode ?? 0)
                           default:
-                              self.status = .unknown
+                              DispatchQueue.main.async { [weak self] in
+                                  self?.status = .unknown
+                              }
                               throw NetworkingError.badURLResponse(url: url, status: (output.response as? HTTPURLResponse)?.statusCode ?? 0)
                           }
                       }
+                DispatchQueue.main.async { [weak self] in
+                    self?.status = .status200
+                }
                 return output.data
             }
             .receive(on: DispatchQueue.main)
@@ -68,7 +77,6 @@ class CoinDataService {
             .sink{ (completion) in
                 switch completion {
                 case .finished:
-                    self.status = .status200
                     break
                 case .failure(let error):
                     print(error.localizedDescription)

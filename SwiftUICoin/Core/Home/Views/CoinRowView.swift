@@ -24,18 +24,18 @@ struct CoinRowView: View {
     }
 }
 
-//struct CoinRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            CoinRowView(coin: dev.coin)
-//                .preferredColorScheme(.light)
-//                .previewLayout(.sizeThatFits)
-//            CoinRowView(coin: dev.coin)
-//                .preferredColorScheme(.dark)
-//                .previewLayout(.sizeThatFits)
-//        }
-//    }
-//}
+struct CoinRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            CoinRowView(coin: dev.coin, backup: nil)
+                .preferredColorScheme(.light)
+                .previewLayout(.sizeThatFits)
+            CoinRowView(coin: dev.coin, backup: nil)
+                .preferredColorScheme(.dark)
+                .previewLayout(.sizeThatFits)
+        }
+    }
+}
 
 extension CoinRowView {
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchListView: View {
     
-    @EnvironmentObject var viewModel: HomeViewModel
+    @StateObject var viewModel: HomeViewModel
     
     var body: some View {
         ScrollView {
