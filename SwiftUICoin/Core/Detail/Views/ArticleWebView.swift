@@ -38,7 +38,8 @@ extension ArticleWebView {
             Spacer()
             IconView(iconName: "square.and.arrow.up")
         }
-        .background(Color.theme.coinDetailBackground)
+        .background(Color.theme.coinDetailBackground
+                        .ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
     }
 }
