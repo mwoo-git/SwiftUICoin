@@ -18,7 +18,7 @@ struct DetailStatsView: View {
                     StatisticView(stat: stat)
                 }
                 explorer
-                introduction
+                Spacer()
             }
     }
 }
@@ -67,22 +67,6 @@ extension DetailStatsView {
                         .font(.subheadline)
                 }
                 .foregroundColor(Color.theme.openseaColor)
-            }
-        }
-        .padding()
-    }
-    
-    private var introduction: some View {
-        VStack {
-            HStack {
-                Text("Introduction")
-                    .foregroundColor(Color.theme.accent)
-                Spacer()
-            }
-            .padding(.bottom)
-            
-            if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
-                Text(coinDescription)
             }
         }
         .padding()

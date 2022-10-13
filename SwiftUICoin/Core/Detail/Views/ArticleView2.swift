@@ -1,16 +1,16 @@
 //
-//  HeadlineRowView.swift
+//  ArticleView2.swift
 //  SwiftUICoin
 //
-//  Created by Woo Min on 2022/10/05.
+//  Created by Woo Min on 2022/10/13.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct HeadlineRowView: View {
+struct ArticleView2: View {
     
-    let headline: HeadlineModel
+    let article: ArticleModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,30 +24,24 @@ struct HeadlineRowView: View {
     }
 }
 
-struct HeadlineRowView_Previews: PreviewProvider {
+struct AtricleView2_Previews: PreviewProvider {
     static var previews: some View {
-            HeadlineRowView(headline: dev.headline)
+        ArticleView2(article: dev.article)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
     }
 }
 
-extension HeadlineRowView {
+extension ArticleView2 {
     private var topColumn: some View {
         
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    KFImage(URL(string: headline.authorImageUrl))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .cornerRadius(5)
-                    Text(headline.cleanAuthor)
+                    Text("블록미디어")
                         .font(.footnote)
-                        .padding(.leading, 5)
                 }
-                Text(headline.title)
+                Text(article.title)
                     .font(.headline)
                     .lineLimit(2)
                     .foregroundColor(Color.theme.textColor)
@@ -56,7 +50,7 @@ extension HeadlineRowView {
             }
             Spacer()
             let size = UIScreen.main.bounds.width / 5
-            KFImage(URL(string: headline.imageUrl))
+            KFImage(URL(string: article.image))
                 .resizable()
                 .scaledToFill()
                 .frame(width: size, height: size)
@@ -67,10 +61,9 @@ extension HeadlineRowView {
     
     private var rowColumn: some View {
         HStack {
-            Text(headline.cleanDate)
+            Text(article.cleanDate)
                 .font(.footnote)
             Spacer()
-            Image(systemName: "ellipsis")
         }
     }
 }

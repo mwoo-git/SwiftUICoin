@@ -12,6 +12,8 @@ struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @State private var currentTab: Int = 0
+    @Namespace var namespace
     
     init(coin: CoinModel?, backup: BackupCoinEntity?) {
         if coin == nil {
@@ -24,10 +26,14 @@ struct DetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .center, spacing: 0) {
                     tradingView
                     info
+                    if !homeViewModel.allCoins.isEmpty {
+                        TopMoversView()
+                        LowMoversView()
+                    }
                 }
             }
         }
@@ -90,32 +96,48 @@ extension DetailView {
     }
     
     private var listOption: some View {
-        HStack(alignment: .top, spacing: 30) {
+        HStack {
             VStack {
                 Text("주요 뉴스")
-                    .foregroundColor(viewModel.infoOption == .news ? Color.theme.textColor : Color.theme.accent)
-                Capsule()
-                    .fill(viewModel.infoOption == .news ? Color.theme.textColor : .clear)
-                    .frame(width: 30, height: 2)
+                    .foregroundColor(currentTab == 0 ? Color.theme.textColor : Color.theme.accent)
+                    .font(.headline)
+                    .fontWeight(currentTab == 0 ? .bold : .regular)
+                if currentTab == 0 {
+                    Color.theme.textColor
+                        .frame(width: 30, height: 2)
+                        .matchedGeometryEffect(id: "underline", in: namespace)
+                        
+                } else {
+                    Color.clear.frame(width: 30, height: 2)
+                }
             }
+            .animation(.easeInOut(duration: 0.2),  value: currentTab)
             .onTapGesture {
-                viewModel.infoOption = .news
+                    currentTab = 0
             }
-            VStack() {
+            VStack {
                 Text("\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "") 정보")
-                    .foregroundColor(viewModel.infoOption == .about ? Color.theme.textColor : Color.theme.accent)
-                Capsule()
-                    .fill(viewModel.infoOption == .about ? Color.theme.textColor : .clear)
-                    .frame(width: 30, height: 2)
+                    .foregroundColor(currentTab == 1 ? Color.theme.textColor : Color.theme.accent)
+                    .font(.headline)
+                    .fontWeight(currentTab == 1 ? .bold : .regular)
+                if currentTab == 1 {
+                    Color.theme.textColor
+                        .frame(width: 30, height: 2)
+                        .matchedGeometryEffect(id: "underline", in: namespace)
+                } else {
+                    Color.clear.frame(width: 30, height: 2)
+                }
             }
+            .animation(.easeInOut(duration: 0.2),  value: currentTab)
             .onTapGesture {
-                viewModel.infoOption = .about
+                    currentTab = 1
             }
+            .padding(.leading)
             Spacer()
         }
-        .padding(.horizontal)
-        .padding(.top, 15)
         .font(.headline)
+        .padding(.horizontal)
+        .padding(.top)
         .foregroundColor(Color.theme.accent)
         .background(Color.theme.background)
     }
@@ -124,26 +146,27 @@ extension DetailView {
         LazyVStack(
             pinnedViews: [.sectionHeaders]) {
                 Section(header: listOption) {
-                    if viewModel.infoOption == .news {
-                        if viewModel.articles.isEmpty {
-                            ArticlePlaceholderView()
-                        } else {
+                    if viewModel.articles.isEmpty {
+                        ArticlePlaceholderView()
+                    } else {
+                        TabView(selection: $currentTab) {
                             LazyVStack {
                                 ForEach(viewModel.articles.prefix(4)) { article in
                                     NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
-                                        ArticleView(article: article)
+                                        ArticleView2(article: article)
                                     }
                                     .buttonStyle(ListSelectionStyle())
                                 }
-                                
+                                Spacer()
                             }
-                            .padding(.top)
+                            .tag(0)
+                            
+                            DetailStatsView(viewModel: viewModel).tag(1)
                         }
-                    } else {
-                        DetailStatsView(viewModel: viewModel)
+                        .frame(height: 600)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
                     }
                 }
-                
             }
             .background(Color.theme.background)
     }

@@ -6,18 +6,26 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ArticlePlaceholderView: View {
     
     @State private var opacity: Double = 1
     
     var body: some View {
-        LazyVStack {
-            ForEach(0..<5) { i in
-                row
+        VStack(spacing: 15) {
+            ForEach(0..<4) { i in
+                VStack(spacing: 0) {
+                    topColumn
+                    rowColumn
+                }
+                .padding()
+                .frame(height: 140)
+                .foregroundColor(Color.theme.accent)
+                .redacted(reason: .placeholder)
             }
+            Spacer()
         }
-        .padding(.top)
         .opacity(opacity)
         .onAppear {
             withAnimation {
@@ -30,42 +38,44 @@ struct ArticlePlaceholderView: View {
 
 struct ArticlePlaceholderView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ArticlePlaceholderView()
-                .preferredColorScheme(.light)
-                .previewLayout(.sizeThatFits)
-            ArticlePlaceholderView()
+        ArticlePlaceholderView()
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-        }
     }
 }
 
 extension ArticlePlaceholderView {
-    private var row: some View {
-        VStack{
-            VStack(alignment: .leading, spacing: 0) {
-                Text("article.titlearticle.titlearticle.titlearticle.titlearticle.title")
-                    .foregroundColor(Color.theme.textColor)
-                    .multilineTextAlignment(.leading)
-                    .frame(width: UIScreen.main.bounds.width / 1.2)
-                Spacer()
-                HStack(alignment: .firstTextBaseline) {
-                    Text("Coinness")
-                    Text("｜")
-                    Text("2022년 9월 22일 오후 12:25")
-                    Spacer()
+    private var topColumn: some View {
+        
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text("한국경제TV...".replacingOccurrences(of: "언론사 선정", with: ""))
+                        .font(.footnote)
                 }
-                .font(.subheadline)
+                Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때")
+                    .font(.headline)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                Spacer()
             }
-            .frame(height: 90)
-            .padding(.horizontal)
-            .padding(.vertical, 5)
-            Divider()
-                .padding(.horizontal)
-                .padding(.bottom, 5)
+            Spacer()
+            let size = UIScreen.main.bounds.width / 5
+            KFImage(URL(string: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true"))
+                .resizable()
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .cornerRadius(7)
+                .padding(.leading)
         }
-        .redacted(reason: .placeholder)
-        .foregroundColor(Color.theme.accent)
+    }
+    
+    private var rowColumn: some View {
+        HStack {
+            Text("17시간 전...")
+            Spacer()
+        }
+        .font(.footnote)
     }
 }
+

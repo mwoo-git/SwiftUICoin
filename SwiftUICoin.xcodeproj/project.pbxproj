@@ -52,6 +52,11 @@
 		739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */; };
 		739A39DD28F4293A005348E5 /* StatusCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39DC28F4293A005348E5 /* StatusCodeModel.swift */; };
 		739A39E328F572DC005348E5 /* StatusErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39E228F572DC005348E5 /* StatusErrorView.swift */; };
+		739A39E528F7229C005348E5 /* ArticleView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39E428F7229C005348E5 /* ArticleView2.swift */; };
+		739A39E728F74520005348E5 /* TopMoversItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39E628F7451F005348E5 /* TopMoversItemView.swift */; };
+		739A39E928F7466A005348E5 /* TopMoversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39E828F7466A005348E5 /* TopMoversView.swift */; };
+		739A39EB28F750D8005348E5 /* LowMoversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39EA28F750D8005348E5 /* LowMoversView.swift */; };
+		739A39ED28F75DAC005348E5 /* SearchAllCoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39EC28F75DAC005348E5 /* SearchAllCoinsView.swift */; };
 		73B9562028DDABCE00DD4A9F /* ArticleDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9561F28DDABCE00DD4A9F /* ArticleDataService.swift */; };
 		73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562128DDAC7100DD4A9F /* ArticleModel.swift */; };
 		73B9562428DDAF3700DD4A9F /* ArticleScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */; };
@@ -132,6 +137,11 @@
 		739A39DA28F34840005348E5 /* CoinBackup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinBackup.xcdatamodel; sourceTree = "<group>"; };
 		739A39DC28F4293A005348E5 /* StatusCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeModel.swift; sourceTree = "<group>"; };
 		739A39E228F572DC005348E5 /* StatusErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusErrorView.swift; sourceTree = "<group>"; };
+		739A39E428F7229C005348E5 /* ArticleView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView2.swift; sourceTree = "<group>"; };
+		739A39E628F7451F005348E5 /* TopMoversItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMoversItemView.swift; sourceTree = "<group>"; };
+		739A39E828F7466A005348E5 /* TopMoversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMoversView.swift; sourceTree = "<group>"; };
+		739A39EA28F750D8005348E5 /* LowMoversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowMoversView.swift; sourceTree = "<group>"; };
+		739A39EC28F75DAC005348E5 /* SearchAllCoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAllCoinsView.swift; sourceTree = "<group>"; };
 		73B9561F28DDABCE00DD4A9F /* ArticleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataService.swift; sourceTree = "<group>"; };
 		73B9562128DDAC7100DD4A9F /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleScraperUtility.swift; sourceTree = "<group>"; };
@@ -394,6 +404,7 @@
 				73E6BEE728D1EF280041A7C3 /* SearchView.swift */,
 				7351E62328D4D7D000A8383C /* SearchListView.swift */,
 				73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */,
+				739A39EC28F75DAC005348E5 /* SearchAllCoinsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -430,11 +441,15 @@
 				73D7175E28DB43360081CB2D /* DetailStatsView.swift */,
 				73D7175C28DB414A0081CB2D /* StatisticView.swift */,
 				73B9562828DDCD4100DD4A9F /* ArticleView.swift */,
+				739A39E428F7229C005348E5 /* ArticleView2.swift */,
 				73B9563328DF064700DD4A9F /* CoinWebView.swift */,
 				73B9562F28DEE86200DD4A9F /* ArticleWebView.swift */,
 				7334472928E26DB800F1719E /* CommentView.swift */,
 				731A035528EB5DB900B1BC39 /* ArticlePlaceholderView.swift */,
 				731A035928EC93E400B1BC39 /* MoreButtonView.swift */,
+				739A39E628F7451F005348E5 /* TopMoversItemView.swift */,
+				739A39E828F7466A005348E5 /* TopMoversView.swift */,
+				739A39EA28F750D8005348E5 /* LowMoversView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -591,6 +606,7 @@
 				73B9563428DF064700DD4A9F /* CoinWebView.swift in Sources */,
 				73B9563228DF03BC00DD4A9F /* UIColor.swift in Sources */,
 				731086E328CE37D000283FD3 /* HomeView.swift in Sources */,
+				739A39ED28F75DAC005348E5 /* SearchAllCoinsView.swift in Sources */,
 				739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */,
 				739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
@@ -600,8 +616,11 @@
 				7334473828E4B3C800F1719E /* WatchlistView.swift in Sources */,
 				73C71C6E28D899CC0067167F /* NavigationLazyView.swift in Sources */,
 				734A1E2C28EF421800AF0E0F /* HeadlinePlaceholderView.swift in Sources */,
+				739A39EB28F750D8005348E5 /* LowMoversView.swift in Sources */,
+				739A39E928F7466A005348E5 /* TopMoversView.swift in Sources */,
 				73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */,
 				73E6BEEA28D21FF10041A7C3 /* HomeCoinListView.swift in Sources */,
+				739A39E728F74520005348E5 /* TopMoversItemView.swift in Sources */,
 				7334473028E4887200F1719E /* UIImage.swift in Sources */,
 				731A035C28ECA47400B1BC39 /* HeadlineModel.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
@@ -614,6 +633,7 @@
 				7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */,
 				73B9563628DF09CC00DD4A9F /* WebView.swift in Sources */,
 				731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */,
+				739A39E528F7229C005348E5 /* ArticleView2.swift in Sources */,
 				7334471F28E19DD200F1719E /* WatchCoinListView.swift in Sources */,
 				731086F628CF2DB400283FD3 /* Double.swift in Sources */,
 				731A036328ECB4A500B1BC39 /* HeadlineView.swift in Sources */,

@@ -35,7 +35,7 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView {
     private var homeHeader: some View {
         HStack {
-            Text("Markets")
+            Text("마켓")
                 .font(.title2)
                 .bold()
                 .padding(.leading)

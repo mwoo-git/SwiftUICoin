@@ -11,13 +11,15 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     @Published var allCoins: [CoinModel] = []
+    @Published var backupCoins: [BackupCoinEntity] = []
     @Published var mainWatchlist: [CoinModel] = []
     @Published var subWatchlist: [CoinModel] = []
     @Published var mainWatchlistBackup: [BackupCoinEntity] = []
     @Published var subWatchlistBackup: [BackupCoinEntity] = []
     @Published var searchCoins: [CoinModel] = []
     @Published var searchCoinsBackup: [BackupCoinEntity] = []
-    @Published var backupCoins: [BackupCoinEntity] = []
+    @Published var topMovingCoins: [CoinModel] = []
+    @Published var lowMovingCoins: [CoinModel] = []
     @Published var sortOption: SortOption = .rank
     @Published var isRefreshing: Bool = false
     @Published var isEditing: Bool = false
@@ -46,6 +48,8 @@ class HomeViewModel: ObservableObject {
             .sink { [weak self] (returnedCoins) in
                 self?.allCoins = returnedCoins
                 self?.updateBackup(coins: returnedCoins)
+                self?.configureTopMovingCoins()
+                self?.configurelowMovingCoins()
                 self?.loadWatchlist()
             }
             .store(in: &cancellables)
@@ -144,8 +148,8 @@ class HomeViewModel: ObservableObject {
     
     // reloadWatchlist
     func loadWatchlist() {
-        mainWatchlist = subWatchlist
-        mainWatchlistBackup = subWatchlistBackup
+        mainWatchlist = subWatchlist.sorted(by: { $0.marketCapRank ?? 0 < $1.marketCapRank ?? 0 })
+        mainWatchlistBackup = subWatchlistBackup.sorted(by: { $0.rank < $1.rank })
     }
     
     func isWatchlistExists(coin: CoinModel?, backup: BackupCoinEntity?) -> Bool {
@@ -199,5 +203,15 @@ class HomeViewModel: ObservableObject {
             coin.symbol.lowercased().contains(lowercasedText) ||
             coin.id.lowercased().contains(lowercasedText)
         }
+    }
+    
+    private func configureTopMovingCoins() {
+        let topMovers = allCoins.sorted(by: { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0 })
+        self.topMovingCoins = Array(topMovers.prefix(10))
+    }
+    
+    private func configurelowMovingCoins() {
+        let lowMovers = allCoins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0 })
+        self.lowMovingCoins = Array(lowMovers.prefix(10))
     }
 }

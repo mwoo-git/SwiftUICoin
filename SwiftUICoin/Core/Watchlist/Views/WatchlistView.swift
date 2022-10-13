@@ -37,7 +37,7 @@ struct WatchlistView_Previews: PreviewProvider {
 extension WatchlistView {
     private var header: some View {
         HStack {
-            Text("My Watchlist")
+            Text("관심 목록")
                 .font(.title2)
                 .bold()
                 .padding(.leading)

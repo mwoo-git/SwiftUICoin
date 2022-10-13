@@ -88,6 +88,7 @@ extension EditCoinRowView {
             }
              
         }
+        .padding(.leading)
         .font(.subheadline)
     }
 }

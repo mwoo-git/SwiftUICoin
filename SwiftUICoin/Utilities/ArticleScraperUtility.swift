@@ -23,17 +23,20 @@ class ArticleScraperUtility {
                     let title = try? document.select("div.post-content").select("h2").select("a").text()
                     let date = try? document.select("div.post-content").select("div.post-meta.vcard").select("p").select("span").text()
                     let author = try? document.select("div.post-content").select("div.post-meta.vcard").select("p").select("a.url.fn").text()
+                    let imageUrl = try? document.select("div.header").select("a").select("img").attr("src")
                     
                     if let url = url,
                        let title = title,
                        let date = date,
                        let author = author,
+                       let imageUrl = imageUrl,
                        !url.isEmpty,
                        !title.isEmpty,
                        !date.isEmpty,
-                       !author.isEmpty {
+                       !author.isEmpty,
+                       !imageUrl.isEmpty {
                         
-                        let article = ArticleModel(url: url, title: title, date: date, author: author)
+                        let article = ArticleModel(url: url, title: title, date: date, author: author, imageUrl: imageUrl)
                         articles.append(article)
                     }
                 })

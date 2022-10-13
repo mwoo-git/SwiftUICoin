@@ -16,7 +16,7 @@ struct SortOptionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     HStack(spacing: 0) {
-                        Text("Market Cap")
+                        Text("시가총액")
                             .foregroundColor((viewModel.sortOption == .rank) ? Color.white : Color.theme.accent)
                     }
                     .id("MARKET_CAP")
@@ -36,7 +36,7 @@ struct SortOptionView: View {
                     let iconSize = 13
                     
                     HStack(spacing: 0) {
-                        Text("Price")
+                        Text("가격")
                             .foregroundColor((viewModel.sortOption == .price || viewModel.sortOption == .pricereversed) ? Color.white : Color.theme.accent)
                         Image(systemName: "arrow.down")
                             .font(.system(size: CGFloat(iconSize)))
@@ -57,7 +57,7 @@ struct SortOptionView: View {
                     }
                     
                     HStack(spacing: 0) {
-                        Text("24h Change")
+                        Text("24시간 변동률")
                             .foregroundColor((viewModel.sortOption == .priceChangePercentage24H || viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
                         Image(systemName: "arrow.down")
                             .font(.system(size: CGFloat(iconSize)))

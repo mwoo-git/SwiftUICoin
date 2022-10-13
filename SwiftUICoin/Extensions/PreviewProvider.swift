@@ -27,7 +27,7 @@ class DeveloperPreview {
     
     let stat = StatisticModel(title: "Rank", value: "No. 1")
     
-    let article = ArticleModel(url: "https://www.blockmedia.co.kr/archives/258270", title: "거래소 BTC 입금 수, 2년래 최저", date: "2022년 9월 22일 오후 12:25", author: "Coinness")
+    let article = ArticleModel(url: "https://www.blockmedia.co.kr/archives/258270", title: "거래소 BTC 입금 수, 2년래 최저", date: "2022년 9월 22일 오후 12:25", author: "Coinness", imageUrl: "https://www.blockmedia.co.kr/wp-content/uploads/2022/10/1-bitcoin-image-2-3.jpg")
     
     let homeVM = HomeViewModel()
     

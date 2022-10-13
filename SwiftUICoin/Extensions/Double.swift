@@ -100,7 +100,11 @@ extension Double {
     /// Convert 1.2345 to "1.23%"
     /// ```
     func asPercentString() -> String {
-        return asNumberString() + "%"
+        if self > 0 {
+            return "+" + asNumberString() + "%"
+        } else {
+            return asNumberString() + "%"
+        }
     }
     
     /// Convert a Double to a String with K, M, Bn, Tr abbreviations.

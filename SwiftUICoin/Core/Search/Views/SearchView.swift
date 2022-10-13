@@ -16,9 +16,11 @@ struct SearchView: View {
         VStack(spacing: 0) {
             searchBar
             Divider()
-//            listOptionBar
             if !viewModel.searchText.isEmpty {
                 SearchListView(viewModel: viewModel)
+                    .padding(.top, 10)
+            } else {
+                SearchAllCoinsView(viewModel: viewModel)
                     .padding(.top, 10)
             }
             Spacer()
