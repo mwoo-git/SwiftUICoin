@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct ArticleView: View {
+struct ArticleRowView: View {
     
     let article: ArticleModel
     
@@ -26,13 +26,13 @@ struct ArticleView: View {
 
 struct AtricleView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleView(article: dev.article)
+        ArticleRowView(article: dev.article)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
     }
 }
 
-extension ArticleView {
+extension ArticleRowView {
     private var topColumn: some View {
         
         HStack(alignment: .top) {

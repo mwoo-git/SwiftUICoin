@@ -12,6 +12,7 @@ struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @State private var symbol = ""
     
     init(coin: CoinModel?, backup: BackupCoinEntity?) {
         if coin == nil {
@@ -19,6 +20,7 @@ struct DetailView: View {
         } else {
             _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin, backup: nil))
         }
+        _symbol = State(wrappedValue: (coin?.symbol.uppercased() ?? backup?.symbol?.uppercased()) ?? "")
     }
     
     var body: some View {
@@ -61,14 +63,22 @@ struct DetailView_Previews: PreviewProvider {
 extension DetailView {
     
     private var tradingView: some View {
-        TradingView(symbol: Usd.usd.contains((viewModel.coin?.symbol ?? viewModel.backup?.symbol) ?? "") ? "\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")USD" : "\((viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? "")USDT")
+        TradingView(symbol: convertSymbol)
             .frame(height: UIScreen.main.bounds.height / 1.75)
             .frame(width: UIScreen.main.bounds.width)
-            .padding(.bottom)
             .background(Color.theme.background)
+            .padding(.bottom)
     }
-}
-
-struct Usd {
-    static let usd: [String] = ["usdt", "usdc", "busd"]
+    
+    var convertSymbol: String {
+        if Usd.usd.contains(symbol) {
+            return "\(symbol))USD"
+        } else {
+            return "BINANCE:\(symbol)USDT"
+        }
+    }
+    
+    struct Usd {
+        static let usd: [String] = ["USDT", "USDC", "BUSD"]
+    }
 }

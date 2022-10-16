@@ -16,18 +16,19 @@ struct DetailInfoView: View {
         LazyVStack(
             pinnedViews: [.sectionHeaders]) {
                 Section(header: InfoOptionView(viewModel: viewModel, currentTab: $currentTab)) {
-                    if viewModel.articles.isEmpty {
-                        ArticlePlaceholderView()
-                    } else {
                         TabView(selection: $currentTab) {
-                            LazyVStack {
+                            VStack {
+                                if viewModel.articles.isEmpty {
+                                    ArticlePlaceholderView()
+                                } else {
                                 ForEach(viewModel.articles.prefix(4)) { article in
                                     NavigationLink(destination: NavigationLazyView(ArticleWebView(article: article))) {
-                                        ArticleView(article: article)
+                                        ArticleRowView(article: article)
                                     }
                                     .buttonStyle(ListSelectionStyle())
                                 }
                                 Spacer()
+                                }
                             }
                             .tag(0)
                             
@@ -35,7 +36,6 @@ struct DetailInfoView: View {
                         }
                         .frame(height: 600)
                         .tabViewStyle(.page(indexDisplayMode: .never))
-                    }
                 }
             }
             .background(Color.theme.background)

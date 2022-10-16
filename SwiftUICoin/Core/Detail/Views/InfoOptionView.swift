@@ -57,7 +57,7 @@ struct InfoOptionView: View {
         }
         .font(.headline)
         .padding(.horizontal)
-        .padding(.top)
+        .padding(.top, 10)
         .foregroundColor(Color.theme.accent)
         .background(Color.theme.background)
     }

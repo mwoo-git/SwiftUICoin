@@ -15,7 +15,6 @@ class DetailViewModel: ObservableObject {
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
     @Published var infoOption: InfoOption = .news
-    
     @Published var coin: CoinModel?
     @Published var backup: BackupCoinEntity?
     private let coinDatailDataService: CoinDetailDataService

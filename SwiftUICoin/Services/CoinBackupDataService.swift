@@ -69,8 +69,8 @@ class CoinBackupDataService {
     
     // 변경 적용
     private func applyChanges() {
-        save() // CoreData Entity에 저장하고
-        getBackup() // 저장된(변경된) 모든 객체를 가져와서 savedEtities 어레이에 업데이트하라
+        save()
+        getBackup()
     }
     
     // Delete

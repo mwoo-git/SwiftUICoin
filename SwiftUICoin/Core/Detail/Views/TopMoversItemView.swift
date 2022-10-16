@@ -39,6 +39,7 @@ struct TopMoversItemView: View {
                 .foregroundColor(coin.priceChangePercentage24H ?? 0 > 0 ? .green : .red)
                 .padding(.horizontal)
         }
+        .contentShape(Rectangle())
         .frame(width: 130, height: 120)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
@@ -49,6 +50,11 @@ struct TopMoversItemView: View {
 
 struct TopMoversItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TopMoversItemView(coin: dev.coin)
+        Group {
+            TopMoversItemView(coin: dev.coin)
+                .previewLayout(.sizeThatFits)
+            TopMoversItemView(coin: dev.coin)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

@@ -24,12 +24,11 @@ struct TradingView: View {
                 <style>
                                     body {
                                         margin: 0;
-                                        background-color: #1F2630;
+                                        background-color: #131722;
                                     }
                                     .container {
                                         width: 100vw;
                                         height: 100vh;
-                                        background: pink;
                                     }
                 </style>
                 </head>
@@ -50,6 +49,7 @@ struct TradingView: View {
                   "locale": "en",
                   "toolbar_bg": "#1F2630",
                   "enable_publishing": false,
+                  "allow_symbol_change": true,
                   "studies": [
                     "Volume@tv-basicstudies"
                   ],
