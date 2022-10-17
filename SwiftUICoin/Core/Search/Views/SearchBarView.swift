@@ -6,10 +6,11 @@
 //  TextField First Responder
 
 import SwiftUI
+import Combine
 
 struct SearchBarView: View {
     
-    @Binding var searchText: String
+    @Binding var searchText: String 
     @State private var clearTextField = false
     
     var body: some View {
@@ -89,6 +90,7 @@ struct FirstResponderTextField: UIViewRepresentable {
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
             searchText = textField.text ?? ""
+            textField.text = String(searchText.prefix(15)) // 글자 수 제한
         }
         
         // 리턴키를 누르면 포커스 해제됩니다.

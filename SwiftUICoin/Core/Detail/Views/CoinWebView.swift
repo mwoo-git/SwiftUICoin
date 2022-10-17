@@ -50,7 +50,7 @@ extension CoinWebView {
                     .bold()
             }
             Spacer()
-            IconView(iconName: "square.and.arrow.up")
+            ShareButtonView(url: viewModel.websiteURL ?? "")
         }
         .background(Color.theme.coinDetailBackground.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)

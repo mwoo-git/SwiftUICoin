@@ -72,6 +72,7 @@
 		73B9564228E0854D00DD4A9F /* NftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9564128E0854D00DD4A9F /* NftModel.swift */; };
 		73B9564428E089F100DD4A9F /* NftRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9564328E089F100DD4A9F /* NftRowView.swift */; };
 		73B9564628E0911600DD4A9F /* NftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9564528E0911500DD4A9F /* NftDetailView.swift */; };
+		73BB738E28FC533700BB7FEA /* ShareButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BB738D28FC533700BB7FEA /* ShareButtonView.swift */; };
 		73C71C6228D84ADE0067167F /* SortOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6128D84ADD0067167F /* SortOptionView.swift */; };
 		73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6628D868B70067167F /* SearchViewModel.swift */; };
 		73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6B28D86DDD0067167F /* DetailView.swift */; };
@@ -159,6 +160,7 @@
 		73B9564128E0854D00DD4A9F /* NftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftModel.swift; sourceTree = "<group>"; };
 		73B9564328E089F100DD4A9F /* NftRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftRowView.swift; sourceTree = "<group>"; };
 		73B9564528E0911500DD4A9F /* NftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftDetailView.swift; sourceTree = "<group>"; };
+		73BB738D28FC533700BB7FEA /* ShareButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButtonView.swift; sourceTree = "<group>"; };
 		73C71C6128D84ADD0067167F /* SortOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionView.swift; sourceTree = "<group>"; };
 		73C71C6628D868B70067167F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		73C71C6B28D86DDD0067167F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				73B9563528DF09CC00DD4A9F /* WebView.swift */,
 				739A39E228F572DC005348E5 /* StatusErrorView.swift */,
 				739A39F628FAA867005348E5 /* NetworkMissingView.swift */,
+				73BB738D28FC533700BB7FEA /* ShareButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				739A39EF28F85E4F005348E5 /* InfoOptionView.swift in Sources */,
 				73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */,
 				731A037028EF2AC100B1BC39 /* HeadlineBigRowView.swift in Sources */,
+				73BB738E28FC533700BB7FEA /* ShareButtonView.swift in Sources */,
 				73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */,
 				731A035628EB5DB900B1BC39 /* ArticlePlaceholderView.swift in Sources */,
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,

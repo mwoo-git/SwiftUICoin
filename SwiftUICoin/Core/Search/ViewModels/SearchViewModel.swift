@@ -12,7 +12,13 @@ import SwiftUI
 class SearchViewModel: ObservableObject {
     
     @Published var searchCoins: [CoinModel] = []
-    @Published var searchText: String = ""
+    @Published var searchText: String = "" {
+        didSet {
+            if searchText.count > 5 {
+                searchText = String(searchText.prefix(5))
+            }
+        }
+    }
     
     private let dataService = CoinDataService()
     private var cancellables = Set<AnyCancellable>()

@@ -36,7 +36,7 @@ extension ArticleWebView {
                 .lineLimit(1)
                 .font(.headline)
             Spacer()
-            IconView(iconName: "square.and.arrow.up")
+            ShareButtonView(url: article.url)
         }
         .background(Color.theme.coinDetailBackground
                         .ignoresSafeArea())
