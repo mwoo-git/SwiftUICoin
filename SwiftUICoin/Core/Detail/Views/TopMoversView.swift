@@ -13,13 +13,13 @@ struct TopMoversView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("상승률 TOP 코인")
+            Text("사람들이 찾고 있는 인기 암호화폐 🔥")
                 .font(.headline)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     
-                    ForEach(viewModel.topMovingCoins) { coin in
+                    ForEach(viewModel.trendCoins.prefix(10)) { coin in
                         NavigationLink(
                             destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
                             label: {

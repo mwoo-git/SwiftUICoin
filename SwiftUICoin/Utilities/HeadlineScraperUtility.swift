@@ -29,7 +29,7 @@ class HeadlineScraperUtility {
             var articles = [HeadlineModel]()
             do {
                 let elements = try SwiftSoup.parse(html)
-                let documents = try elements.getElementById("main_pack")?.select("section.sc_new.sp_nnews._prs_nws").select("div").select("div.group_news").select("ul").select("li").select("div.news_wrap.api_ani_send")
+                let documents = try elements.getElementById("main_pack")?.select("section.sc_new.sp_nnews._prs_nws > div > div.group_news > ul > li > div.news_wrap.api_ani_send")
                 documents?.forEach({ (document) in
                     let url = try? document.select("div > a[href].news_tit").attr("href")
                     let title = try? document.select("div > a[href].news_tit").text()

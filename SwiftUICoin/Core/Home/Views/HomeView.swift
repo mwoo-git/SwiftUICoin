@@ -13,11 +13,11 @@ struct HomeView: View {
     @State private var showMenu: Bool = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            homeHeader
-            HomeCoinListView()
-        }
-        .background(Color.theme.background.ignoresSafeArea())
+            VStack(spacing: 0) {
+                homeHeader
+                HomeCoinListView()
+            }
+            .background(Color.theme.background.ignoresSafeArea())
     }
 }
 

@@ -38,7 +38,6 @@ struct DetailView: View {
                     
                     if !homeViewModel.allCoins.isEmpty {
                         TopMoversView()
-                        LowMoversView()
                     }
                     
                 }
@@ -64,7 +63,7 @@ extension DetailView {
     
     private var tradingView: some View {
         TradingView(symbol: convertSymbol)
-            .frame(height: UIScreen.main.bounds.height / 1.75)
+            .frame(height: UIScreen.main.bounds.height / 1.55)
             .frame(width: UIScreen.main.bounds.width)
             .background(Color.theme.background)
             .padding(.bottom)
@@ -72,13 +71,13 @@ extension DetailView {
     
     var convertSymbol: String {
         if Usd.usd.contains(symbol) {
-            return "\(symbol))USD"
+            return "\(symbol)USD"
         } else {
             return "BINANCE:\(symbol)USDT"
         }
     }
     
     struct Usd {
-        static let usd: [String] = ["USDT", "USDC", "BUSD"]
+        static let usd: [String] = ["USDT", "USDC", "BUSD", "DAI"]
     }
 }

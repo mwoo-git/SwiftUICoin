@@ -47,12 +47,36 @@ struct TradingView: View {
                   "theme": "dark",
                   "style": "1",
                   "locale": "en",
-                  "toolbar_bg": "#1F2630",
+                  "toolbar_bg": "#131722",
                   "enable_publishing": false,
                   "allow_symbol_change": true,
+                  "studies_overrides": {
+                        "moving average.ma.color": "#A62CB0"
+                  },
                   "studies": [
-                    "Volume@tv-basicstudies"
-                  ],
+                    {
+                            id: "MASimple@tv-basicstudies",
+                            inputs: {
+                                length: 25
+                                }
+                        },
+                        {
+                            id: "MASimple@tv-basicstudies",
+                            inputs: {
+                                length: 99
+                                }
+                        },
+                        {
+                            id: "MASimple@tv-basicstudies",
+                            inputs: {
+                                length: 7
+                                }
+                        },
+                {
+                
+                                    id: "Volume@tv-basicstudies"
+                }
+                ],
                   "container_id": "tradingview_e8bc1"
                 }
                   );

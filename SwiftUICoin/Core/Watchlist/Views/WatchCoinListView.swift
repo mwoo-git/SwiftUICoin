@@ -21,58 +21,22 @@ struct WatchCoinListView: View {
             }
         }) {
             if viewModel.allCoins.isEmpty || viewModel.allCoins.isEmpty && viewModel.backupCoins.isEmpty {
-                LazyVStack {
+                
+                VStack {
                     ForEach(0..<5) { i in
                         CoinPlaceholderView()
                     }
                 }
+                
             } else {
                 if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
-                    if !viewModel.isEditing {
-                        LazyVStack {
-                            if viewModel.status == .status429 || viewModel.status == .status500 {
-                                StatusErrorView()
-                            }
-                            ForEach(viewModel.mainWatchlistBackup) { backup in
-                                NavigationLink(
-                                    destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
-                                    label: { CoinRowView(coin: nil, backup: backup) }
-                                )
-                            }
-                        }
-                        .onAppear {
-                            viewModel.loadWatchlist()
-                        }
-                    } else {
-                        LazyVStack {
-                            ForEach(viewModel.mainWatchlistBackup) { backup in
-                                EditCoinRowView(coin: nil, backup: backup)
-                            }
-                        }
-                    }
+                    
+                    backupCoins
+                    
                 } else {
-                    if !viewModel.isEditing {
-                        LazyVStack {
-                            if viewModel.status == .status429 || viewModel.status == .status500 {
-                                StatusErrorView()
-                            }
-                            ForEach(viewModel.mainWatchlist) { coin in
-                                NavigationLink(
-                                    destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
-                                    label: { CoinRowView(coin: coin, backup: nil) }
-                                )
-                            }
-                        }
-                        .onAppear {
-                            viewModel.loadWatchlist()
-                        }
-                    } else {
-                        LazyVStack {
-                            ForEach(viewModel.mainWatchlist) { coin in
-                                EditCoinRowView(coin: coin, backup: nil)
-                            }
-                        }
-                    }
+                    
+                    mainCoins
+                    
                 }
             }
         }
@@ -88,5 +52,57 @@ struct WatchCoinListView: View {
 struct WatchCoinListView_Previews: PreviewProvider {
     static var previews: some View {
         WatchCoinListView()
+    }
+}
+
+extension WatchCoinListView {
+    private var mainCoins: some View {
+        LazyVStack {
+            if viewModel.status == .status429 || viewModel.status == .status500 {
+                StatusErrorView()
+            }
+            if viewModel.isWatchlistEmpty() && viewModel.mainWatchlist.isEmpty {
+                WatchlistEmptyView()
+            } else {
+                ForEach(viewModel.mainWatchlist) { coin in
+                    if !viewModel.isEditing {
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+                            label: { CoinRowView(coin: coin, backup: nil)
+                                
+                            })
+                            .onAppear {
+                                viewModel.loadWatchlist()
+                            }
+                    } else {
+                        EditCoinRowView(coin: coin, backup: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var backupCoins: some View {
+        LazyVStack {
+            if viewModel.status == .status429 || viewModel.status == .status500 {
+                StatusErrorView()
+            }
+            if viewModel.isWatchlistEmpty() && viewModel.mainWatchlist.isEmpty {
+                WatchlistEmptyView()
+            } else {
+                ForEach(viewModel.mainWatchlistBackup) { backup in
+                    if !viewModel.isEditing {
+                        NavigationLink(
+                            destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
+                            label: { CoinRowView(coin: nil, backup: backup) })
+                            .onAppear {
+                                viewModel.loadWatchlist()
+                            }
+                    } else {
+                        EditCoinRowView(coin: nil, backup: backup)
+                    }
+                }
+            }
+        }
     }
 }

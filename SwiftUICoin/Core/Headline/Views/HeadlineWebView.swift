@@ -42,7 +42,7 @@ extension HeadlineWebView {
             Spacer()
             ShareButtonView(url: article.url)
         }
-        .background(Color.theme.background)
+        .background(Color.theme.background.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
     }
 }

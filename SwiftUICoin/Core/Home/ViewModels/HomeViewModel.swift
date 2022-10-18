@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
@@ -25,10 +26,12 @@ class HomeViewModel: ObservableObject {
     @Published var isEditing: Bool = false
     @Published var searchText: String = ""
     @Published var status: StatusCode = .status200
+    @Published var trendCoins: [CoinModel] = []
     
     private let dataService = CoinDataService()
     private let backupDataService = CoinBackupDataService()
     private let watchlistDataService = WatchlistDataService()
+    private let trendCoinsDataService = TrendDataService()
     private var cancellables = Set<AnyCancellable>()
     
     enum SortOption {
@@ -98,6 +101,14 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
+        trendCoinsDataService.$trendCoins
+            .combineLatest($allCoins)
+            .map(convertTrendCoins)
+            .sink { [weak self] (returnedCoins) in
+                self?.trendCoins = returnedCoins
+            }
+            .store(in: &cancellables)
+        
     }
     
     func updateBackup(coins: [CoinModel]) {
@@ -164,6 +175,15 @@ class HomeViewModel: ObservableObject {
             watchlistDataService.updateWatchlist(coin: coin, backup: nil)
         }
         
+    }
+    
+    
+    private func convertTrendCoins(trendModels: [TrendModel], coinModels: [CoinModel]) -> [CoinModel] {
+        trendModels
+            .compactMap { (coin) in
+                guard let convertCoin = coinModels.first(where: { $0.symbol == coin.symbol }) else { return nil }
+                return convertCoin
+            }
     }
     
     // AllCoins 중에 Watchlist에 해당되는 코인만 리턴
