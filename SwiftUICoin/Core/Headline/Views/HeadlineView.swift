@@ -107,11 +107,7 @@ extension HeadlineView {
                 .padding(.leading)
             Spacer()
             HStack(spacing: 0) {
-                NavigationLink(
-                    destination: SearchView()) {
-                        IconView(iconName: "magnifyingglass")
-                    }
-                IconView(iconName:"person.circle")
+                SettingsButtonView()
             }
         }
     }

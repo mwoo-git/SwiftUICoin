@@ -45,6 +45,8 @@
 		734A1E2E28F07DB400AF0E0F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A1E2D28F07DB400AF0E0F /* View.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
+		7360D03E2904582800F06499 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03D2904582800F06499 /* SettingsView.swift */; };
+		7360D0402904764A00F06499 /* SettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03F2904764A00F06499 /* SettingsButtonView.swift */; };
 		7367FD5E28D30B1500E050EA /* TradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367FD5D28D30B1500E050EA /* TradingView.swift */; };
 		739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D728F346E7005348E5 /* CoinBackupDataService.swift */; };
 		739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */; };
@@ -138,6 +140,8 @@
 		734A1E2D28F07DB400AF0E0F /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
+		7360D03D2904582800F06499 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7360D03F2904764A00F06499 /* SettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonView.swift; sourceTree = "<group>"; };
 		7367FD5D28D30B1500E050EA /* TradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingView.swift; sourceTree = "<group>"; };
 		739A39D728F346E7005348E5 /* CoinBackupDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBackupDataService.swift; sourceTree = "<group>"; };
 		739A39DA28F34840005348E5 /* CoinBackup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinBackup.xcdatamodel; sourceTree = "<group>"; };
@@ -266,6 +270,7 @@
 				73C71C6328D84D400067167F /* Search */,
 				73C71C6828D86D760067167F /* Detail */,
 				731A035D28ECA6C100B1BC39 /* Headline */,
+				73A6EDF129006F1E00847A91 /* Setting */,
 				73D527AA28E8918600650679 /* NFT */,
 				7334472D28E37D6B00F1719E /* MyTabView.swift */,
 			);
@@ -330,6 +335,7 @@
 				739A39E228F572DC005348E5 /* StatusErrorView.swift */,
 				739A39F628FAA867005348E5 /* NetworkMissingView.swift */,
 				73BB738D28FC533700BB7FEA /* ShareButtonView.swift */,
+				7360D03F2904764A00F06499 /* SettingsButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -407,6 +413,30 @@
 				7367FD5D28D30B1500E050EA /* TradingView.swift */,
 			);
 			path = TradingView;
+			sourceTree = "<group>";
+		};
+		73A6EDF129006F1E00847A91 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				73A6EDF229006F4E00847A91 /* Views */,
+				73A6EDF329006F5500847A91 /* ViewModels */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		73A6EDF229006F4E00847A91 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7360D03D2904582800F06499 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73A6EDF329006F5500847A91 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		73C71C6328D84D400067167F /* Search */ = {
@@ -630,11 +660,13 @@
 				73C71C7028D98BBE0067167F /* CoinDetailModel.swift in Sources */,
 				731086CF28CE285100283FD3 /* ContentView.swift in Sources */,
 				731086EC28CE45B200283FD3 /* IconView.swift in Sources */,
+				7360D0402904764A00F06499 /* SettingsButtonView.swift in Sources */,
 				73B9563428DF064700DD4A9F /* CoinWebView.swift in Sources */,
 				73B9563228DF03BC00DD4A9F /* UIColor.swift in Sources */,
 				731086E328CE37D000283FD3 /* HomeView.swift in Sources */,
 				739A39ED28F75DAC005348E5 /* SearchAllCoinsView.swift in Sources */,
 				739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */,
+				7360D03E2904582800F06499 /* SettingsView.swift in Sources */,
 				739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				73D527AC28E895CC00650679 /* ListSelectionStyle.swift in Sources */,

@@ -11,13 +11,14 @@ struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
+    @State private var isDark: Bool = false
     
     var body: some View {
-            VStack(spacing: 0) {
-                homeHeader
-                HomeCoinListView()
-            }
-            .background(Color.theme.background.ignoresSafeArea())
+        VStack(spacing: 0) {
+            homeHeader
+            HomeCoinListView()
+        }
+        .background(Color.theme.background.ignoresSafeArea())
     }
 }
 
@@ -40,23 +41,12 @@ extension HomeView {
                 .bold()
                 .padding(.leading)
             Spacer()
-            if !showMenu {
-                HStack(spacing: 0) {
-                    NavigationLink(
-                        destination: SearchView()) {
-                            IconView(iconName: "magnifyingglass")
-                        }
-                    IconView(iconName: showMenu ? "arrow.left" : "person.circle")
-                        .onTapGesture {
-                            withAnimation() {
-                                showMenu.toggle()
-                            }
-                        }
-                        .animation(.none, value: showMenu)
-                }
-            } else {
-                IconView(iconName: "sun.min.fill")
-                    .padding(.trailing, 18)
+            HStack(spacing: 0) {
+                NavigationLink(
+                    destination: SearchView()) {
+                        IconView(iconName: "magnifyingglass")
+                    }
+                SettingsButtonView()
             }
         }
     }

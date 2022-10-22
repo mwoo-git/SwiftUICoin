@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct SwiftUICoinApp: App {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var monitor = NetworkMonitor()
     @State private var isNavigationBarHidden: Bool = true
@@ -29,13 +30,10 @@ struct SwiftUICoinApp: App {
                         NetworkMissingView()
                     }
                 }
-                
-                
-                
             }
             .environmentObject(viewModel)// 모든 자식뷰가 viewModel에 엑세스 할 수 있습니다.
             .environmentObject(monitor)
-            .navigationViewStyle(StackNavigationViewStyle())
-        }
+            .navigationViewStyle(.stack)
+            .environment(\.colorScheme, isDarkMode ? .dark : .light)        }
     }
 }
