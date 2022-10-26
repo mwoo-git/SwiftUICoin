@@ -12,22 +12,13 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var isDark: Bool = false
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.openURL) var openURL
+    private var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기")
     
     var body: some View {
         VStack(spacing: 0) {
             settingHeader
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "mail")
-                    Text("개발자에게 연락하기")
-                        .foregroundColor(Color.theme.textColor)
-                }
-                
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color.theme.accent)
-            }
-            .padding()
+            settingList
             Spacer()
         }
         .background(Color.theme.background.ignoresSafeArea())
@@ -49,8 +40,8 @@ struct SettingView_Previews: PreviewProvider {
     }
 }
 
-extension SettingsView {
-    private var settingHeader: some View {
+private extension SettingsView {
+    var settingHeader: some View {
         HStack {
             IconView(iconName: "chevron.left")
                 .onTapGesture {
@@ -70,8 +61,54 @@ extension SettingsView {
             } label: {
                 IconView(iconName: isDark ? "moon.fill" : "sun.min.fill")
             }
-
-            
+        }
+    }
+    
+    var chevron_right: some View {
+        Image(systemName: "chevron.right")
+            .foregroundColor(Color.theme.accent)
+            .font(.subheadline)
+    }
+    
+    var settingList: some View {
+        Group {
+            HStack {
+                HStack(spacing: 10) {
+                    Image(systemName: "speaker.wave.1")
+                        .frame(width: 30, height: 30)
+                        .font(.title3)
+                    Text("공지사항")
+                        .foregroundColor(Color.theme.textColor)
+                }
+                Spacer()
+                chevron_right
+            }
+            .padding()
+            HStack {
+                HStack(spacing: 10) {
+                    Image(systemName: "mail")
+                        .frame(width: 30, height: 30)
+                    Text("문의하기")
+                        .foregroundColor(Color.theme.textColor)
+                }
+                Spacer()
+                chevron_right
+            }
+            .onTapGesture {
+                email.send(openURL: openURL)
+            }
+            .padding()
+            HStack {
+                HStack(spacing: 10) {
+                    Image(systemName: "v.circle")
+                        .frame(width: 30, height: 30)
+                    Text("버전 정보")
+                        .foregroundColor(Color.theme.textColor)
+                }
+                Spacer()
+                chevron_right
+            }
+            .padding()
         }
     }
 }

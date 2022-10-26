@@ -69,8 +69,8 @@ extension Double {
         formatter.usesGroupingSeparator = true
         formatter.numberStyle = .currency
 //        formatter.locale = .current // <- default value
-//        formatter.currencyCode = "usd"  // <- change currency
-//        formatter.currencySymbol = "$" // <- change currency symbol
+        formatter.currencyCode = "usd"  // <- change currency
+        formatter.currencySymbol = "" // <- change currency symbol
         formatter.minimumFractionDigits = 2 // 소수점 뒤로 최소 2자리
         formatter.maximumFractionDigits = 6 // 소수점 뒤로 최대 6자리
         return formatter

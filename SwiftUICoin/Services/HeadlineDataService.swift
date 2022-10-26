@@ -24,7 +24,7 @@ class HeadlineDataService {
     func getArticles() {
         
         let urlString = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=\(keyword)"
-        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         guard let url = URL(string: encodedString) else { return print("scrap url error")}
         print("start \(keyword) scrap")
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)

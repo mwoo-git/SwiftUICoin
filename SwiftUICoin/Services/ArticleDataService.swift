@@ -30,7 +30,7 @@ class ArticleDataService {
         
         
         let urlString = "https://www.blockmedia.co.kr/?s=\((coin == nil ? backup?.symbol?.convertSymbol : coin?.symbol.convertSymbol) ?? "")"
-        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
         guard let url = URL(string: encodedString) else { return }
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
