@@ -18,7 +18,7 @@ class TrendScraperUtility {
     
     func scrapSymbol(from data:Data) -> Future<[TrendModel], Never> {
         Future { promise in
-            let html = String(data: data, encoding: .utf8)!
+            let html = String(data: data, encoding: .utf8) ?? ""
             var symbols = [TrendModel]()
             do {
                 let elements = try SwiftSoup.parse(html)

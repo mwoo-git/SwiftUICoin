@@ -23,9 +23,9 @@ struct SortOptionView: View {
                     .padding(.vertical, 3)
                     .padding(.horizontal, 10)
                     .background(
-                        Capsule()
-                            .fill(viewModel.sortOption == .rank ? Color.theme.sortOptionSelected : .clear)
+                        viewModel.sortOption == .rank ? Color.theme.sortOptionSelected : .clear
                     )
+                    .cornerRadius(3)
                     .onTapGesture {
                         viewModel.sortOption = .rank
                         withAnimation(.easeInOut) {
@@ -33,51 +33,39 @@ struct SortOptionView: View {
                         }
                     }
                     
-                    let iconSize = 13
-                    
                     HStack(spacing: 0) {
-                        Text("가격")
-                            .foregroundColor((viewModel.sortOption == .price || viewModel.sortOption == .pricereversed) ? Color.white : Color.theme.accent)
-                        Image(systemName: "arrow.down")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(viewModel.sortOption == .price ?  Color.white : viewModel.sortOption == .pricereversed ? Color.theme.background : Color.theme.accent)
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(viewModel.sortOption == .pricereversed ?  Color.white : viewModel.sortOption == .price ? Color.theme.background : Color.theme.accent)
+                        Text("상승")
+                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24H) ? Color.white : Color.theme.accent)
                     }
+                    .id("PRICE_UP")
                     .padding(.vertical, 3)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 5)
+                    .padding(.horizontal, 10)
                     .background(
-                        Capsule()
-                            .fill((viewModel.sortOption == .price || viewModel.sortOption == .pricereversed) ? Color.theme.sortOptionSelected : .clear)
+                        viewModel.sortOption == .priceChangePercentage24H ? Color.theme.sortOptionSelected : .clear
                     )
+                    .cornerRadius(3)
                     .onTapGesture {
-                        viewModel.sortOption = viewModel.sortOption == .price ? .pricereversed : .price
-                    }
-                    
-                    HStack(spacing: 0) {
-                        Text("24시간 변동률")
-                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24H || viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
-                        Image(systemName: "arrow.down")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(viewModel.sortOption == .priceChangePercentage24H ?  Color.white : viewModel.sortOption == .priceChangePercentage24HReversed ? Color.theme.background : Color.theme.accent)
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: CGFloat(iconSize)))
-                            .foregroundColor(viewModel.sortOption == .priceChangePercentage24HReversed ?  Color.white : viewModel.sortOption == .priceChangePercentage24H ? Color.theme.background : Color.theme.accent)
-                    }
-                    .id("24H_CHANGE")
-                    .padding(.vertical, 3)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 5)
-                    .background(
-                        Capsule()
-                            .fill((viewModel.sortOption == .priceChangePercentage24H || viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.theme.sortOptionSelected : .clear)
-                    )
-                    .onTapGesture {
-                        viewModel.sortOption = viewModel.sortOption == .priceChangePercentage24H ? .priceChangePercentage24HReversed : .priceChangePercentage24H
+                        viewModel.sortOption = .priceChangePercentage24H
                         withAnimation(.easeInOut) {
-                            proxy.scrollTo("24H_CHANGE", anchor: .topTrailing)
+                            proxy.scrollTo("PRICE_UP", anchor: .topLeading)
+                        }
+                    }
+                    
+                    HStack(spacing: 0) {
+                        Text("하락")
+                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
+                    }
+                    .id("PRICE_DOWN")
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 10)
+                    .background(
+                        viewModel.sortOption == .priceChangePercentage24HReversed ? Color.theme.sortOptionSelected : .clear
+                    )
+                    .cornerRadius(3)
+                    .onTapGesture {
+                        viewModel.sortOption = .priceChangePercentage24HReversed
+                        withAnimation(.easeInOut) {
+                            proxy.scrollTo("PRICE_DOWN", anchor: .topLeading)
                         }
                     }
                 }

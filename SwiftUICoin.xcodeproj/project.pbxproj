@@ -98,6 +98,14 @@
 		73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */; };
 		73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE728D1EF280041A7C3 /* SearchView.swift */; };
 		73E6BEEA28D21FF10041A7C3 /* HomeCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */; };
+		73FF2411290BE785008C8172 /* GlobalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2410290BE784008C8172 /* GlobalItemView.swift */; };
+		73FF2413290BE7D8008C8172 /* GlobalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2412290BE7D8008C8172 /* GlobalModel.swift */; };
+		73FF2415290BEDCF008C8172 /* GlobalGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2414290BEDCF008C8172 /* GlobalGridView.swift */; };
+		73FF2418290C2FA1008C8172 /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2417290C2FA1008C8172 /* GlobalViewModel.swift */; };
+		73FF241A290C3219008C8172 /* GlobalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2419290C3219008C8172 /* GlobalDataService.swift */; };
+		73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241B290C32B2008C8172 /* USAScraperUtility.swift */; };
+		73FF241E291037F7008C8172 /* GlobalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241D291037F4008C8172 /* GlobalDetailView.swift */; };
+		73FF242029104B82008C8172 /* GlobalPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +199,14 @@
 		73E6BEE528D1D9AC0041A7C3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		73E6BEE728D1EF280041A7C3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoinListView.swift; sourceTree = "<group>"; };
+		73FF2410290BE784008C8172 /* GlobalItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalItemView.swift; sourceTree = "<group>"; };
+		73FF2412290BE7D8008C8172 /* GlobalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalModel.swift; sourceTree = "<group>"; };
+		73FF2414290BEDCF008C8172 /* GlobalGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGridView.swift; sourceTree = "<group>"; };
+		73FF2417290C2FA1008C8172 /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
+		73FF2419290C3219008C8172 /* GlobalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataService.swift; sourceTree = "<group>"; };
+		73FF241B290C32B2008C8172 /* USAScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USAScraperUtility.swift; sourceTree = "<group>"; };
+		73FF241D291037F4008C8172 /* GlobalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDetailView.swift; sourceTree = "<group>"; };
+		73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlaceHolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +284,7 @@
 			children = (
 				731086E428CE3AAD00283FD3 /* Components */,
 				731086DF28CE376000283FD3 /* Home */,
+				73FF240D290BE71D008C8172 /* Grobal */,
 				7334473328E4B36C00F1719E /* Watchlist */,
 				73C71C6328D84D400067167F /* Search */,
 				73C71C6828D86D760067167F /* Detail */,
@@ -291,6 +308,7 @@
 				73BB739128FD415C00BB7FEA /* TrendModel.swift */,
 				739A39DC28F4293A005348E5 /* StatusCodeModel.swift */,
 				7360D043290846FC00F06499 /* SupportEmailModel.swift */,
+				73FF2412290BE7D8008C8172 /* GlobalModel.swift */,
 				7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */,
 				739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */,
 			);
@@ -527,6 +545,7 @@
 				73B9561F28DDABCE00DD4A9F /* ArticleDataService.swift */,
 				731A036628ECC07800B1BC39 /* HeadlineDataService.swift */,
 				73BB738F28FD412E00BB7FEA /* TrendDataService.swift */,
+				73FF2419290C3219008C8172 /* GlobalDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -539,8 +558,37 @@
 				731A036828ECC1F800B1BC39 /* HeadlineScraperUtility.swift */,
 				739A39F428FAA451005348E5 /* NetworkMornitor.swift */,
 				73BB739328FD423A00BB7FEA /* TrendScraperUtility.swift */,
+				73FF241B290C32B2008C8172 /* USAScraperUtility.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		73FF240D290BE71D008C8172 /* Grobal */ = {
+			isa = PBXGroup;
+			children = (
+				73FF240E290BE740008C8172 /* Views */,
+				73FF240F290BE74D008C8172 /* ViewModels */,
+			);
+			path = Grobal;
+			sourceTree = "<group>";
+		};
+		73FF240E290BE740008C8172 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73FF2410290BE784008C8172 /* GlobalItemView.swift */,
+				73FF2414290BEDCF008C8172 /* GlobalGridView.swift */,
+				73FF241D291037F4008C8172 /* GlobalDetailView.swift */,
+				73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73FF240F290BE74D008C8172 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				73FF2417290C2FA1008C8172 /* GlobalViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -640,14 +688,18 @@
 				73B9564428E089F100DD4A9F /* NftRowView.swift in Sources */,
 				73D7175D28DB414A0081CB2D /* StatisticView.swift in Sources */,
 				7360D044290846FD00F06499 /* SupportEmailModel.swift in Sources */,
+				73FF2415290BEDCF008C8172 /* GlobalGridView.swift in Sources */,
 				73BB739228FD415C00BB7FEA /* TrendModel.swift in Sources */,
+				73FF242029104B82008C8172 /* GlobalPlaceHolderView.swift in Sources */,
 				739A39F728FAA867005348E5 /* NetworkMissingView.swift in Sources */,
 				7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */,
 				731086F028CF1D0D00283FD3 /* CoinRowView.swift in Sources */,
 				733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */,
+				73FF2413290BE7D8008C8172 /* GlobalModel.swift in Sources */,
 				73B9563028DEE86200DD4A9F /* ArticleWebView.swift in Sources */,
 				731A036528ECBABD00B1BC39 /* HeadlineViewModel.swift in Sources */,
 				734A1E2E28F07DB400AF0E0F /* View.swift in Sources */,
+				73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */,
 				73D7175B28DB3E930081CB2D /* StatisticModel.swift in Sources */,
 				739A39DD28F4293A005348E5 /* StatusCodeModel.swift in Sources */,
 				73B9562028DDABCE00DD4A9F /* ArticleDataService.swift in Sources */,
@@ -671,13 +723,17 @@
 				739A39ED28F75DAC005348E5 /* SearchAllCoinsView.swift in Sources */,
 				739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */,
 				7360D03E2904582800F06499 /* SettingsView.swift in Sources */,
+				73FF241E291037F7008C8172 /* GlobalDetailView.swift in Sources */,
 				739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				73D527AC28E895CC00650679 /* ListSelectionStyle.swift in Sources */,
 				731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */,
 				73BB739028FD412E00BB7FEA /* TrendDataService.swift in Sources */,
+				73FF2418290C2FA1008C8172 /* GlobalViewModel.swift in Sources */,
 				7334473828E4B3C800F1719E /* WatchlistView.swift in Sources */,
+				73FF2411290BE785008C8172 /* GlobalItemView.swift in Sources */,
 				73C71C6E28D899CC0067167F /* NavigationLazyView.swift in Sources */,
+				73FF241A290C3219008C8172 /* GlobalDataService.swift in Sources */,
 				734A1E2C28EF421800AF0E0F /* HeadlinePlaceholderView.swift in Sources */,
 				739A39F328F86124005348E5 /* DetailInfoView.swift in Sources */,
 				739A39EB28F750D8005348E5 /* LowMoversView.swift in Sources */,

@@ -52,6 +52,7 @@ private extension SettingsView {
                         isDarkMode = false
                     }
                 }
+                .contentShape(Rectangle())
             Spacer()
             Text("더보기")
                 .font(.headline)
@@ -94,6 +95,7 @@ private extension SettingsView {
                 Spacer()
                 chevron_right
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 email.send(openURL: openURL)
             }

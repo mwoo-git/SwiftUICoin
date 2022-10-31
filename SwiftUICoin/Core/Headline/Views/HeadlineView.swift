@@ -38,7 +38,7 @@ struct TabBarView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack() {
+                HStack(spacing: 25) {
                     ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
                         TabBarItem(currentTab: $currentTab, namespace: namespace.self, id: index, tabBarItemName: item, tab: index)
                             .onChange(of: currentTab) { _ in
@@ -63,7 +63,7 @@ struct TabBarItem: View {
     var tab: Int
     
     var body: some View {
-            VStack {
+        VStack() {
                 Text(tabBarItemName)
                     .foregroundColor(currentTab == tab ? Color.theme.textColor : Color.theme.accent)
                     .font(.subheadline)
@@ -79,11 +79,11 @@ struct TabBarItem: View {
             }
             .id(id)
             .animation(.easeInOut(duration: 0.2),  value: currentTab)
-            .padding(.trailing)
             .onTapGesture {
                     currentTab = tab
             }
             .padding(.top)
+            .contentShape(Rectangle())
     }
 }
 

@@ -18,6 +18,7 @@ struct BackButtonView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
+            .contentShape(Rectangle())
     }
 }
 

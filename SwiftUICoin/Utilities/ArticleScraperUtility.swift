@@ -13,7 +13,7 @@ class ArticleScraperUtility {
     
     func scrapArticle(from data:Data) -> Future<[ArticleModel], Never> {
         Future { promise in
-            let html = String(data: data, encoding: .utf8)!
+            let html = String(data: data, encoding: .utf8) ?? ""
             var articles = [ArticleModel]()
             do {
                 let elements = try SwiftSoup.parse(html)
