@@ -15,6 +15,8 @@ struct GlobalPlaceholderView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("나스닥 100")
+          
+                
                 Text("11,191.630")
                     .font(.title2)
                     .bold()

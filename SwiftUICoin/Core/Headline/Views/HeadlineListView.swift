@@ -7,10 +7,14 @@
 
 import SwiftUI
 import SwiftUIPullToRefresh
+import BetterSafariView
 
 struct HeadlineListView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @StateObject var viewModel: HeadlineViewModel
+    @State private var showSafari = false
+    @State private var url = ""
     
     init(keyword: String) {
         _viewModel = StateObject(wrappedValue: HeadlineViewModel(keyword: keyword))
@@ -28,14 +32,34 @@ struct HeadlineListView: View {
             } else {
                 LazyVStack(spacing: 15) {
                     ForEach(viewModel.articles) { article in
-                        NavigationLink(
-                            destination: NavigationLazyView(HeadlineWebView(article: article)),
-                            label: {
-                                HeadlineRowView(headline: article)
-                            })
-                            .buttonStyle(ListSelectionStyle())
+                        Button {
+                            if url != article.url {
+                                url = article.url
+                            } else {
+                                showSafari.toggle()
+                            }
+                        } label: {
+                            HeadlineRowView(headline: article)
+                        }
+                        .buttonStyle(ListSelectionStyle())
                     }
-                }.padding(.top)
+                }
+                .padding(.top)
+                .onChange(of: url, perform: {_ in
+                    showSafari.toggle()
+                })
+                .safariView(isPresented: $showSafari) {
+                    SafariView(
+                        url: URL(string: url)!,
+                        configuration: SafariView.Configuration(
+                            entersReaderIfAvailable: false,
+                            barCollapsingEnabled: true
+                        )
+                    )
+                        .preferredBarAccentColor(isDarkMode ? .black : .white)
+                        .preferredControlAccentColor(isDarkMode ? .white : .black)
+                        .dismissButtonStyle(.done)
+                }
             }
         }
     }

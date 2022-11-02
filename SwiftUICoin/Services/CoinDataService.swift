@@ -22,6 +22,7 @@ class CoinDataService {
     func getCoin() {
         
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h") else { return }
+        print("Start 코인리스트 Download")
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .tryMap { (output) -> Data in
@@ -57,6 +58,7 @@ class CoinDataService {
             .sink(receiveCompletion: NetworkingManager.handleCompletion, receiveValue: { [weak self] (returnCoins) in
                 self?.allCoins = returnCoins
                 self?.coinSubscription?.cancel()
+                print("End Download")
             })
     }
 }

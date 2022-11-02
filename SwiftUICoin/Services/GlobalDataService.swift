@@ -23,7 +23,7 @@ class GlobalDataService {
         
         let urlString = "https://investing.com/"
         guard let url = URL(string: urlString) else { return print("scrap url error")}
-        print("start")
+        print("start Global scrap")
 //        var request = URLRequest(url: url)
 //        request.httpMethod = "GET"
 //        request.addValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")

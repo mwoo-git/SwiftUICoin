@@ -106,6 +106,9 @@
 		73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241B290C32B2008C8172 /* USAScraperUtility.swift */; };
 		73FF241E291037F7008C8172 /* GlobalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241D291037F4008C8172 /* GlobalDetailView.swift */; };
 		73FF242029104B82008C8172 /* GlobalPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */; };
+		73FF242229117377008C8172 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF242129117376008C8172 /* SafariView.swift */; };
+		73FF242429118791008C8172 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF242329118791008C8172 /* UINavigationController.swift */; };
+		73FF242729118F00008C8172 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 73FF242629118F00008C8172 /* BetterSafariView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +210,8 @@
 		73FF241B290C32B2008C8172 /* USAScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USAScraperUtility.swift; sourceTree = "<group>"; };
 		73FF241D291037F4008C8172 /* GlobalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDetailView.swift; sourceTree = "<group>"; };
 		73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlaceHolderView.swift; sourceTree = "<group>"; };
+		73FF242129117376008C8172 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		73FF242329118791008C8172 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +222,7 @@
 				73E6BEE128D0C3930041A7C3 /* Kingfisher in Frameworks */,
 				73B9562728DDAF8A00DD4A9F /* SwiftSoup in Frameworks */,
 				73D527B628E9E77F00650679 /* SwiftUIPullToRefresh in Frameworks */,
+				73FF242729118F00008C8172 /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,7 @@
 				73B9563128DF03BC00DD4A9F /* UIColor.swift */,
 				7334472F28E4887200F1719E /* UIImage.swift */,
 				734A1E2D28F07DB400AF0E0F /* View.swift */,
+				73FF242329118791008C8172 /* UINavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -357,6 +364,7 @@
 				739A39F628FAA867005348E5 /* NetworkMissingView.swift */,
 				73BB738D28FC533700BB7FEA /* ShareButtonView.swift */,
 				7360D03F2904764A00F06499 /* SettingsButtonView.swift */,
+				73FF242129117376008C8172 /* SafariView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -611,6 +619,7 @@
 				73E6BEE028D0C3930041A7C3 /* Kingfisher */,
 				73B9562628DDAF8A00DD4A9F /* SwiftSoup */,
 				73D527B528E9E77F00650679 /* SwiftUIPullToRefresh */,
+				73FF242629118F00008C8172 /* BetterSafariView */,
 			);
 			productName = SwiftUICoin;
 			productReference = 731086C928CE285100283FD3 /* SwiftUICoin.app */;
@@ -644,6 +653,7 @@
 				73E6BEDF28D0C3930041A7C3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				73B9562528DDAF8A00DD4A9F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				73D527B428E9E77F00650679 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
+				73FF242529118EFF008C8172 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 			);
 			productRefGroup = 731086CA28CE285100283FD3 /* Products */;
 			projectDirPath = "";
@@ -680,6 +690,7 @@
 				7334472E28E37D6D00F1719E /* MyTabView.swift in Sources */,
 				73C71C6228D84ADE0067167F /* SortOptionView.swift in Sources */,
 				731A036D28EDF7FB00B1BC39 /* HeadlineListView.swift in Sources */,
+				73FF242429118791008C8172 /* UINavigationController.swift in Sources */,
 				73B9564228E0854D00DD4A9F /* NftModel.swift in Sources */,
 				73BB739428FD423A00BB7FEA /* TrendScraperUtility.swift in Sources */,
 				731A036928ECC1F800B1BC39 /* HeadlineScraperUtility.swift in Sources */,
@@ -709,6 +720,7 @@
 				7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */,
 				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				739A39F528FAA452005348E5 /* NetworkMornitor.swift in Sources */,
+				73FF242229117377008C8172 /* SafariView.swift in Sources */,
 				73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */,
 				7334472828E2653F00F1719E /* BackButtonView.swift in Sources */,
 				73C71C7228D990CA0067167F /* DetailViewModel.swift in Sources */,
@@ -999,6 +1011,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		73FF242529118EFF008C8172 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1016,6 +1036,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73E6BEDF28D0C3930041A7C3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		73FF242629118F00008C8172 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73FF242529118EFF008C8172 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

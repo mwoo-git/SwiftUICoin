@@ -13,9 +13,30 @@ struct HeadlineRowView: View {
     let headline: HeadlineModel
     
     var body: some View {
-        VStack(spacing: 0) {
-            topColumn
-            rowColumn
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                KFImage(URL(string: headline.authorImageUrl))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                    .cornerRadius(5)
+                Text(headline.cleanAuthor)
+                    .font(.footnote)
+                    .padding(.leading, 5)
+            }
+            .padding(.bottom, 10)
+            Text(headline.title)
+                .font(.title3)
+                .lineLimit(2)
+                .foregroundColor(Color.theme.textColor)
+                .multilineTextAlignment(.leading)
+            Spacer()
+            HStack {
+                Text(headline.cleanDate)
+                    .font(.footnote)
+                Spacer()
+                Image(systemName: "ellipsis")
+            }
         }
         .contentShape(Rectangle())
         .padding()
@@ -29,48 +50,5 @@ struct HeadlineRowView_Previews: PreviewProvider {
             HeadlineRowView(headline: dev.headline)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-    }
-}
-
-extension HeadlineRowView {
-    private var topColumn: some View {
-        
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    KFImage(URL(string: headline.authorImageUrl))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .cornerRadius(5)
-                    Text(headline.cleanAuthor)
-                        .font(.footnote)
-                        .padding(.leading, 5)
-                }
-                Text(headline.title)
-                    .font(.headline)
-                    .lineLimit(2)
-                    .foregroundColor(Color.theme.textColor)
-                    .multilineTextAlignment(.leading)
-                Spacer()
-            }
-            Spacer()
-            let size = UIScreen.main.bounds.width / 5
-            KFImage(URL(string: headline.imageUrl))
-                .resizable()
-                .scaledToFill()
-                .frame(width: size, height: size)
-                .cornerRadius(7)
-                .padding(.leading)
-        }
-    }
-    
-    private var rowColumn: some View {
-        HStack {
-            Text(headline.cleanDate)
-                .font(.footnote)
-            Spacer()
-            Image(systemName: "ellipsis")
-        }
     }
 }

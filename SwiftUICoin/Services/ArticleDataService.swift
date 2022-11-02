@@ -31,8 +31,8 @@ class ArticleDataService {
         
         let urlString = "https://www.blockmedia.co.kr/?s=\((coin == nil ? backup?.symbol?.convertSymbol : coin?.symbol.convertSymbol) ?? "")"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
         guard let url = URL(string: encodedString) else { return }
+        print("Start 블록미디어 scrap")
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
@@ -48,6 +48,7 @@ class ArticleDataService {
             } receiveValue: { [weak self] (articles) in
                 self?.articles = articles
                 self?.coinSubscription?.cancel()
+                print("Scrap end")
             }
     }
 }
