@@ -43,6 +43,8 @@ extension Double {
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
         formatter.numberStyle = .currency
+        formatter.currencyCode = "usd"
+        formatter.currencySymbol = "$"
         formatter.maximumFractionDigits = 0 // 소수점 뒤로 최대 6자리
         return formatter
     }

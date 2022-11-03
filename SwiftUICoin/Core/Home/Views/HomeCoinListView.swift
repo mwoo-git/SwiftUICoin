@@ -34,10 +34,21 @@ struct HomeCoinListView: View {
                         }
                     }
                 } else {
-                    LazyVStack {
+                    LazyVStack(alignment: .leading) {
+                        Text("주요 지수")
+                            .font(.title3)
+                            .bold()
+                            .padding(.horizontal)
+                            .padding(.top)
                         GlobalGridView(viewModel: globalViewModel)
+                        Text("코인 순위")
+                            .font(.title3)
+                            .bold()
+                            .padding()
+                            .padding(.top, 10)
                         allCoinList
                     }
+                    .id("SCROLL_TO_TOP")
                 }
             }
             .overlay(
@@ -95,7 +106,6 @@ extension HomeCoinListView {
                 }
             }
         }
-        .id("SCROLL_TO_TOP")
         .overlay(scrollToTopGeometryReader)
     }
     
@@ -123,7 +133,7 @@ extension HomeCoinListView {
             )
             .padding(.trailing, 30)
             .padding(.bottom, 40)
-            .opacity(-scrollViewOffset > 145 ? 1: 0)
+            .opacity(-scrollViewOffset > 400 ? 1: 0)
     }
 }
 

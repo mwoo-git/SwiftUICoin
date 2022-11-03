@@ -11,10 +11,7 @@ import SwiftUI
 struct SupportEmailModel {
     let toAddress: String
     let subject: String
-    var body: String {"""
-        의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.
-    """
-    }
+    let body: String
     
     func send(openURL: OpenURLAction) {
         let urlString = "mailto:\(toAddress)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")"

@@ -72,7 +72,8 @@ struct SortOptionView: View {
                 .font(.system(size: 15, weight: .bold))
                 .foregroundColor(Color.theme.accent)
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.bottom)
         }
         .background(Color.theme.background)
     }

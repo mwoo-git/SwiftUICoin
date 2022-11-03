@@ -75,6 +75,7 @@ extension ArticlePlaceholderView {
         HStack {
             Text("17시간 전...")
             Spacer()
+            Text("....")
         }
         .font(.footnote)
     }

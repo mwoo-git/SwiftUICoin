@@ -42,7 +42,7 @@ extension ArticleRowView {
                         .font(.footnote)
                 }
                 Text(article.title)
-                    .font(.headline)
+                    
                     .lineLimit(2)
                     .foregroundColor(Color.theme.textColor)
                     .multilineTextAlignment(.leading)
@@ -65,5 +65,10 @@ extension ArticleRowView {
                 .font(.footnote)
             Spacer()
         }
+        .overlay(
+            MenuButtonView(url: article.url, author: "블록미디어", title: article.title)
+                .offset(x: 13)
+            , alignment: .trailing
+        )
     }
 }

@@ -35,8 +35,12 @@ struct HeadlineRowView: View {
                 Text(headline.cleanDate)
                     .font(.footnote)
                 Spacer()
-                Image(systemName: "ellipsis")
             }
+            .overlay(
+                MenuButtonView(url: headline.url, author: headline.cleanAuthor, title: headline.title)
+                    .offset(x: 13)
+                , alignment: .trailing
+            )
         }
         .contentShape(Rectangle())
         .padding()
@@ -47,8 +51,59 @@ struct HeadlineRowView: View {
 
 struct HeadlineRowView_Previews: PreviewProvider {
     static var previews: some View {
-            HeadlineRowView(headline: dev.headline)
-                .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
+        HeadlineRowView(headline: dev.headline)
+            .preferredColorScheme(.dark)
+            .previewLayout(.sizeThatFits)
+    }
+}
+
+struct MenuButtonView: View {
+    
+    @State private var isShareSheetShowing = false
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.openURL) var openURL
+    
+    let url: String
+    let author: String
+    let title: String
+    
+    var body: some View {
+        Menu {
+            Button(action: share) {
+                HStack {
+                    Text("공유")
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+            
+            Button(action: {
+                let email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "뉴스 문제 신고", body: """
+                [\(author)] \(title)
+                
+                """)
+                email.send(openURL: openURL)
+            }) {
+                HStack {
+                    Text("문제 신고")
+                    Image(systemName: "exclamationmark.bubble")
+                }
+            }
+            
+        } label:{
+            Image(systemName: "ellipsis")
+                .padding()
+                .contentShape(Rectangle())
+                .foregroundColor(Color.theme.accent)
+        }
+        .buttonStyle(ListSelectionStyle())
+    }
+    
+    func share() {
+        isShareSheetShowing.toggle()
+        
+        let url = URL(string: url)
+        let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }

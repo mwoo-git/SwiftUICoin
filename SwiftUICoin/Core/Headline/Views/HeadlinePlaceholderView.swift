@@ -15,14 +15,7 @@ struct HeadlinePlaceholderView: View {
     var body: some View {
         VStack(spacing: 15) {
             ForEach(0..<5) { i in
-                VStack(spacing: 0) {
-                    topColumn
-                    rowColumn
-                }
-                .padding()
-                .frame(height: 140)
-                .foregroundColor(Color.theme.accent)
-                .redacted(reason: .placeholder)
+                row
             }
             Spacer()
         }
@@ -40,50 +33,42 @@ struct HeadlinePlaceholderView: View {
 struct HeadlinePlaceholderView_Previews: PreviewProvider {
     static var previews: some View {
         HeadlinePlaceholderView()
-                .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
+            .preferredColorScheme(.dark)
+            .previewLayout(.sizeThatFits)
     }
 }
 
-extension HeadlinePlaceholderView {
-    private var topColumn: some View {
-        
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    KFImage(URL(string: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true"))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .cornerRadius(5)
-                    Text("한국경제TV...".replacingOccurrences(of: "언론사 선정", with: ""))
-                        .font(.footnote)
-                        .padding(.leading, 5)
-                }
-                Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때")
-                    .font(.headline)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-                Spacer()
+private extension HeadlinePlaceholderView {
+    var row: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                KFImage(URL(string: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true"))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                    .cornerRadius(5)
+                Text("한국경제TV...")
+                    .font(.footnote)
+                    .padding(.leading, 5)
             }
+            .padding(.bottom, 10)
+            Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때'부자아빠' 기요사키, 달러 폭락 예언..")
+                .font(.title3)
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
             Spacer()
-            let size = UIScreen.main.bounds.width / 5
-            KFImage(URL(string: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true"))
-                .resizable()
-                .scaledToFill()
-                .frame(width: size, height: size)
-                .cornerRadius(7)
-                .padding(.leading)
+            HStack {
+                Text("17시간 전...")
+                    .font(.footnote)
+                Spacer()
+                Text("...")
+            }
         }
-    }
-    
-    private var rowColumn: some View {
-        HStack {
-            Text("17시간 전...")
-            Spacer()
-            Text("...")
-        }
-        .font(.footnote)
+        .contentShape(Rectangle())
+        .padding()
+        .frame(height: 140)
+        .foregroundColor(Color.theme.accent)
+        .redacted(reason: .placeholder)
     }
 }
 

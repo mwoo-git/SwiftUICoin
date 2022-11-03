@@ -13,7 +13,7 @@ struct SettingsView: View {
     @State private var isDark: Bool = false
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
-    private var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기")
+    private var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
     
     var body: some View {
         VStack(spacing: 0) {
