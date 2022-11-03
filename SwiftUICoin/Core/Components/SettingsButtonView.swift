@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsButtonView: View {
+    
     var body: some View {
         NavigationLink(
             destination: SettingsView()) {
@@ -16,8 +17,3 @@ struct SettingsButtonView: View {
     }
 }
 
-struct SettingsButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsButtonView()
-    }
-}

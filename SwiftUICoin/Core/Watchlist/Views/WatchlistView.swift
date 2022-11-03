@@ -10,6 +10,7 @@ import SwiftUI
 struct WatchlistView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
         
@@ -20,6 +21,13 @@ struct WatchlistView: View {
             Spacer()
         }
         .background(Color.theme.background.ignoresSafeArea())
+        .onAppear {
+            if isDarkMode {
+                viewModel.isDark  = true
+            } else {
+                viewModel.isDark = false
+            }
+        }
     }
 }
 

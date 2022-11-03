@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var showMenu: Bool = false
     @State private var isDark: Bool = false
     
@@ -19,6 +20,14 @@ struct HomeView: View {
             HomeCoinListView()
         }
         .background(Color.theme.background.ignoresSafeArea())
+        .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
+        .onAppear {
+            if viewModel.isDark {
+                isDarkMode  = true
+            } else {
+                isDarkMode = false
+            }
+        }
     }
 }
 

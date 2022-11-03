@@ -27,6 +27,7 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var status: StatusCode = .status200
     @Published var trendCoins: [CoinModel] = []
+    @Published var isDark: Bool = false
     
     private let dataService = CoinDataService()
     private let backupDataService = CoinBackupDataService()

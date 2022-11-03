@@ -10,10 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @State private var isDark: Bool = false
+    @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
-    private var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
+    var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,12 +23,12 @@ struct SettingsView: View {
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
-        .environment(\.colorScheme, isDark ? .dark : .light)
+        .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
         .onAppear {
             if isDarkMode {
-                isDark = true
+                viewModel.isDark = true
             } else {
-                isDark = false
+                viewModel.isDark = false
             }
         }
     }
@@ -46,7 +46,7 @@ private extension SettingsView {
             IconView(iconName: "chevron.left")
                 .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
-                    if isDark {
+                    if viewModel.isDark {
                         isDarkMode = true
                     } else {
                         isDarkMode = false
@@ -58,9 +58,9 @@ private extension SettingsView {
                 .font(.headline)
             Spacer()
             Button {
-                isDark.toggle()
+                viewModel.isDark.toggle()
             } label: {
-                IconView(iconName: isDark ? "moon.fill" : "sun.min.fill")
+                IconView(iconName: viewModel.isDark ? "moon.fill" : "sun.min.fill")
             }
         }
     }
