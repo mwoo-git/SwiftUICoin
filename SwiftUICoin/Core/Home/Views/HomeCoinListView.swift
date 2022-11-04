@@ -63,6 +63,10 @@ struct HomeCoinListView: View {
             .background(Color.theme.background)
             .onAppear {
                 UIScrollView.appearance().keyboardDismissMode = .onDrag
+                if !viewModel.allCoins.isEmpty && !globalViewModel.indices.isEmpty {
+                    viewModel.getCoin()
+                    globalViewModel.fetchGlobalList()
+                }
             }
         }
     }

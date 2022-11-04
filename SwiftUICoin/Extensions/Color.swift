@@ -27,7 +27,6 @@ struct ColorTheme {
     let binanceColor = Color("BinanceColor")
     let searchBar = Color("SearchBarColor")
     let iconColor = Color("IconColor")
-    let coinDetailBackground = Color("CoinDetailBackgroundColor")
     let textColor = Color("TextColor")
     let openseaColor = Color("OpenSeaColor")
     let listSelectionColor = Color("ListSelectionColor")

@@ -62,6 +62,11 @@ struct HeadlineListView: View {
                 }
             }
         }
+        .onAppear {
+            if !viewModel.articles.isEmpty {
+                viewModel.getArticle()
+            }
+        }
     }
 }
 

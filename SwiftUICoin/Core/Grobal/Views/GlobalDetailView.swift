@@ -38,7 +38,7 @@ private extension GlobalDetailView {
             }
             Spacer()
         }
-        .background(Color.theme.coinDetailBackground.ignoresSafeArea())
+        .background(Color.theme.background.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
     }
 }

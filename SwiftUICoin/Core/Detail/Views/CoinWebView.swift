@@ -52,7 +52,7 @@ extension CoinWebView {
             Spacer()
             ShareButtonView(url: viewModel.websiteURL ?? "")
         }
-        .background(Color.theme.coinDetailBackground.ignoresSafeArea())
+        .background(Color.theme.background.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
     }
 }

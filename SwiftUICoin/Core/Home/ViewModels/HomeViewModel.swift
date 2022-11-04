@@ -131,7 +131,7 @@ class HomeViewModel: ObservableObject {
             if !isRefreshing {
                 dataService.getCoin()
                 isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
                     self.isRefreshing = false
                 }
             }
