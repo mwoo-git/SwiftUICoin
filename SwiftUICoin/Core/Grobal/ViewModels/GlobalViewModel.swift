@@ -66,7 +66,7 @@ final class GlobalViewModel: ObservableObject {
             if !isRefreshing {
                 usaDataService.getItem()
                 isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
                     self.isRefreshing = false
                 }
             }

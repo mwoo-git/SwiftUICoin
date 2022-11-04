@@ -35,23 +35,20 @@ class HeadlineScraperUtility {
                     let title = try? document.select("div > a[href].news_tit").text()
                     let date = try? document.select("div").select("div.news_info").select("div.info_group").select("span").text()
                     let author = try? document.select("div").select("div.news_info").select("div.info_group").select("a.info.press").text()
-                    let imageUrl = try? document.select("a").select("img[src].api_get").attr("src")
                     let authorImageUrl = try? document.select("div").select("div.news_info").select("div.info_group").select("a.info.press").select("span").select("img").attr("src")
                     
                     if let url = url,
                        let title = title,
                        let date = date,
                        let author = author,
-                       let imageUrl = imageUrl,
                        let authorImageUrl = authorImageUrl,
                        !url.isEmpty,
                        !title.isEmpty,
                        !date.isEmpty,
                        !author.isEmpty,
-                       !imageUrl.isEmpty,
                        !authorImageUrl.isEmpty {
                         
-                        let article = HeadlineModel(url: url, title: title, date: date, author: author, imageUrl: imageUrl, authorImageUrl: authorImageUrl)
+                        let article = HeadlineModel(url: url, title: title, date: date, author: author, authorImageUrl: authorImageUrl)
                         articles.append(article)
                     }
                 })
