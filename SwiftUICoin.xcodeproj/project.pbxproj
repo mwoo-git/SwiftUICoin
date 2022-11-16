@@ -48,6 +48,7 @@
 		7360D0402904764A00F06499 /* SettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03F2904764A00F06499 /* SettingsButtonView.swift */; };
 		7360D044290846FD00F06499 /* SupportEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D043290846FC00F06499 /* SupportEmailModel.swift */; };
 		7367FD5E28D30B1500E050EA /* TradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367FD5D28D30B1500E050EA /* TradingView.swift */; };
+		736B40E629252F9B008BAB64 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B40E529252F9B008BAB64 /* LaunchView.swift */; };
 		739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D728F346E7005348E5 /* CoinBackupDataService.swift */; };
 		739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */; };
 		739A39DD28F4293A005348E5 /* StatusCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39DC28F4293A005348E5 /* StatusCodeModel.swift */; };
@@ -79,6 +80,9 @@
 		73BB739228FD415C00BB7FEA /* TrendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BB739128FD415C00BB7FEA /* TrendModel.swift */; };
 		73BB739428FD423A00BB7FEA /* TrendScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BB739328FD423A00BB7FEA /* TrendScraperUtility.swift */; };
 		73BB739628FD897900BB7FEA /* WatchlistEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BB739528FD897900BB7FEA /* WatchlistEmptyView.swift */; };
+		73C0FF1529158A6800016E64 /* NoticeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FF1429158A6800016E64 /* NoticeRowView.swift */; };
+		73C0FF1729158BA600016E64 /* NoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FF1629158BA600016E64 /* NoticeModel.swift */; };
+		73C0FF1B2922B08400016E64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C0FF1A2922B08300016E64 /* LaunchScreen.storyboard */; };
 		73C71C6228D84ADE0067167F /* SortOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6128D84ADD0067167F /* SortOptionView.swift */; };
 		73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6628D868B70067167F /* SearchViewModel.swift */; };
 		73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C71C6B28D86DDD0067167F /* DetailView.swift */; };
@@ -154,6 +158,7 @@
 		7360D03F2904764A00F06499 /* SettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonView.swift; sourceTree = "<group>"; };
 		7360D043290846FC00F06499 /* SupportEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmailModel.swift; sourceTree = "<group>"; };
 		7367FD5D28D30B1500E050EA /* TradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingView.swift; sourceTree = "<group>"; };
+		736B40E529252F9B008BAB64 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		739A39D728F346E7005348E5 /* CoinBackupDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBackupDataService.swift; sourceTree = "<group>"; };
 		739A39DA28F34840005348E5 /* CoinBackup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinBackup.xcdatamodel; sourceTree = "<group>"; };
 		739A39DC28F4293A005348E5 /* StatusCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeModel.swift; sourceTree = "<group>"; };
@@ -184,6 +189,9 @@
 		73BB739128FD415C00BB7FEA /* TrendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendModel.swift; sourceTree = "<group>"; };
 		73BB739328FD423A00BB7FEA /* TrendScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendScraperUtility.swift; sourceTree = "<group>"; };
 		73BB739528FD897900BB7FEA /* WatchlistEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistEmptyView.swift; sourceTree = "<group>"; };
+		73C0FF1429158A6800016E64 /* NoticeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRowView.swift; sourceTree = "<group>"; };
+		73C0FF1629158BA600016E64 /* NoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeModel.swift; sourceTree = "<group>"; };
+		73C0FF1A2922B08300016E64 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73C71C6128D84ADD0067167F /* SortOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionView.swift; sourceTree = "<group>"; };
 		73C71C6628D868B70067167F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		73C71C6B28D86DDD0067167F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -289,6 +297,7 @@
 			children = (
 				731086E428CE3AAD00283FD3 /* Components */,
 				731086DF28CE376000283FD3 /* Home */,
+				73C0FF182922B05C00016E64 /* Launch */,
 				73FF240D290BE71D008C8172 /* Grobal */,
 				7334473328E4B36C00F1719E /* Watchlist */,
 				73C71C6328D84D400067167F /* Search */,
@@ -314,6 +323,7 @@
 				739A39DC28F4293A005348E5 /* StatusCodeModel.swift */,
 				7360D043290846FC00F06499 /* SupportEmailModel.swift */,
 				73FF2412290BE7D8008C8172 /* GlobalModel.swift */,
+				73C0FF1629158BA600016E64 /* NoticeModel.swift */,
 				7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */,
 				739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */,
 			);
@@ -454,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				7360D03D2904582800F06499 /* SettingsView.swift */,
+				73C0FF1429158A6800016E64 /* NoticeRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -463,6 +474,23 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		73C0FF182922B05C00016E64 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				73C0FF192922B06C00016E64 /* Views */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		73C0FF192922B06C00016E64 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73C0FF1A2922B08300016E64 /* LaunchScreen.storyboard */,
+				736B40E529252F9B008BAB64 /* LaunchView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		73C71C6328D84D400067167F /* Search */ = {
@@ -666,6 +694,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C0FF1B2922B08400016E64 /* LaunchScreen.storyboard in Resources */,
 				731086D428CE285800283FD3 /* Preview Assets.xcassets in Resources */,
 				731086D128CE285800283FD3 /* Assets.xcassets in Resources */,
 			);
@@ -681,6 +710,7 @@
 				73B9564628E0911600DD4A9F /* NftDetailView.swift in Sources */,
 				73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */,
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
+				73C0FF1529158A6800016E64 /* NoticeRowView.swift in Sources */,
 				731A036B28EDD24100B1BC39 /* HeadlineWebView.swift in Sources */,
 				73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */,
 				73E6BEDE28D0B6310041A7C3 /* CoinDataService.swift in Sources */,
@@ -736,6 +766,7 @@
 				739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */,
 				731086CD28CE285100283FD3 /* SwiftUICoinApp.swift in Sources */,
 				73D527AC28E895CC00650679 /* ListSelectionStyle.swift in Sources */,
+				736B40E629252F9B008BAB64 /* LaunchView.swift in Sources */,
 				731086E728CE3AD900283FD3 /* CircleButtonView.swift in Sources */,
 				73BB739028FD412E00BB7FEA /* TrendDataService.swift in Sources */,
 				73FF2418290C2FA1008C8172 /* GlobalViewModel.swift in Sources */,
@@ -748,6 +779,7 @@
 				739A39EB28F750D8005348E5 /* LowMoversView.swift in Sources */,
 				739A39F128F8605A005348E5 /* DetailHeaderView.swift in Sources */,
 				739A39E928F7466A005348E5 /* TopMoversView.swift in Sources */,
+				73C0FF1729158BA600016E64 /* NoticeModel.swift in Sources */,
 				73E6BEE428D1B41A0041A7C3 /* NetworkingManager.swift in Sources */,
 				73E6BEEA28D21FF10041A7C3 /* HomeCoinListView.swift in Sources */,
 				739A39E728F74520005348E5 /* TopMoversItemView.swift in Sources */,
@@ -907,10 +939,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftUICoin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "블록와이드";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -939,10 +973,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftUICoin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "블록와이드";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

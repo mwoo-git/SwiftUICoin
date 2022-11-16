@@ -73,44 +73,47 @@ private extension SettingsView {
     
     var settingList: some View {
         Group {
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "speaker.wave.1")
-                        .frame(width: 30, height: 30)
-                        .font(.title3)
-                    Text("공지사항")
-                        .foregroundColor(Color.theme.textColor)
-                }
-                Spacer()
-                chevron_right
-            }
-            .padding()
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "mail")
-                        .frame(width: 30, height: 30)
-                    Text("문의하기")
-                        .foregroundColor(Color.theme.textColor)
-                }
-                Spacer()
-                chevron_right
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
+//            HStack {
+//                HStack(spacing: 10) {
+//                    Image(systemName: "speaker.wave.1")
+//                        .frame(width: 30, height: 30)
+//                        .font(.title3)
+//                    Text("공지사항")
+//                        .foregroundColor(Color.theme.textColor)
+//                }
+//                Spacer()
+//                chevron_right
+//            }
+//            .padding()
+            Button {
                 email.send(openURL: openURL)
-            }
-            .padding()
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "v.circle")
-                        .frame(width: 30, height: 30)
-                    Text("버전 정보")
-                        .foregroundColor(Color.theme.textColor)
+            } label: {
+                HStack {
+                    HStack(spacing: 10) {
+                        Image(systemName: "mail")
+                            .frame(width: 30, height: 30)
+                        Text("문의하기")
+                            .foregroundColor(Color.theme.textColor)
+                    }
+                    Spacer()
+                    chevron_right
                 }
-                Spacer()
-                chevron_right
+                .contentShape(Rectangle())
+                .padding()
+                
             }
-            .padding()
+            .buttonStyle(ListSelectionStyle())
+//            HStack {
+//                HStack(spacing: 10) {
+//                    Image(systemName: "v.circle")
+//                        .frame(width: 30, height: 30)
+//                    Text("버전 정보")
+//                        .foregroundColor(Color.theme.textColor)
+//                }
+//                Spacer()
+//                chevron_right
+//            }
+//            .padding()
         }
     }
 }

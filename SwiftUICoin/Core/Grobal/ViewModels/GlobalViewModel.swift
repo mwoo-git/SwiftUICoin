@@ -39,7 +39,7 @@ final class GlobalViewModel: ObservableObject {
     }
     
     private func commodities(globals: [GlobalModel]) {
-        // if 문으로 배열에 해당 범위가 있는지 체크하여 "Index out of range" 오류를 방지합니다.
+//         if 문으로 배열에 해당 범위가 있는지 체크하여 "Index out of range" 오류를 방지합니다.
         if 7 >= globals.startIndex && 13 < globals.endIndex {
             let list = globals[7...13].filter { $0.name != "Brent Oil" }
             self.commodities = Array(list)

@@ -14,26 +14,42 @@ struct SwiftUICoinApp: App {
     @StateObject private var monitor = NetworkMonitor()
     @State private var isNavigationBarHidden: Bool = true
     @AppStorage("isDarkMode") private var isDarkMode = false
+    @State private var showLaunchView = true
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                VStack {
-                    MyTabView()
-                        .navigationBarTitle("Hidden Title")
-                        .navigationBarHidden(self.isNavigationBarHidden)
-                        .onAppear {
-                            self.isNavigationBarHidden = true
+            ZStack {
+                NavigationView {
+                    VStack {
+                        MyTabView()
+                            .navigationBarTitle("Hidden Title")
+                            .navigationBarHidden(self.isNavigationBarHidden)
+                            .onAppear {
+                                self.isNavigationBarHidden = true
+                            }
+                        if !monitor.isConnected || monitor.showAlert {
+                            NetworkMissingView()
                         }
-                    if !monitor.isConnected || monitor.showAlert {
-                        NetworkMissingView()
                     }
                 }
+                .environmentObject(viewModel)
+                .environmentObject(monitor)
+                .navigationViewStyle(.stack)
+                .environment(\.colorScheme, isDarkMode ? .dark : .light)
+                
+                ZStack {
+                    if showLaunchView {
+                        LaunchView(showLaunchView: $showLaunchView)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    showLaunchView = false
+                                }
+                            }
+                            .transition(.move(edge: .leading))
+                    }
+                }
+                .zIndex(2.0)
             }
-            .environmentObject(viewModel)
-            .environmentObject(monitor)
-            .navigationViewStyle(.stack)
-            .environment(\.colorScheme, isDarkMode ? .dark : .light)
         }
     }
 }
