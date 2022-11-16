@@ -27,7 +27,9 @@ struct SortOptionView: View {
                     )
                     .cornerRadius(3)
                     .onTapGesture {
-                        viewModel.sortOption = .rank
+                        if viewModel.sortOption != .rank {
+                            viewModel.sortOption = .rank
+                        }
                         withAnimation(.easeInOut) {
                             proxy.scrollTo("MARKET_CAP", anchor: .topLeading)
                         }
@@ -45,7 +47,9 @@ struct SortOptionView: View {
                     )
                     .cornerRadius(3)
                     .onTapGesture {
-                        viewModel.sortOption = .priceChangePercentage24H
+                        if viewModel.sortOption != .priceChangePercentage24H {
+                            viewModel.sortOption = .priceChangePercentage24H
+                        }
                         withAnimation(.easeInOut) {
                             proxy.scrollTo("PRICE_UP", anchor: .topLeading)
                         }
@@ -63,7 +67,9 @@ struct SortOptionView: View {
                     )
                     .cornerRadius(3)
                     .onTapGesture {
-                        viewModel.sortOption = .priceChangePercentage24HReversed
+                        if viewModel.sortOption != .priceChangePercentage24HReversed {
+                            viewModel.sortOption = .priceChangePercentage24HReversed
+                        }
                         withAnimation(.easeInOut) {
                             proxy.scrollTo("PRICE_DOWN", anchor: .topLeading)
                         }
