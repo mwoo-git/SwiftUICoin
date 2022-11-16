@@ -20,14 +20,14 @@ struct HomeView: View {
             HomeCoinListView()
         }
         .background(Color.theme.background.ignoresSafeArea())
-        .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
-        .onAppear {
-            if viewModel.isDark {
-                isDarkMode  = true
-            } else {
-                isDarkMode = false
-            }
-        }
+        .environment(\.colorScheme, .dark)
+//        .onAppear {
+//            if viewModel.isDark {
+//                isDarkMode  = true
+//            } else {
+//                isDarkMode = false
+//            }
+//        }
     }
 }
 

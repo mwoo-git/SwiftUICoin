@@ -10,7 +10,7 @@ import SwiftUI
 struct HeadlineView: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") private var isDarkMode = true
     @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @State private var currentTab: Int = 0
     
@@ -28,14 +28,14 @@ struct HeadlineView: View {
             Spacer()
         }
         .background(Color.theme.background.ignoresSafeArea())
-        .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
-        .onAppear {
-            if viewModel.isDark {
-                isDarkMode  = true
-            } else {
-                isDarkMode = false
-            }
-        }
+        .environment(\.colorScheme, .dark)
+//        .onAppear {
+//            if viewModel.isDark {
+//                isDarkMode  = true
+//            } else {
+//                isDarkMode = false
+//            }
+//        }
     }
 }
 

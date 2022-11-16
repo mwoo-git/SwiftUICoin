@@ -12,8 +12,8 @@ struct SwiftUICoinApp: App {
 
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var monitor = NetworkMonitor()
-    @State private var isNavigationBarHidden: Bool = true
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @State private var isNavigationBarHidden = true
+    @AppStorage("isDarkMode") private var isDarkMode = true
     @State private var showLaunchView = true
     
     var body: some Scene {
@@ -35,7 +35,8 @@ struct SwiftUICoinApp: App {
                 .environmentObject(viewModel)
                 .environmentObject(monitor)
                 .navigationViewStyle(.stack)
-                .environment(\.colorScheme, isDarkMode ? .dark : .light)
+//                .environment(\.colorScheme, isDarkMode ? .dark : .light)
+                .environment(\.colorScheme, .dark)
                 
                 ZStack {
                     if showLaunchView {

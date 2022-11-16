@@ -74,6 +74,7 @@ extension WatchCoinListView {
                             .onAppear {
                                 viewModel.loadWatchlist()
                             }
+                            .buttonStyle(ListSelectionStyle())
                     } else {
                         EditCoinRowView(coin: coin, backup: nil)
                     }
@@ -98,6 +99,7 @@ extension WatchCoinListView {
                             .onAppear {
                                 viewModel.loadWatchlist()
                             }
+                            .buttonStyle(ListSelectionStyle())
                     } else {
                         EditCoinRowView(coin: nil, backup: backup)
                     }

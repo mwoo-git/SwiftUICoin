@@ -13,7 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
-    var email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
+    var email = SupportEmailModel(toAddress: "blockwide.ios@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
     
     var body: some View {
         VStack(spacing: 0) {
@@ -25,11 +25,12 @@ struct SettingsView: View {
         .navigationBarHidden(true)
         .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
         .onAppear {
-            if isDarkMode {
-                viewModel.isDark = true
-            } else {
-                viewModel.isDark = false
-            }
+//            if isDarkMode {
+//                viewModel.isDark = true
+//            } else {
+//                viewModel.isDark = false
+//            }
+            isDarkMode = true
         }
     }
 }
@@ -43,6 +44,18 @@ struct SettingView_Previews: PreviewProvider {
 private extension SettingsView {
     var settingHeader: some View {
         HStack {
+            
+            Spacer()
+            Text("더보기")
+                .font(.subheadline)
+            Spacer()
+//            Button {
+//                viewModel.isDark.toggle()
+//            } label: {
+//                IconView(iconName: viewModel.isDark ? "moon.fill" : "sun.min.fill")
+//            }
+        }
+        .overlay(
             IconView(iconName: "chevron.left")
                 .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
@@ -53,16 +66,9 @@ private extension SettingsView {
                     }
                 }
                 .contentShape(Rectangle())
-            Spacer()
-            Text("더보기")
-                .font(.headline)
-            Spacer()
-            Button {
-                viewModel.isDark.toggle()
-            } label: {
-                IconView(iconName: viewModel.isDark ? "moon.fill" : "sun.min.fill")
-            }
-        }
+            , alignment: .leading
+        )
+        .padding(.vertical)
     }
     
     var chevron_right: some View {

@@ -14,7 +14,7 @@ struct GlobalDetailView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TradingView(symbol: symbol)
+            GlobalTradingView(symbol: symbol)
             header
         }
         .background(Color.theme.background.ignoresSafeArea())
@@ -31,14 +31,20 @@ struct GlobalDetailView_Previews: PreviewProvider {
 private extension GlobalDetailView {
     var header: some View {
         HStack(spacing: 0) {
-            BackButtonView()
             HStack {
+                Spacer()
                 Text(name)
                     .bold()
+                Spacer()
             }
             Spacer()
         }
+        .overlay(
+            BackButtonView()
+            , alignment: .leading
+        )
         .background(Color.theme.background.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
+        .padding(.vertical)
     }
 }

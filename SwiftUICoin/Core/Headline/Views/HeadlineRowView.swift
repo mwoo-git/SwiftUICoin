@@ -77,7 +77,7 @@ struct MenuButtonView: View {
             }
             
             Button(action: {
-                let email = SupportEmailModel(toAddress: "hanulbom@gmail.com", subject: "뉴스 문제 신고", body: """
+                let email = SupportEmailModel(toAddress: "blockwide.ios@gmail.com", subject: "뉴스 문제 신고", body: """
                 [\(author)] \(title)
                 
                 """)
