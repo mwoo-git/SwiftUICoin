@@ -11,6 +11,7 @@ import SwiftUI
 struct SwiftUICoinApp: App {
 
     @StateObject private var viewModel = HomeViewModel()
+    @StateObject var globalViewModel = GlobalViewModel()
     @StateObject private var monitor = NetworkMonitor()
     @State private var isNavigationBarHidden = true
     @AppStorage("isDarkMode") private var isDarkMode = true
@@ -33,6 +34,7 @@ struct SwiftUICoinApp: App {
                     }
                 }
                 .environmentObject(viewModel)
+                .environmentObject(globalViewModel)
                 .environmentObject(monitor)
                 .navigationViewStyle(.stack)
 //                .environment(\.colorScheme, isDarkMode ? .dark : .light)

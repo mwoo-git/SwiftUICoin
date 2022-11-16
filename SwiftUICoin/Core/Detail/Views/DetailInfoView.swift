@@ -52,8 +52,8 @@ struct DetailInfoView: View {
                                     barCollapsingEnabled: true
                                 )
                             )
-                                .preferredBarAccentColor(isDarkMode ? .black : .white)
-                                .preferredControlAccentColor(isDarkMode ? .white : .black)
+                                .preferredBarAccentColor(.black)
+                                .preferredControlAccentColor(.white)
                                 .dismissButtonStyle(.done)
                         }
                         

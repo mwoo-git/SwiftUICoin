@@ -11,7 +11,7 @@ import SwiftUIPullToRefresh
 struct HomeCoinListView: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
-    @StateObject var globalViewModel = GlobalViewModel()
+    @EnvironmentObject var globalViewModel: GlobalViewModel
     @State private var scrollViewOffset: CGFloat = 0
     @State private var startOffset: CGFloat = 0
     

@@ -23,15 +23,14 @@ struct SettingsView: View {
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
-        .environment(\.colorScheme, viewModel.isDark ? .dark : .light)
-        .onAppear {
+        .environment(\.colorScheme, .dark)
+//        .onAppear {
 //            if isDarkMode {
 //                viewModel.isDark = true
 //            } else {
 //                viewModel.isDark = false
 //            }
-            isDarkMode = true
-        }
+//        }
     }
 }
 

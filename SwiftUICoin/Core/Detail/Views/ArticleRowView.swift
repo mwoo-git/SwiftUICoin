@@ -22,6 +22,35 @@ struct ArticleRowView: View {
         .frame(height: 140)
         .foregroundColor(Color.theme.accent)
     }
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: 0) {
+//            HStack {
+//                Text("블록미디어")
+//                    .font(.footnote)
+//            }
+//            .padding(.bottom, 10)
+//            Text(article.title)
+//                .font(.headline)
+//                .lineLimit(2)
+//                .foregroundColor(Color.theme.textColor)
+//                .multilineTextAlignment(.leading)
+//            Spacer()
+//            HStack {
+//                Text(article.cleanDate)
+//                    .font(.footnote)
+//                Spacer()
+//            }
+//            .overlay(
+//                MenuButtonView(url: article.url, author: "블록미디어", title: article.title)
+//                    .offset(x: 13)
+//                , alignment: .trailing
+//            )
+//        }
+//        .contentShape(Rectangle())
+//        .padding()
+//        .frame(height: 140)
+//        .foregroundColor(Color.theme.accent)
+//    }
 }
 
 struct AtricleView_Previews: PreviewProvider {

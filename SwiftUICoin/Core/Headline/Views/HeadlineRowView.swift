@@ -22,7 +22,7 @@ struct HeadlineRowView: View {
                     .cornerRadius(5)
                 Text(headline.cleanAuthor)
                     .font(.footnote)
-                    .padding(.leading, 5)
+                    .padding(.leading, 5)   
             }
             .padding(.bottom, 10)
             Text(headline.title)
