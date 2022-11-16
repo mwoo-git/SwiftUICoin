@@ -40,12 +40,7 @@ struct SwiftUICoinApp: App {
                 ZStack {
                     if showLaunchView {
                         LaunchView(showLaunchView: $showLaunchView)
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    showLaunchView = false
-                                }
-                            }
-                            .transition(.move(edge: .leading))
+//                            .transition(.move(edge: .leading))
                     }
                 }
                 .zIndex(2.0)

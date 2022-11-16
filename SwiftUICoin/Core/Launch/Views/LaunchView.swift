@@ -19,6 +19,13 @@ struct LaunchView: View {
                 .font(.title)
                 .bold()
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    showLaunchView = false
+                }
+            }
+        }
     }
 }
 
