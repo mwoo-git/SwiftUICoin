@@ -77,8 +77,8 @@ extension DetailStatsView {
                                 barCollapsingEnabled: true
                             )
                         )
-                            .preferredBarAccentColor(isDarkMode ? .black : .white)
-                            .preferredControlAccentColor(isDarkMode ? .white : .black)
+                            .preferredBarAccentColor(.black)
+                            .preferredControlAccentColor(.white)
                             .dismissButtonStyle(.done)
                     }
                     Image(systemName: "arrow.up.forward.square")
