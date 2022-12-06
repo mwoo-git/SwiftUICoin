@@ -42,14 +42,8 @@ private extension HeadlinePlaceholderView {
     var row: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                KFImage(URL(string: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true"))
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 15, height: 15)
-                    .cornerRadius(5)
-                Text("한국경제TV...")
+                Text("한국경제TV....")
                     .font(.footnote)
-                    .padding(.leading, 5)
             }
             .padding(.bottom, 10)
             Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때'부자아빠' 기요사키, 달러 폭락 예언..")

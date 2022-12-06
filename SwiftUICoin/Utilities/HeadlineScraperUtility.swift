@@ -36,7 +36,7 @@ class HeadlineScraperUtility {
                     let date = try? document.select("div").select("div.news_info").select("div.info_group").select("span").text()
                     let author = try? document.select("div").select("div.news_info").select("div.info_group").select("a.info.press").text()
                     let authorImageUrl = try? document.select("div").select("div.news_info").select("div.info_group").select("a.info.press").select("span").select("img").attr("src")
-                    
+                    print(authorImageUrl)
                     if let url = url,
                        let title = title,
                        let date = date,
