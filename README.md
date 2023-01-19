@@ -86,7 +86,7 @@ SwiftUICoin
 |**[MERGE]**|머지|
 |**[MOVE/RENAME]**|프로젝트 내 파일, 코드 이동 및 이름 변경|
 
-### 🧑‍💻 Connect
+### 🧑‍💻 Contact
 
 모든 건의, 문의 사항은 blockwide.ios@gmail.com 을 통해 받겠습니다.
 
