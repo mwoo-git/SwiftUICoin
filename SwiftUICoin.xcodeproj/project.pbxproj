@@ -57,6 +57,7 @@
 		73771CCE297949E400539C09 /* 001.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC9297949E400539C09 /* 001.png */; };
 		73771CCF297949E400539C09 /* 005.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CCA297949E400539C09 /* 005.png */; };
 		73771CD329794E4900539C09 /* 007.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD229794E4900539C09 /* 007.png */; };
+		73771CD5297955E400539C09 /* 008.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD4297955E400539C09 /* 008.JPG */; };
 		739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D728F346E7005348E5 /* CoinBackupDataService.swift */; };
 		739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */; };
 		739A39DD28F4293A005348E5 /* StatusCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39DC28F4293A005348E5 /* StatusCodeModel.swift */; };
@@ -176,6 +177,7 @@
 		73771CC9297949E400539C09 /* 001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 001.png; sourceTree = "<group>"; };
 		73771CCA297949E400539C09 /* 005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 005.png; sourceTree = "<group>"; };
 		73771CD229794E4900539C09 /* 007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 007.png; sourceTree = "<group>"; };
+		73771CD4297955E400539C09 /* 008.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 008.JPG; sourceTree = "<group>"; };
 		739A39D728F346E7005348E5 /* CoinBackupDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBackupDataService.swift; sourceTree = "<group>"; };
 		739A39DA28F34840005348E5 /* CoinBackup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinBackup.xcdatamodel; sourceTree = "<group>"; };
 		739A39DC28F4293A005348E5 /* StatusCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeModel.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				73771CC6297949E400539C09 /* 004.png */,
 				73771CCA297949E400539C09 /* 005.png */,
 				73771CD229794E4900539C09 /* 007.png */,
+				73771CD4297955E400539C09 /* 008.JPG */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73771CD5297955E400539C09 /* 008.JPG in Resources */,
 				73771CCC297949E400539C09 /* 002.png in Resources */,
 				73771CCD297949E400539C09 /* 003.png in Resources */,
 				73771CC529786DC200539C09 /* 1.png in Resources */,

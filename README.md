@@ -72,4 +72,15 @@ SwiftUICoin
               ...
 ```
 
+### 🧑‍💻 Author
+
+<div align="center"> 
+  
+| [민우](https://github.com/mwoo-git) |
+|:---:|
+|<img width="120" alt="알로라" src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/008.png">|
+  
+</div>
+
+<br/>
 
