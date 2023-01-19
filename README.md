@@ -74,7 +74,11 @@ SwiftUICoin
 
 ### 🧑‍💻 Connect
 
-모든 건의, 문의 사항은 blockwide.ios@gmail.com 을 통해 받겠습니다. 
+모든 건의, 문의 사항은 blockwide.ios@gmail.com 을 통해 받겠습니다.
+
+현재 iOS 개발자 취업 준비 중입니다. 
+
+저를 채용하는데 관심이 있으시다면 연락주세요~!
 
 <br/>
 
