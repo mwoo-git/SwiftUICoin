@@ -28,7 +28,6 @@
 * Combine
 * MVVM
 * Github
-<br/>
 
 ### 🎁 Library
 
@@ -38,7 +37,6 @@
 | Kingfisher        | `7.3.2` |
 | BetterSafariView  | `-----` |
 | SwiftUIPullToRefresh| `1.1.8` |
-<br/>
 
 ### 🔀 Git branch
 
@@ -47,7 +45,6 @@ main(default)
 
 develop
 ```
-<br/>
 
 ### 🗂 Folder Structure
 
@@ -73,6 +70,5 @@ SwiftUICoin
               └── 📁 Setting
               ...
 ```
-<br/>
 
 
