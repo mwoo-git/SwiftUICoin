@@ -10,6 +10,7 @@
 
 ### :sparkles: Skills & Tech Stack
 * Swift UI
+* MVVM
 * Github
 
 ### 🎁 Library
@@ -29,5 +30,31 @@ main(default)
 develop
 
 ```
+
+### 🗂 Folder Structure
+
+```
+SwiftUICoin
+  |
+  └── SwiftUICoin
+          |── 🗂 Utilities
+          |── 🗂 Extensions
+          |── 🗂 Services
+          |── 🗂 Models
+          └── 🗂 Core
+              │── 📁 Components
+              │── 📁 Launch
+              │── 📁 Home
+              |      │── 📁 Views
+              |      │── 📁 ViewModels
+              │── 📁 Global
+              │── 📁 WatchList
+              │── 📁 Search
+              │── 📁 Detail
+              │── 📁 Headline
+              └── 📁 Setting
+              ...
+```
+
 
 
