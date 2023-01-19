@@ -28,7 +28,6 @@
 main(default)
 
 develop
-
 ```
 
 ### 🗂 Folder Structure
