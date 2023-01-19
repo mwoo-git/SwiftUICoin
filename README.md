@@ -10,6 +10,7 @@
 
 ### :sparkles: Skills & Tech Stack
 * Swift UI
+* Combine
 * MVVM
 * Github
 
