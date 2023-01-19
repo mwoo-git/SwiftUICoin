@@ -4,6 +4,11 @@
   </a>
 </p>
 
+### 블록 와이드
+블록 와이드는 흩어져있는 암호화폐 정보를 한 곳에 모아서 보여주는 어플리케이션입니다. 
+쉽고 간편한 블록 와이드를 사용해보세요!  
+
+
 ### 🎆 Preview
 |<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/001.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/002.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/003.png" width="300">|
 |:-:|:-:|:-:|
