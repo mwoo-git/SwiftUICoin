@@ -74,7 +74,7 @@ SwiftUICoin
 
 ### 🧑‍💻 Connect
 
-blockwide.ios@gmail.com
+모든 건의, 문의 사항은 blockwide.ios@gmail.com 을 통해 받겠습니다. 
 
 <br/>
 
