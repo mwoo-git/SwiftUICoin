@@ -19,14 +19,14 @@
 | SwiftSoup         | `2.4.3` |
 | Kingfisher        | `7.3.2` |
 | BetterSafariView  | `-----` |
-| SwiftUIPullToRefresh| `-----` |
+| SwiftUIPullToRefresh| `1.1.8` |
 
 ### 🔀 Git branch
 
 ```
 main(default)
 
-develop(default)
+develop
 
 ```
 
