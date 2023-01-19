@@ -27,6 +27,7 @@
 ### :sparkles: Skills & Tech Stack
 * Swift UI
 * Combine
+* Core Data
 * MVVM
 * Github
 
