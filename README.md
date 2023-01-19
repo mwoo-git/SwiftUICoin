@@ -5,9 +5,9 @@
 </p>
 
 ### 🎆 Preview
-|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/001.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/002.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/003.png" width="300" height="500">|
+|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/001.png" width="300" height="450">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/002.png" width="300" height="450">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/003.png" width="300" height="450">|
 |:-:|:-:|:-:|
-|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/004.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/005.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/006.png" width="300" height="500">|
+|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/004.png" width="300" height="450">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/005.png" width="300" height="450">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/006.png" width="300" height="450">|
 <br/>
 
 ### 🛠 Development Environment
