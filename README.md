@@ -4,12 +4,20 @@
   </a>
 </p>
 
+### 🎆 Preview
+|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/001.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/002.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/003.png" width="300" height="500">|
+|:-:|:-:|:-:|
+|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/004.png" width="300" height="500">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/005.png" width="300" height="500">|
+<br/>
+
 ### 🛠 Development Environment
 
 <img width="77" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://img.shields.io/badge/iOS-14.0+-silver"> <img width="95" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://img.shields.io/badge/Xcode-13.2-blue">
 
 ### :sparkles: Skills & Tech Stack
 * Swift UI
+* Combine
+* MVVM
 * Github
 
 ### 🎁 Library
