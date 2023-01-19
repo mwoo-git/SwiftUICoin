@@ -10,8 +10,6 @@
 
 ### :sparkles: Skills & Tech Stack
 * Swift UI
-* Combine
-* MVVM
 * Github
 
 ### 🎁 Library
@@ -55,6 +53,5 @@ SwiftUICoin
               └── 📁 Setting
               ...
 ```
-
 
 
