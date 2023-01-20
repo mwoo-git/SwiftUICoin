@@ -3,8 +3,11 @@
     <img src = "https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/1.png">
   </a>
   
+  </p>
+
+<div align="center"> 
   [<img width="220" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/009.png">](https://apps.apple.com/us/app/%EB%B8%94%EB%A1%9D%EC%99%80%EC%9D%B4%EB%93%9C/id6444627253)
-</p>
+</div>
 
 ### 블록 와이드
 블록 와이드는 흩어져있는 암호화폐 정보를 한 곳에 모아서 보여주는 어플리케이션입니다.
