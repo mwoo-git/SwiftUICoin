@@ -41,7 +41,6 @@
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
 		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
 		734A1E2C28EF421800AF0E0F /* HeadlinePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */; };
-		734A1E2E28F07DB400AF0E0F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A1E2D28F07DB400AF0E0F /* View.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
 		7360D03E2904582800F06499 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03D2904582800F06499 /* SettingsView.swift */; };
@@ -73,7 +72,6 @@
 		739A39F328F86124005348E5 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39F228F86124005348E5 /* DetailInfoView.swift */; };
 		739A39F528FAA452005348E5 /* NetworkMornitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39F428FAA451005348E5 /* NetworkMornitor.swift */; };
 		739A39F728FAA867005348E5 /* NetworkMissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39F628FAA867005348E5 /* NetworkMissingView.swift */; };
-		739A39F928FB2A86005348E5 /* ExchangeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39F828FB2A84005348E5 /* ExchangeOptionView.swift */; };
 		73B9562028DDABCE00DD4A9F /* ArticleDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9561F28DDABCE00DD4A9F /* ArticleDataService.swift */; };
 		73B9562228DDAC7100DD4A9F /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562128DDAC7100DD4A9F /* ArticleModel.swift */; };
 		73B9562428DDAF3700DD4A9F /* ArticleScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */; };
@@ -119,7 +117,6 @@
 		73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241B290C32B2008C8172 /* USAScraperUtility.swift */; };
 		73FF241E291037F7008C8172 /* GlobalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241D291037F4008C8172 /* GlobalDetailView.swift */; };
 		73FF242029104B82008C8172 /* GlobalPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */; };
-		73FF242229117377008C8172 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF242129117376008C8172 /* SafariView.swift */; };
 		73FF242429118791008C8172 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF242329118791008C8172 /* UINavigationController.swift */; };
 		73FF242729118F00008C8172 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 73FF242629118F00008C8172 /* BetterSafariView */; };
 /* End PBXBuildFile section */
@@ -161,7 +158,6 @@
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinePlaceholderView.swift; sourceTree = "<group>"; };
-		734A1E2D28F07DB400AF0E0F /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7360D03D2904582800F06499 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -194,7 +190,6 @@
 		739A39F228F86124005348E5 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		739A39F428FAA451005348E5 /* NetworkMornitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMornitor.swift; sourceTree = "<group>"; };
 		739A39F628FAA867005348E5 /* NetworkMissingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMissingView.swift; sourceTree = "<group>"; };
-		739A39F828FB2A84005348E5 /* ExchangeOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOptionView.swift; sourceTree = "<group>"; };
 		73B9561F28DDABCE00DD4A9F /* ArticleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataService.swift; sourceTree = "<group>"; };
 		73B9562128DDAC7100DD4A9F /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleScraperUtility.swift; sourceTree = "<group>"; };
@@ -237,7 +232,6 @@
 		73FF241B290C32B2008C8172 /* USAScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USAScraperUtility.swift; sourceTree = "<group>"; };
 		73FF241D291037F4008C8172 /* GlobalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDetailView.swift; sourceTree = "<group>"; };
 		73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlaceHolderView.swift; sourceTree = "<group>"; };
-		73FF242129117376008C8172 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		73FF242329118791008C8172 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -309,7 +303,6 @@
 				733517ED28DCC4AA00A9DF37 /* String.swift */,
 				73B9563128DF03BC00DD4A9F /* UIColor.swift */,
 				7334472F28E4887200F1719E /* UIImage.swift */,
-				734A1E2D28F07DB400AF0E0F /* View.swift */,
 				73FF242329118791008C8172 /* UINavigationController.swift */,
 			);
 			path = Extensions;
@@ -395,7 +388,6 @@
 				739A39F628FAA867005348E5 /* NetworkMissingView.swift */,
 				73BB738D28FC533700BB7FEA /* ShareButtonView.swift */,
 				7360D03F2904764A00F06499 /* SettingsButtonView.swift */,
-				73FF242129117376008C8172 /* SafariView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -489,6 +481,26 @@
 				73771CD4297955E400539C09 /* 008.JPG */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		73771CD9297BC37D00539C09 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */,
+				739A39F428FAA451005348E5 /* NetworkMornitor.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		73771CDA297BC38700539C09 /* Scraper */ = {
+			isa = PBXGroup;
+			children = (
+				73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */,
+				731A036828ECC1F800B1BC39 /* HeadlineScraperUtility.swift */,
+				73BB739328FD423A00BB7FEA /* TrendScraperUtility.swift */,
+				73FF241B290C32B2008C8172 /* USAScraperUtility.swift */,
+			);
+			path = Scraper;
 			sourceTree = "<group>";
 		};
 		73A6EDF129006F1E00847A91 /* Setting */ = {
@@ -594,7 +606,6 @@
 				739A39EA28F750D8005348E5 /* LowMoversView.swift */,
 				73B9563328DF064700DD4A9F /* CoinWebView.swift */,
 				73B9562F28DEE86200DD4A9F /* ArticleWebView.swift */,
-				739A39F828FB2A84005348E5 /* ExchangeOptionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -626,12 +637,8 @@
 		73E6BEE228D1B3E30041A7C3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				73E6BEE328D1B4190041A7C3 /* NetworkingManager.swift */,
-				73B9562328DDAF3700DD4A9F /* ArticleScraperUtility.swift */,
-				731A036828ECC1F800B1BC39 /* HeadlineScraperUtility.swift */,
-				739A39F428FAA451005348E5 /* NetworkMornitor.swift */,
-				73BB739328FD423A00BB7FEA /* TrendScraperUtility.swift */,
-				73FF241B290C32B2008C8172 /* USAScraperUtility.swift */,
+				73771CDA297BC38700539C09 /* Scraper */,
+				73771CD9297BC37D00539C09 /* Network */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -785,7 +792,6 @@
 				73FF2413290BE7D8008C8172 /* GlobalModel.swift in Sources */,
 				73B9563028DEE86200DD4A9F /* ArticleWebView.swift in Sources */,
 				731A036528ECBABD00B1BC39 /* HeadlineViewModel.swift in Sources */,
-				734A1E2E28F07DB400AF0E0F /* View.swift in Sources */,
 				73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */,
 				73D7175B28DB3E930081CB2D /* StatisticModel.swift in Sources */,
 				736B40E829254838008BAB64 /* GlobalTradingView.swift in Sources */,
@@ -797,7 +803,6 @@
 				7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */,
 				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				739A39F528FAA452005348E5 /* NetworkMornitor.swift in Sources */,
-				73FF242229117377008C8172 /* SafariView.swift in Sources */,
 				73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */,
 				7334472828E2653F00F1719E /* BackButtonView.swift in Sources */,
 				73C71C7228D990CA0067167F /* DetailViewModel.swift in Sources */,
@@ -843,7 +848,6 @@
 				73E6BEE828D1EF290041A7C3 /* SearchView.swift in Sources */,
 				731A035628EB5DB900B1BC39 /* ArticlePlaceholderView.swift in Sources */,
 				73E6BEE628D1D9AC0041A7C3 /* SearchBarView.swift in Sources */,
-				739A39F928FB2A86005348E5 /* ExchangeOptionView.swift in Sources */,
 				7334472228E2048E00F1719E /* WatchlistContainer.xcdatamodeld in Sources */,
 				73B9563628DF09CC00DD4A9F /* WebView.swift in Sources */,
 				731086F428CF1E9100283FD3 /* PreviewProvider.swift in Sources */,

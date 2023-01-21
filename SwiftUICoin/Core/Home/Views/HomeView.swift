@@ -11,8 +11,8 @@ struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @State private var showMenu: Bool = false
-    @State private var isDark: Bool = false
+    @State private var showMenu = false
+    @State private var isDark = false
     
     var body: some View {
         VStack(spacing: 0) {

@@ -3,7 +3,7 @@
 ////  SwiftUICoin
 ////
 ////  Created by Woo Min on 2022/09/22.
-////
+////  라인 차트를 보여주는 뷰입니다. 사용 하지 않는 뷰
 //
 //import SwiftUI
 //

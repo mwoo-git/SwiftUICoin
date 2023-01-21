@@ -11,7 +11,7 @@ import Combine
 class HeadlineViewModel: ObservableObject {
     
     @Published var articles: [HeadlineModel] = []
-    @Published var isRefreshing: Bool = false
+    @Published var isRefreshing = false
     @Published var keyword: String
     
     private var headlineDataService: HeadlineDataService

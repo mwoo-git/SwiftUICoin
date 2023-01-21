@@ -13,7 +13,7 @@ final class GlobalViewModel: ObservableObject {
     @Published var indices: [GlobalModel] = []
     @Published var commodities: [GlobalModel] = []
     @Published var stocks: [GlobalModel] = []
-    @Published var isRefreshing: Bool = false
+    @Published var isRefreshing = false
     
     private let usaDataService = GlobalDataService()
     private var cancellables = Set<AnyCancellable>()
