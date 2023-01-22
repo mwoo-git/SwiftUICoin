@@ -45,8 +45,8 @@ struct HomeView_Previews: PreviewProvider {
 extension HomeView {
     private var homeHeader: some View {
         HStack {
-            Text("마켓")
-                .font(.title2)
+            Text("BlockWide")
+                .font(.title3)
                 .bold()
                 .padding(.leading)
             Spacer()

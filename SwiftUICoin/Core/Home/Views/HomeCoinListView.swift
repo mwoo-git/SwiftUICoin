@@ -36,7 +36,7 @@ struct HomeCoinListView: View {
                 } else {
                     LazyVStack(alignment: .leading) {
                         GlobalScrollView(viewModel: globalViewModel)
-                        Text("코인 순위")
+                        Text("코인 리스트")
                             .font(.title3)
                             .bold()
                             .padding()

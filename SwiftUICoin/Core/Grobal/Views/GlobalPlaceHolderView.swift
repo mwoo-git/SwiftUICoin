@@ -13,23 +13,24 @@ struct GlobalPlaceholderView: View {
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 1) {
                 Text("나스닥 100")
-          
-                
-                Text("11,191.630")
-                    .font(.title2)
                     .bold()
-                HStack {
-                    Text("▾214.27")
-                    Text("-1.88%")
-                }
-                .font(.subheadline)
+                Text("-1.88%000")
+                    .bold()
+                Text("-1.88%0000")
+                    .bold()
+                    .padding(.trailing, 11)
+                    .padding(.vertical, 3)
+                    .font(.footnote)
+                    .cornerRadius(5)
             }
+            .font(.subheadline)
+            .contentShape(Rectangle())
+            .padding(.vertical, 10)
             Spacer()
         }
-        .padding(.vertical, 10)
-        .padding(.horizontal)
+        .frame(width: 110)
         .redacted(reason: .placeholder)
         .opacity(opacity)
         .onAppear {

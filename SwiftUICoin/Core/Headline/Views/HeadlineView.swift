@@ -112,7 +112,7 @@ extension HeadlineView {
     private var header: some View {
         HStack {
             Text("헤드라인")
-                .font(.title2)
+                .font(.title3)
                 .bold()
                 .padding(.leading)
             Spacer()
