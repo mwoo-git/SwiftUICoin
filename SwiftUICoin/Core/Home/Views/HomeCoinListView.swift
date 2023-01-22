@@ -35,12 +35,7 @@ struct HomeCoinListView: View {
                     }
                 } else {
                     LazyVStack(alignment: .leading) {
-                        Text("주요 지수")
-                            .font(.title3)
-                            .bold()
-                            .padding(.horizontal)
-                            .padding(.top)
-                        GlobalGridView(viewModel: globalViewModel)
+                        GlobalScrollView(viewModel: globalViewModel)
                         Text("코인 순위")
                             .font(.title3)
                             .bold()

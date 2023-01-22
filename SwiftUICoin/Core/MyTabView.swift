@@ -23,33 +23,33 @@ struct MyTabView: View {
         
         TabView(selection: $selection) {
             
-            WatchlistView()
-                .tabItem {
-                    Image(systemName: selection == 0 ? "heart.fill" : "heart")
-//                        .environment(\.symbolVariants, .none)
-                    Text("Watchlist")
-                }
-                .environmentObject(viewModel)
-                .navigationTitle("")
-                .navigationBarHidden(self.isNavigationBarHidden)
-                .onAppear(perform: {
-                    self.isNavigationBarHidden = true
-                            viewModel.addSubscribers()
-                })
-                .tag(0)
-            
+//            WatchlistView()
+//                .tabItem {
+//                    Image(systemName: selection == 0 ? "heart.fill" : "heart")
+////                        .environment(\.symbolVariants, .none)
+//                    Text("Watchlist")
+//                }
+//                .environmentObject(viewModel)
+//                .navigationTitle("")
+//                .navigationBarHidden(self.isNavigationBarHidden)
+//                .onAppear(perform: {
+//                    self.isNavigationBarHidden = true
+//                            viewModel.addSubscribers()
+//                })
+//                .tag(0)
+//
             HomeView()
                 .tabItem {
-                    Image(systemName: selection  == 1 ? "chart.bar.fill" : "chart.bar")
+                    Image(systemName: selection  == 0 ? "house.fill" : "house")
 //                        .environment(\.symbolVariants, .none)
-                    Text("Markets")
+                    Text("Home")
                 }
                 .navigationTitle("")
                 .navigationBarHidden(self.isNavigationBarHidden)
                 .onAppear(perform: {
                     self.isNavigationBarHidden = true
                 })
-                .tag(1)
+                .tag(0)
             
             HeadlineView()
                 .tabItem {
@@ -62,7 +62,7 @@ struct MyTabView: View {
                 .onAppear(perform: {
                     self.isNavigationBarHidden = true
                 })
-                .tag(2)
+                .tag(1)
             
            
             

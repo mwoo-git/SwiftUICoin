@@ -33,9 +33,45 @@ struct GlobalItemView: View {
     }
 }
 
+struct GlobalItemView2: View {
+    
+    let global: GlobalModel
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 1) {
+                Text(global.nameKR)
+                    .bold()
+                Text(global.price)
+                    .bold()
+                Text(global.priceChangePercentage)
+                    .bold()
+                    .padding(.trailing, 11)
+                    .padding(.leading, 8)
+                    .padding(.vertical, 3)
+                    .font(.footnote)
+                    .foregroundColor(Color.white)
+                    .background(
+                        global.priceChangePercentage.contains("+") ? Color.theme.globalItemGreenColor : Color.theme.red
+                    )
+                    .cornerRadius(5)
+            }
+            .font(.subheadline)
+            .contentShape(Rectangle())
+            .padding(.vertical, 10)
+            Spacer()
+        }
+        .frame(width: 110)
+    }
+}
+
 struct GlobalItemView_Previews: PreviewProvider {
     static var previews: some View {
-        GlobalItemView(global: dev.global)
-            .previewLayout(.sizeThatFits)
+        Group {
+            GlobalItemView(global: dev.global)
+                .previewLayout(.sizeThatFits)
+            GlobalItemView2(global: dev.global)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

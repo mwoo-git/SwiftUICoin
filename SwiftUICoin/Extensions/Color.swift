@@ -31,6 +31,7 @@ struct ColorTheme {
     let textColor = Color("TextColor")
     let openseaColor = Color("OpenSeaColor")
     let listSelectionColor = Color("ListSelectionColor")
+    let globalItemGreenColor = Color("GlobalItemGreenColor")
 }
 
 struct LaunchTheme {

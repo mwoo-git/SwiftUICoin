@@ -24,7 +24,6 @@ class ArticleScraperUtility {
                     let date = try? document.select("div.post-content").select("div.post-meta.vcard").select("p").select("span").text()
                     let author = try? document.select("div.post-content").select("div.post-meta.vcard").select("p").select("a.url.fn").text()
                     let imageUrl = try? document.select("div.header").select("a").select("img").attr("src")
-                    print(imageUrl)
                     if let url = url,
                        let title = title,
                        let date = date,

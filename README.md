@@ -55,6 +55,8 @@ SwiftUICoin
   |
   └── SwiftUICoin
           |── 🗂 Utilities
+          |   │── 📁 Scraper
+          |   └── 📁 Network
           |── 🗂 Extensions
           |── 🗂 Services
           |── 🗂 Models
@@ -63,7 +65,7 @@ SwiftUICoin
               │── 📁 Launch
               │── 📁 Home
               |      │── 📁 Views
-              |      │── 📁 ViewModels
+              |      └── 📁 ViewModels
               │── 📁 Global
               │── 📁 WatchList
               │── 📁 Search

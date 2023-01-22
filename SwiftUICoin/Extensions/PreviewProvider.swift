@@ -21,7 +21,7 @@ class DeveloperPreview {
     
     private init() { }
     
-    let global = GlobalModel(name: "나스닥 100", price: "11,191.63", priceChange: "▾214.27", priceChangePercentage: "-1.88%")
+    let global = GlobalModel(name: "S&P500 선물", price: "11,191.63", priceChange: "▾214.27", priceChangePercentage: "-1.88%")
     
     let headline = HeadlineModel(url: "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202210040046&amp;t=NN", title: "'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때", date: "17시간 전", author: "한국경제TV", authorImageUrl: "https://search.pstatic.net/common/?src=https%3A%2F%2Fmimgnews.pstatic.net%2Fimage%2Fupload%2Foffice_logo%2F215%2F2018%2F09%2F18%2Flogo_215_18_20180918133718.png&type=f54_54&expire=24&refresh=true")
     

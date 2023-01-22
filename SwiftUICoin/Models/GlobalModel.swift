@@ -33,7 +33,7 @@ struct GlobalModel: Codable, Identifiable {
         case "Nasdaq":
             return "나스닥"
         case "Dollar Index":
-            return "미국 달러 지수"
+            return "달러 지수"
         case "Crude Oil WTI":
             return "WTI"
         case "Natural Gas":
