@@ -63,6 +63,11 @@ struct HomeCoinListView: View {
                     globalViewModel.fetchGlobalList()
                 }
             }
+            .onChange(of: viewModel.sortOption) { _ in
+                if viewModel.sortOption == .favorite {
+                    proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
+                }
+            }
         }
     }
 }
@@ -74,9 +79,9 @@ struct AllCoinListView_Previews: PreviewProvider {
     }
 }
 
-extension HomeCoinListView {
+private extension HomeCoinListView {
     
-    private var allCoinList: some View {
+    var allCoinList: some View {
         LazyVStack(pinnedViews: [.sectionHeaders]) {
             Section(header: VStack(spacing: 0) {
                 SortOptionView()
@@ -84,23 +89,27 @@ extension HomeCoinListView {
                 if viewModel.status == .status429 || viewModel.status == .status500 {
                     StatusErrorView()
                 }
-                if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
-                    ForEach(viewModel.backupCoins) { backup in
-                        NavigationLink(
-                            destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
-                            label: {
-                                CoinRowView(coin: nil, backup: backup)
-                            })
-                            .buttonStyle(ListSelectionStyle())
-                    }
+                if viewModel.sortOption == .favorite {
+                    WatchCoinListView()
                 } else {
-                    ForEach(viewModel.allCoins) { coin in
-                        NavigationLink(
-                            destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
-                            label: {
-                                CoinRowView(coin: coin, backup: nil)
-                            })
-                            .buttonStyle(ListSelectionStyle())
+                    if viewModel.status != .status200 && viewModel.allCoins.isEmpty {
+                        ForEach(viewModel.backupCoins) { backup in
+                            NavigationLink(
+                                destination: NavigationLazyView(DetailView(coin: nil, backup: backup)),
+                                label: {
+                                    CoinRowView(coin: nil, backup: backup)
+                                })
+                                .buttonStyle(ListSelectionStyle())
+                        }
+                    } else {
+                        ForEach(viewModel.allCoins) { coin in
+                            NavigationLink(
+                                destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+                                label: {
+                                    CoinRowView(coin: coin, backup: nil)
+                                })
+                                .buttonStyle(ListSelectionStyle())
+                        }
                     }
                 }
             }
@@ -108,7 +117,7 @@ extension HomeCoinListView {
         .overlay(scrollToTopGeometryReader)
     }
     
-    private var scrollToTopGeometryReader: some View {
+    var scrollToTopGeometryReader: some View {
         GeometryReader{proxy -> Color in
             DispatchQueue.main.async {
                 if startOffset == 0 {
@@ -121,7 +130,7 @@ extension HomeCoinListView {
         }
     }
     
-    private var scrollToTopButton: some View {
+    var scrollToTopButton: some View {
         Image(systemName: "arrow.up")
             .font(.title2)
             .foregroundColor(Color.white)
