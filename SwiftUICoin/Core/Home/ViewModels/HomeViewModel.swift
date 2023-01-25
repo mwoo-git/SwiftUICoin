@@ -36,7 +36,7 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     enum SortOption {
-        case rank, price, pricereversed, priceChangePercentage24H, priceChangePercentage24HReversed
+        case rank, price, pricereversed, priceChangePercentage24H, priceChangePercentage24HReversed, favorite
     }
     
     init() {
@@ -151,6 +151,8 @@ class HomeViewModel: ObservableObject {
             return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0})
         case .priceChangePercentage24HReversed:
             return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0})
+        case .favorite:
+            return coins.sorted(by: { $0.marketCapRank?.convertRank ?? 0 < $1.marketCapRank?.convertRank ?? 0 })
         }
     }
     

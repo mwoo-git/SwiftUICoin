@@ -16,6 +16,26 @@ struct SortOptionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     HStack(spacing: 0) {
+                        Text("관심목록")
+                            .foregroundColor((viewModel.sortOption == .favorite) ? Color.white : Color.theme.accent)
+                    }
+                    .id("FAVORITE")
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 10)
+                    .background(
+                        viewModel.sortOption == .favorite ? Color.theme.sortOptionSelected : .clear
+                    )
+                    .cornerRadius(3)
+                    .onTapGesture {
+                        if viewModel.sortOption != .favorite {
+                            viewModel.sortOption = .favorite
+                        }
+                        withAnimation(.easeInOut) {
+                            proxy.scrollTo("FAVORITE", anchor: .topLeading)
+                        }
+                    }
+                    
+                    HStack(spacing: 0) {
                         Text("시가총액")
                             .foregroundColor((viewModel.sortOption == .rank) ? Color.white : Color.theme.accent)
                     }

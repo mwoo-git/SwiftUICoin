@@ -112,7 +112,6 @@
 		73E6BEEA28D21FF10041A7C3 /* HomeCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */; };
 		73FF2411290BE785008C8172 /* GlobalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2410290BE784008C8172 /* GlobalItemView.swift */; };
 		73FF2413290BE7D8008C8172 /* GlobalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2412290BE7D8008C8172 /* GlobalModel.swift */; };
-		73FF2415290BEDCF008C8172 /* GlobalGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2414290BEDCF008C8172 /* GlobalGridView.swift */; };
 		73FF2418290C2FA1008C8172 /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2417290C2FA1008C8172 /* GlobalViewModel.swift */; };
 		73FF241A290C3219008C8172 /* GlobalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF2419290C3219008C8172 /* GlobalDataService.swift */; };
 		73FF241C290C32B2008C8172 /* USAScraperUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF241B290C32B2008C8172 /* USAScraperUtility.swift */; };
@@ -228,7 +227,6 @@
 		73E6BEE928D21FF10041A7C3 /* HomeCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoinListView.swift; sourceTree = "<group>"; };
 		73FF2410290BE784008C8172 /* GlobalItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalItemView.swift; sourceTree = "<group>"; };
 		73FF2412290BE7D8008C8172 /* GlobalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalModel.swift; sourceTree = "<group>"; };
-		73FF2414290BEDCF008C8172 /* GlobalGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGridView.swift; sourceTree = "<group>"; };
 		73FF2417290C2FA1008C8172 /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 		73FF2419290C3219008C8172 /* GlobalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataService.swift; sourceTree = "<group>"; };
 		73FF241B290C32B2008C8172 /* USAScraperUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USAScraperUtility.swift; sourceTree = "<group>"; };
@@ -658,7 +656,6 @@
 			isa = PBXGroup;
 			children = (
 				73FF2410290BE784008C8172 /* GlobalItemView.swift */,
-				73FF2414290BEDCF008C8172 /* GlobalGridView.swift */,
 				73FF241D291037F4008C8172 /* GlobalDetailView.swift */,
 				73FF241F29104B81008C8172 /* GlobalPlaceHolderView.swift */,
 				73771CDB297D201500539C09 /* GlobalScrollView.swift */,
@@ -785,7 +782,6 @@
 				73B9564428E089F100DD4A9F /* NftRowView.swift in Sources */,
 				73D7175D28DB414A0081CB2D /* StatisticView.swift in Sources */,
 				7360D044290846FD00F06499 /* SupportEmailModel.swift in Sources */,
-				73FF2415290BEDCF008C8172 /* GlobalGridView.swift in Sources */,
 				73BB739228FD415C00BB7FEA /* TrendModel.swift in Sources */,
 				73FF242029104B82008C8172 /* GlobalPlaceHolderView.swift in Sources */,
 				739A39F728FAA867005348E5 /* NetworkMissingView.swift in Sources */,
