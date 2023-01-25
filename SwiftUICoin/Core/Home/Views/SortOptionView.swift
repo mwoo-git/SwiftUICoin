@@ -14,20 +14,23 @@ struct SortOptionView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 30) {
+                HStack(spacing: 10) {
                     
-                    let vertical: CGFloat = 5
-                    let horizontal: CGFloat = 10
+                    let vertical: CGFloat = 8
+                    let horizontal: CGFloat = 13
                     
-                    HStack(spacing: 0) {
+                    HStack(spacing: 5) {
+                        Image(systemName: viewModel.sortOption != .favorite ? "star" : "star.fill")
+                            .foregroundColor(viewModel.sortOption != .favorite ? Color.theme.textColor : Color.theme.binanceColor)
                         Text("관심목록")
-                            .foregroundColor((viewModel.sortOption == .favorite) ? Color.white : Color.theme.accent)
+                            .foregroundColor((viewModel.sortOption == .favorite) ? Color.white : Color.white)
                     }
                     .id("FAVORITE")
                     .padding(.vertical, vertical)
-                    .padding(.horizontal, horizontal)
+                    .padding(.trailing, horizontal)
+                    .padding(.leading, 6)
                     .background(
-                        viewModel.sortOption == .favorite ? Color.theme.sortOptionSelected : .clear
+                        Color.theme.sortOptionColor
                     )
                     .cornerRadius(3)
                     .onTapGesture {
@@ -39,17 +42,23 @@ struct SortOptionView: View {
                         }
                     }
                     
+                    Divider()
+                    
                     HStack(spacing: 0) {
                         Text("시가총액")
-                            .foregroundColor((viewModel.sortOption == .rank) ? Color.white : Color.theme.accent)
+                            .foregroundColor((viewModel.sortOption == .rank) ? Color.theme.background : Color.theme.textColor)
                     }
                     .id("MARKET_CAP")
                     .padding(.vertical, vertical)
                     .padding(.horizontal, horizontal)
                     .background(
-                        viewModel.sortOption == .rank ? Color.theme.sortOptionSelected : .clear
+                        viewModel.sortOption == .rank ? Color.theme.textColor : Color.theme.sortOptionColor
                     )
-                    .cornerRadius(3)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color(.systemGray4), lineWidth: 3)
+                    )
+                    .cornerRadius(50)
                     .onTapGesture {
                         if viewModel.sortOption != .rank {
                             viewModel.sortOption = .rank
@@ -61,15 +70,19 @@ struct SortOptionView: View {
                     
                     HStack(spacing: 0) {
                         Text("상승")
-                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24H) ? Color.white : Color.theme.accent)
+                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24H) ? Color.theme.background : Color.theme.textColor)
                     }
                     .id("PRICE_UP")
                     .padding(.vertical, vertical)
                     .padding(.horizontal, horizontal)
                     .background(
-                        viewModel.sortOption == .priceChangePercentage24H ? Color.theme.sortOptionSelected : .clear
+                        viewModel.sortOption == .priceChangePercentage24H ? Color.theme.textColor : Color.theme.sortOptionColor
                     )
-                    .cornerRadius(3)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color(.systemGray4), lineWidth: 3)
+                    )
+                    .cornerRadius(50)
                     .onTapGesture {
                         if viewModel.sortOption != .priceChangePercentage24H {
                             viewModel.sortOption = .priceChangePercentage24H
@@ -81,15 +94,19 @@ struct SortOptionView: View {
                     
                     HStack(spacing: 0) {
                         Text("하락")
-                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
+                            .foregroundColor((viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.theme.background : Color.theme.textColor)
                     }
                     .id("PRICE_DOWN")
                     .padding(.vertical, vertical)
                     .padding(.horizontal, horizontal)
                     .background(
-                        viewModel.sortOption == .priceChangePercentage24HReversed ? Color.theme.sortOptionSelected : .clear
+                        viewModel.sortOption == .priceChangePercentage24HReversed ? Color.theme.textColor : Color.theme.sortOptionColor
                     )
-                    .cornerRadius(3)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color(.systemGray3), lineWidth: 3)
+                    )
+                    .cornerRadius(50)
                     .onTapGesture {
                         if viewModel.sortOption != .priceChangePercentage24HReversed {
                             viewModel.sortOption = .priceChangePercentage24HReversed
@@ -99,11 +116,11 @@ struct SortOptionView: View {
                         }
                     }
                 }
-                .font(.system(size: 15, weight: .bold))
+                .font(.system(size: 15, weight: .regular))
                 .foregroundColor(Color.theme.accent)
             }
             .padding(.horizontal)
-            .padding(.bottom)
+            .padding(.bottom, 8)
         }
         .background(Color.theme.background)
     }

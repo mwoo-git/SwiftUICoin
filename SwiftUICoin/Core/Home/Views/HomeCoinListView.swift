@@ -34,7 +34,7 @@ struct HomeCoinListView: View {
                         }
                     }
                 } else {
-                    LazyVStack(alignment: .leading, spacing: 30) {
+                    LazyVStack(alignment: .leading, spacing: 20) {
                         GlobalScrollView(viewModel: globalViewModel)
 //                        Text("코인 리스트")
 //                            .font(.title3)

@@ -111,7 +111,7 @@ struct HeadlineView_Previews: PreviewProvider {
 extension HeadlineView {
     private var header: some View {
         HStack {
-            Text("헤드라인")
+            Text("뉴스")
                 .font(.title3)
                 .bold()
                 .padding(.leading)

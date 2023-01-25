@@ -42,7 +42,7 @@ struct MyTabView: View {
                 .tabItem {
                     Image(systemName: selection  == 0 ? "house.fill" : "house")
 //                        .environment(\.symbolVariants, .none)
-                    Text("Home")
+                    Text("홈")
                 }
                 .navigationTitle("")
                 .navigationBarHidden(self.isNavigationBarHidden)
@@ -55,7 +55,7 @@ struct MyTabView: View {
                 .tabItem {
                     Image(systemName: selection  == 1 ? "newspaper.fill" : "newspaper")
 //                        .environment(\.symbolVariants, .none)
-                    Text("Headline")
+                    Text("뉴스")
                 }
                 .navigationTitle("")
                 .navigationBarHidden(self.isNavigationBarHidden)
