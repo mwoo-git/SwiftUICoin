@@ -15,13 +15,17 @@ struct SortOptionView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
+                    
+                    let vertical: CGFloat = 5
+                    let horizontal: CGFloat = 10
+                    
                     HStack(spacing: 0) {
                         Text("관심목록")
                             .foregroundColor((viewModel.sortOption == .favorite) ? Color.white : Color.theme.accent)
                     }
                     .id("FAVORITE")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 10)
+                    .padding(.vertical, vertical)
+                    .padding(.horizontal, horizontal)
                     .background(
                         viewModel.sortOption == .favorite ? Color.theme.sortOptionSelected : .clear
                     )
@@ -40,8 +44,8 @@ struct SortOptionView: View {
                             .foregroundColor((viewModel.sortOption == .rank) ? Color.white : Color.theme.accent)
                     }
                     .id("MARKET_CAP")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 10)
+                    .padding(.vertical, vertical)
+                    .padding(.horizontal, horizontal)
                     .background(
                         viewModel.sortOption == .rank ? Color.theme.sortOptionSelected : .clear
                     )
@@ -60,8 +64,8 @@ struct SortOptionView: View {
                             .foregroundColor((viewModel.sortOption == .priceChangePercentage24H) ? Color.white : Color.theme.accent)
                     }
                     .id("PRICE_UP")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 10)
+                    .padding(.vertical, vertical)
+                    .padding(.horizontal, horizontal)
                     .background(
                         viewModel.sortOption == .priceChangePercentage24H ? Color.theme.sortOptionSelected : .clear
                     )
@@ -80,8 +84,8 @@ struct SortOptionView: View {
                             .foregroundColor((viewModel.sortOption == .priceChangePercentage24HReversed) ? Color.white : Color.theme.accent)
                     }
                     .id("PRICE_DOWN")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 10)
+                    .padding(.vertical, vertical)
+                    .padding(.horizontal, horizontal)
                     .background(
                         viewModel.sortOption == .priceChangePercentage24HReversed ? Color.theme.sortOptionSelected : .clear
                     )
