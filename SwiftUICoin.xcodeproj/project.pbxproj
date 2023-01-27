@@ -40,6 +40,9 @@
 		7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334473D28E4E52700F1719E /* EditCoinRowView.swift */; };
 		733517EC28DC4CDB00A9DF37 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517EB28DC4CDB00A9DF37 /* ChartView.swift */; };
 		733517EE28DCC4AA00A9DF37 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733517ED28DCC4AA00A9DF37 /* String.swift */; };
+		734452D92984331400AEEE09 /* 002.png in Resources */ = {isa = PBXBuildFile; fileRef = 734452D62984331300AEEE09 /* 002.png */; };
+		734452DA2984331400AEEE09 /* 003.png in Resources */ = {isa = PBXBuildFile; fileRef = 734452D72984331300AEEE09 /* 003.png */; };
+		734452DB2984331400AEEE09 /* 001.png in Resources */ = {isa = PBXBuildFile; fileRef = 734452D82984331400AEEE09 /* 001.png */; };
 		734A1E2C28EF421800AF0E0F /* HeadlinePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
@@ -50,13 +53,6 @@
 		736B40E629252F9B008BAB64 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B40E529252F9B008BAB64 /* LaunchView.swift */; };
 		736B40E829254838008BAB64 /* GlobalTradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B40E729254837008BAB64 /* GlobalTradingView.swift */; };
 		73771CC529786DC200539C09 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC429786DC200539C09 /* 1.png */; };
-		73771CCB297949E400539C09 /* 004.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC6297949E400539C09 /* 004.png */; };
-		73771CCC297949E400539C09 /* 002.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC7297949E400539C09 /* 002.png */; };
-		73771CCD297949E400539C09 /* 003.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC8297949E400539C09 /* 003.png */; };
-		73771CCE297949E400539C09 /* 001.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC9297949E400539C09 /* 001.png */; };
-		73771CCF297949E400539C09 /* 005.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CCA297949E400539C09 /* 005.png */; };
-		73771CD329794E4900539C09 /* 007.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD229794E4900539C09 /* 007.png */; };
-		73771CD5297955E400539C09 /* 008.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD4297955E400539C09 /* 008.JPG */; };
 		73771CD7297A481A00539C09 /* 009.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD6297A481A00539C09 /* 009.png */; };
 		73771CDC297D201500539C09 /* GlobalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73771CDB297D201500539C09 /* GlobalScrollView.swift */; };
 		739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D728F346E7005348E5 /* CoinBackupDataService.swift */; };
@@ -157,6 +153,9 @@
 		7334473D28E4E52700F1719E /* EditCoinRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoinRowView.swift; sourceTree = "<group>"; };
 		733517EB28DC4CDB00A9DF37 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		733517ED28DCC4AA00A9DF37 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		734452D62984331300AEEE09 /* 002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 002.png; sourceTree = "<group>"; };
+		734452D72984331300AEEE09 /* 003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 003.png; sourceTree = "<group>"; };
+		734452D82984331400AEEE09 /* 001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 001.png; sourceTree = "<group>"; };
 		734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinePlaceholderView.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
@@ -168,13 +167,6 @@
 		736B40E729254837008BAB64 /* GlobalTradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTradingView.swift; sourceTree = "<group>"; };
 		73771CC229786D2000539C09 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		73771CC429786DC200539C09 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		73771CC6297949E400539C09 /* 004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 004.png; sourceTree = "<group>"; };
-		73771CC7297949E400539C09 /* 002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 002.png; sourceTree = "<group>"; };
-		73771CC8297949E400539C09 /* 003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 003.png; sourceTree = "<group>"; };
-		73771CC9297949E400539C09 /* 001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 001.png; sourceTree = "<group>"; };
-		73771CCA297949E400539C09 /* 005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 005.png; sourceTree = "<group>"; };
-		73771CD229794E4900539C09 /* 007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 007.png; sourceTree = "<group>"; };
-		73771CD4297955E400539C09 /* 008.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 008.JPG; sourceTree = "<group>"; };
 		73771CD6297A481A00539C09 /* 009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 009.png; sourceTree = "<group>"; };
 		73771CDB297D201500539C09 /* GlobalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalScrollView.swift; sourceTree = "<group>"; };
 		739A39D728F346E7005348E5 /* CoinBackupDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBackupDataService.swift; sourceTree = "<group>"; };
@@ -472,13 +464,9 @@
 			children = (
 				73771CD6297A481A00539C09 /* 009.png */,
 				73771CC429786DC200539C09 /* 1.png */,
-				73771CC9297949E400539C09 /* 001.png */,
-				73771CC7297949E400539C09 /* 002.png */,
-				73771CC8297949E400539C09 /* 003.png */,
-				73771CC6297949E400539C09 /* 004.png */,
-				73771CCA297949E400539C09 /* 005.png */,
-				73771CD229794E4900539C09 /* 007.png */,
-				73771CD4297955E400539C09 /* 008.JPG */,
+				734452D82984331400AEEE09 /* 001.png */,
+				734452D62984331300AEEE09 /* 002.png */,
+				734452D72984331300AEEE09 /* 003.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -741,15 +729,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73771CD5297955E400539C09 /* 008.JPG in Resources */,
-				73771CCC297949E400539C09 /* 002.png in Resources */,
-				73771CCD297949E400539C09 /* 003.png in Resources */,
+				734452D92984331400AEEE09 /* 002.png in Resources */,
+				734452DA2984331400AEEE09 /* 003.png in Resources */,
 				73771CD7297A481A00539C09 /* 009.png in Resources */,
+				734452DB2984331400AEEE09 /* 001.png in Resources */,
 				73771CC529786DC200539C09 /* 1.png in Resources */,
-				73771CCF297949E400539C09 /* 005.png in Resources */,
-				73771CCE297949E400539C09 /* 001.png in Resources */,
-				73771CD329794E4900539C09 /* 007.png in Resources */,
-				73771CCB297949E400539C09 /* 004.png in Resources */,
 				73C0FF1B2922B08400016E64 /* LaunchScreen.storyboard in Resources */,
 				731086D428CE285800283FD3 /* Preview Assets.xcassets in Resources */,
 				731086D128CE285800283FD3 /* Assets.xcassets in Resources */,
