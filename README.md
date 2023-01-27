@@ -13,7 +13,7 @@
 <br/>
 
 ### 🎆 Preview
-|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/001.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/002.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/003.png" width="300">|
+|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/01.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/02.png" width="300">|<img src="https://github.com/mwoo-git/SwiftUICoin/blob/main/SwiftUICoin/Image/03.png" width="300">|
 |:-:|:-:|:-:|
 
 <br/>
