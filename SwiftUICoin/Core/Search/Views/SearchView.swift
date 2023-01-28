@@ -44,9 +44,9 @@ struct SearchView_Previews: PreviewProvider {
     }
 }
 
-extension SearchView {
+private extension SearchView {
     
-    private var searchBar: some View {
+    var searchBar: some View {
         HStack {
             SearchBarView(searchText: $viewModel.searchText)
             Spacer()
@@ -63,22 +63,5 @@ extension SearchView {
         .frame(maxWidth: UIScreen.main.bounds.width)
         .padding()
         .padding(.bottom, -8)
-    }
-    
-    private var listOptionBar: some View {
-        HStack(alignment: .top, spacing: 30) {
-            VStack() {
-                Text("Markets")
-                    .foregroundColor(Color.white)
-                Capsule()
-                    .fill(Color.theme.binanceColor)
-                    .frame(width: 25, height: 3)
-            }
-            Spacer()
-        }
-        .padding(.top, 10)
-        .padding(.horizontal)
-        .font(.headline)
-        .foregroundColor(Color.theme.accent)
     }
 }

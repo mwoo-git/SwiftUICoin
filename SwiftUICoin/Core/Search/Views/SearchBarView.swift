@@ -46,7 +46,7 @@ struct SearchBarView_Previews: PreviewProvider {
 
 extension SearchBarView {
     private var normalTextField: some View {
-        TextField("검색", text: $searchText)
+        TextField("BTC", text: $searchText)
             .foregroundColor(Color.white)
             .accentColor(Color.theme.binanceColor)
             .frame(height: 30)
@@ -58,7 +58,7 @@ extension SearchBarView {
     }
     
     private var firstResponderTextField: some View {
-        FirstResponderTextField(searchText: $searchText, placeHolder: "검색")
+        FirstResponderTextField(searchText: $searchText, placeHolder: "BTC")
             .foregroundColor(Color.white)
             .accentColor(Color.theme.iconColor)
             .frame(height: 30)
