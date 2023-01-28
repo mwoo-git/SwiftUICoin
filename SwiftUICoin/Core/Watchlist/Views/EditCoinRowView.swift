@@ -38,9 +38,9 @@ struct SearchRowView_Previews: PreviewProvider {
     }
 }
 
-extension EditCoinRowView {
+private extension EditCoinRowView {
     
-    private var leftColumn: some View {
+    var leftColumn: some View {
         HStack(alignment: .center, spacing: 0) {
             
             KFImage(URL(string: (coin?.image ?? backup?.image) ?? ""))
@@ -65,16 +65,18 @@ extension EditCoinRowView {
         HStack {
             if coin == nil {
                 if !viewModel.isWatchlistExists(coin: nil, backup: backup) {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "star")
+                        .foregroundColor(Color.theme.textColor)
                 } else {
-                    Image(systemName: "checkmark.circle")
+                    Image(systemName: "star.fill")
                         .foregroundColor(Color.theme.binanceColor)
                 }
             } else {
                 if !viewModel.isWatchlistExists(coin: coin, backup: nil) {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "star")
+                        .foregroundColor(Color.theme.textColor)
                 } else {
-                    Image(systemName: "checkmark.circle")
+                    Image(systemName: "star.fill")
                         .foregroundColor(Color.theme.binanceColor)
                 }
             }
