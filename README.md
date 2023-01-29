@@ -89,8 +89,11 @@ SwiftUICoin
 
 ### 🧑‍💻 Contact
 
-블록와이드:  blockwide.ios@gmail.com
+블록와이드: blockwide.ios@gmail.com
+
 개발자: hanulbom@gmail.com
+
+블로그: https://minwoostory.tistory.com
 
 <br/>
 
