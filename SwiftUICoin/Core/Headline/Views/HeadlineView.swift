@@ -11,7 +11,7 @@ struct HeadlineView: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
     @AppStorage("isDarkMode") private var isDarkMode = true
-    @State private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
+    @AppStorage("categories") private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @State private var currentTab: Int = 0
     
     var body: some View {
@@ -108,8 +108,8 @@ struct HeadlineView_Previews: PreviewProvider {
     }
 }
 
-extension HeadlineView {
-    private var header: some View {
+private extension HeadlineView {
+    var header: some View {
         HStack {
             Text("뉴스")
                 .font(.title3)
