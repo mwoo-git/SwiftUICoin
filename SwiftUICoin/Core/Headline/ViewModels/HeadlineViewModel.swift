@@ -17,7 +17,6 @@ class HeadlineViewModel: ObservableObject {
     private var headlineDataService: HeadlineDataService
     private var cancellables = Set<AnyCancellable>()
     
-    
     init(keyword: String) {
         self.keyword = keyword
         self.headlineDataService = HeadlineDataService(keyword: keyword)
@@ -25,32 +24,24 @@ class HeadlineViewModel: ObservableObject {
     }
     
     private func addSubscribers() {
-        
         headlineDataService.$articles
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] (returnedArticles) in
                 self?.articles = returnedArticles
+                self?.isRefreshing = false
             }
             .store(in: &cancellables)
-        
     }
     
     func getArticle() {
-        if articles.isEmpty {
-            if !isRefreshing {
-                headlineDataService.getArticles()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.isRefreshing = false
-                }
-            }
-        } else {
-            if !isRefreshing {
-                headlineDataService.getArticles()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
-                    self.isRefreshing = false
-                }
-            }
+        if isRefreshing { return }
+        
+        headlineDataService.getArticles()
+        isRefreshing = true
+        let refreshTime: Double = articles.isEmpty ? 3 : 300
+        DispatchQueue.main.asyncAfter(deadline: .now() + refreshTime) { [weak self] in
+            self?.isRefreshing = false
         }
     }
 }
+
