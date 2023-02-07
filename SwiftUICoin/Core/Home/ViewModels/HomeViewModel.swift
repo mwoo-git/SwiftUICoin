@@ -11,28 +11,30 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    @Published var allCoins: [CoinModel] = []
-    @Published var backupCoins: [BackupCoinEntity] = []
-    @Published var mainWatchlist: [CoinModel] = []
-    @Published var subWatchlist: [CoinModel] = []
-    @Published var mainWatchlistBackup: [BackupCoinEntity] = []
-    @Published var subWatchlistBackup: [BackupCoinEntity] = []
-    @Published var searchCoins: [CoinModel] = []
-    @Published var searchCoinsBackup: [BackupCoinEntity] = []
-    @Published var topMovingCoins: [CoinModel] = []
-    @Published var lowMovingCoins: [CoinModel] = []
-    @Published var sortOption: SortOption = .rank
-    @Published var isRefreshing: Bool = false
-    @Published var isEditing: Bool = false
-    @Published var searchText: String = ""
-    @Published var status: StatusCode = .status200
-    @Published var trendCoins: [CoinModel] = []
-    @Published var isDark: Bool = true
+    @Published var allCoins = [CoinModel]()
+    @Published var mainWatchlist = [CoinModel]()
+    @Published var subWatchlist = [CoinModel]()
+    @Published var searchCoins = [CoinModel]()
+    @Published var topMovingCoins = [CoinModel]()
+    @Published var lowMovingCoins = [CoinModel]()
+    @Published var trendCoins = [CoinModel]()
     
-    private let dataService = CoinDataService()
-    private let backupDataService = CoinBackupDataService()
-    private let watchlistDataService = WatchlistDataService()
-    private let trendCoinsDataService = TrendDataService()
+    @Published var backupCoins = [BackupCoinEntity]()
+    @Published var mainWatchlistBackup = [BackupCoinEntity]()
+    @Published var subWatchlistBackup = [BackupCoinEntity]()
+    @Published var searchCoinsBackup = [BackupCoinEntity]()
+    
+    @Published var status: StatusCode = .status200
+    @Published var sortOption: SortOption = .rank
+    @Published var isRefreshing = false
+    @Published var isEditing = false
+    @Published var isDark = true
+    @Published var searchText = ""
+    
+    private lazy var dataService = CoinDataService()
+    private lazy var backupDataService = CoinBackupDataService()
+    private lazy var watchlistDataService = WatchlistDataService()
+    private lazy var trendCoinsDataService = TrendDataService()
     private var cancellables = Set<AnyCancellable>()
     
     enum SortOption {
@@ -53,7 +55,7 @@ class HomeViewModel: ObservableObject {
                 self?.allCoins = returnedCoins
                 self?.updateBackup(coins: returnedCoins)
                 self?.configureTopMovingCoins()
-                self?.configurelowMovingCoins()
+                self?.configureLowMovingCoins()
                 self?.loadWatchlist()
             }
             .store(in: &cancellables)
@@ -119,22 +121,15 @@ class HomeViewModel: ObservableObject {
     }
     
     func getCoin() {
-        if allCoins.isEmpty {
-            if !isRefreshing {
-                dataService.getCoin()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.isRefreshing = false
-                }
-            }
-        } else {
-            if !isRefreshing {
-                dataService.getCoin()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-                    self.isRefreshing = false
-                }
-            }
+        if isRefreshing {
+            return
+        }
+        isRefreshing = true
+        
+        let refreshInterval: TimeInterval = allCoins.isEmpty ? 3 : 60
+        dataService.getCoin()
+        DispatchQueue.main.asyncAfter(deadline: .now() + refreshInterval) {
+            self.isRefreshing = false
         }
     }
     
@@ -142,20 +137,19 @@ class HomeViewModel: ObservableObject {
     private func sortCoins(coins: [CoinModel], sort: SortOption) -> [CoinModel] {
         switch sort {
         case .rank:
-            return coins.sorted(by: { $0.marketCapRank?.convertRank ?? 0 < $1.marketCapRank?.convertRank ?? 0 })
+            return coins.sorted(by: { ($0.marketCapRank?.convertRank ?? 0) < ($1.marketCapRank?.convertRank ?? 0) })
         case .price:
             return coins.sorted(by: { $0.currentPrice > $1.currentPrice })
         case .pricereversed:
             return coins.sorted(by: { $0.currentPrice < $1.currentPrice })
         case .priceChangePercentage24H:
-            return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0})
+            return coins.sorted(by: { ($0.priceChangePercentage24H ?? 0) > ($1.priceChangePercentage24H ?? 0)})
         case .priceChangePercentage24HReversed:
-            return coins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0})
+            return coins.sorted(by: { ($0.priceChangePercentage24H ?? 0) < ($1.priceChangePercentage24H ?? 0)})
         case .favorite:
-            return coins.sorted(by: { $0.marketCapRank?.convertRank ?? 0 < $1.marketCapRank?.convertRank ?? 0 })
+            return coins.sorted(by: { ($0.marketCapRank?.convertRank ?? 0) < ($1.marketCapRank?.convertRank ?? 0) })
         }
     }
-    
     func isWatchlistEmpty() -> Bool {
         watchlistDataService.isWatchlistEmpty()
     }
@@ -172,69 +166,63 @@ class HomeViewModel: ObservableObject {
     
     // Update Watchlist (Delete or add)
     func updateWatchlist(coin: CoinModel?, backup: BackupCoinEntity?) {
-        if coin == nil {
-            watchlistDataService.updateWatchlist(coin: nil, backup: backup)
-        } else {
-            watchlistDataService.updateWatchlist(coin: coin, backup: nil)
-        }
-        
+        watchlistDataService.updateWatchlist(coin: coin, backup: backup)
     }
     
     
     private func convertTrendCoins(trendModels: [TrendModel], coinModels: [CoinModel]) -> [CoinModel] {
-        trendModels
-            .compactMap { (coin) in
-                guard let convertCoin = coinModels.first(where: { $0.symbol == coin.symbol }) else { return nil }
-                return convertCoin
-            }
+        return trendModels.compactMap { trendModel in
+            coinModels.first(where: { $0.symbol == trendModel.symbol })
+        }
     }
     
     // AllCoins 중에 Watchlist에 해당되는 코인만 리턴
     private func convertCoins(coinModels: [CoinModel], watchlistEntities: [WatchlistEntity]) -> [CoinModel] {
-        coinModels
-            .compactMap { (coin) -> CoinModel? in
-                guard watchlistEntities.first(where: { $0.coinID == coin.id }) != nil else { return nil
-                }
-                return coin
-            }
+        coinModels.filter { coin in
+            watchlistEntities.first(where: { $0.coinID == coin.id }) != nil
+        }
     }
     
     private func convertCoinsBackup(coinModels: [BackupCoinEntity], watchlistEntities: [WatchlistEntity]) -> [BackupCoinEntity] {
-        coinModels
-            .compactMap { (coin) -> BackupCoinEntity? in
-                guard watchlistEntities.first(where: { $0.coinID == coin.id }) != nil else { return nil
-                }
-                return coin
-            }
+        coinModels.filter { coin in
+            watchlistEntities.contains(where: { $0.coinID == coin.id })
+        }
     }
     
+    //Search
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
         
         // text가 비어있지 않을 때만 계속 진행, 비어있다면 coins를 리턴하라
-        guard !text.isEmpty else {
-            return coins
-        }
+        guard !text.isEmpty else { return coins }
         
         // 입력된 문자를 소문자로 변환
         let lowercasedText = text.lowercased()
         
         // StartingCoins를 순회하며 조건값으로 필터링하고 리턴하라
-        return coins.filter { (coin) -> Bool in
+        return coins.filter {
             
             // 요소의 name, symbol, id에 lowercasedText를 포함한 것을 반환하라
-            return coin.name.lowercased().contains(lowercasedText) || // || 는 or "혹은"이라는 뜻
-            coin.symbol.lowercased().contains(lowercasedText) ||
-            coin.id.lowercased().contains(lowercasedText)
+            $0.name.lowercased().contains(lowercasedText) ||
+            $0.symbol.lowercased().contains(lowercasedText) ||
+            $0.id.lowercased().contains(lowercasedText)
         }
     }
     
-    private func configureTopMovingCoins() {
-        let topMovers = allCoins.sorted(by: { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0 })
-        self.topMovingCoins = Array(topMovers.prefix(10))
+    private func sortCoins(isTop: Bool) {
+        let sortedCoins = allCoins.sorted(by: {
+            let priceChange1 = $0.priceChangePercentage24H ?? 0
+            let priceChange2 = $1.priceChangePercentage24H ?? 0
+            return isTop ? (priceChange1 > priceChange2) : (priceChange1 < priceChange2)
+        })
+        self.topMovingCoins = isTop ? Array(sortedCoins.prefix(10)) : []
+        self.lowMovingCoins = !isTop ? Array(sortedCoins.prefix(10)) : []
     }
     
-    private func configurelowMovingCoins() {
-        let lowMovers = allCoins.sorted(by: { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0 })
-        self.lowMovingCoins = Array(lowMovers.prefix(10))
+    private func configureTopMovingCoins() {
+        sortCoins(isTop: true)
+    }
+    
+    private func configureLowMovingCoins() {
+        sortCoins(isTop: false)
     }
 }

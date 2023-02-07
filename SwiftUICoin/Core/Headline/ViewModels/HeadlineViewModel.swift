@@ -10,7 +10,7 @@ import Combine
 
 class HeadlineViewModel: ObservableObject {
     
-    @Published var articles: [HeadlineModel] = []
+    @Published var articles = [HeadlineModel]()
     @Published var isRefreshing = false
     @Published var keyword: String
     

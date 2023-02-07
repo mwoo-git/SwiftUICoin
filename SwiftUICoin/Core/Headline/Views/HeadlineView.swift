@@ -13,29 +13,50 @@ struct HeadlineView: View {
     @AppStorage("isDarkMode") private var isDarkMode = true
     @AppStorage("categories") private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @State private var currentTab: Int = 0
+    @State private var didChange = false
     
     var body: some View {
         VStack(spacing: 0) {
             header
             TabBarView(currentTab: $currentTab, categories: $categories)
-            TabView(selection: self.$currentTab) {
-                ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
-                    HeadlineListView(keyword: item)
-                        .tag(index)
+            
+            // categories가 수정되었을 때 탭뷰를 새롭게 로드하기 위해서 didChange를 사용합니다.
+            switch didChange {
+            case false:
+                TabView(selection: self.$currentTab) {
+                    ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
+                        HeadlineListView(keyword: item)
+                            .tag(index)
+                    }
                 }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                Spacer()
+            default:
+                TabView(selection: self.$currentTab) {
+                    ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
+                        HeadlineListView(keyword: item)
+                            .tag(index)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                Spacer()
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            Spacer()
         }
         .background(Color.theme.background.ignoresSafeArea())
         .environment(\.colorScheme, .dark)
-//        .onAppear {
-//            if viewModel.isDark {
-//                isDarkMode  = true
-//            } else {
-//                isDarkMode = false
-//            }
+//        .onChange(of: categories) { _ in
+//            didChange.toggle()
 //        }
+//        .onAppear {
+//            didChange.toggle()
+//        }
+        //        .onAppear {
+        //            if viewModel.isDark {
+        //                isDarkMode  = true
+        //            } else {
+        //                isDarkMode = false
+        //            }
+        //        }
     }
 }
 
@@ -74,26 +95,26 @@ struct TabBarItem: View {
     
     var body: some View {
         VStack() {
-                Text(tabBarItemName)
-                    .foregroundColor(currentTab == tab ? Color.theme.textColor : Color.theme.accent)
-                    .font(.subheadline)
-                    .fontWeight(currentTab == tab ? .bold : .thin)
-                if currentTab == tab {
-                    Color.theme.textColor
-                        .frame(height: 2)
-                        .matchedGeometryEffect(id: "underline", in: namespace)
-                        .padding(.horizontal, 2)
-                } else {
-                    Color.clear.frame(height: 2)
-                }
+            Text(tabBarItemName)
+                .foregroundColor(currentTab == tab ? Color.theme.textColor : Color.theme.accent)
+                .font(.subheadline)
+                .fontWeight(currentTab == tab ? .bold : .thin)
+            if currentTab == tab {
+                Color.theme.textColor
+                    .frame(height: 2)
+                    .matchedGeometryEffect(id: "underline", in: namespace)
+                    .padding(.horizontal, 2)
+            } else {
+                Color.clear.frame(height: 2)
             }
-            .id(id)
-            .animation(.easeInOut(duration: 0.2),  value: currentTab)
-            .onTapGesture {
-                    currentTab = tab
-            }
-            .padding(.top)
-            .contentShape(Rectangle())
+        }
+        .id(id)
+        .animation(.easeInOut(duration: 0.2),  value: currentTab)
+        .onTapGesture {
+            currentTab = tab
+        }
+        .padding(.top)
+        .contentShape(Rectangle())
     }
 }
 
@@ -117,6 +138,10 @@ private extension HeadlineView {
                 .padding(.leading)
             Spacer()
             HStack(spacing: 0) {
+                NavigationLink(
+                    destination: HeadlineEditView(didChange: $didChange)) {
+                        IconView(iconName: "list.bullet")
+                    }
                 SettingsButtonView()
             }
         }
