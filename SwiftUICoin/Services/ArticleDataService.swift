@@ -11,7 +11,7 @@ import Combine
 class ArticleDataService {
     @Published var articles: [ArticleModel] = []
     
-    var htmlScrapUtlity = ArticleScraperUtility()
+    var htmlScrapUtlity = BlockmediaScraper()
     var coinSubscription: AnyCancellable?
     
     var coin: CoinModel?
@@ -36,7 +36,7 @@ class ArticleDataService {
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
-            .flatMap(htmlScrapUtlity.scrapArticle(from:))
+            .flatMap(htmlScrapUtlity.scrapeArticles(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {

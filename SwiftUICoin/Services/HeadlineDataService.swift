@@ -10,9 +10,9 @@ import Combine
 
 class HeadlineDataService {
     
-    @Published var articles: [HeadlineModel] = []
+    @Published var headlines = [HeadlineModel]()
     
-    var htmlScrapUtlity = HeadlineScraperUtility()
+    var htmlScrapUtlity = HeadlineScraper()
     var coinSubscription: AnyCancellable?
     var keyword: String
     
@@ -30,7 +30,7 @@ class HeadlineDataService {
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
-            .flatMap(htmlScrapUtlity.scrapArticle(from:))
+            .flatMap(htmlScrapUtlity.scrapeHeadlines(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {
@@ -40,7 +40,7 @@ class HeadlineDataService {
                     print(error.localizedDescription)
                 }
             } receiveValue: { [weak self] (articles) in
-                self?.articles = articles
+                self?.headlines = articles
                 print("scrap end")
                 self?.coinSubscription?.cancel()
             }
