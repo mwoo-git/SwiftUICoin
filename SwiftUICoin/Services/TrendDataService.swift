@@ -10,7 +10,7 @@ import Combine
 class TrendDataService {
     @Published var trendCoins: [TrendModel] = []
     
-    var htmlScrapUtlity = TrendScraperUtility()
+    var htmlScrapUtlity = TrendScraper()
     var coinSubscription: AnyCancellable?
     
     init() {
@@ -26,7 +26,7 @@ class TrendDataService {
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
-            .flatMap(htmlScrapUtlity.scrapSymbol(from:))
+            .flatMap(htmlScrapUtlity.scrapeSymbol(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {

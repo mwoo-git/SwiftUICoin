@@ -12,9 +12,9 @@ class HeadlineDataService {
     
     @Published var headlines = [HeadlineModel]()
     
-    var htmlScrapUtlity = HeadlineScraper()
-    var coinSubscription: AnyCancellable?
-    var keyword: String
+    private let htmlScrapUtility = HeadlineScraper()
+    private var coinSubscription: AnyCancellable?
+    private let keyword: String
     
     init(keyword: String) {
         self.keyword = keyword
@@ -22,7 +22,6 @@ class HeadlineDataService {
     }
     
     func getArticles() {
-        
         let urlString = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=\(keyword)"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         guard let url = URL(string: encodedString) else { return print("scrap url error")}
@@ -30,7 +29,7 @@ class HeadlineDataService {
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
-            .flatMap(htmlScrapUtlity.scrapeHeadlines(from:))
+            .flatMap(htmlScrapUtility.scrapeHeadlines(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {

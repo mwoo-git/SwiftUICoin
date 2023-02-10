@@ -14,26 +14,16 @@ import Combine
  symbol: td:nth-child(2) > div > div > span:nth-child(2)
  */
 
-class TrendScraperUtility {
+class TrendScraper {
     
-    func scrapSymbol(from data:Data) -> Future<[TrendModel], Never> {
+    func scrapeSymbol(from data:Data) -> Future<[TrendModel], Never> {
         Future { promise in
             let html = String(data: data, encoding: .utf8) ?? ""
             var symbols = [TrendModel]()
             do {
                 let elements = try SwiftSoup.parse(html)
-                let documents = try elements.getElementById("__next")?.select("div > div.main-content > div > div > div > div> table > tbody > tr")
-                documents?.forEach({ (document) in
-                    let symbol = try? document.select("td > a > div > div > div > p").text().lowercased()
-                    
-                    if let symbol = symbol, !symbol.isEmpty {
-                        
-                        let coinsSymbol = TrendModel(symbol: symbol)
-                        symbols.append(coinsSymbol)
-                        
-                    }
-                    
-                })
+                let documents = try elements.select("table tbody tr td a div div div p").array()
+                symbols = documents.compactMap { try? TrendModel(symbol: $0.text().lowercased()) }
                 promise(.success(symbols))
             } catch let error {
                 debugPrint(error)

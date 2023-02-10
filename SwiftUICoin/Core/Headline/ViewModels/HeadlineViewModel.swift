@@ -10,7 +10,7 @@ import Combine
 
 class HeadlineViewModel: ObservableObject {
     
-    @Published var articles = [HeadlineModel]()
+    @Published var headlines = [HeadlineModel]()
     @Published var isRefreshing = false
     @Published var keyword: String
     
@@ -20,25 +20,25 @@ class HeadlineViewModel: ObservableObject {
     init(keyword: String) {
         self.keyword = keyword
         self.headlineDataService = HeadlineDataService(keyword: keyword)
-        addSubscribers()
+        subscribeToHeadlines()
     }
     
-    private func addSubscribers() {
-        headlineDataService.$articles
+    private func subscribeToHeadlines() {
+        headlineDataService.$headlines
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] (returnedArticles) in
-                self?.articles = returnedArticles
+            .sink { [weak self] (newHeadlines) in
+                self?.headlines = newHeadlines
                 self?.isRefreshing = false
             }
             .store(in: &cancellables)
     }
     
-    func getArticle() {
+    func refreshHeadlines() {
         if isRefreshing { return }
         
         headlineDataService.getArticles()
         isRefreshing = true
-        let refreshTime: Double = articles.isEmpty ? 3 : 300
+        let refreshTime: Double = headlines.isEmpty ? 3 : 300
         DispatchQueue.main.asyncAfter(deadline: .now() + refreshTime) { [weak self] in
             self?.isRefreshing = false
         }

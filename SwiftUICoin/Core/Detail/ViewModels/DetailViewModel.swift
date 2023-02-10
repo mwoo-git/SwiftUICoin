@@ -10,15 +10,16 @@ import Combine
 
 class DetailViewModel: ObservableObject {
     
-    @Published var statistics: [StatisticModel] = []
-    @Published var articles: [ArticleModel] = []
+    @Published var statistics = [StatisticModel]()
+    @Published var articles = [ArticleModel]()
     @Published var coinDescription: String? = nil
     @Published var websiteURL: String? = nil
     @Published var infoOption: InfoOption = .news
     @Published var coin: CoinModel?
     @Published var backup: BackupCoinEntity?
+    
     private let coinDatailDataService: CoinDetailDataService
-    private let articleDataService: ArticleDataService
+    private let articleDataService: BlockmediaDataService
     private var cancellables = Set<AnyCancellable>()
     
     enum InfoOption {
@@ -29,11 +30,11 @@ class DetailViewModel: ObservableObject {
         if coin == nil {
             self.backup = backup
             self.coinDatailDataService = CoinDetailDataService(coin: nil, backup: backup)
-            self.articleDataService = ArticleDataService(coin: nil, backup: backup)
+            self.articleDataService = BlockmediaDataService(coin: nil, backup: backup)
         } else {
             self.coin = coin
             self.coinDatailDataService = CoinDetailDataService(coin: coin, backup: nil)
-            self.articleDataService = ArticleDataService(coin: coin, backup: nil)
+            self.articleDataService = BlockmediaDataService(coin: coin, backup: nil)
         }
         
         self.addSubscribers()
@@ -65,23 +66,13 @@ class DetailViewModel: ObservableObject {
     }
     
     private func mapDataToStatistics(coinModel: CoinModel?) -> [StatisticModel] {
-        
-        let marketCap = coinModel?.marketCap?.asCurrency() ?? ""
-        let marketCapStat = StatisticModel(title: "Market Cap", value: marketCap)
-        
-        let circulationSupply = coinModel?.circulatingSupply?.asNumberWithoutDecimal() ?? ""
-        let circulationSupplyStat = StatisticModel(title: "Circulation Supply", value: circulationSupply)
-        
-        let maxSupply = coinModel?.maxSupply?.asNumberWithoutDecimal() ?? ""
-        let maxSupplyStat = StatisticModel(title: "Max Supply", value: maxSupply)
-        
-        let totalSupply = coinModel?.totalSupply?.asNumberWithoutDecimal() ?? ""
-        let totalSupplyStat = StatisticModel(title: "Total Supply", value: totalSupply)
-        
-        let statArray: [StatisticModel] = [
-            marketCapStat, circulationSupplyStat, maxSupplyStat, totalSupplyStat
+        let statistics = [
+            ("Market Cap", coinModel?.marketCap?.asCurrency()),
+            ("Circulation Supply", coinModel?.circulatingSupply?.asNumberWithoutDecimal()),
+            ("Max Supply", coinModel?.maxSupply?.asNumberWithoutDecimal()),
+            ("Total Supply", coinModel?.totalSupply?.asNumberWithoutDecimal())
         ]
         
-        return statArray
+        return statistics.compactMap { StatisticModel(title: $0.0, value: $0.1 ?? "") }
     }
 }

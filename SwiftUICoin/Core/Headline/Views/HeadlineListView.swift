@@ -15,6 +15,7 @@ struct HeadlineListView: View {
     @StateObject var viewModel: HeadlineViewModel
     @State private var showSafari = false
     @State private var url = ""
+    @AppStorage("categories") private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     
     init(keyword: String) {
         _viewModel = StateObject(wrappedValue: HeadlineViewModel(keyword: keyword))
@@ -22,16 +23,16 @@ struct HeadlineListView: View {
     
     var body: some View {
         RefreshableScrollView(showsIndicators: false, loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
-            viewModel.getArticle()
+            viewModel.refreshHeadlines()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 done()
             }
         }) {
-            if viewModel.articles.isEmpty {
+            if viewModel.headlines.isEmpty {
                 HeadlinePlaceholderView()
             } else {
                 LazyVStack(spacing: 15) {
-                    ForEach(viewModel.articles) { article in
+                    ForEach(viewModel.headlines) { article in
                         Button {
                             if url != article.url {
                                 url = article.url
@@ -62,11 +63,11 @@ struct HeadlineListView: View {
                 }
             }
         }
-        .onAppear {
-            if !viewModel.articles.isEmpty {
-                viewModel.getArticle()
-            }
-        }
+//        .onAppear {
+//            if !viewModel.articles.isEmpty {
+//                viewModel.getArticle()
+//            }
+//        }
     }
 }
 

@@ -12,7 +12,7 @@ class GlobalDataService {
     
     @Published var globals: [GlobalModel] = []
     
-    var htmlScrapUtlity = USAScraperUtility()
+    var htmlScrapUtlity = InvestingScraper()
     var coinSubscription: AnyCancellable?
     
     init() {
@@ -30,7 +30,7 @@ class GlobalDataService {
         coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .map(\.data)
-            .flatMap(htmlScrapUtlity.scrapGlobal(from:))
+            .flatMap(htmlScrapUtlity.scrapeInvesting(from:))
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {

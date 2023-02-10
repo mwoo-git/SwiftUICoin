@@ -3,7 +3,6 @@
 //  SwiftUICoin
 //
 //  Created by Woo Min on 2022/09/14.
-//  LazyStack은 iOS 14이상부터 지원합니다.
 
 import SwiftUI
 import SwiftUIPullToRefresh
@@ -16,7 +15,7 @@ struct HomeCoinListView: View {
     @State private var startOffset: CGFloat = 0
     
     var body: some View {
-        ScrollViewReader {proxyReader in
+        ScrollViewReader { proxyReader in
             RefreshableScrollView(loadingViewBackgroundColor: Color.theme.background, onRefresh: { done in
                 viewModel.getCoin()
                 globalViewModel.fetchGlobalList()
@@ -24,7 +23,7 @@ struct HomeCoinListView: View {
                     done()
                 }
             }) {
-                if viewModel.allCoins.isEmpty || viewModel.allCoins.isEmpty && viewModel.backupCoins.isEmpty {
+                if viewModel.allCoins.isEmpty && viewModel.backupCoins.isEmpty {
                     VStack(spacing: 0) {
                         SortOptionView()
                         LazyVStack {
@@ -36,11 +35,6 @@ struct HomeCoinListView: View {
                 } else {
                     LazyVStack(alignment: .leading, spacing: 20) {
                         GlobalScrollView(viewModel: globalViewModel)
-//                        Text("코인 리스트")
-//                            .font(.title3)
-//                            .bold()
-//                            .padding()
-//                            .padding(.top, 10)
                         allCoinList
                     }
                     .id("SCROLL_TO_TOP")
@@ -58,7 +52,7 @@ struct HomeCoinListView: View {
             .background(Color.theme.background)
             .onAppear {
                 UIScrollView.appearance().keyboardDismissMode = .onDrag
-                if !viewModel.allCoins.isEmpty && !globalViewModel.indices.isEmpty {
+                if !viewModel.allCoins.isEmpty || !viewModel.backupCoins.isEmpty {
                     viewModel.getCoin()
                     globalViewModel.fetchGlobalList()
                 }
@@ -80,7 +74,6 @@ struct AllCoinListView_Previews: PreviewProvider {
 }
 
 private extension HomeCoinListView {
-    
     var allCoinList: some View {
         LazyVStack(pinnedViews: [.sectionHeaders]) {
             Section(header: VStack(spacing: 0) {
@@ -118,13 +111,13 @@ private extension HomeCoinListView {
     }
     
     var scrollToTopGeometryReader: some View {
-        GeometryReader{proxy -> Color in
+        GeometryReader { proxy -> Color in
             DispatchQueue.main.async {
-                if startOffset == 0 {
+                if self.startOffset == 0 {
                     self.startOffset = proxy.frame(in: .global).minY
                 }
                 let offset = proxy.frame(in: .global).minY
-                self.scrollViewOffset = offset - startOffset
+                self.scrollViewOffset = offset - self.startOffset
             }
             return Color.clear
         }
@@ -135,13 +128,10 @@ private extension HomeCoinListView {
             .font(.title2)
             .foregroundColor(Color.white)
             .frame(width: 40, height: 40)
-            .background(
-                Circle()
-                    .foregroundColor(Color.theme.arrowButton)
-            )
+            .background(Circle().foregroundColor(Color.theme.arrowButton))
             .padding(.trailing, 30)
             .padding(.bottom, 40)
-            .opacity(-scrollViewOffset > 400 ? 1: 0)
+            .opacity(scrollViewOffset > 400 ? 1 : 0)
     }
 }
 

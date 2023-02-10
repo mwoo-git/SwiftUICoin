@@ -34,41 +34,28 @@ final class GlobalViewModel: ObservableObject {
     }
     
     private func indices(globals: [GlobalModel]) {
-        let list = globals.filter { $0.name != "S&P 500 VIX" }
-        self.indices = Array(list.prefix(6))
+        self.indices = Array(globals.filter { $0.name != "S&P 500 VIX" }.prefix(6))
     }
-    
+
     private func commodities(globals: [GlobalModel]) {
 //         if 문으로 배열에 해당 범위가 있는지 체크하여 "Index out of range" 오류를 방지합니다.
         if 7 >= globals.startIndex && 13 < globals.endIndex {
-            let list = globals[7...13].filter { $0.name != "Brent Oil" }
-            self.commodities = Array(list)
+            self.commodities = globals[7...13].filter { $0.name != "Brent Oil" }
         }
     }
-    
+
     private func stocks(globals: [GlobalModel]) {
         if 21 >= globals.startIndex && 26 < globals.endIndex {
-            let list = globals[21...26]
-            self.stocks = Array(list)
+            self.stocks = Array(globals[21...26])
         }
     }
     
     func fetchGlobalList() {
-        if indices.isEmpty {
-            if !isRefreshing {
-                usaDataService.getItem()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.isRefreshing = false
-                }
-            }
-        } else {
-            if !isRefreshing {
-                usaDataService.getItem()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-                    self.isRefreshing = false
-                }
+        if !isRefreshing {
+            usaDataService.getItem()
+            isRefreshing = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + (indices.isEmpty ? 3 : 60)) {
+                self.isRefreshing = false
             }
         }
     }
