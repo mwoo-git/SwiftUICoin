@@ -14,8 +14,8 @@ struct GlobalDetailView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            topHeader
             GlobalTradingView(symbol: symbol)
-            header
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
@@ -29,7 +29,7 @@ struct GlobalDetailView_Previews: PreviewProvider {
 }
 
 private extension GlobalDetailView {
-    var header: some View {
+    var topHeader: some View {
         HStack(spacing: 0) {
             HStack {
                 Spacer()

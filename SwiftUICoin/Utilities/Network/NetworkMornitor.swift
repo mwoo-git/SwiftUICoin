@@ -11,7 +11,7 @@ import SwiftUI
 
 class NetworkMonitor: ObservableObject {
     
-    @Published var isConnected: Bool = true
+    @Published var isConnected: Bool = false
     @Published var showAlert: Bool = false
     
     let monitor = NWPathMonitor()

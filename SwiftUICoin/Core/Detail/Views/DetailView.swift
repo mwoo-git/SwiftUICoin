@@ -9,37 +9,27 @@ import SwiftUI
 import Kingfisher
 
 struct DetailView: View {
-    
-    @StateObject var viewModel: DetailViewModel
+
+    @ObservedObject var viewModel: DetailViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
-    @State private var symbol = ""
-    
-    init(coin: CoinModel?, backup: BackupCoinEntity?) {
-        if coin == nil {
-            _viewModel = StateObject(wrappedValue: DetailViewModel(coin: nil, backup: backup))
-        } else {
-            _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin, backup: nil))
-        }
-        _symbol = State(wrappedValue: (coin?.symbol.uppercased() ?? backup?.symbol?.uppercased()) ?? "")
+    private var symbol: String {
+        return (viewModel.coin?.symbol.uppercased() ?? viewModel.backup?.symbol?.uppercased()) ?? ""
     }
-    
+
+    init(coin: CoinModel?, backup: BackupCoinEntity?) {
+        viewModel = DetailViewModel(coin: coin, backup: backup)
+    }
+
     var body: some View {
         VStack(spacing: 0) {
-            
             DetailHeaderView(viewModel: viewModel)
-            
             ScrollView(showsIndicators: false) {
-                
                 VStack(alignment: .center, spacing: 0) {
-                    
                     tradingView
-                    
                     DetailInfoView(viewModel: viewModel)
-                    
                     if !homeViewModel.allCoins.isEmpty {
                         TopMoversView()
                     }
-                    
                 }
             }
         }
@@ -62,7 +52,7 @@ struct DetailView_Previews: PreviewProvider {
 extension DetailView {
     
     private var tradingView: some View {
-        TradingView(symbol: convertSymbol)
+        TradingViewChart(symbol: convertSymbol)
             .frame(height: UIScreen.main.bounds.height / 1.55)
             .frame(width: UIScreen.main.bounds.width)
             .background(Color.theme.background)

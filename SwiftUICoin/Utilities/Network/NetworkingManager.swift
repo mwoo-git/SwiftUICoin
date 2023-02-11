@@ -4,7 +4,6 @@
 //
 //  Created by Woo Min on 2022/09/14.
 //  재사용 가능한 네트워킹 매니저
-//  메모: 서버에서 문제가 발생했을 때 화면에 띄울 수 있도록 기능추가해야합니다.
 
 import Foundation
 import Combine

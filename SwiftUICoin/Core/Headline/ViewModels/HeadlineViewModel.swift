@@ -10,47 +10,38 @@ import Combine
 
 class HeadlineViewModel: ObservableObject {
     
-    @Published var articles: [HeadlineModel] = []
+    @Published var headlines = [HeadlineModel]()
     @Published var isRefreshing = false
     @Published var keyword: String
     
     private var headlineDataService: HeadlineDataService
     private var cancellables = Set<AnyCancellable>()
     
-    
     init(keyword: String) {
         self.keyword = keyword
         self.headlineDataService = HeadlineDataService(keyword: keyword)
-        addSubscribers()
+        subscribeToHeadlines()
     }
     
-    private func addSubscribers() {
-        
-        headlineDataService.$articles
-            .sink { [weak self] (returnedArticles) in
-                self?.articles = returnedArticles
+    private func subscribeToHeadlines() {
+        headlineDataService.$headlines
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (newHeadlines) in
+                self?.headlines = newHeadlines
+                self?.isRefreshing = false
             }
             .store(in: &cancellables)
-        
     }
     
-    func getArticle() {
-        if articles.isEmpty {
-            if !isRefreshing {
-                headlineDataService.getArticles()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.isRefreshing = false
-                }
-            }
-        } else {
-            if !isRefreshing {
-                headlineDataService.getArticles()
-                isRefreshing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
-                    self.isRefreshing = false
-                }
-            }
+    func refreshHeadlines() {
+        if isRefreshing { return }
+        
+        headlineDataService.getArticles()
+        isRefreshing = true
+        let refreshTime: Double = headlines.isEmpty ? 3 : 300
+        DispatchQueue.main.asyncAfter(deadline: .now() + refreshTime) { [weak self] in
+            self?.isRefreshing = false
         }
     }
 }
+
