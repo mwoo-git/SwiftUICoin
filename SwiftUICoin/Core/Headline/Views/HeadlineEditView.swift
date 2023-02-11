@@ -11,48 +11,27 @@ struct HeadlineEditView: View {
     
     @AppStorage("categories") private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @Binding var didChange: Bool
-    @State private var newItem = ""
     @State private var isEditing = false
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             topHeader
-            List {
-                HStack {
-                    TextField("새 항목 추가", text: $newItem)
-                        .font(.title3)
-                        .foregroundColor(Color.theme.textColor)
-                    Button(action: {
-                        self.categories.append(self.newItem)
-                        self.newItem = ""
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                            .foregroundColor(.theme.background)
-                    })
-                }
-                .padding(.horizontal)
-                
-                ForEach(categories, id: \.self) { item in
-                    Text(item)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.theme.textColor)
-                }
-                .onMove(perform: move)
-                .onDelete(perform: delete)
-            }
-            .environment(\.editMode, .constant(isEditing ? .active : .inactive))
+            description
+            Text("뉴스 순서")
+                .bold()
+                .padding(.leading)
+                .padding(.vertical, 5)
+                .font(.footnote)
+            categoryList
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
-        .onAppear {
-            self.isEditing = true
-        }
         .onDisappear {
-            self.isEditing = false
             self.didChange.toggle()
             print(didChange)
+        }
+        .onAppear {
+            UITableView.appearance().separatorColor = UIColor(Color.theme.background)
         }
     }
     
@@ -77,7 +56,7 @@ private extension HeadlineEditView {
         HStack(spacing: 0) {
             HStack {
                 Spacer()
-                Text("키워드 편집")
+                Text("뉴스 키워드")
                     .bold()
                 Spacer()
             }
@@ -87,8 +66,52 @@ private extension HeadlineEditView {
             BackButtonView()
             , alignment: .leading
         )
+        .overlay(
+            Button(action: {
+                withAnimation { self.isEditing.toggle() }
+            }) { Text(isEditing ? "저장" : "편집") }
+                .padding(.trailing)
+                .foregroundColor(Color.theme.textColor)
+            , alignment: .trailing
+        )
         .background(Color.theme.background.ignoresSafeArea())
         .frame(width: UIScreen.main.bounds.width)
         .padding(.vertical)
+    }
+    
+    var description: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("아래의 순서로 뉴스 화면에 표시됩니다.")
+            Text("순서를 원하는대로 바꿔보세요! 🎨☺️")
+                .bold()
+        }
+        .font(.title3)
+        .foregroundColor(Color.theme.textColor)
+        .padding()
+    }
+    
+    var categoryList: some View {
+        List {
+            ForEach(categories, id: \.self) { item in
+                HStack {
+                    Text(item)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.theme.textColor)
+                        .padding()
+                    Spacer()
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+            }
+            .onMove(perform: move)
+            .onDelete(perform: delete)
+            .listRowBackground(Color.theme.background)
+        }
+        .listStyle(.plain)
+        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
+
     }
 }

@@ -68,7 +68,6 @@ struct MyTabView: View {
             
         }
         .accentColor(Color.theme.textColor)
-        
     }
 }
 

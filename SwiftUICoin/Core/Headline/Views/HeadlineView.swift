@@ -139,6 +139,10 @@ private extension HeadlineView {
             Spacer()
             HStack(spacing: 0) {
                 NavigationLink(
+                    destination: HeadlineSearchView()) {
+                        IconView(iconName: "magnifyingglass")
+                    }
+                NavigationLink(
                     destination: HeadlineEditView(didChange: $didChange)) {
                         IconView(iconName: "list.bullet")
                     }

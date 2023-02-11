@@ -42,7 +42,7 @@ class DetailViewModel: ObservableObject {
     
     private func addSubscribers() {
         
-        coinDatailDataService.$coinDateils
+        coinDatailDataService.$coinDetails
             .sink { [weak self] (returnedCoinDetails) in
                 self?.websiteURL = returnedCoinDetails?.links?.homepage?.first
             }

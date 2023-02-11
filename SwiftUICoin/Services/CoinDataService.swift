@@ -10,7 +10,7 @@ import Combine
 
 class CoinDataService {
     
-    @Published var allCoins: [CoinModel] = []
+    @Published var allCoins = [CoinModel]()
     @Published var status: StatusCode = .status200
     
     var coinSubscription: AnyCancellable?
@@ -27,7 +27,7 @@ class CoinDataService {
             .subscribe(on: DispatchQueue.global(qos: .default))
             .tryMap { (output) -> Data in
                 guard let httpResponse = output.response as? HTTPURLResponse else {
-                    throw URLError(.unknown)
+                    throw NetworkingManager.NetworkingError.unknown
                 }
                 
                 switch httpResponse.statusCode {
@@ -62,4 +62,3 @@ class CoinDataService {
             })
     }
 }
-
