@@ -11,8 +11,8 @@ import SwiftUI
 
 class SearchViewModel: ObservableObject {
     
-    @Published var searchCoins: [CoinModel] = []
-    @Published var searchText: String = "" {
+    @Published var searchCoins = [CoinModel]()
+    @Published var searchText = "" {
         didSet {
             if searchText.count > 5 {
                 searchText = String(searchText.prefix(5))

@@ -10,7 +10,8 @@ import Combine
 
 struct SearchBarView: View {
     
-    @Binding var searchText: String 
+    @Binding var searchText: String
+    @Binding var didReturn: Bool
     @State private var clearTextField = false
     
     var body: some View {
@@ -34,10 +35,10 @@ struct SearchBarView: View {
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SearchBarView(searchText: .constant(""))
+            SearchBarView(searchText: .constant(""), didReturn: .constant(false))
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            SearchBarView(searchText: .constant(""))
+            SearchBarView(searchText: .constant(""), didReturn: .constant(false))
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
         }
@@ -46,7 +47,7 @@ struct SearchBarView_Previews: PreviewProvider {
 
 extension SearchBarView {
     private var normalTextField: some View {
-        TextField("BTC", text: $searchText)
+        TextField("검색", text: $searchText)
             .foregroundColor(Color.white)
             .accentColor(Color.theme.binanceColor)
             .frame(height: 30)
@@ -58,7 +59,7 @@ extension SearchBarView {
     }
     
     private var firstResponderTextField: some View {
-        FirstResponderTextField(searchText: $searchText, placeHolder: "BTC")
+        FirstResponderTextField(searchText: $searchText, didReturn: $didReturn, placeHolder: "검색")
             .foregroundColor(Color.white)
             .accentColor(Color.theme.iconColor)
             .frame(height: 30)
@@ -82,10 +83,12 @@ struct FirstResponderTextField: UIViewRepresentable {
     class Coordinator: NSObject, UITextFieldDelegate {
         
         @Binding var searchText: String
+        @Binding var didReturn: Bool
         var becameFirstResponder = false
         
-        init(searchText: Binding<String>) {
+        init(searchText: Binding<String>, didReturn: Binding<Bool>) {
             self._searchText = searchText
+            self._didReturn = didReturn
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -95,12 +98,14 @@ struct FirstResponderTextField: UIViewRepresentable {
         
         // 리턴키를 누르면 포커스 해제됩니다.
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            didReturn.toggle()
             textField.resignFirstResponder()
             return true
         }
     }
     
     @Binding var searchText: String
+    @Binding var didReturn: Bool
     let placeHolder: String
     
     func makeUIView(context: Context) -> some UIView {
@@ -111,7 +116,7 @@ struct FirstResponderTextField: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(searchText: $searchText)
+        return Coordinator(searchText: $searchText, didReturn: $didReturn)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
