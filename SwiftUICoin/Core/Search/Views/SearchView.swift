@@ -11,6 +11,7 @@ struct SearchView: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var didReturn = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -48,7 +49,7 @@ private extension SearchView {
     
     var searchBar: some View {
         HStack {
-            SearchBarView(searchText: $viewModel.searchText)
+            SearchBarView(searchText: $viewModel.searchText, didReturn: $didReturn)
             Spacer()
             Text("취소")
                 .foregroundColor(Color.theme.textColor)
