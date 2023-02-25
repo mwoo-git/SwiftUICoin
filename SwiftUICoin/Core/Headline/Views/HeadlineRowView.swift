@@ -29,6 +29,8 @@ struct HeadlineRowView: View {
                         .font(.footnote)
                         .padding(.leading, 5)
                 }
+                Text(headline.cleanAuthor)
+                    .font(.footnote)
             }
             .padding(.bottom, 10)
             

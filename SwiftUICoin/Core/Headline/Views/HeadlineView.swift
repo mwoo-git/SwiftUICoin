@@ -129,26 +129,30 @@ struct TabBarItem2: View {
     var tab: Int
     
     var body: some View {
-        HStack(spacing: 0) {
-            Text(tabBarItemName)
-                .foregroundColor( currentTab == tab ? Color.theme.background : Color.theme.textColor)
+        ZStack {
+            Button {
+                currentTab = tab
+            } label: {
+                HStack(spacing: 0) {
+                    Text(tabBarItemName)
+                        .foregroundColor( currentTab == tab ? Color.theme.background : Color.theme.textColor)
+                }
+                .id(id)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 13)
+                .background(
+                    currentTab == tab ? Color.theme.textColor : Color.theme.sortOptionColor
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color(.systemGray4), lineWidth: 3)
+                )
+                .cornerRadius(50)
+                .font(.system(size: 15, weight: .regular))
+                .padding(.vertical, 10)
+                .contentShape(Rectangle())
+            }
         }
-        .id(id)
-        .padding(.vertical, 8)
-        .padding(.horizontal, 13)
-        .background(
-            currentTab == tab ? Color.theme.textColor : Color.theme.sortOptionColor
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 50)
-                .stroke(Color(.systemGray4), lineWidth: 3)
-        )
-        .cornerRadius(50)
-        .onTapGesture {
-            currentTab = tab
-        }
-        .font(.system(size: 15, weight: .regular))
-        .padding(.top)
     }
 }
 
