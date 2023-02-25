@@ -69,9 +69,9 @@ struct TabBarView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
+                HStack(spacing: 10) {
                     ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
-                        TabBarItem(currentTab: $currentTab, namespace: namespace.self, id: index, tabBarItemName: item, tab: index)
+                        TabBarItem2(currentTab: $currentTab, namespace: namespace.self, id: index, tabBarItemName: item, tab: index)
                             .onChange(of: currentTab) { _ in
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     proxy.scrollTo(currentTab, anchor: .center)
@@ -85,6 +85,7 @@ struct TabBarView: View {
     }
 }
 
+// 제목 밑에 선이 있는 아이템
 struct TabBarItem: View {
     
     @Binding var currentTab: Int
@@ -115,6 +116,39 @@ struct TabBarItem: View {
         }
         .padding(.top)
         .contentShape(Rectangle())
+    }
+}
+
+// 캡슐형 아이템
+struct TabBarItem2: View {
+    
+    @Binding var currentTab: Int
+    let namespace: Namespace.ID
+    let id: Int
+    var tabBarItemName: String
+    var tab: Int
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            Text(tabBarItemName)
+                .foregroundColor( currentTab == tab ? Color.theme.background : Color.theme.textColor)
+        }
+        .id(id)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 13)
+        .background(
+            currentTab == tab ? Color.theme.textColor : Color.theme.sortOptionColor
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 50)
+                .stroke(Color(.systemGray4), lineWidth: 3)
+        )
+        .cornerRadius(50)
+        .onTapGesture {
+            currentTab = tab
+        }
+        .font(.system(size: 15, weight: .regular))
+        .padding(.top)
     }
 }
 
