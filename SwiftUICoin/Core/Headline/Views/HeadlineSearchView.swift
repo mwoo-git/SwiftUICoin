@@ -15,12 +15,13 @@ struct HeadlineSearchView: View {
     @State private var didReturn = false
     @State private var refreshList = false
     @Binding var didChange: Bool
+    @State private var isFocus = false
     
     var body: some View {
         VStack(spacing: 0) {
             searchBar
             Divider()
-            if keyword.isEmpty {
+            if keyword.isEmpty || isFocus {
                 Spacer()
             } else {
                 if refreshList {
@@ -48,7 +49,7 @@ struct HeadlineSearchView_Previews: PreviewProvider {
 private extension HeadlineSearchView {
     var searchBar: some View {
         HStack {
-            SearchBarView(searchText: $searchText, didReturn: $didReturn)
+            SearchBarView(searchText: $searchText, didReturn: $didReturn, isFocus: $isFocus)
             Spacer()
             Text("취소")
                 .foregroundColor(Color.theme.textColor)

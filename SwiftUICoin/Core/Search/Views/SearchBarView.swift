@@ -12,6 +12,7 @@ struct SearchBarView: View {
     
     @Binding var searchText: String
     @Binding var didReturn: Bool
+    @Binding var isFocus: Bool
     @State private var clearTextField = false
     
     var body: some View {
@@ -35,10 +36,10 @@ struct SearchBarView: View {
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SearchBarView(searchText: .constant(""), didReturn: .constant(false))
+            SearchBarView(searchText: .constant(""), didReturn: .constant(false), isFocus: .constant(true))
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            SearchBarView(searchText: .constant(""), didReturn: .constant(false))
+            SearchBarView(searchText: .constant(""), didReturn: .constant(false), isFocus: .constant(true))
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
         }
@@ -59,9 +60,9 @@ extension SearchBarView {
     }
     
     private var firstResponderTextField: some View {
-        FirstResponderTextField(searchText: $searchText, didReturn: $didReturn, placeHolder: "검색")
+        FirstResponderTextField(searchText: $searchText, didReturn: $didReturn, isFocus: $isFocus, placeHolder: "검색")
             .foregroundColor(Color.white)
-            .accentColor(Color.theme.iconColor)
+            .accentColor(Color.theme.textColor)
             .frame(height: 30)
             .overlay(
                 Image(systemName: "xmark.circle.fill")
@@ -84,11 +85,13 @@ struct FirstResponderTextField: UIViewRepresentable {
         
         @Binding var searchText: String
         @Binding var didReturn: Bool
+        @Binding var isFocus: Bool
         var becameFirstResponder = false
         
-        init(searchText: Binding<String>, didReturn: Binding<Bool>) {
+        init(searchText: Binding<String>, didReturn: Binding<Bool>, isFocus: Binding<Bool>) {
             self._searchText = searchText
             self._didReturn = didReturn
+            self._isFocus = isFocus
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -102,10 +105,19 @@ struct FirstResponderTextField: UIViewRepresentable {
             textField.resignFirstResponder()
             return true
         }
+        
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            isFocus = true
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            isFocus = false
+        }
     }
     
     @Binding var searchText: String
     @Binding var didReturn: Bool
+    @Binding var isFocus: Bool
     let placeHolder: String
     
     func makeUIView(context: Context) -> some UIView {
@@ -116,7 +128,7 @@ struct FirstResponderTextField: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(searchText: $searchText, didReturn: $didReturn)
+        return Coordinator(searchText: $searchText, didReturn: $didReturn, isFocus: $isFocus)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
@@ -126,3 +138,4 @@ struct FirstResponderTextField: UIViewRepresentable {
         }
     }
 }
+
