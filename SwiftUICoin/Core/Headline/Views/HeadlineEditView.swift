@@ -26,22 +26,27 @@ struct HeadlineEditView: View {
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
-        .onDisappear {
-            self.didChange.toggle()
-            print(didChange)
-        }
         .onAppear {
             UITableView.appearance().separatorColor = UIColor(Color.theme.background)
         }
+        .overlay(
+                NavigationLink(destination: HeadlineSearchView(didChange: $didChange)) {
+                    RoundedRectangle(cornerRadius: 10.0, style: .continuous)
+                        .fill(Color.blue)
+                        .frame(height: 50)
+                        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
+                        .overlay(
+                            Text("추가하기")
+                                .foregroundColor(Color.white)
+                                .font(.headline)
+                        )
+                }
+                .padding(.bottom, 20),
+                alignment: .bottom
+            )
     }
     
-    func move(from source: IndexSet, to destination: Int) {
-        categories.move(fromOffsets: source, toOffset: destination)
-    }
     
-    func delete(at offsets: IndexSet) {
-        categories.remove(atOffsets: offsets)
-    }
 }
 
 struct HeadlineEditView_Previews: PreviewProvider {
@@ -112,6 +117,15 @@ private extension HeadlineEditView {
         }
         .listStyle(.plain)
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
-
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        categories.move(fromOffsets: source, toOffset: destination)
+        didChange.toggle()
+    }
+    
+    func delete(at offsets: IndexSet) {
+        categories.remove(atOffsets: offsets)
+        didChange.toggle()
     }
 }

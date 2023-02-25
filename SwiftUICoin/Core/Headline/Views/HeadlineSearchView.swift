@@ -14,6 +14,7 @@ struct HeadlineSearchView: View {
     @State private var keyword = ""
     @State private var didReturn = false
     @State private var refreshList = false
+    @Binding var didChange: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -40,7 +41,7 @@ struct HeadlineSearchView: View {
 
 struct HeadlineSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        HeadlineSearchView()
+        HeadlineSearchView(didChange: .constant(false))
     }
 }
 
