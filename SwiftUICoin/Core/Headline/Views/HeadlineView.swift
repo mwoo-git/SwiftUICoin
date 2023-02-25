@@ -133,11 +133,11 @@ private extension HeadlineView {
     var header: some View {
         HStack {
             Text("뉴스")
-                .font(.title3)
+                .font(.title2)
                 .bold()
                 .padding(.leading)
             Spacer()
-            HStack(spacing: 0) {
+            HStack(spacing: 15) {
                 NavigationLink(
                     destination: HeadlineSearchView()) {
                         IconView(iconName: "magnifyingglass")
@@ -148,6 +148,8 @@ private extension HeadlineView {
                     }
                 SettingsButtonView()
             }
+            .padding(.trailing)
         }
+        .frame(height: 50)
     }
 }
