@@ -48,6 +48,7 @@
 		734A1E2C28EF421800AF0E0F /* HeadlinePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */; };
 		7351E62228D389BB00A8383C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62128D389BB00A8383C /* UIApplication.swift */; };
 		7351E62428D4D7D300A8383C /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7351E62328D4D7D000A8383C /* SearchListView.swift */; };
+		7355918C29AA8D4500B80165 /* HeadlineSearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355918B29AA8D4500B80165 /* HeadlineSearchHistoryView.swift */; };
 		7360D03E2904582800F06499 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03D2904582800F06499 /* SettingsView.swift */; };
 		7360D0402904764A00F06499 /* SettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03F2904764A00F06499 /* SettingsButtonView.swift */; };
 		7360D044290846FD00F06499 /* SupportEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D043290846FC00F06499 /* SupportEmailModel.swift */; };
@@ -165,6 +166,7 @@
 		734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinePlaceholderView.swift; sourceTree = "<group>"; };
 		7351E62128D389BB00A8383C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7351E62328D4D7D000A8383C /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
+		7355918B29AA8D4500B80165 /* HeadlineSearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineSearchHistoryView.swift; sourceTree = "<group>"; };
 		7360D03D2904582800F06499 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7360D03F2904764A00F06499 /* SettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonView.swift; sourceTree = "<group>"; };
 		7360D043290846FC00F06499 /* SupportEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmailModel.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				734A1E2B28EF421800AF0E0F /* HeadlinePlaceholderView.swift */,
 				734452E1298FC1B500AEEE09 /* HeadlineEditView.swift */,
 				736DFAD629979AB200BA0DF4 /* HeadlineSearchView.swift */,
+				7355918B29AA8D4500B80165 /* HeadlineSearchHistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				731A036928ECC1F800B1BC39 /* HeadlineScraper.swift in Sources */,
 				73BB739628FD897900BB7FEA /* WatchlistEmptyView.swift in Sources */,
 				7367FD5E28D30B1500E050EA /* TradingViewChart.swift in Sources */,
+				7355918C29AA8D4500B80165 /* HeadlineSearchHistoryView.swift in Sources */,
 				73B9564428E089F100DD4A9F /* NftRowView.swift in Sources */,
 				73D7175D28DB414A0081CB2D /* StatisticView.swift in Sources */,
 				7360D044290846FD00F06499 /* SupportEmailModel.swift in Sources */,

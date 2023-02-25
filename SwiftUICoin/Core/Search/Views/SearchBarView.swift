@@ -74,6 +74,7 @@ extension SearchBarView {
                         searchText = ""
                         clearTextField.toggle()
                     }
+                    .contentShape(Rectangle())
                 , alignment: .trailing
             )
     }
