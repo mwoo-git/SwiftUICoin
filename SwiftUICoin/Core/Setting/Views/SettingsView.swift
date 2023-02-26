@@ -12,8 +12,8 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openURL) var openURL
-    var email = SupportEmailModel(toAddress: "blockwide.ios@gmail.com", subject: "문의하기", body: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
+    @State private var showMailView = false
+    @State private var mailData = ComposeMailData(subject: "문의하기", recipients: ["blockwide.ios@gmail.com"], message: "의견을 보내주시면 더 나은 서비스 개발에 활용됩니다.")
     
     var body: some View {
         VStack(spacing: 0) {
@@ -43,16 +43,10 @@ struct SettingView_Previews: PreviewProvider {
 private extension SettingsView {
     var settingHeader: some View {
         HStack {
-            
             Spacer()
             Text("더보기")
                 .font(.subheadline)
             Spacer()
-//            Button {
-//                viewModel.isDark.toggle()
-//            } label: {
-//                IconView(iconName: viewModel.isDark ? "moon.fill" : "sun.min.fill")
-//            }
         }
         .overlay(
             IconView(iconName: "chevron.left")
@@ -78,20 +72,8 @@ private extension SettingsView {
     
     var settingList: some View {
         Group {
-//            HStack {
-//                HStack(spacing: 10) {
-//                    Image(systemName: "speaker.wave.1")
-//                        .frame(width: 30, height: 30)
-//                        .font(.title3)
-//                    Text("공지사항")
-//                        .foregroundColor(Color.theme.textColor)
-//                }
-//                Spacer()
-//                chevron_right
-//            }
-//            .padding()
             Button {
-                email.send(openURL: openURL)
+                showMailView.toggle()
             } label: {
                 HStack {
                     HStack(spacing: 10) {
@@ -108,17 +90,12 @@ private extension SettingsView {
                 
             }
             .buttonStyle(ListSelectionStyle())
-//            HStack {
-//                HStack(spacing: 10) {
-//                    Image(systemName: "v.circle")
-//                        .frame(width: 30, height: 30)
-//                    Text("버전 정보")
-//                        .foregroundColor(Color.theme.textColor)
-//                }
-//                Spacer()
-//                chevron_right
-//            }
-//            .padding()
+            .sheet(isPresented: $showMailView) {
+                MailView(data: $mailData) { result in
+                    print(result)
+                }
+            }
+            .disabled(!MailView.canSendMail)
         }
     }
 }

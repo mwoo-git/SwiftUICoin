@@ -12,6 +12,7 @@ struct HeadlineEditView: View {
     @AppStorage("categories") private var categories = ["비트코인", "이더리움", "증시", "연준", "금리", "환율", "NFT", "메타버스"]
     @Binding var didChange: Bool
     @State private var isEditing = false
+    @State private var showAddSheet = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -26,22 +27,13 @@ struct HeadlineEditView: View {
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
-        .onDisappear {
-            self.didChange.toggle()
-            print(didChange)
-        }
         .onAppear {
             UITableView.appearance().separatorColor = UIColor(Color.theme.background)
         }
+        .overlay(addView, alignment: .bottom)
     }
     
-    func move(from source: IndexSet, to destination: Int) {
-        categories.move(fromOffsets: source, toOffset: destination)
-    }
     
-    func delete(at offsets: IndexSet) {
-        categories.remove(atOffsets: offsets)
-    }
 }
 
 struct HeadlineEditView_Previews: PreviewProvider {
@@ -112,6 +104,37 @@ private extension HeadlineEditView {
         }
         .listStyle(.plain)
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
-
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        categories.move(fromOffsets: source, toOffset: destination)
+        didChange.toggle()
+    }
+    
+    func delete(at offsets: IndexSet) {
+        categories.remove(atOffsets: offsets)
+        didChange.toggle()
+    }
+    
+    var addView: some View {
+        Button(action: {
+            self.showAddSheet.toggle()
+        }) {
+            RoundedRectangle(cornerRadius: 10.0, style: .continuous)
+                .fill(Color.blue)
+                .frame(height: 50)
+                .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
+                .overlay(
+                    Text("추가하기")
+                        .foregroundColor(Color.white)
+                        .font(.headline)
+                )
+        }
+        .padding(.bottom, 20)
+        .sheet(isPresented: $showAddSheet) {
+            NavigationView {
+                HeadlineSearchView(didChange: $didChange)
+            }
+        }
     }
 }

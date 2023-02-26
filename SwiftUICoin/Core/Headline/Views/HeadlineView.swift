@@ -69,9 +69,9 @@ struct TabBarView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
+                HStack(spacing: 10) {
                     ForEach(Array(zip(categories.indices, categories)), id: \.0) { index, item in
-                        TabBarItem(currentTab: $currentTab, namespace: namespace.self, id: index, tabBarItemName: item, tab: index)
+                        TabBarItem2(currentTab: $currentTab, namespace: namespace.self, id: index, tabBarItemName: item, tab: index)
                             .onChange(of: currentTab) { _ in
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     proxy.scrollTo(currentTab, anchor: .center)
@@ -85,6 +85,7 @@ struct TabBarView: View {
     }
 }
 
+// 제목 밑에 선이 있는 아이템
 struct TabBarItem: View {
     
     @Binding var currentTab: Int
@@ -118,6 +119,43 @@ struct TabBarItem: View {
     }
 }
 
+// 캡슐형 아이템
+struct TabBarItem2: View {
+    
+    @Binding var currentTab: Int
+    let namespace: Namespace.ID
+    let id: Int
+    var tabBarItemName: String
+    var tab: Int
+    
+    var body: some View {
+        ZStack {
+            Button {
+                currentTab = tab
+            } label: {
+                HStack(spacing: 0) {
+                    Text(tabBarItemName)
+                        .foregroundColor( currentTab == tab ? Color.theme.background : Color.theme.textColor)
+                }
+                .id(id)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 13)
+                .background(
+                    currentTab == tab ? Color.theme.textColor : Color.theme.sortOptionColor
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color(.systemGray4), lineWidth: 3)
+                )
+                .cornerRadius(50)
+                .font(.system(size: 15, weight: .regular))
+                .padding(.vertical, 10)
+                .contentShape(Rectangle())
+            }
+        }
+    }
+}
+
 struct HeadlineView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -133,13 +171,13 @@ private extension HeadlineView {
     var header: some View {
         HStack {
             Text("뉴스")
-                .font(.title3)
+                .font(.title2)
                 .bold()
                 .padding(.leading)
             Spacer()
-            HStack(spacing: 0) {
+            HStack(spacing: 15) {
                 NavigationLink(
-                    destination: HeadlineSearchView()) {
+                    destination: HeadlineSearchView(didChange: $didChange)) {
                         IconView(iconName: "magnifyingglass")
                     }
                 NavigationLink(
@@ -148,6 +186,8 @@ private extension HeadlineView {
                     }
                 SettingsButtonView()
             }
+            .padding(.trailing)
         }
+        .frame(height: 50)
     }
 }

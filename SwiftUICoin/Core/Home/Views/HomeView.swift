@@ -46,18 +46,20 @@ extension HomeView {
     private var homeHeader: some View {
         HStack {
             Text("BlockWide")
-                .font(.title3)
+                .font(.title2)
                 .bold()
                 .padding(.leading)
             Spacer()
-            HStack(spacing: 0) {
+            HStack(spacing: 15) {
                 NavigationLink(
                     destination: SearchView()) {
                         IconView(iconName: "magnifyingglass")
                     }
                 SettingsButtonView()
             }
+            .padding(.trailing)
         }
+        .frame(height: 50)
     }
 }
 

@@ -41,18 +41,16 @@ struct HeadlinePlaceholderView_Previews: PreviewProvider {
 private extension HeadlinePlaceholderView {
     var row: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text("한국경제TV....")
-                    .font(.footnote)
-            }
-            .padding(.bottom, 10)
-            Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때'부자아빠' 기요사키, 달러 폭락 예언..")
+            Text("'부자아빠' 기요사키, 달러 폭락 예언...비트코인·금·은 매수할 때gkgkgkgkk")
                 .font(.title3)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
             Spacer()
-            HStack {
-                Text("17시간 전...")
+            HStack(spacing: 5) {
+                Text("한국경제TV")
+                    .font(.footnote)
+                Text("·")
+                Text("17시간 전")
                     .font(.footnote)
                 Spacer()
                 Text("...")
@@ -60,7 +58,7 @@ private extension HeadlinePlaceholderView {
         }
         .contentShape(Rectangle())
         .padding()
-        .frame(height: 140)
+        .frame(height: 110)
         .foregroundColor(Color.theme.accent)
         .redacted(reason: .placeholder)
     }

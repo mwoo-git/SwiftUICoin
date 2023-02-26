@@ -37,10 +37,6 @@ class HomeViewModel: ObservableObject {
     private lazy var trendCoinsDataService = TrendDataService()
     private var cancellables = Set<AnyCancellable>()
     
-    enum SortOption {
-        case rank, price, pricereversed, priceChangePercentage24H, priceChangePercentage24HReversed, favorite
-    }
-    
     init() {
         addSubscribers()
     }
