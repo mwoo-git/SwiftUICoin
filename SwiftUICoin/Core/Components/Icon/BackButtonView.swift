@@ -12,7 +12,10 @@ struct BackButtonView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        IconView(iconName: "chevron.left")
+        Image(systemName: "chevron.left")
+            .foregroundColor(Color.theme.textColor)
+            .font(.title3)
+            .frame(width: 50, height: 50)
             .onTapGesture {
                 withAnimation() {
                     self.presentationMode.wrappedValue.dismiss()
