@@ -46,18 +46,11 @@ private extension SettingsView {
             Spacer()
             Text("더보기")
                 .font(.subheadline)
+                .bold()
             Spacer()
         }
         .overlay(
-            IconView(iconName: "chevron.left")
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
-                    if viewModel.isDark {
-                        isDarkMode = true
-                    } else {
-                        isDarkMode = false
-                    }
-                }
+            BackButtonView()
                 .contentShape(Rectangle())
             , alignment: .leading
         )
