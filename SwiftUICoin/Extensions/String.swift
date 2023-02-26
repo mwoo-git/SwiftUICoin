@@ -37,6 +37,8 @@ extension String {
             return "아발란체"
         case "dot":
             return "폴카닷"
+        case "klay":
+            return "클레이튼"
         default:
             return self
         }
