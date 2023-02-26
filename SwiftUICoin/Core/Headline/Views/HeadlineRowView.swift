@@ -14,33 +14,16 @@ struct HeadlineRowView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                let onerror = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                if headline.authorImageUrl == onerror {
-                    Text(headline.cleanAuthor)
-                        .font(.footnote)
-                } else {
-                    KFImage(URL(string: headline.authorImageUrl))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .cornerRadius(5)
-                    Text(headline.cleanAuthor)
-                        .font(.footnote)
-                        .padding(.leading, 5)
-                }
-                Text(headline.cleanAuthor)
-                    .font(.footnote)
-            }
-            .padding(.bottom, 10)
-            
             Text(headline.title)
                 .font(.title3)
                 .lineLimit(2)
                 .foregroundColor(Color.theme.textColor)
                 .multilineTextAlignment(.leading)
             Spacer()
-            HStack {
+            HStack(spacing: 5) {
+                Text(headline.cleanAuthor)
+                    .font(.footnote)
+                Text("·")
                 Text(headline.cleanDate)
                     .font(.footnote)
                 Spacer()
@@ -53,7 +36,7 @@ struct HeadlineRowView: View {
         }
         .contentShape(Rectangle())
         .padding()
-        .frame(height: 140)
+        .frame(height: 110)
         .foregroundColor(Color.theme.accent)
     }
 }

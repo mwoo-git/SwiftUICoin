@@ -63,6 +63,7 @@ struct HeadlineSearchView: View {
             search()
         }
         .overlay(messageView, alignment: .bottom)
+        .colorScheme(.dark)
     }
 }
 
