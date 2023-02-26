@@ -53,11 +53,13 @@ struct MenuButtonView: View {
     
     @State private var isShareSheetShowing = false
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openURL) var openURL
     
     let url: String
     let author: String
     let title: String
+    
+    @State private var showMailView = false
+    @State private var mailData = ComposeMailData(subject: "", recipients: nil, message: "")
     
     var body: some View {
         Menu {
@@ -69,11 +71,10 @@ struct MenuButtonView: View {
             }
             
             Button(action: {
-                let email = SupportEmailModel(toAddress: "blockwide.ios@gmail.com", subject: "뉴스 문제 신고", body: """
+                mailData = ComposeMailData(subject: "뉴스 문제 신고", recipients: ["blockwide.ios@gmail.com"], message: """
                 [\(author)] \(title)
-                
                 """)
-                email.send(openURL: openURL)
+                showMailView.toggle()
             }) {
                 HStack {
                     Text("문제 신고")
@@ -88,6 +89,12 @@ struct MenuButtonView: View {
                 .foregroundColor(Color.theme.accent)
         }
         .buttonStyle(ListSelectionStyle())
+        .sheet(isPresented: $showMailView) {
+            MailView(data: $mailData) { result in
+                print(result)
+            }
+        }
+        .disabled(!MailView.canSendMail)
     }
     
     func share() {
