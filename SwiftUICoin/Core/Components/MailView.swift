@@ -94,7 +94,6 @@ public struct ComposeMailData {
         self.subject = subject
         self.recipients = recipients
         self.message = message
-//        self.attachments = attachments
     }
     
     // 빈 ComposeMailData를 반환하는 변수
