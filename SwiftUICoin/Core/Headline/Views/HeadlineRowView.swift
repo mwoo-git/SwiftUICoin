@@ -81,6 +81,12 @@ struct MenuButtonView: View {
                     Image(systemName: "exclamationmark.bubble")
                 }
             }
+            .sheet(isPresented: $showMailView) {
+                MailView(data: $mailData) { result in
+                    print(result)
+                }
+            }
+            .disabled(!MailView.canSendMail)
             
         } label:{
             Image(systemName: "ellipsis")
@@ -89,12 +95,6 @@ struct MenuButtonView: View {
                 .foregroundColor(Color.theme.accent)
         }
         .buttonStyle(ListSelectionStyle())
-        .sheet(isPresented: $showMailView) {
-            MailView(data: $mailData) { result in
-                print(result)
-            }
-        }
-        .disabled(!MailView.canSendMail)
     }
     
     func share() {

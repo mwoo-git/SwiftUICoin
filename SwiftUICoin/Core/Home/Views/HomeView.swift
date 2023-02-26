@@ -52,10 +52,6 @@ extension HomeView {
             Spacer()
             HStack(spacing: 15) {
                 NavigationLink(
-                    destination: MailViewTest()) {
-                        IconView(iconName: "star")
-                    }
-                NavigationLink(
                     destination: SearchView()) {
                         IconView(iconName: "magnifyingglass")
                     }
