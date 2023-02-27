@@ -118,6 +118,7 @@ private extension HomeCoinListView {
                 }
                 let offset = proxy.frame(in: .global).minY
                 self.scrollViewOffset = offset - self.startOffset
+                print(scrollViewOffset)
             }
             return Color.clear
         }
@@ -131,7 +132,7 @@ private extension HomeCoinListView {
             .background(Circle().foregroundColor(Color.theme.arrowButton))
             .padding(.trailing, 30)
             .padding(.bottom, 40)
-            .opacity(scrollViewOffset > 400 ? 1 : 0)
+            .opacity(scrollViewOffset < -100 ? 1 : 0)
     }
 }
 

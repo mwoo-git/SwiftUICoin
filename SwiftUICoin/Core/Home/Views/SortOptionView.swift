@@ -36,14 +36,13 @@ struct SortOptionView: View {
                         .cornerRadius(50)
                 }
                 .font(.system(size: 15, weight: .regular))
-                .foregroundColor(.theme.accent)
-                .background(Color.theme.background)
                 .onAppear {
                     self.scrollViewProxy = proxy
                 }
                 .padding(.horizontal, 10) // Add horizontal padding to HStack
             }
             .padding(.bottom, 8)
+            .background(Color.theme.background)
         }
     }
 }
