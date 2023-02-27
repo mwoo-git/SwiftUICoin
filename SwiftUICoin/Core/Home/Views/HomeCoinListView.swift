@@ -118,7 +118,6 @@ private extension HomeCoinListView {
                 }
                 let offset = proxy.frame(in: .global).minY
                 self.scrollViewOffset = offset - self.startOffset
-                print(scrollViewOffset)
             }
             return Color.clear
         }
