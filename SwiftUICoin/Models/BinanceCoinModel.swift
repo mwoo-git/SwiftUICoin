@@ -7,15 +7,15 @@
 
 import Foundation
 
+struct BinanceExchangeInfo: Codable {
+    let symbols: [BinanceCoin]
+}
+
 struct BinanceCoin: Codable {
     let symbol: String
     let baseAsset: String
     let quoteAsset: String
     let status: String
-    
-    var name: String {
-        return baseAsset.lowercased()
-    }
 }
 
 
