@@ -38,14 +38,14 @@ struct HomeCoinListView: View {
                         GlobalScrollView(viewModel: globalViewModel)
                         allCoinList
                     }
-                    .id("SCROLL_TO_TOP")
+                    .id("scrollView")
                 }
             }
             .overlay(
                 scrollToTopButton
                     .onTapGesture {
                         withAnimation {
-                            proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
+                            proxyReader.scrollTo("scrollView", anchor: .top)
                         }
                     }
                 ,alignment: .bottomTrailing
@@ -60,7 +60,7 @@ struct HomeCoinListView: View {
             }
             .onChange(of: viewModel.sortOption) { _ in
                 if viewModel.sortOption == .favorite {
-                    proxyReader.scrollTo("SCROLL_TO_TOP", anchor: .top)
+                    proxyReader.scrollTo("scrollView", anchor: .top)
                 }
             }
         }
@@ -113,12 +113,12 @@ private extension HomeCoinListView {
     
     var scrollToTopGeometryReader: some View {
         GeometryReader { proxy -> Color in
-            DispatchQueue.main.async {
-                if self.startOffset == 0 {
-                    self.startOffset = proxy.frame(in: .global).minY
+            let offsetY = proxy.frame(in: .named("scrollView")).minY
+            let newOffset = max(0, offsetY)
+            if self.scrollViewOffset != newOffset {
+                DispatchQueue.main.async {
+                    self.scrollViewOffset = newOffset
                 }
-                let offset = proxy.frame(in: .global).minY
-                self.scrollViewOffset = offset - self.startOffset
             }
             return Color.clear
         }
@@ -132,7 +132,7 @@ private extension HomeCoinListView {
             .background(Circle().foregroundColor(Color.theme.arrowButton))
             .padding(.trailing, 30)
             .padding(.bottom, 40)
-            .opacity(scrollViewOffset < -100 ? 1 : 0)
+            .opacity(scrollViewOffset < 80 ? 1 : 0)
     }
 }
 
