@@ -52,6 +52,9 @@
 		7355919029AB697700B80165 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355918F29AB697700B80165 /* MailView.swift */; };
 		7355919229AB7A8900B80165 /* FirstResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355919129AB7A8900B80165 /* FirstResponderTextField.swift */; };
 		7355919429AB82B100B80165 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7355919329AB82B100B80165 /* 03.png */; };
+		7355919B29AFADA400B80165 /* BinanceCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355919A29AFADA400B80165 /* BinanceCoinModel.swift */; };
+		7355919D29AFADED00B80165 /* BinanceCoinDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355919C29AFADED00B80165 /* BinanceCoinDataService.swift */; };
+		7355919F29AFAF7500B80165 /* BinanceCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355919E29AFAF7500B80165 /* BinanceCoinViewModel.swift */; };
 		7360D03E2904582800F06499 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03D2904582800F06499 /* SettingsView.swift */; };
 		7360D0402904764A00F06499 /* SettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360D03F2904764A00F06499 /* SettingsButtonView.swift */; };
 		7367FD5E28D30B1500E050EA /* TradingViewChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367FD5D28D30B1500E050EA /* TradingViewChart.swift */; };
@@ -170,6 +173,9 @@
 		7355918F29AB697700B80165 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		7355919129AB7A8900B80165 /* FirstResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderTextField.swift; sourceTree = "<group>"; };
 		7355919329AB82B100B80165 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		7355919A29AFADA400B80165 /* BinanceCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceCoinModel.swift; sourceTree = "<group>"; };
+		7355919C29AFADED00B80165 /* BinanceCoinDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceCoinDataService.swift; sourceTree = "<group>"; };
+		7355919E29AFAF7500B80165 /* BinanceCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceCoinViewModel.swift; sourceTree = "<group>"; };
 		7360D03D2904582800F06499 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7360D03F2904764A00F06499 /* SettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonView.swift; sourceTree = "<group>"; };
 		7367FD5D28D30B1500E050EA /* TradingViewChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingViewChart.swift; sourceTree = "<group>"; };
@@ -315,6 +321,7 @@
 		731086DD28CE375100283FD3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7355919529ADB97E00B80165 /* UPBit */,
 				731086E428CE3AAD00283FD3 /* Components */,
 				731086DF28CE376000283FD3 /* Home */,
 				73C0FF182922B05C00016E64 /* Launch */,
@@ -344,6 +351,7 @@
 				7334472028E2048D00F1719E /* WatchlistContainer.xcdatamodeld */,
 				739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */,
 				7355918D29AB3F3400B80165 /* CoinSortOptionModel.swift */,
+				7355919A29AFADA400B80165 /* BinanceCoinModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -374,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				731086F728CF790900283FD3 /* HomeViewModel.swift */,
+				7355919E29AFAF7500B80165 /* BinanceCoinViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -472,6 +481,13 @@
 				736B40E729254837008BAB64 /* GlobalTradingView.swift */,
 			);
 			path = TradingView;
+			sourceTree = "<group>";
+		};
+		7355919529ADB97E00B80165 /* UPBit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UPBit;
 			sourceTree = "<group>";
 		};
 		73771CC329786DAA00539C09 /* Image */ = {
@@ -633,6 +649,7 @@
 				731A036628ECC07800B1BC39 /* HeadlineDataService.swift */,
 				73BB738F28FD412E00BB7FEA /* TrendDataService.swift */,
 				73FF2419290C3219008C8172 /* GlobalDataService.swift */,
+				7355919C29AFADED00B80165 /* BinanceCoinDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -764,6 +781,7 @@
 			files = (
 				73B9564628E0911600DD4A9F /* NftDetailView.swift in Sources */,
 				73C71C6728D868B70067167F /* SearchViewModel.swift in Sources */,
+				7355919F29AFAF7500B80165 /* BinanceCoinViewModel.swift in Sources */,
 				736DFAD729979AB200BA0DF4 /* HeadlineSearchView.swift in Sources */,
 				7351E62228D389BB00A8383C /* UIApplication.swift in Sources */,
 				73C0FF1529158A6800016E64 /* NoticeRowView.swift in Sources */,
@@ -818,6 +836,7 @@
 				739A39ED28F75DAC005348E5 /* SearchAllCoinsView.swift in Sources */,
 				7355919229AB7A8900B80165 /* FirstResponderTextField.swift in Sources */,
 				739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */,
+				7355919D29AFADED00B80165 /* BinanceCoinDataService.swift in Sources */,
 				7360D03E2904582800F06499 /* SettingsView.swift in Sources */,
 				73FF241E291037F7008C8172 /* GlobalDetailView.swift in Sources */,
 				739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */,
@@ -845,6 +864,7 @@
 				731A035C28ECA47400B1BC39 /* HeadlineModel.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
 				73C71C7428D9910F0067167F /* CoinDetailDataService.swift in Sources */,
+				7355919B29AFADA400B80165 /* BinanceCoinModel.swift in Sources */,
 				739A39EF28F85E4F005348E5 /* InfoOptionView.swift in Sources */,
 				73C71C6C28D86DDD0067167F /* DetailView.swift in Sources */,
 				73BB738E28FC533700BB7FEA /* ShareButtonView.swift in Sources */,

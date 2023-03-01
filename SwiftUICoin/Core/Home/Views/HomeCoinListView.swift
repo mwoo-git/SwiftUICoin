@@ -11,6 +11,7 @@ struct HomeCoinListView: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
     @EnvironmentObject var globalViewModel: GlobalViewModel
+    @EnvironmentObject var binanceViewModel: BinanceCoinViewModel
     @State private var scrollViewOffset: CGFloat = 0
     @State private var startOffset: CGFloat = 0
     
@@ -95,7 +96,7 @@ private extension HomeCoinListView {
                                 .buttonStyle(ListSelectionStyle())
                         }
                     } else {
-                        ForEach(viewModel.allCoins) { coin in
+                        ForEach(binanceViewModel.binanceCoins(allCoins: viewModel.allCoins, binanceCoins: binanceViewModel.coins)) { coin in
                             NavigationLink(
                                 destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
                                 label: {
