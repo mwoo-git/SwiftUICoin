@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
+    @EnvironmentObject private var UpbitViewModel: UpbitCoinViewModel
     @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var showMenu = false
     @State private var isDark = false
@@ -51,6 +52,12 @@ extension HomeView {
                 .padding(.leading)
             Spacer()
             HStack(spacing: 15) {
+                Button {
+                    UpbitViewModel.showTickers.toggle()
+                } label: {
+                    Text(UpbitViewModel.showTickers ? "시작" : "정지")
+                }
+
                 NavigationLink(
                     destination: SearchView()) {
                         IconView(iconName: "magnifyingglass")
