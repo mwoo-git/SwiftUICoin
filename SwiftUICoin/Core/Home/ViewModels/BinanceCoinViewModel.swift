@@ -20,7 +20,6 @@ class BinanceCoinViewModel: ObservableObject {
     
     func fetchCoins() {
         dataService.$coins
-            .receive(on: RunLoop.main)
             .sink { [weak self] (coins) in
                 self?.coins = coins
             }

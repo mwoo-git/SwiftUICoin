@@ -6,13 +6,13 @@
 //
 
 import Foundation
+import Alamofire
 import Combine
 
 class BinanceCoinDataService {
     @Published var coins = [BinanceCoin]()
     
     private let baseUrl = "https://api.binance.com/api/v3"
-    private let session = URLSession.shared
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -20,7 +20,14 @@ class BinanceCoinDataService {
     }
     
     func fetchCoins() {
-        self.fetchCoinsPublisher()
+        AF.request("\(baseUrl)/exchangeInfo")
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: BinanceExchangeInfo.self, decoder: JSONDecoder())
+            .compactMap { $0.value }
+            .map { $0.symbols.filter { $0.quoteAsset == "USDT" && $0.status == "TRADING" }
+                .map { BinanceCoin(symbol: $0.symbol, baseAsset: $0.baseAsset, quoteAsset: $0.quoteAsset, status: $0.status) }
+            }
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -32,17 +39,6 @@ class BinanceCoinDataService {
                 self?.coins = coins
             })
             .store(in: &cancellables)
-    }
-    
-    private func fetchCoinsPublisher() -> AnyPublisher<[BinanceCoin], Error> {
-        let url = URL(string: "\(baseUrl)/exchangeInfo")!
-        return session.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: BinanceExchangeInfo.self, decoder: JSONDecoder())
-            .map { $0.symbols.filter { $0.quoteAsset == "USDT" && $0.status == "TRADING" }
-                .map { BinanceCoin(symbol: $0.symbol, baseAsset: $0.baseAsset, quoteAsset: $0.quoteAsset, status: $0.status) }
-            }
-            .eraseToAnyPublisher()
     }
 }
 
