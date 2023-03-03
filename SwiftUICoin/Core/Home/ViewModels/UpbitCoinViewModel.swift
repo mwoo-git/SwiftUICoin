@@ -44,7 +44,7 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     func updateDisplayedTickers() {
-        displayedTickers = updatingTickers
+        displayedTickers = updatingTickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
     }
     
     func fetchTickersWithInterval() {
