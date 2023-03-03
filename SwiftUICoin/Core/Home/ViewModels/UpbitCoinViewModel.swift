@@ -10,7 +10,8 @@ import Combine
 
 class UpbitCoinViewModel: ObservableObject {
     @Published var coins = [UpbitCoin]()
-    @Published var tickers = [UpbitTicker]()
+    @Published var displayedTickers = [UpbitTicker]()
+    @Published var updatingTickers = [UpbitTicker]()
     @Published var showTickers = false
     
     private lazy var dataService = UpbitCoinDataService()
@@ -34,9 +35,16 @@ class UpbitCoinViewModel: ObservableObject {
     func fetchTickers() {
         dataService.$tickers
             .sink { [weak self] tickers in
-                self?.tickers = tickers
+                self?.updatingTickers = tickers
+                if self?.displayedTickers.isEmpty ?? false {
+                    self?.updateDisplayedTickers()
+                }
             }
             .store(in: &tickerCancellables)
+    }
+    
+    func updateDisplayedTickers() {
+        displayedTickers = updatingTickers
     }
     
     func fetchTickersWithInterval() {
@@ -45,7 +53,7 @@ class UpbitCoinViewModel: ObservableObject {
             .sink { [weak self] showTickers in
                 tickerTimer?.cancel()
                 if showTickers {
-                    tickerTimer = Timer.publish(every: 5, on: .main, in: .common)
+                    tickerTimer = Timer.publish(every: 1, on: .main, in: .common)
                         .autoconnect()
                         .sink { [weak self] _ in
                             self?.dataService.fetchTickers()
@@ -56,11 +64,11 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     func getKoreanName(for market: String) -> String? {
-            if let coin = coins.first(where: { $0.market == market }) {
-                return coin.korean_name
-            }
-            return nil
+        if let coin = coins.first(where: { $0.market == market }) {
+            return coin.korean_name
         }
+        return nil
+    }
 }
 
 
