@@ -54,6 +54,13 @@ class UpbitCoinViewModel: ObservableObject {
             }
             .store(in: &tickerCancellables)
     }
+    
+    func getKoreanName(for market: String) -> String? {
+            if let coin = coins.first(where: { $0.market == market }) {
+                return coin.korean_name
+            }
+            return nil
+        }
 }
 
 

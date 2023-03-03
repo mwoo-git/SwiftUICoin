@@ -221,4 +221,9 @@ class HomeViewModel: ObservableObject {
     private func configureLowMovingCoins() {
         sortCoins(isTop: false)
     }
+    
+    func getImageUrl(for symbol: String) -> String? {
+        let coin = allCoins.first(where: { $0.symbol.lowercased() == symbol.lowercased() })
+        return coin?.image
+    }
 }
