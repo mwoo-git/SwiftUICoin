@@ -57,7 +57,7 @@ class UpbitCoinDataService {
                         print("Error fetching upbit tickers: \(error)")
                     case .finished:
                         print("Upbit ticker data fetching finished.")
-                        print(self.tickers.first(where: { $0.market == "KRW-BTC" }))
+//                        print(self.tickers.first(where: { $0.market == "KRW-BTC" }))
                     }
                 },
                 receiveValue: { [weak self] tickers in

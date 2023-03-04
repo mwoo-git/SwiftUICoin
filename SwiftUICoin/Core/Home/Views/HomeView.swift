@@ -54,9 +54,9 @@ extension HomeView {
             Spacer()
             HStack(spacing: 15) {
                 Button {
-                    UpbitViewModel.showTickers.toggle()
+                    UpbitViewModel.isTimerRunning.toggle()
                 } label: {
-                    Text(UpbitViewModel.showTickers ? "시작" : "정지")
+                    Text(UpbitViewModel.isTimerRunning ? "시작" : "정지")
                 }
 
                 NavigationLink(

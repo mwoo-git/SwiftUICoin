@@ -12,7 +12,7 @@ class UpbitCoinViewModel: ObservableObject {
     @Published var coins = [UpbitCoin]()
     @Published var displayedTickers = [UpbitTicker]()
     @Published var updatingTickers = [UpbitTicker]()
-    @Published var showTickers = false
+    @Published var isTimerRunning = false
     
     private lazy var dataService = UpbitCoinDataService()
     private var coinCancellables: Set<AnyCancellable> = []
@@ -49,10 +49,10 @@ class UpbitCoinViewModel: ObservableObject {
     
     func fetchTickersWithInterval() {
         var tickerTimer: AnyCancellable?
-        $showTickers
-            .sink { [weak self] showTickers in
+        $isTimerRunning
+            .sink { [weak self] isTimerRunning in
                 tickerTimer?.cancel()
-                if showTickers {
+                if isTimerRunning {
                     tickerTimer = Timer.publish(every: 1, on: .main, in: .common)
                         .autoconnect()
                         .sink { [weak self] _ in

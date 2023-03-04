@@ -10,8 +10,8 @@ import Kingfisher
 
 struct UpbitCoinRowView: View {
     
-    @EnvironmentObject private var UpbitVm: UpbitCoinViewModel
-    @EnvironmentObject private var HomeVm: HomeViewModel
+    @EnvironmentObject var UpbitVm: UpbitCoinViewModel
+    @EnvironmentObject var HomeVm: HomeViewModel
     
     @State private var showTicker = false
     @State private var price = ""

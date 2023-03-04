@@ -6,30 +6,38 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct UpbitCoinListView: View {
-    
     @EnvironmentObject var vm: UpbitCoinViewModel
+    @State private var scrollViewOffset: CGFloat = 0
+    @State private var isScrolling = false
     
     var body: some View {
-        ScrollView(.vertical) {
-            LazyVStack {
-                Button {
-                    vm.showTickers.toggle()
-                } label: {
-                    Text(vm.showTickers ? "시작" : "정지")
+        ScrollViewReader { scrollView in
+            ScrollView() {
+                LazyVStack {
+                    ForEach(vm.displayedTickers) { ticker in
+                        UpbitCoinRowView(ticker: ticker)
+                    }
                 }
-
-                ForEach(vm.displayedTickers) { ticker in
-                    UpbitCoinRowView(ticker: ticker)
+                .overlay(ListGeometryReader)
+            }
+            .onAppear {
+                vm.isTimerRunning = true
+            }
+            .onDisappear {
+                vm.isTimerRunning = false
+            }
+            .onChange(of: isScrolling) { newValue in
+                if isScrolling {
+                    print("스크롤 중입니다.")
+                    vm.isTimerRunning = false
+                } else {
+                    print("스크롤 중이 아닙니다.")
+                    vm.isTimerRunning = true
                 }
             }
-        }
-        .onAppear {
-            vm.showTickers = true
-        }
-        .onDisappear {
-            vm.showTickers = false
         }
     }
 }
@@ -39,3 +47,26 @@ struct UpbitCoinListView_Previews: PreviewProvider {
         UpbitCoinListView()
     }
 }
+
+private extension UpbitCoinListView {
+    var ListGeometryReader: some View {
+        GeometryReader { proxy -> Color in
+            let offsetY = proxy.frame(in: .named("scrollView")).minY
+            let newOffset = min(0, offsetY)
+            if self.scrollViewOffset != newOffset {
+                DispatchQueue.main.async {
+                    isScrolling = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.scrollViewOffset = newOffset
+                }
+            } else {
+                DispatchQueue.main.async {
+                    isScrolling = false
+                }
+            }
+            return Color.clear
+        }
+    }
+}
+
