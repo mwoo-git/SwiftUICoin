@@ -31,10 +31,10 @@ struct UpbitCoinListView: View {
             }
             .onChange(of: isScrolling) { newValue in
                 if isScrolling {
-                    print("스크롤 중입니다.")
+                    print("Scrolling in progress")
                     vm.isTimerRunning = false
                 } else {
-                    print("스크롤 중이 아닙니다.")
+                    print("Scrolling has stopped")
                     vm.isTimerRunning = true
                 }
             }
