@@ -96,14 +96,15 @@ private extension HomeCoinListView {
                                 .buttonStyle(ListSelectionStyle())
                         }
                     } else {
-                        ForEach(binanceViewModel.binanceCoins(allCoins: viewModel.allCoins, binanceCoins: binanceViewModel.coins)) { coin in
-                            NavigationLink(
-                                destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
-                                label: {
-                                    CoinRowView(coin: coin, backup: nil)
-                                })
-                                .buttonStyle(ListSelectionStyle())
-                        }
+//                        ForEach(binanceViewModel.binanceCoins(allCoins: viewModel.allCoins, binanceCoins: binanceViewModel.coins)) { coin in
+//                            NavigationLink(
+//                                destination: NavigationLazyView(DetailView(coin: coin, backup: nil)),
+//                                label: {
+//                                    CoinRowView(coin: coin, backup: nil)
+//                                })
+//                                .buttonStyle(ListSelectionStyle())
+//                        }
+                        UpbitCoinListView()
                     }
                 }
             }

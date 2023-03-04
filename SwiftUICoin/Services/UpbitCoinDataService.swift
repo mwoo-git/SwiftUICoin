@@ -27,7 +27,6 @@ class UpbitCoinDataService {
             .publishDecodable(type: [UpbitCoin].self, decoder: JSONDecoder())
             .compactMap { $0.value }
             .map { $0.filter { $0.market.hasPrefix("KRW") } }
-            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):

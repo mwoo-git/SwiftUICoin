@@ -18,7 +18,7 @@ struct UpbitCoinRowView: View {
     @State private var changeRate = ""
     @State private var volume = ""
     
-    var ticker: UpbitTicker?
+    var ticker: UpbitTicker
     
     var body: some View {
         
@@ -31,9 +31,9 @@ struct UpbitCoinRowView: View {
         .contentShape(Rectangle())
         .onAppear {
             showTicker = true
-            price = ticker?.formattedTradePrice ?? ""
-            changeRate = ticker?.formattedChangeRate ?? ""
-            volume = ticker?.formattedAccTradePrice24H ?? ""
+            price = ticker.formattedTradePrice
+            changeRate = ticker.formattedChangeRate
+            volume = ticker.formattedAccTradePrice24H
         }
         .onDisappear {
             showTicker = false
@@ -43,7 +43,7 @@ struct UpbitCoinRowView: View {
                 return
             }
             
-            if let updatedTicker = tickers.first(where: { $0.market == ticker?.market }), updatedTicker.formattedTradePrice != price {
+            if let updatedTicker = tickers.first(where: { $0.market == ticker.market }), updatedTicker.formattedTradePrice != price {
                 DispatchQueue.main.async {
                     price = updatedTicker.formattedTradePrice
                     changeRate = updatedTicker.formattedChangeRate
@@ -72,20 +72,17 @@ extension UpbitCoinRowView {
     private var leftColumn: some View {
         HStack(spacing: 0) {
             
-//            KFImage(URL(string: HomeVm.getImageUrl(for: ticker?.market.replacingOccurrences(of: "KRW-", with: "").lowercased() ?? "") ?? ""))
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 32, height: 32)
-//                .cornerRadius(5)
+            KFImage(URL(string: HomeVm.getImageUrl(for: ticker.market.replacingOccurrences(of: "KRW-", with: "").lowercased() ) ?? ""))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 32, height: 32)
+                .cornerRadius(5)
             
             VStack(alignment: .leading, spacing: 4) {
-                if let koreanName = UpbitVm.getKoreanName(for: ticker?.market ?? "") {
-                    Text(koreanName)
-                    
-                        .font(.headline)
-                        .foregroundColor(Color.theme.textColor)
-                }
-                Text(ticker?.market.replacingOccurrences(of: "KRW-", with: "").uppercased() ?? "")
+                Text(UpbitVm.getKoreanName(for: ticker.market))
+                    .font(.headline)
+                    .foregroundColor(Color.theme.textColor)
+                Text(ticker.market.replacingOccurrences(of: "KRW-", with: "").uppercased())
                     .foregroundColor(Color.theme.accent)
                     .font(.subheadline)
             }
@@ -95,12 +92,12 @@ extension UpbitCoinRowView {
     
     private var rightColmn: some View {
         VStack(alignment: .trailing, spacing: 4) {
-            Text(ticker == nil ? "$0.00" : price )
+            Text(price)
                 .bold()
                 .font(.headline)
-                .foregroundColor(ticker == nil ? Color.theme.accent : Color.theme.textColor)
-            Text(ticker == nil ? "0.00%" : changeRate )
-                .foregroundColor(ticker == nil ? Color.theme.accent : (ticker?.change == "FALL" ? Color.theme.red : Color.theme.green))
+                .foregroundColor(Color.theme.textColor)
+            Text(changeRate)
+                .foregroundColor(ticker.change == "FALL" ? Color.theme.red : Color.theme.green)
                 .font(.subheadline)
         }
     }

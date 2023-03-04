@@ -18,8 +18,7 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             homeHeader
-            UpbitCoinListView()
-//            HomeCoinListView()
+            HomeCoinListView()
         }
         .background(Color.theme.background.ignoresSafeArea())
         .environment(\.colorScheme, .dark)

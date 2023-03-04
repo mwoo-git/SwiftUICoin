@@ -44,7 +44,9 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     func updateDisplayedTickers() {
-        displayedTickers = updatingTickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+        DispatchQueue.main.async {
+            self.displayedTickers = self.updatingTickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+        }
     }
     
     func fetchTickersWithInterval() {
@@ -63,11 +65,9 @@ class UpbitCoinViewModel: ObservableObject {
             .store(in: &tickerCancellables)
     }
     
-    func getKoreanName(for market: String) -> String? {
-        if let coin = coins.first(where: { $0.market == market }) {
-            return coin.korean_name
-        }
-        return nil
+    func getKoreanName(for market: String) -> String {
+        let coin = coins.first(where: { $0.market == market })
+        return coin?.korean_name ?? ""
     }
 }
 

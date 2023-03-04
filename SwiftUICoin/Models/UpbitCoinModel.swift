@@ -45,13 +45,9 @@ struct UpbitTicker: Codable, Identifiable {
     }
     
     var formattedChangeRate: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 2
-        formatter.multiplier = 1
-        formatter.percentSymbol = "%"
-        let rate = self.changeRate * (self.change == "FALL" ? -1 : 1) * 100 
-        return formatter.string(for: rate) ?? ""
+        let rate = self.changeRate * (self.change == "FALL" ? -1 : 1) * 100
+        let rateString = String(format: "%.2f", rate)
+        return "\(rateString)%"
     }
     
     var formattedAccTradePrice24H: String {
