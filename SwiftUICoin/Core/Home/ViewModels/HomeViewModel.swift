@@ -25,7 +25,7 @@ class HomeViewModel: ObservableObject {
     @Published var searchCoinsBackup = [BackupCoinEntity]()
     
     @Published var status: StatusCode = .status200
-    @Published var sortOption: SortOption = .rank
+    @Published var sortOption: CoingeckoSortOption = .rank
     @Published var isRefreshing = false
     @Published var isEditing = false
     @Published var isDark = true
@@ -130,7 +130,7 @@ class HomeViewModel: ObservableObject {
     }
     
     // Sort AllCoins
-    private func sortCoins(coins: [CoinModel], sort: SortOption) -> [CoinModel] {
+    private func sortCoins(coins: [CoinModel], sort: CoingeckoSortOption) -> [CoinModel] {
         switch sort {
         case .rank:
             return coins.sorted(by: { ($0.marketCapRank?.convertRank ?? 0) < ($1.marketCapRank?.convertRank ?? 0) })

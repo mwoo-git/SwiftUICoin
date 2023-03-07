@@ -16,8 +16,8 @@ struct UpbitCoinListView: View {
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView() {
-                LazyVStack {
-                    ForEach(vm.displayedTickers) { ticker in
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(vm.displayedTickers.enumerated()), id: \.element) { index, ticker in
                         UpbitCoinRowView(ticker: ticker)
                     }
                     .onAppear {

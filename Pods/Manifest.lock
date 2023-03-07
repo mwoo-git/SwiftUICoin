@@ -1,16 +1,20 @@
 PODS:
-  - Alamofire (5.5.0)
+  - Alamofire (5.6.4)
+  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - Alamofire
+  - Starscream
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Starscream
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 3cba3f1596c479f5b738cb59a2a58b85f825d333
+PODFILE CHECKSUM: d88346789e0e033da72a8fc9091251bf673be548
 
 COCOAPODS: 1.11.2

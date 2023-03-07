@@ -32,6 +32,10 @@ struct ColorTheme {
     let openseaColor = Color("OpenSeaColor")
     let listSelectionColor = Color("ListSelectionColor")
     let globalItemGreenColor = Color("GlobalItemGreenColor")
+    let risingColor = Color("RisingColor")
+    let fallingColor = Color("FallingColor")
+    let risingBackgroundColor = Color("RisingBackgroundColor")
+    let fallingBackgroundColor = Color("FallingBackgroundColor")
 }
 
 struct LaunchTheme {

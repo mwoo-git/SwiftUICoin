@@ -21,7 +21,7 @@ class DeveloperPreview {
     
     private init() { }
     
-    let upbitTicker = UpbitTicker(market: "KRW-BTC", change: "FALL", tradePrice: 29815000.0, changeRate: 0.0415956797, accTradePrice24H: 227557022569.19116)
+    let upbitTicker = UpbitTicker(market: "KRW-BTC", change: "FALL", tradePrice: 29815000.0, changeRate: 0.0415956797, accTradePrice24H: 227557022569.19116, signedChangeRate: -0.0415956797)
     
     let global = GlobalModel(name: "S&P500 선물", price: "11,191.63", priceChange: "▾214.27", priceChangePercentage: "-1.88%")
     

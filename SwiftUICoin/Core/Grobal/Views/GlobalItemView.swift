@@ -42,8 +42,10 @@ struct GlobalItemView2: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text(global.nameKR)
                     .bold()
+                    .foregroundColor(Color.theme.textColor)
                 Text(global.price)
                     .bold()
+                    .foregroundColor(Color.theme.textColor)
                 Text(global.priceChangePercentage)
                     .bold()
                     .padding(.trailing, 11)
@@ -52,7 +54,7 @@ struct GlobalItemView2: View {
                     .font(.footnote)
                     .foregroundColor(Color.white)
                     .background(
-                        global.priceChangePercentage.contains("+") ? Color.theme.globalItemGreenColor : Color.theme.red
+                        global.priceChangePercentage.contains("+") ? Color.theme.red : Color.blue
                     )
                     .cornerRadius(5)
             }

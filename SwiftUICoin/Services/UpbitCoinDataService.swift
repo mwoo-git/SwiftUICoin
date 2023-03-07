@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Combine
+import Starscream
 
 class UpbitCoinDataService {
     @Published var coins = [UpbitCoin]()

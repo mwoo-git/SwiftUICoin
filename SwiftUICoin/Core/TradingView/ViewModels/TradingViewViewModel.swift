@@ -1,26 +1,30 @@
 //
-//  TradingView.swift
+//  TradingViewViewModel.swift
 //  SwiftUICoin
 //
-//  Created by Woo Min on 2022/09/15.
+//  Created by Woo Min on 2023/03/05.
 //
 
 import SwiftUI
 import WebKit
+import Combine
 
-struct TradingViewChart: View {
+class TradingViewViewModel: ObservableObject {
+    @Published var symbol: String = ""
+    @Published var html: String = ""
+    private var cancellables: Set<AnyCancellable> = []
     
-    let symbol: String
-    @State private var html = ""
-    
-    var body: some View {
-        WebView(html: $html)
-            .onAppear {
-                self.loadHTML()
+    init(symbol: String) {
+        self.symbol = symbol
+        self.loadHTML()
+        self.$symbol
+            .sink { [weak self] _ in
+                self?.loadHTML()
             }
+            .store(in: &cancellables)
     }
     
-    private func loadHTML() {
+    func loadHTML() {
         let meta = "<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'>"
         let style = "<style>body { margin: 0; background-color: #131722; } .container { width: 100vw; height: 100vh; }</style>"
         let tradingView = """
@@ -60,25 +64,4 @@ struct TradingViewChart: View {
         html = "<html><head>\(meta)\(style)</head><body>\(tradingView)</body></html>"
     }
     
-    
-    struct WebView: UIViewRepresentable {
-            @Binding var html: String
-            
-            func makeUIView(context: Context) -> WKWebView {
-                let webView = WKWebView()
-                webView.scrollView.isScrollEnabled = false
-                webView.isOpaque = false
-                return webView
-            }
-            
-            func updateUIView(_ webView: WKWebView, context: Context) {
-                webView.loadHTMLString(html, baseURL: nil)
-            }
-        }
-    
-    struct TradingView_Previews: PreviewProvider {
-        static var previews: some View {
-            TradingViewChart(symbol: "BTC")
-        }
-    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SortOption: String, CaseIterable, Identifiable {
+enum CoingeckoSortOption: String, CaseIterable, Identifiable {
     case favorite = "FAVORITE"
     case rank = "MARKET_CAP"
     case priceChangePercentage24H = "PRICE_UP"

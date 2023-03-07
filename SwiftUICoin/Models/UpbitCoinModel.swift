@@ -13,13 +13,14 @@ struct UpbitCoin: Codable {
     let english_name: String
 }
 
-struct UpbitTicker: Codable, Identifiable {
+struct UpbitTicker: Codable, Identifiable, Hashable {
     let id = UUID()
     let market: String
     let change: String
     let tradePrice: Double
     let changeRate: Double
     let accTradePrice24H: Double
+    let signedChangeRate: Double
     
     enum CodingKeys: String, CodingKey {
         case market
@@ -27,6 +28,11 @@ struct UpbitTicker: Codable, Identifiable {
         case tradePrice = "trade_price"
         case changeRate = "change_rate"
         case accTradePrice24H = "acc_trade_price_24h"
+        case signedChangeRate = "signed_change_rate"
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     var formattedTradePrice: String {
@@ -46,8 +52,9 @@ struct UpbitTicker: Codable, Identifiable {
     
     var formattedChangeRate: String {
         let rate = self.changeRate * (self.change == "FALL" ? -1 : 1) * 100
-        let rateString = String(format: "%.2f", rate)
-        return "\(rateString)%"
+        let sign = rate >= 0 ? "+" : "-"
+        let rateString = String(format: "%.2f", abs(rate))
+        return "\(sign)\(rateString)%"
     }
     
     var formattedAccTradePrice24H: String {

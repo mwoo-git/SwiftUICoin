@@ -13,10 +13,19 @@ class UpbitCoinViewModel: ObservableObject {
     @Published var displayedTickers = [UpbitTicker]()
     @Published var updatingTickers = [UpbitTicker]()
     @Published var isTimerRunning = false
+    @Published var sortBy: TickerSortOption = .volume
     
     private lazy var dataService = UpbitCoinDataService()
-    private var coinCancellables: Set<AnyCancellable> = []
-    private var tickerCancellables: Set<AnyCancellable> = []
+    private var cancellables = Set<AnyCancellable>()
+    
+    enum TickerSortOption {
+        case price
+        case priceReversed
+        case changeRate
+        case changeRateReversed
+        case volume
+        case volumeReversed
+    }
     
     init() {
         fetchCoins()
@@ -29,7 +38,7 @@ class UpbitCoinViewModel: ObservableObject {
             .sink { [weak self] coins in
                 self?.coins = coins
             }
-            .store(in: &coinCancellables)
+            .store(in: &cancellables)
     }
     
     func fetchTickers() {
@@ -40,13 +49,7 @@ class UpbitCoinViewModel: ObservableObject {
                     self?.updateDisplayedTickers()
                 }
             }
-            .store(in: &tickerCancellables)
-    }
-    
-    func updateDisplayedTickers() {
-        DispatchQueue.main.async {
-            self.displayedTickers = self.updatingTickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
-        }
+            .store(in: &cancellables)
     }
     
     func fetchTickersWithInterval() {
@@ -62,12 +65,39 @@ class UpbitCoinViewModel: ObservableObject {
                         }
                 }
             }
-            .store(in: &tickerCancellables)
+            .store(in: &cancellables)
     }
     
     func getKoreanName(for market: String) -> String {
         let coin = coins.first(where: { $0.market == market })
         return coin?.korean_name ?? ""
+    }
+    
+    func updateDisplayedTickers() {
+        $updatingTickers
+            .combineLatest($sortBy)
+            .map(sortTickers)
+            .sink { [weak self] (tickers) in
+                self?.displayedTickers = tickers
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func sortTickers(tickers: [UpbitTicker], sort: TickerSortOption) -> [UpbitTicker] {
+        switch sort {
+        case .price:
+            return tickers.sorted(by: { $0.tradePrice > $1.tradePrice })
+        case .priceReversed:
+            return tickers.sorted(by: { $0.tradePrice < $1.tradePrice })
+        case .changeRate:
+            return tickers.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
+        case .changeRateReversed:
+            return tickers.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
+        case .volume:
+            return tickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+        case .volumeReversed:
+            return tickers.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
+        }
     }
 }
 

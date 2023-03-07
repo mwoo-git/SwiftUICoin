@@ -60,7 +60,7 @@ struct SortOptionBarView_Previews: PreviewProvider {
 }
 
 private extension SortOptionView {
-    func button(for sortOption: SortOption, label: String) -> some View {
+    func button(for sortOption: CoingeckoSortOption, label: String) -> some View {
         let isSelected = viewModel.sortOption == sortOption
         
         return Button(action: {
@@ -99,7 +99,7 @@ private extension SortOptionView {
             .id(sortOption)
     }
     
-    func selectedBorder(for sortOption: SortOption) -> some View {
+    func selectedBorder(for sortOption: CoingeckoSortOption) -> some View {
         let isSelected = viewModel.sortOption == sortOption
         
         return RoundedRectangle(cornerRadius: 50)
