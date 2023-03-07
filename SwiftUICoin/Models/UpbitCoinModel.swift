@@ -70,3 +70,5 @@ struct UpbitTicker: Codable, Identifiable, Hashable {
 }
 
 
+
+

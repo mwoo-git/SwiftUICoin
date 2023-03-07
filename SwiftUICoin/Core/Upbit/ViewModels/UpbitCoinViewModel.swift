@@ -15,7 +15,8 @@ class UpbitCoinViewModel: ObservableObject {
     @Published var isTimerRunning = false
     @Published var sortBy: TickerSortOption = .volume
     
-    private lazy var dataService = UpbitCoinDataService()
+    private var dataService = UpbitCoinDataService()
+    private var webSocketService = UpbitWebSocketService()
     private var cancellables = Set<AnyCancellable>()
     
     enum TickerSortOption {
@@ -30,13 +31,14 @@ class UpbitCoinViewModel: ObservableObject {
     init() {
         fetchCoins()
         fetchTickers()
-        fetchTickersWithInterval()
+//        fetchTickersWithInterval()
     }
     
     func fetchCoins() {
         dataService.$coins
             .sink { [weak self] coins in
                 self?.coins = coins
+                self?.webSocketService.connect(coins: coins)
             }
             .store(in: &cancellables)
     }
