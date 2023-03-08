@@ -38,7 +38,7 @@ class UpbitCoinViewModel: ObservableObject {
         dataService.$coins
             .sink { [weak self] coins in
                 self?.coins = coins
-                self?.webSocketService.connect(coins: coins)
+                self?.webSocketService.connect(codes: self?.marketsFromCoins() ?? "")
             }
             .store(in: &cancellables)
     }
@@ -100,6 +100,10 @@ class UpbitCoinViewModel: ObservableObject {
         case .volumeReversed:
             return tickers.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
         }
+    }
+    
+    func marketsFromCoins() -> String {
+        return coins.map { $0.market }.joined(separator: ",")
     }
 }
 

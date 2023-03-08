@@ -23,12 +23,12 @@ struct UpbitTicker: Codable, Identifiable, Hashable {
     let signedChangeRate: Double
     
     enum CodingKeys: String, CodingKey {
-        case market
-        case change
-        case tradePrice = "trade_price"
-        case changeRate = "change_rate"
-        case accTradePrice24H = "acc_trade_price_24h"
-        case signedChangeRate = "signed_change_rate"
+        case market = "cd"
+        case change = "c"
+        case tradePrice = "tp"
+        case changeRate = "cp"
+        case accTradePrice24H = "atp24h"
+        case signedChangeRate = "scr"
     }
     
     func hash(into hasher: inout Hasher) {

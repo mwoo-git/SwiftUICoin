@@ -7,23 +7,33 @@
 
 import Foundation
 import Combine
-import Starscream
 
 
 class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     
-    @Published var tickers = [UpbitTicker]()
+    @Published var tickers = [String:UpbitTicker]()
     
     private var webSocket: URLSessionWebSocketTask?
     
-    private var markets = [UpbitCoin]()
+    private var codes = ""
     
-    func connect(coins: [UpbitCoin]) {
-        self.markets = coins
+    func connect(codes: String) {
+        self.codes = codes
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
         let url = URL(string:"wss://api.upbit.com/websocket/v1")!
         webSocket = session.webSocketTask(with: url)
         webSocket?.resume()
+    }
+    
+    func send() {
+        let message = """
+        [{"ticket":"bw"},{"type":"ticker","codes":[\(codes)]},{"format":"SIMPLE"}]
+        """
+        webSocket?.send(.string(message), completionHandler: { error in
+            if let error = error {
+                print("Upbit send error: \(error.localizedDescription)")
+            }
+        })
     }
     
     func ping() {
@@ -37,58 +47,51 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
         timer.fire()
     }
     
+    private func receive() {
+        webSocket?.receive { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let message):
+                switch message {
+                case .string(let text):
+                    print("Received text message: \(text)")
+                    if let data = text.data(using: .utf8) {
+                        self.onReceiveData(data)
+                    }
+                case .data(let data):
+                    print("Received binary message: \(data)")
+                    self.onReceiveData(data)
+                default: break
+                }
+                self.receive()
+                
+            case .failure(let error):
+                print("Failed to receive message: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func onReceiveData(_ data: Data) {
+        guard let ticker = try? JSONDecoder().decode(UpbitTicker.self, from: data) else {
+            return print("UpbitTicker 객체 생성 에러")
+        }
+        let newDictionary = [ticker.market: ticker]
+        print(newDictionary)
+    }
+    
     func close() {
         webSocket?.cancel(with: .goingAway, reason: nil)
         webSocket = nil
     }
     
-    func send() {
-        let codes = markets.map { $0.market }.joined(separator: ",")
-        let message = "{\"type\":\"ticker\",\"codes\":[\"\(codes)\"]}"
-        webSocket?.send(.string(message), completionHandler: { error in
-            if let error = error {
-                print("Upbit send error: \(error.localizedDescription)")
-            }
-        })
-    }
-    
-    func receive() {
-        webSocket?.receive(completionHandler: { [weak self] result in
-            switch result {
-            case .success(let message):
-                switch message {
-                case .data(let data):
-                    print("데이터 받았습니다. \(data)")
-                    let jsonData = data
-                    let decoder = JSONDecoder()
-                    do {
-                        let tickers = try decoder.decode([UpbitTicker].self, from: jsonData)
-                        DispatchQueue.main.async {
-                            self?.tickers = tickers
-                        }
-                    } catch {
-                        print("Error decoding JSON: \(error)")
-                    }
-                case .string(let message):
-                    break
-                @unknown default:
-                    break
-                }
-            case .failure(let error):
-                print("Upbit Receive error: \(error.localizedDescription)")
-            }
-            self?.receive()
-        })
-    }
-    
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        print("연결 완료")
-        ping()
-        receive()
+        print("UPbit websocket connection opened.")
         send()
+        receive()
+        ping()
     }
     
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-        print("연결 끊김")
+        print("UPbit websocket connection closed.")
     }
 }
