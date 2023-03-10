@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             homeHeader
-            HomeCoinListView()
+            UpbitCoinListView()
         }
         .background(Color.theme.background.ignoresSafeArea())
         .environment(\.colorScheme, .dark)
@@ -52,12 +52,6 @@ extension HomeView {
                 .padding(.leading)
             Spacer()
             HStack(spacing: 15) {
-                Button {
-                    UpbitViewModel.isTimerRunning.toggle()
-                } label: {
-                    Text(UpbitViewModel.isTimerRunning ? "시작" : "정지")
-                }
-
                 NavigationLink(
                     destination: SearchView()) {
                         IconView(iconName: "magnifyingglass")

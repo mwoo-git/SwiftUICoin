@@ -22,15 +22,15 @@ struct GlobalScrollView: View {
                 scrollView
             }
         }
-        .onChange(of: isScrolling) { newValue in
-            if isScrolling {
-                print("Scrolling in progress")
-                UpbitVm.isTimerRunning = false
-            } else {
-                print("Scrolling has stopped")
-                UpbitVm.isTimerRunning = true
-            }
-        }
+//        .onChange(of: isScrolling) { newValue in
+//            if isScrolling {
+//                print("Scrolling in progress")
+//                UpbitVm.isTimerRunning = false
+//            } else {
+//                print("Scrolling has stopped")
+//                UpbitVm.isTimerRunning = true
+//            }
+//        }
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class UpbitCoinRowViewModel: ObservableObject {
     @Published var market = ""
@@ -17,24 +18,33 @@ class UpbitCoinRowViewModel: ObservableObject {
     @Published var volume = ""
     @Published var color = Color.theme.textColor
     
+    var ticker: UpbitTicker
+    
+    init(ticker: UpbitTicker) {
+        self.ticker = ticker
+        self.price = ticker.formattedTradePrice
+        self.changeRate = ticker.formattedChangeRate
+        self.volume = ticker.formattedAccTradePrice24H
+        self.market = ticker.market
+    }
     
     enum Change: Equatable {
         case rise, fall, natural
     }
     
-    func updateView(tickers: [UpbitTicker]) {
+    func updateView(tickers: [String: UpbitTicker]) {
         guard showTicker else {
             return
         }
         
-        if let updatedTicker = tickers.first(where: { $0.market == market }), updatedTicker.formattedTradePrice != price {
+        if let updatedTicker = tickers[market], updatedTicker.formattedTradePrice != price {
             let newPrice = updatedTicker.formattedTradePrice
-            if self.price < newPrice {
-                self.color = Color.theme.red
-            } else {
-                self.color = Color.theme.openseaColor
-            }
             DispatchQueue.main.async {
+                if self.price < newPrice {
+                    self.color = Color.theme.red
+                } else {
+                    self.color = Color.theme.openseaColor
+                }
                 self.price = updatedTicker.formattedTradePrice
                 self.changeRate = updatedTicker.formattedChangeRate
                 self.volume = updatedTicker.formattedAccTradePrice24H

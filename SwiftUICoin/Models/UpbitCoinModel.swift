@@ -26,7 +26,7 @@ struct UpbitTicker: Codable, Identifiable, Hashable {
         case market = "cd"
         case change = "c"
         case tradePrice = "tp"
-        case changeRate = "cp"
+        case changeRate = "cr"
         case accTradePrice24H = "atp24h"
         case signedChangeRate = "scr"
     }
@@ -69,6 +69,28 @@ struct UpbitTicker: Codable, Identifiable, Hashable {
     }
 }
 
+struct UpbitTickerRestAPI: Codable, Identifiable, Hashable {
+    let id = UUID()
+    let market: String
+    let change: String
+    let tradePrice: Double
+    let changeRate: Double
+    let accTradePrice24H: Double
+    let signedChangeRate: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case market
+        case change
+        case tradePrice = "trade_price"
+        case changeRate = "change_rate"
+        case accTradePrice24H = "acc_trade_price_24h"
+        case signedChangeRate = "signed_change_rate"
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
 
 
 

@@ -12,7 +12,7 @@ import Starscream
 
 class UpbitCoinDataService {
     @Published var coins = [UpbitCoin]()
-    @Published var tickers = [UpbitTicker]()
+    @Published var tickers = [String: UpbitTicker]()
     
     private let baseUrl = "https://api.upbit.com/v1"
     private var coinCancellables = Set<AnyCancellable>()
@@ -42,14 +42,13 @@ class UpbitCoinDataService {
             .store(in: &coinCancellables)
     }
     
-    func fetchTickers() {
+    private func fetchTickers() {
         let tickersUrl = "https://api.upbit.com/v1/ticker?markets=" + coins.map { $0.market }.joined(separator: ",")
         
         AF.request(tickersUrl)
             .validate(statusCode: 200..<300)
-            .publishDecodable(type: [UpbitTicker].self, decoder: JSONDecoder())
+            .publishDecodable(type: [UpbitTickerRestAPI].self, decoder: JSONDecoder())
             .compactMap { $0.value }
-            .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { completion in
                     switch completion {
@@ -57,12 +56,22 @@ class UpbitCoinDataService {
                         print("Error fetching upbit tickers: \(error)")
                     case .finished:
                         print("Upbit ticker data fetching finished.")
-//                        print(self.tickers.first(where: { $0.market == "KRW-BTC" }))
+                        print(self.tickers.first(where: { $0.value.market == "KRW-BTC" }))
                     }
                 },
                 receiveValue: { [weak self] tickers in
-                    self?.tickers = tickers
-                }
+                        var tickersDict: [String: UpbitTicker] = [:]
+                        tickers.forEach { tickerRestAPI in
+                            let ticker = UpbitTicker(market: tickerRestAPI.market,
+                                                     change: tickerRestAPI.change,
+                                                     tradePrice: tickerRestAPI.tradePrice,
+                                                     changeRate: tickerRestAPI.changeRate,
+                                                     accTradePrice24H: tickerRestAPI.accTradePrice24H,
+                                                     signedChangeRate: tickerRestAPI.signedChangeRate)
+                            tickersDict[ticker.market] = ticker
+                        }
+                        self?.tickers = tickersDict
+                    }
             )
             .store(in: &tickerCancellables)
     }

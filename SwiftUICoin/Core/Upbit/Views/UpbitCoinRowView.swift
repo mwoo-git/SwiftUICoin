@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct UpbitCoinRowView: View {
     
-    @EnvironmentObject var UpbitVm: UpbitCoinViewModel
-    @EnvironmentObject var HomeVm: HomeViewModel
-    @StateObject private var vm = UpbitCoinRowViewModel()
+    @EnvironmentObject var upbit: UpbitCoinViewModel
+    @StateObject var vm: UpbitCoinRowViewModel
     
-    var ticker: UpbitTicker
+    let queue = DispatchQueue.global()
+    
+    init(ticker: UpbitTicker) {
+        _vm = StateObject(wrappedValue: UpbitCoinRowViewModel(ticker: ticker))
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,16 +37,17 @@ struct UpbitCoinRowView: View {
         .contentShape(Rectangle())
         .onAppear {
             vm.showTicker = true
-            vm.price = ticker.formattedTradePrice
-            vm.changeRate = ticker.formattedChangeRate
-            vm.volume = ticker.formattedAccTradePrice24H
-            vm.market = ticker.market
+            upbit.appendCode(market: vm.market)
         }
         .onDisappear {
             vm.showTicker = false
+            upbit.deleteCode(market: vm.market)
+            
         }
-        .onReceive(UpbitVm.$updatingTickers) { tickers in
-            vm.updateView(tickers: tickers)
+        .onReceive(upbit.updatingTickersSubject) { tickers in
+            queue.async {
+                vm.updateView(tickers: tickers)
+            }
         }
     }
 }
@@ -52,12 +57,12 @@ private extension UpbitCoinRowView {
     var leftColumn: some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(UpbitVm.getKoreanName(for: ticker.market))
+                Text(upbit.getKoreanName(for: vm.market))
                     .font(.system(size: 15))
                     .fontWeight(.light)
                     .foregroundColor(Color.theme.textColor)
                     .padding(.bottom, 3)
-                Text(ticker.market.replacingOccurrences(of: "KRW-", with: "").uppercased())
+                Text(vm.market.replacingOccurrences(of: "KRW-", with: "").uppercased())
                     .foregroundColor(Color.theme.accent)
                     .font(.system(size: 12))
                     .fontWeight(.regular)
@@ -77,7 +82,7 @@ private extension UpbitCoinRowView {
                 .fontWeight(.medium)
                 .foregroundColor(vm.changeRate.contains("-") ? Color.theme.fallingColor : Color.theme.risingColor)
                 .frame(width: UIScreen.main.bounds.width / 5, alignment: .trailing)
-                
+            
             Text(vm.volume + "백만")
                 .font(.system(size: 14))
                 .fontWeight(.regular)

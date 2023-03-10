@@ -20,25 +20,19 @@ struct UpbitCoinListView: View {
                     ForEach(Array(vm.displayedTickers.enumerated()), id: \.element) { index, ticker in
                         UpbitCoinRowView(ticker: ticker)
                     }
-                    .onAppear {
-                        vm.isTimerRunning = true
-                    }
-                    .onDisappear {
-                        vm.isTimerRunning = false
-                    }
                 }
                 .overlay(ListGeometryReader)
             }
         }
-        .onChange(of: isScrolling) { newValue in
-            if isScrolling {
-                print("Scrolling in progress")
-                vm.isTimerRunning = false
-            } else {
-                print("Scrolling has stopped")
-                vm.isTimerRunning = true
-            }
-        }
+//        .onChange(of: isScrolling) { newValue in
+//            if isScrolling {
+//                print("Scrolling in progress")
+//                vm.send1()
+//            } else {
+//                print("Scrolling has stopped")
+//                vm.send(send: "KRW-BTC")
+//            }
+//        }
     }
 }
 

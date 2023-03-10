@@ -8,24 +8,23 @@
 import Foundation
 import Combine
 
-
 class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     
-    @Published var tickers = [String:UpbitTicker]()
+    let tickerDictionarySubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
+    var tickerDictionary: [String: UpbitTicker] { tickerDictionarySubject.value }
     
     private var webSocket: URLSessionWebSocketTask?
     
     private var codes = ""
     
-    func connect(codes: String) {
-        self.codes = codes
+    func connect() {
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
         let url = URL(string:"wss://api.upbit.com/websocket/v1")!
         webSocket = session.webSocketTask(with: url)
         webSocket?.resume()
     }
     
-    func send() {
+    func send(codes: String) {
         let message = """
         [{"ticket":"bw"},{"type":"ticker","codes":[\(codes)]},{"format":"SIMPLE"}]
         """
@@ -34,6 +33,7 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
                 print("Upbit send error: \(error.localizedDescription)")
             }
         })
+        print(message)
     }
     
     func ping() {
@@ -72,11 +72,14 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     }
     
     private func onReceiveData(_ data: Data) {
-        guard let ticker = try? JSONDecoder().decode(UpbitTicker.self, from: data) else {
-            return print("UpbitTicker 객체 생성 에러")
+        DispatchQueue.global(qos: .background).async {
+            guard let ticker = try? JSONDecoder().decode(UpbitTicker.self, from: data) else {
+                return print("UpbitTicker 객체 생성 에러")
+            }
+            let newDictionary = [ticker.market: ticker]
+            let mergedDictionary = self.tickerDictionary.merging(newDictionary) { $1 }
+            self.tickerDictionarySubject.send(mergedDictionary)
         }
-        let newDictionary = [ticker.market: ticker]
-        print(newDictionary)
     }
     
     func close() {
@@ -86,7 +89,6 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("UPbit websocket connection opened.")
-        send()
         receive()
         ping()
     }

@@ -11,10 +11,15 @@ import Combine
 class UpbitCoinViewModel: ObservableObject {
     @Published var coins = [UpbitCoin]()
     @Published var displayedTickers = [UpbitTicker]()
-    @Published var updatingTickers = [UpbitTicker]()
-    @Published var isTimerRunning = false
     @Published var sortBy: TickerSortOption = .volume
     
+    let codesSubject = CurrentValueSubject<[String], Never>([])
+    var codes: [String] { codesSubject.value }
+    
+    let updatingTickersSubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
+    var updatingTickers: [String: UpbitTicker] { updatingTickersSubject.value }
+    
+    private let queue = DispatchQueue.global()
     private var dataService = UpbitCoinDataService()
     private var webSocketService = UpbitWebSocketService()
     private var cancellables = Set<AnyCancellable>()
@@ -30,41 +35,57 @@ class UpbitCoinViewModel: ObservableObject {
     
     init() {
         fetchCoins()
-        fetchTickers()
-//        fetchTickersWithInterval()
+        fetchTickersFromRestApi()
+        fetchTickersFromWebSocket()
+        webSocketService.connect()
+        sendToWebSocket()
     }
     
     func fetchCoins() {
         dataService.$coins
             .sink { [weak self] coins in
                 self?.coins = coins
-                self?.webSocketService.connect(codes: self?.marketsFromCoins() ?? "")
             }
             .store(in: &cancellables)
     }
     
-    func fetchTickers() {
+    func send(codes: String) {
+        webSocketService.send(codes: codes)
+    }
+    
+    func send1() {
+        webSocketService.send(codes: "KRW-BTC")
+    }
+    
+    func sendToWebSocket() {
+        codesSubject
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.global())
+            .sink { [weak self] codes in
+                self?.webSocketService.send(codes: codes.joined(separator: ","))
+            }
+            .store(in: &cancellables)
+    }
+    
+    func fetchTickersFromRestApi() {
         dataService.$tickers
+            .combineLatest($sortBy)
+            .receive(on: DispatchQueue.global())
+            .map(sortTickers)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] tickers in
-                self?.updatingTickers = tickers
-                if self?.displayedTickers.isEmpty ?? false {
-                    self?.updateDisplayedTickers()
-                }
+                self?.displayedTickers = tickers
             }
             .store(in: &cancellables)
     }
     
-    func fetchTickersWithInterval() {
-        var tickerTimer: AnyCancellable?
-        $isTimerRunning
-            .sink { [weak self] isTimerRunning in
-                tickerTimer?.cancel()
-                if isTimerRunning {
-                    tickerTimer = Timer.publish(every: 1, on: .main, in: .common)
-                        .autoconnect()
-                        .sink { [weak self] _ in
-                            self?.dataService.fetchTickers()
-                        }
+    func fetchTickersFromWebSocket() {
+        webSocketService.tickerDictionarySubject
+            .throttle(for: 1.0, scheduler: DispatchQueue.global(), latest: true)
+            .receive(on: DispatchQueue.global())
+            .sink { [weak self] tickers in
+                let mergedDictionary = self?.updatingTickers.merging(tickers) { $1 }
+                DispatchQueue.main.async {
+                    self?.updatingTickersSubject.send(mergedDictionary ?? [:])
                 }
             }
             .store(in: &cancellables)
@@ -75,35 +96,43 @@ class UpbitCoinViewModel: ObservableObject {
         return coin?.korean_name ?? ""
     }
     
-    func updateDisplayedTickers() {
-        $updatingTickers
-            .combineLatest($sortBy)
-            .map(sortTickers)
-            .sink { [weak self] (tickers) in
-                self?.displayedTickers = tickers
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func sortTickers(tickers: [UpbitTicker], sort: TickerSortOption) -> [UpbitTicker] {
+    private func sortTickers(tickers: [String: UpbitTicker], sort: TickerSortOption) -> [UpbitTicker] {
+        var sortedTickers: [UpbitTicker] = []
+        
         switch sort {
         case .price:
-            return tickers.sorted(by: { $0.tradePrice > $1.tradePrice })
+            sortedTickers = tickers.values.sorted(by: { $0.tradePrice > $1.tradePrice })
         case .priceReversed:
-            return tickers.sorted(by: { $0.tradePrice < $1.tradePrice })
+            sortedTickers = tickers.values.sorted(by: { $0.tradePrice < $1.tradePrice })
         case .changeRate:
-            return tickers.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
+            sortedTickers = tickers.values.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
         case .changeRateReversed:
-            return tickers.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
+            sortedTickers = tickers.values.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
         case .volume:
-            return tickers.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+            sortedTickers = tickers.values.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
         case .volumeReversed:
-            return tickers.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
+            sortedTickers = tickers.values.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
         }
+        
+        return sortedTickers
     }
     
     func marketsFromCoins() -> String {
         return coins.map { $0.market }.joined(separator: ",")
+    }
+    
+    func appendCode(market: String) {
+        queue.async {
+            if !self.codes.contains(market) {
+                self.codesSubject.value.append(market)
+            }
+        }
+    }
+    
+    func deleteCode(market: String) {
+        queue.async {
+            self.codesSubject.value.removeAll(where: { $0 == market })
+        }
     }
 }
 
