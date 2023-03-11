@@ -10,10 +10,7 @@ import Combine
 
 struct UpbitCoinRowView: View {
     
-    @EnvironmentObject var upbit: UpbitCoinViewModel
     @StateObject var vm: UpbitCoinRowViewModel
-    
-    let queue = DispatchQueue.global()
     
     init(ticker: UpbitTicker) {
         _vm = StateObject(wrappedValue: UpbitCoinRowViewModel(ticker: ticker))
@@ -37,16 +34,11 @@ struct UpbitCoinRowView: View {
         .contentShape(Rectangle())
         .onAppear {
             vm.showTicker = true
-            upbit.appendCode(market: vm.market)
+            vm.appendCode(market: vm.market)
         }
         .onDisappear {
             vm.showTicker = false
-            upbit.deleteCode(market: vm.market)
-        }
-        .onReceive(upbit.updatingTickersSubject) { tickers in
-            queue.async {
-                vm.updateView(tickers: tickers)
-            }
+            vm.deleteCode(market: vm.market)
         }
     }
 }
@@ -56,12 +48,12 @@ private extension UpbitCoinRowView {
     var leftColumn: some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(upbit.getKoreanName(for: vm.market))
+                Text(vm.koreanName())
                     .font(.system(size: 15))
                     .fontWeight(.light)
                     .foregroundColor(Color.theme.textColor)
                     .padding(.bottom, 3)
-                Text(vm.ticker.symbol)
+                Text(vm.symbol)
                     .foregroundColor(Color.theme.accent)
                     .font(.system(size: 12))
                     .fontWeight(.regular)

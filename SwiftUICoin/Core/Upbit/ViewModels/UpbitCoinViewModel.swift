@@ -6,24 +6,21 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 
 class UpbitCoinViewModel: ObservableObject {
-    @Published var coins = [UpbitCoin]()
+    
     @Published var displayedTickers = [UpbitTicker]()
     @Published var sortBy: TickerSortOption = .volume
-    
-    let codesSubject = CurrentValueSubject<[String], Never>([])
-    var codes: [String] { codesSubject.value }
-    
-    let updatingTickersSubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
-    var updatingTickers: [String: UpbitTicker] { updatingTickersSubject.value }
+    @Published var scrollViewOffset: CGFloat = 0
+    @Published var isScrolling = false
     
     private let queue = DispatchQueue.global()
     private let main = DispatchQueue.main
     private let dataService = UpbitCoinDataService.shared
-    private let webSocketService = UpbitWebSocketService.shared
     private var cancellables = Set<AnyCancellable>()
+    let webSocketService = UpbitWebSocketService.shared
     
     enum TickerSortOption {
         case price
@@ -35,27 +32,17 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     init() {
-        fetchCoins()
         fetchTickersFromRestApi()
-        fetchTickersFromWebSocket()
         webSocketService.connect()
         sendToWebSocket()
         isWebSocketConnected()
     }
     
-    func fetchCoins() {
-        dataService.$coins
-            .sink { [weak self] coins in
-                self?.coins = coins
-            }
-            .store(in: &cancellables)
-    }
-    
     func sendToWebSocket() {
-        codesSubject
+        webSocketService.codesSubject
             .debounce(for: .seconds(1), scheduler: queue)
             .sink { [weak self] codes in
-                self?.webSocketService.send(codes: codes.joined(separator: ","))
+                self?.webSocketService.send()
             }
             .store(in: &cancellables)
     }
@@ -70,24 +57,6 @@ class UpbitCoinViewModel: ObservableObject {
                 self?.displayedTickers = tickers
             }
             .store(in: &cancellables)
-    }
-    
-    func fetchTickersFromWebSocket() {
-        webSocketService.tickerDictionarySubject
-            .throttle(for: 1.0, scheduler: queue, latest: true)
-            .receive(on: queue)
-            .sink { [weak self] tickers in
-                let mergedDictionary = self?.updatingTickers.merging(tickers) { $1 }
-                self?.main.async {
-                    self?.updatingTickersSubject.send(mergedDictionary ?? [:])
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    func getKoreanName(for market: String) -> String {
-        let coin = coins.first(where: { $0.market == market })
-        return coin?.korean_name ?? ""
     }
     
     private func sortTickers(tickers: [String: UpbitTicker], sort: TickerSortOption) -> [UpbitTicker] {
@@ -112,44 +81,42 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     func codesFromCoins() -> String {
-        return coins.map { $0.market }.joined(separator: ",")
-    }
-    
-    func appendCode(market: String) {
-        queue.async {
-            if !self.codes.contains(market) {
-                self.codesSubject.value.append(market)
-            }
-        }
-    }
-    
-    func deleteCode(market: String) {
-        queue.async {
-            self.codesSubject.value.removeAll(where: { $0 == market })
-        }
+        return dataService.coins.map { $0.market }.joined(separator: ",")
     }
     
     private func isWebSocketConnected() {
         queue.async {
             self.webSocketService.$isConnected
-                .filter { $0 == true }
-                .sink { [weak self] _ in
-                    guard let self = self else { return }
-                    let top10Markets = self.displayedTickers.prefix(10).map { $0.market }
-                    self.webSocketService.send(codes: top10Markets.joined(separator: ","))
-                    print("웹소켓 연결 후 재요청 완료")
+                .sink { [weak self] isConnected in
+                    if isConnected {
+                        guard let self = self else { return }
+                        let top10Markets = self.displayedTickers.prefix(10).map { $0.market }
+                        self.webSocketService.codesSubject.send(top10Markets)
+                        print("웹소켓 연결 후 코드 등록 완료")
+                    }
                 }
                 .store(in: &self.cancellables)
         }
     }
-
     
-    func connectWebSocket() {
-            webSocketService.connect()
-    }
-    
-    func closeWebSocket() {
-        webSocketService.close()
+    func listGeometryReader() -> some View {
+        GeometryReader { proxy -> Color in
+            let offsetY = proxy.frame(in: .named("scrollView")).minY
+            let newOffset = min(0, offsetY)
+            if self.scrollViewOffset != newOffset {
+                self.main.async {
+                    self.isScrolling = true
+                }
+                self.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.scrollViewOffset = newOffset
+                }
+            } else {
+                self.main.async {
+                    self.isScrolling = false
+                }
+            }
+            return Color.clear
+        }
     }
 }
 

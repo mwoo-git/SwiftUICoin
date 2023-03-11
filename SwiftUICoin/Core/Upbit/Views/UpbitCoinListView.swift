@@ -9,9 +9,8 @@ import SwiftUI
 import UIKit
 
 struct UpbitCoinListView: View {
-    @EnvironmentObject var vm: UpbitCoinViewModel
-    @State private var scrollViewOffset: CGFloat = 0
-    @State private var isScrolling = false
+    
+    @StateObject private var vm = UpbitCoinViewModel()
     
     var body: some View {
         ScrollViewReader { scrollView in
@@ -20,14 +19,16 @@ struct UpbitCoinListView: View {
                     ForEach(Array(vm.displayedTickers.enumerated()), id: \.element) { index, ticker in
                         UpbitCoinRowView(ticker: ticker)
                     }
+                    .onAppear {
+                        print("리스트 보여짐")
+                        vm.webSocketService.connect()
+                        
+                    }
+                    .onDisappear {
+                        vm.webSocketService.close()
+                    }
                 }
                 .overlay(ListGeometryReader)
-                .onAppear {
-                    vm.connectWebSocket()
-                }
-                .onDisappear {
-                    vm.closeWebSocket()
-                }
             }
         }
 //        .onChange(of: isScrolling) { newValue in
@@ -53,16 +54,16 @@ private extension UpbitCoinListView {
         GeometryReader { proxy -> Color in
             let offsetY = proxy.frame(in: .named("scrollView")).minY
             let newOffset = min(0, offsetY)
-            if self.scrollViewOffset != newOffset {
+            if vm.scrollViewOffset != newOffset {
                 DispatchQueue.main.async {
-                    isScrolling = true
+                    vm.isScrolling = true
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.scrollViewOffset = newOffset
+                    vm.scrollViewOffset = newOffset
                 }
             } else {
                 DispatchQueue.main.async {
-                    isScrolling = false
+                    vm.isScrolling = false
                 }
             }
             return Color.clear

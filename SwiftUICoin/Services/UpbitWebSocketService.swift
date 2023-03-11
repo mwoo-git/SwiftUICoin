@@ -19,9 +19,10 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     let tickerDictionarySubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
     var tickerDictionary: [String: UpbitTicker] { tickerDictionarySubject.value }
     
-    private var webSocket: URLSessionWebSocketTask?
+    let codesSubject = CurrentValueSubject<[String], Never>([])
+    var codes: [String] { codesSubject.value }
     
-    private var codes = ""
+    private var webSocket: URLSessionWebSocketTask?
     
     func connect() {
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
@@ -30,9 +31,10 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
         webSocket?.resume()
     }
     
-    func send(codes: String) {
+    func send() {
+        let markets = codes.joined(separator: ",")
         let message = """
-        [{"ticket":"bw"},{"type":"ticker","codes":[\(codes)]},{"format":"SIMPLE"}]
+        [{"ticket":"bw"},{"type":"ticker","codes":[\(markets)]},{"format":"SIMPLE"}]
         """
         webSocket?.send(.string(message), completionHandler: { error in
             if let error = error {
