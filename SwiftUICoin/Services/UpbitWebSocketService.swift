@@ -10,6 +10,12 @@ import Combine
 
 class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     
+    static let shared = UpbitWebSocketService()
+    
+    private override init() {}
+    
+    @Published var isConnected = false
+    
     let tickerDictionarySubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
     var tickerDictionary: [String: UpbitTicker] { tickerDictionarySubject.value }
     
@@ -89,11 +95,13 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("UPbit websocket connection opened.")
+        isConnected = true
         receive()
         ping()
     }
     
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
         print("UPbit websocket connection closed.")
+        isConnected = false
     }
 }

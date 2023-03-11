@@ -19,6 +19,7 @@ class UpbitCoinRowViewModel: ObservableObject {
     @Published var color = Color.theme.textColor
     
     var ticker: UpbitTicker
+    let main = DispatchQueue.main
     
     init(ticker: UpbitTicker) {
         self.ticker = ticker
@@ -39,7 +40,7 @@ class UpbitCoinRowViewModel: ObservableObject {
         
         if let updatedTicker = tickers[market], updatedTicker.formattedTradePrice != price {
             let newPrice = updatedTicker.formattedTradePrice
-            DispatchQueue.main.async {
+            main.async {
                 if self.price < newPrice {
                     self.color = Color.theme.red
                 } else {
@@ -49,14 +50,14 @@ class UpbitCoinRowViewModel: ObservableObject {
                 self.changeRate = updatedTicker.formattedChangeRate
                 self.volume = updatedTicker.formattedAccTradePrice24H
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            main.asyncAfter(deadline: .now() + 0.5) {
                 self.color = Color.theme.textColor
             }
         }
     }
     
     func changeColor() {
-        DispatchQueue.main.async {
+        main.async {
             switch self.change {
             case .rise:
                 self.color = Color.theme.red

@@ -22,6 +22,12 @@ struct UpbitCoinListView: View {
                     }
                 }
                 .overlay(ListGeometryReader)
+                .onAppear {
+                    vm.connectWebSocket()
+                }
+                .onDisappear {
+                    vm.closeWebSocket()
+                }
             }
         }
 //        .onChange(of: isScrolling) { newValue in

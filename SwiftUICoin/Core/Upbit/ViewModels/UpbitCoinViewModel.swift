@@ -20,8 +20,9 @@ class UpbitCoinViewModel: ObservableObject {
     var updatingTickers: [String: UpbitTicker] { updatingTickersSubject.value }
     
     private let queue = DispatchQueue.global()
+    private let main = DispatchQueue.main
     private var dataService = UpbitCoinDataService()
-    private var webSocketService = UpbitWebSocketService()
+    private let webSocketService = UpbitWebSocketService.shared
     private var cancellables = Set<AnyCancellable>()
     
     enum TickerSortOption {
@@ -39,6 +40,7 @@ class UpbitCoinViewModel: ObservableObject {
         fetchTickersFromWebSocket()
         webSocketService.connect()
         sendToWebSocket()
+        isWebSocketConnected()
     }
     
     func fetchCoins() {
@@ -49,17 +51,9 @@ class UpbitCoinViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func send(codes: String) {
-        webSocketService.send(codes: codes)
-    }
-    
-    func send1() {
-        webSocketService.send(codes: "KRW-BTC")
-    }
-    
     func sendToWebSocket() {
         codesSubject
-            .debounce(for: .seconds(1), scheduler: DispatchQueue.global())
+            .debounce(for: .seconds(1), scheduler: queue)
             .sink { [weak self] codes in
                 self?.webSocketService.send(codes: codes.joined(separator: ","))
             }
@@ -69,9 +63,9 @@ class UpbitCoinViewModel: ObservableObject {
     func fetchTickersFromRestApi() {
         dataService.$tickers
             .combineLatest($sortBy)
-            .receive(on: DispatchQueue.global())
+            .receive(on: queue)
             .map(sortTickers)
-            .receive(on: DispatchQueue.main)
+            .receive(on: main)
             .sink { [weak self] tickers in
                 self?.displayedTickers = tickers
             }
@@ -80,11 +74,11 @@ class UpbitCoinViewModel: ObservableObject {
     
     func fetchTickersFromWebSocket() {
         webSocketService.tickerDictionarySubject
-            .throttle(for: 1.0, scheduler: DispatchQueue.global(), latest: true)
-            .receive(on: DispatchQueue.global())
+            .throttle(for: 1.0, scheduler: queue, latest: true)
+            .receive(on: queue)
             .sink { [weak self] tickers in
                 let mergedDictionary = self?.updatingTickers.merging(tickers) { $1 }
-                DispatchQueue.main.async {
+                self?.main.async {
                     self?.updatingTickersSubject.send(mergedDictionary ?? [:])
                 }
             }
@@ -117,7 +111,7 @@ class UpbitCoinViewModel: ObservableObject {
         return sortedTickers
     }
     
-    func marketsFromCoins() -> String {
+    func codesFromCoins() -> String {
         return coins.map { $0.market }.joined(separator: ",")
     }
     
@@ -133,6 +127,29 @@ class UpbitCoinViewModel: ObservableObject {
         queue.async {
             self.codesSubject.value.removeAll(where: { $0 == market })
         }
+    }
+    
+    private func isWebSocketConnected() {
+        queue.async {
+            self.webSocketService.$isConnected
+                .filter { $0 == true }
+                .sink { [weak self] _ in
+                    guard let self = self else { return }
+                    let top10Markets = self.displayedTickers.prefix(10).map { $0.market }
+                    self.webSocketService.send(codes: top10Markets.joined(separator: ","))
+                    print("웹소켓 연결 후 재요청 완료")
+                }
+                .store(in: &self.cancellables)
+        }
+    }
+
+    
+    func connectWebSocket() {
+            webSocketService.connect()
+    }
+    
+    func closeWebSocket() {
+        webSocketService.close()
     }
 }
 

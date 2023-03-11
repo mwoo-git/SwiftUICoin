@@ -67,6 +67,10 @@ struct UpbitTicker: Codable, Identifiable, Hashable {
         let accTradePriceInMillion = self.accTradePrice24H / 1_000_000
         return formatter.string(from: NSNumber(value: accTradePriceInMillion)) ?? "0"
     }
+    
+    var symbol: String {
+        return market.replacingOccurrences(of: "KRW-", with: "").uppercased()
+    }
 }
 
 struct UpbitTickerRestAPI: Codable, Identifiable, Hashable {

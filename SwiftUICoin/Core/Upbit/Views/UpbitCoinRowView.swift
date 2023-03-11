@@ -42,7 +42,6 @@ struct UpbitCoinRowView: View {
         .onDisappear {
             vm.showTicker = false
             upbit.deleteCode(market: vm.market)
-            
         }
         .onReceive(upbit.updatingTickersSubject) { tickers in
             queue.async {
@@ -62,7 +61,7 @@ private extension UpbitCoinRowView {
                     .fontWeight(.light)
                     .foregroundColor(Color.theme.textColor)
                     .padding(.bottom, 3)
-                Text(vm.market.replacingOccurrences(of: "KRW-", with: "").uppercased())
+                Text(vm.ticker.symbol)
                     .foregroundColor(Color.theme.accent)
                     .font(.system(size: 12))
                     .fontWeight(.regular)
