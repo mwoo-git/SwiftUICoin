@@ -21,7 +21,7 @@ class UpbitCoinViewModel: ObservableObject {
     
     private let queue = DispatchQueue.global()
     private let main = DispatchQueue.main
-    private var dataService = UpbitCoinDataService.shared
+    private let dataService = UpbitCoinDataService.shared
     private let webSocketService = UpbitWebSocketService.shared
     private var cancellables = Set<AnyCancellable>()
     
