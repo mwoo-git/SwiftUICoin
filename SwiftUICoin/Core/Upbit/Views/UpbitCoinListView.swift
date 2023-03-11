@@ -11,6 +11,8 @@ import UIKit
 struct UpbitCoinListView: View {
     
     @StateObject private var vm = UpbitCoinViewModel()
+    @State var scrollViewOffset: CGFloat = 0
+    @State var isScrolling = false
     
     var body: some View {
         ScrollViewReader { scrollView in
@@ -54,16 +56,16 @@ private extension UpbitCoinListView {
         GeometryReader { proxy -> Color in
             let offsetY = proxy.frame(in: .named("scrollView")).minY
             let newOffset = min(0, offsetY)
-            if vm.scrollViewOffset != newOffset {
+            if scrollViewOffset != newOffset {
                 DispatchQueue.main.async {
-                    vm.isScrolling = true
+                    isScrolling = true
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    vm.scrollViewOffset = newOffset
+                    scrollViewOffset = newOffset
                 }
             } else {
                 DispatchQueue.main.async {
-                    vm.isScrolling = false
+                    isScrolling = false
                 }
             }
             return Color.clear

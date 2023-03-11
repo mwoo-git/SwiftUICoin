@@ -13,8 +13,6 @@ class UpbitCoinViewModel: ObservableObject {
     
     @Published var displayedTickers = [UpbitTicker]()
     @Published var sortBy: TickerSortOption = .volume
-    @Published var scrollViewOffset: CGFloat = 0
-    @Published var isScrolling = false
     
     private let queue = DispatchQueue.global()
     private let main = DispatchQueue.main
@@ -96,26 +94,6 @@ class UpbitCoinViewModel: ObservableObject {
                     }
                 }
                 .store(in: &self.cancellables)
-        }
-    }
-    
-    func listGeometryReader() -> some View {
-        GeometryReader { proxy -> Color in
-            let offsetY = proxy.frame(in: .named("scrollView")).minY
-            let newOffset = min(0, offsetY)
-            if self.scrollViewOffset != newOffset {
-                self.main.async {
-                    self.isScrolling = true
-                }
-                self.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.scrollViewOffset = newOffset
-                }
-            } else {
-                self.main.async {
-                    self.isScrolling = false
-                }
-            }
-            return Color.clear
         }
     }
 }
