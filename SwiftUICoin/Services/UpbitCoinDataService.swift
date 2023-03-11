@@ -11,6 +11,9 @@ import Combine
 import Starscream
 
 class UpbitCoinDataService {
+    
+    static let shared = UpbitCoinDataService()
+    
     @Published var coins = [UpbitCoin]()
     @Published var tickers = [String: UpbitTicker]()
     
@@ -18,7 +21,7 @@ class UpbitCoinDataService {
     private var coinCancellables = Set<AnyCancellable>()
     private var tickerCancellables = Set<AnyCancellable>()
     
-    init() {
+    private init() {
         fetchCoins()
     }
     
