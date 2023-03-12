@@ -17,6 +17,7 @@ class UpbitCoinRowViewModel: ObservableObject {
     @Published var changeRate = ""
     @Published var volume = ""
     @Published var color = Color.theme.textColor
+    @Published var backgroundColor = Color.theme.background
     @Published var symbol = ""
     
     private var ticker: UpbitTicker
@@ -61,9 +62,11 @@ class UpbitCoinRowViewModel: ObservableObject {
                 let newPrice = updatedTicker.formattedTradePrice
                 self.main.async {
                     if self.price < newPrice {
-                        self.color = Color.theme.red
+                        self.color = Color.theme.risingColor
+                        self.backgroundColor = Color.theme.risingColor.opacity(0.05)
                     } else {
-                        self.color = Color.theme.openseaColor
+                        self.color = Color.theme.fallingColor
+                        self.backgroundColor = Color.theme.fallingColor.opacity(0.05)
                     }
                     self.price = updatedTicker.formattedTradePrice
                     self.changeRate = updatedTicker.formattedChangeRate
@@ -71,6 +74,7 @@ class UpbitCoinRowViewModel: ObservableObject {
                 }
                 self.main.asyncAfter(deadline: .now() + 0.5) {
                     self.color = Color.theme.textColor
+                    self.backgroundColor = Color.theme.background
                 }
             }
         }

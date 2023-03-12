@@ -74,8 +74,10 @@ class UpbitCoinViewModel: ObservableObject {
         }
     }
     
-    func codesFromCoins() -> String {
-        return dataService.coins.map { $0.market }.joined(separator: ",")
+    func codesFromCoins() -> [String] {
+//        return dataService.coins.map { $0.market }.joined(separator: ",")
+        return dataService.coins.map { $0.market }
+
     }
     
     private func isWebSocketConnected() {
@@ -84,8 +86,9 @@ class UpbitCoinViewModel: ObservableObject {
                 .sink { [weak self] isConnected in
                     if isConnected {
                         guard let self = self else { return }
-                        let top10Markets = self.displayedTickers.prefix(10).map { $0.market }
-                        self.webSocketService.codesSubject.send(top10Markets)
+//                        let top10Markets = self.displayedTickers.prefix(10).map { $0.market }
+                        let markets = self.displayedTickers.map { $0.market }
+                        self.webSocketService.codesSubject.send(markets)
                         print("웹소켓 연결 후 코드 등록 완료")
                     }
                 }

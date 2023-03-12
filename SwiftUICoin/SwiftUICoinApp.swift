@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct SwiftUICoinApp: App {
     
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
 
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var binanceViewModel = BinanceCoinViewModel()
@@ -53,26 +53,19 @@ struct SwiftUICoinApp: App {
                 .zIndex(2.0)
             }
         }
-    }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    var webSocketService = UpbitWebSocketService.shared
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("앱 시작")
-        return true
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // 앱이 백그라운드에서 포그라운드로 이동할 때 WebSocket 서비스 연결
-        webSocketService.connect()
-        print("백그라운드 -> 포그라운드")
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // 앱이 백그라운드로 이동할 때 WebSocket 서비스 연결 종료
-        webSocketService.close()
-        print("포그라운드 -> 백그라운드")
+        .onChange(of: scenePhase) { newScenePhase in
+                   switch newScenePhase {
+                   case .active:
+                       UpbitWebSocketService.shared.connect()
+                       print("App is active")
+                   case .inactive:
+                       UpbitWebSocketService.shared.close()
+                       print("App is inactive")
+                   case .background:
+                       print("App is in background")
+                   @unknown default:
+                       print("unexpected Value")
+                   }
+               }
     }
 }

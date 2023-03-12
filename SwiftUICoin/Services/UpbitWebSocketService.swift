@@ -34,7 +34,7 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     func send() {
         let markets = codes.joined(separator: ",")
         let message = """
-        [{"ticket":"bw"},{"type":"ticker","codes":[\(markets)]},{"format":"SIMPLE"}]
+        [{"ticket":"bw"},{"type":"ticker","codes":[\(markets)],"isOnlyRealtime":"true"},{"format":"SIMPLE"}]
         """
         webSocket?.send(.string(message), completionHandler: { error in
             if let error = error {

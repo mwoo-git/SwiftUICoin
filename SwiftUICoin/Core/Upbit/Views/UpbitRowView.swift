@@ -34,12 +34,13 @@ struct UpbitRowView: View {
         .contentShape(Rectangle())
         .onAppear {
             vm.showTicker = true
-            vm.appendCode(market: vm.market)
+//            vm.appendCode(market: vm.market)
         }
         .onDisappear {
             vm.showTicker = false
-            vm.deleteCode(market: vm.market)
+//            vm.deleteCode(market: vm.market)
         }
+        .background(vm.backgroundColor)
     }
 }
 
