@@ -17,24 +17,7 @@ struct TradingViewChart: View {
     }
     
     var body: some View {
-        VStack {
-            Button {
-                setSymbol("ETH")
-            } label: {
-                Text("이더리움")
-            }
-            Button {
-                setSymbol("XRP")
-            } label: {
-                Text("리플")
-            }
-
-            WebView(html: $viewModel.html)
-        }
-    }
-    
-    func setSymbol(_ symbol: String) {
-        viewModel.symbol = symbol
+        WebView(html: $viewModel.html)
     }
     
     struct WebView: UIViewRepresentable {
