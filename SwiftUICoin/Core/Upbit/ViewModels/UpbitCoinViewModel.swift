@@ -16,7 +16,7 @@ class UpbitCoinViewModel: ObservableObject {
     
     private let queue = DispatchQueue.global()
     private let main = DispatchQueue.main
-    private let dataService = UpbitCoinDataService.shared
+    private let dataService = UpbitRestApiService.shared
     private var cancellables = Set<AnyCancellable>()
     let webSocketService = UpbitWebSocketService.shared
     
@@ -58,24 +58,20 @@ class UpbitCoinViewModel: ObservableObject {
     }
     
     private func sortTickers(tickers: [String: UpbitTicker], sort: TickerSortOption) -> [UpbitTicker] {
-        var sortedTickers: [UpbitTicker] = []
-        
         switch sort {
         case .price:
-            sortedTickers = tickers.values.sorted(by: { $0.tradePrice > $1.tradePrice })
+            return tickers.values.sorted(by: { $0.tradePrice > $1.tradePrice })
         case .priceReversed:
-            sortedTickers = tickers.values.sorted(by: { $0.tradePrice < $1.tradePrice })
+            return tickers.values.sorted(by: { $0.tradePrice < $1.tradePrice })
         case .changeRate:
-            sortedTickers = tickers.values.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
+            return tickers.values.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
         case .changeRateReversed:
-            sortedTickers = tickers.values.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
+            return tickers.values.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
         case .volume:
-            sortedTickers = tickers.values.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+            return tickers.values.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
         case .volumeReversed:
-            sortedTickers = tickers.values.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
+            return tickers.values.sorted(by: { $0.accTradePrice24H < $1.accTradePrice24H })
         }
-        
-        return sortedTickers
     }
     
     func codesFromCoins() -> String {

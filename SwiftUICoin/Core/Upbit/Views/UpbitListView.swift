@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct UpbitCoinListView: View {
+struct UpbitListView: View {
     
     @StateObject private var vm = UpbitCoinViewModel()
     @State var scrollViewOffset: CGFloat = 0
@@ -19,7 +19,7 @@ struct UpbitCoinListView: View {
             ScrollView() {
                 LazyVStack(spacing: 0) {
                     ForEach(Array(vm.displayedTickers.enumerated()), id: \.element) { index, ticker in
-                        UpbitCoinRowView(ticker: ticker)
+                        UpbitRowView(ticker: ticker)
                     }
                     .onAppear {
                         print("리스트 보여짐")
@@ -30,7 +30,7 @@ struct UpbitCoinListView: View {
                         vm.webSocketService.close()
                     }
                 }
-                .overlay(ListGeometryReader)
+//                .overlay(ListGeometryReader)
             }
         }
 //        .onChange(of: isScrolling) { newValue in
@@ -47,11 +47,11 @@ struct UpbitCoinListView: View {
 
 struct UpbitCoinListView_Previews: PreviewProvider {
     static var previews: some View {
-        UpbitCoinListView()
+        UpbitListView()
     }
 }
 
-private extension UpbitCoinListView {
+private extension UpbitListView {
     var ListGeometryReader: some View {
         GeometryReader { proxy -> Color in
             let offsetY = proxy.frame(in: .named("scrollView")).minY

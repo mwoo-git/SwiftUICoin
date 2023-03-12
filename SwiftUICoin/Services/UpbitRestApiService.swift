@@ -10,9 +10,9 @@ import Alamofire
 import Combine
 import Starscream
 
-class UpbitCoinDataService {
+class UpbitRestApiService {
     
-    static let shared = UpbitCoinDataService()
+    static let shared = UpbitRestApiService()
     
     @Published var coins = [UpbitCoin]()
     @Published var tickers = [String: UpbitTicker]()

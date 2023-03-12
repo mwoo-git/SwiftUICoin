@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct UpbitCoinRowView: View {
+struct UpbitRowView: View {
     
     @StateObject var vm: UpbitCoinRowViewModel
     
@@ -43,7 +43,7 @@ struct UpbitCoinRowView: View {
     }
 }
 
-private extension UpbitCoinRowView {
+private extension UpbitRowView {
     
     var leftColumn: some View {
         HStack(spacing: 0) {

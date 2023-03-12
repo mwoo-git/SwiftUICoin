@@ -22,7 +22,7 @@ class UpbitCoinRowViewModel: ObservableObject {
     private var ticker: UpbitTicker
     private let main = DispatchQueue.main
     private let queue = DispatchQueue.global()
-    private let dataService = UpbitCoinDataService.shared
+    private let dataService = UpbitRestApiService.shared
     private let webSocketService = UpbitWebSocketService.shared
     private var cancellables = Set<AnyCancellable>()
     
