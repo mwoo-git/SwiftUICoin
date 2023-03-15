@@ -84,7 +84,12 @@ private extension UpbitRowView {
     }
 }
 
-
+struct UpbitRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        UpbitRowView(ticker: dev.upbitTicker)
+            .previewLayout(.sizeThatFits)
+    }
+}
 
 
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UpbitCoinListView: View {
+struct UpbitListView: View {
     
     @StateObject private var vm = UpbitCoinViewModel()
     
@@ -38,6 +38,6 @@ struct UpbitCoinListView: View {
 
 struct UpbitCoinListView_Previews: PreviewProvider {
     static var previews: some View {
-        UpbitCoinListView()
+        UpbitListView()
     }
 }

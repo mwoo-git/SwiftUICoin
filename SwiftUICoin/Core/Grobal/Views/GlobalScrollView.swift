@@ -9,8 +9,7 @@ import SwiftUI
 
 struct GlobalScrollView: View {
     
-    @EnvironmentObject var UpbitVm: UpbitCoinViewModel
-    @StateObject var viewModel: GlobalViewModel
+    @StateObject var viewModel = GlobalViewModel()
     @State private var isScrolling = false
     @State private var scrollViewOffset: CGFloat = 0
     
@@ -22,6 +21,7 @@ struct GlobalScrollView: View {
                 scrollView
             }
         }
+        .frame(height: 100)
 //        .onChange(of: isScrolling) { newValue in
 //            if isScrolling {
 //                print("Scrolling in progress")
