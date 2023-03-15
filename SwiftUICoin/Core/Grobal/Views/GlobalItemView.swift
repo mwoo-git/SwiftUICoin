@@ -52,9 +52,9 @@ struct GlobalItemView2: View {
                     .padding(.leading, 8)
                     .padding(.vertical, 3)
                     .font(.footnote)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(global.priceChangePercentage.contains("+") ? Color.theme.risingColor : Color.theme.fallingColor)
                     .background(
-                        global.priceChangePercentage.contains("+") ? Color.theme.red : Color.blue
+                        global.priceChangePercentage.contains("+") ? Color.theme.risingColor.opacity(0.1) : Color.theme.fallingColor.opacity(0.1)
                     )
                     .cornerRadius(5)
             }
