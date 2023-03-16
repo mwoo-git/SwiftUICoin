@@ -45,7 +45,7 @@
 		7343AB9729B107A6001E05B2 /* UpbitRestApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343AB9629B107A6001E05B2 /* UpbitRestApiService.swift */; };
 		7343AB9929B107F4001E05B2 /* UpbitCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343AB9829B107F4001E05B2 /* UpbitCoinViewModel.swift */; };
 		7343AB9B29B1A57F001E05B2 /* UpbitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343AB9A29B1A57F001E05B2 /* UpbitRowView.swift */; };
-		7343AB9D29B1D04E001E05B2 /* UpbitCoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343AB9C29B1D04D001E05B2 /* UpbitCoinListView.swift */; };
+		7343AB9D29B1D04E001E05B2 /* UpbitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343AB9C29B1D04D001E05B2 /* UpbitListView.swift */; };
 		7343ABA429B49EF7001E05B2 /* TradingViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343ABA329B49EF7001E05B2 /* TradingViewViewModel.swift */; };
 		7343ABA629B7590C001E05B2 /* UpbitCoinRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343ABA529B7590B001E05B2 /* UpbitCoinRowViewModel.swift */; };
 		7343ABA829B78524001E05B2 /* UpbitWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343ABA729B7851F001E05B2 /* UpbitWebSocketService.swift */; };
@@ -74,6 +74,7 @@
 		73771CC529786DC200539C09 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CC429786DC200539C09 /* 1.png */; };
 		73771CD7297A481A00539C09 /* 009.png in Resources */ = {isa = PBXBuildFile; fileRef = 73771CD6297A481A00539C09 /* 009.png */; };
 		73771CDC297D201500539C09 /* GlobalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73771CDB297D201500539C09 /* GlobalScrollView.swift */; };
+		7377A5A129C3873800E91259 /* UpbitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7377A5A029C3873800E91259 /* UpbitTabView.swift */; };
 		739A39D828F346E7005348E5 /* CoinBackupDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D728F346E7005348E5 /* CoinBackupDataService.swift */; };
 		739A39DB28F34840005348E5 /* BackupCoinContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 739A39D928F34840005348E5 /* BackupCoinContainer.xcdatamodeld */; };
 		739A39DD28F4293A005348E5 /* StatusCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A39DC28F4293A005348E5 /* StatusCodeModel.swift */; };
@@ -177,7 +178,7 @@
 		7343AB9629B107A6001E05B2 /* UpbitRestApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitRestApiService.swift; sourceTree = "<group>"; };
 		7343AB9829B107F4001E05B2 /* UpbitCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitCoinViewModel.swift; sourceTree = "<group>"; };
 		7343AB9A29B1A57F001E05B2 /* UpbitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitRowView.swift; sourceTree = "<group>"; };
-		7343AB9C29B1D04D001E05B2 /* UpbitCoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitCoinListView.swift; sourceTree = "<group>"; };
+		7343AB9C29B1D04D001E05B2 /* UpbitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitListView.swift; sourceTree = "<group>"; };
 		7343ABA329B49EF7001E05B2 /* TradingViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingViewViewModel.swift; sourceTree = "<group>"; };
 		7343ABA529B7590B001E05B2 /* UpbitCoinRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitCoinRowViewModel.swift; sourceTree = "<group>"; };
 		7343ABA729B7851F001E05B2 /* UpbitWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitWebSocketService.swift; sourceTree = "<group>"; };
@@ -207,6 +208,7 @@
 		73771CC429786DC200539C09 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		73771CD6297A481A00539C09 /* 009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 009.png; sourceTree = "<group>"; };
 		73771CDB297D201500539C09 /* GlobalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalScrollView.swift; sourceTree = "<group>"; };
+		7377A5A029C3873800E91259 /* UpbitTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitTabView.swift; sourceTree = "<group>"; };
 		739A39D728F346E7005348E5 /* CoinBackupDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBackupDataService.swift; sourceTree = "<group>"; };
 		739A39DA28F34840005348E5 /* CoinBackup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinBackup.xcdatamodel; sourceTree = "<group>"; };
 		739A39DC28F4293A005348E5 /* StatusCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeModel.swift; sourceTree = "<group>"; };
@@ -512,8 +514,9 @@
 			isa = PBXGroup;
 			children = (
 				7343AB9A29B1A57F001E05B2 /* UpbitRowView.swift */,
-				7343AB9C29B1D04D001E05B2 /* UpbitCoinListView.swift */,
+				7343AB9C29B1D04D001E05B2 /* UpbitListView.swift */,
 				734FD0BA29BDCE3500C741B2 /* UpbitSortBarView.swift */,
+				7377A5A029C3873800E91259 /* UpbitTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				731A035428EB40FC00B1BC39 /* CoinPlaceholderView.swift in Sources */,
 				739A39E328F572DC005348E5 /* StatusErrorView.swift in Sources */,
 				7334473E28E4E52800F1719E /* EditCoinRowView.swift in Sources */,
+				7377A5A129C3873800E91259 /* UpbitTabView.swift in Sources */,
 				731086F828CF790A00283FD3 /* HomeViewModel.swift in Sources */,
 				739A39F528FAA452005348E5 /* NetworkMornitor.swift in Sources */,
 				73D7175F28DB43360081CB2D /* DetailStatsView.swift in Sources */,
@@ -995,7 +999,7 @@
 				7334473028E4887200F1719E /* UIImage.swift in Sources */,
 				73771CDC297D201500539C09 /* GlobalScrollView.swift in Sources */,
 				7343AB9929B107F4001E05B2 /* UpbitCoinViewModel.swift in Sources */,
-				7343AB9D29B1D04E001E05B2 /* UpbitCoinListView.swift in Sources */,
+				7343AB9D29B1D04E001E05B2 /* UpbitListView.swift in Sources */,
 				731A035C28ECA47400B1BC39 /* HeadlineModel.swift in Sources */,
 				731086DC28CE2CB300283FD3 /* Color.swift in Sources */,
 				73C71C7428D9910F0067167F /* CoinDetailDataService.swift in Sources */,

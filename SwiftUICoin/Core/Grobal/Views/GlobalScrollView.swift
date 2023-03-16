@@ -21,7 +21,7 @@ struct GlobalScrollView: View {
                 scrollView
             }
         }
-        .frame(height: 100)
+        .frame(height: 80)
 //        .onChange(of: isScrolling) { newValue in
 //            if isScrolling {
 //                print("Scrolling in progress")

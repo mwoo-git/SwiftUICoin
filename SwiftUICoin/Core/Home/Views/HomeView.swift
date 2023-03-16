@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject private var viewModel: HomeViewModel
-    @EnvironmentObject private var UpbitViewModel: UpbitCoinViewModel
+    @EnvironmentObject private var UpbitViewModel: UpbitViewModel
     @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var showMenu = false
     @State private var isDark = false
@@ -19,7 +19,7 @@ struct HomeView: View {
         VStack(spacing: 0) {
             homeHeader
             GlobalScrollView()
-            UpbitListView()
+            UpbitTabView()
         }
         .background(Color.theme.background.ignoresSafeArea())
         .environment(\.colorScheme, .dark)

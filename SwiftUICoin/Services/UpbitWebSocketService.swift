@@ -98,6 +98,7 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("UPbit websocket connection opened.")
         isConnected = true
+        send()
         receive()
         ping()
     }

@@ -17,6 +17,7 @@ class UpbitRestApiService {
     @Published var coins = [UpbitCoin]()
     @Published var tickers = [String: UpbitTicker]()
     
+    private let queue = DispatchQueue.global()
     private let baseUrl = "https://api.upbit.com/v1"
     private var coinCancellables = Set<AnyCancellable>()
     private var tickerCancellables = Set<AnyCancellable>()
@@ -38,6 +39,7 @@ class UpbitRestApiService {
                 case .finished:
                     print("Upbit coin data fetching finished.")
                     self.fetchTickers()
+                    self.updateCodes()
                 }
             }, receiveValue: { [weak self] coins in
                 self?.coins = coins
@@ -45,7 +47,7 @@ class UpbitRestApiService {
             .store(in: &coinCancellables)
     }
     
-    private func fetchTickers() {
+    func fetchTickers() {
         let tickersUrl = "https://api.upbit.com/v1/ticker?markets=" + coins.map { $0.market }.joined(separator: ",")
         
         AF.request(tickersUrl)
@@ -76,5 +78,12 @@ class UpbitRestApiService {
                     }
             )
             .store(in: &tickerCancellables)
+    }
+    
+    private func updateCodes() {
+        queue.async {
+            let markets = self.coins.map { $0.market }
+            UpbitWebSocketService.shared.codesSubject.send(markets)
+        }
     }
 }

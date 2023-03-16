@@ -104,7 +104,6 @@ private extension HomeCoinListView {
 //                                })
 //                                .buttonStyle(ListSelectionStyle())
 //                        }
-                        UpbitListView()
                     }
                 }
             }

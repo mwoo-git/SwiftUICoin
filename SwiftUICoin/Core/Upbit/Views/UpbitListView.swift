@@ -9,20 +9,12 @@ import SwiftUI
 
 struct UpbitListView: View {
     
-    @StateObject private var vm = UpbitCoinViewModel()
+    let tickers: [UpbitTicker]
     
     var body: some View {
         List {
-            ForEach(vm.displayedTickers) { ticker in
+            ForEach(tickers) { ticker in
                 UpbitRowView(ticker: ticker)
-            }
-            .onAppear {
-                print("리스트 보여짐")
-                vm.webSocketService.connect()
-                
-            }
-            .onDisappear {
-                vm.webSocketService.close()
             }
             .listRowBackground(Color.theme.background)
             .listRowInsets(EdgeInsets())
@@ -36,8 +28,8 @@ struct UpbitListView: View {
     }
 }
 
-struct UpbitCoinListView_Previews: PreviewProvider {
-    static var previews: some View {
-        UpbitListView()
-    }
-}
+//struct UpbitCoinListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UpbitListView(tickers: <#[UpbitTicker]#>)
+//    }
+//}

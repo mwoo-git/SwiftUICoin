@@ -59,6 +59,7 @@ struct SwiftUICoinApp: App {
                        UpbitWebSocketService.shared.connect()
                        print("App is active")
                    case .inactive:
+                       UpbitRestApiService.shared.fetchTickers()
                        UpbitWebSocketService.shared.close()
                        print("App is inactive")
                    case .background:
