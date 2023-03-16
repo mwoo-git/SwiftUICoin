@@ -12,7 +12,7 @@ import Combine
 class UpbitCoinViewModel: ObservableObject {
     
     @Published var displayedTickers = [UpbitTicker]()
-    @Published var sortBy: TickerSortOption = .volume
+    @Published var sortBy: TickerSortOption = .changeRate
     
     private let queue = DispatchQueue.global()
     private let main = DispatchQueue.main

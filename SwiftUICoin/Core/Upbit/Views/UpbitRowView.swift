@@ -23,14 +23,10 @@ struct UpbitRowView: View {
                 Spacer()
                 rightColmn
             }
-            .padding(.bottom, 10)
-            
-            Divider()
-                .frame(height: 1)
-                .opacity(0.4)
+            .padding(.bottom)
         }
         .padding(.horizontal)
-        .padding(.top, 10)
+        .padding(.top)
         .contentShape(Rectangle())
         .onAppear {
             vm.showTicker = true
@@ -40,7 +36,6 @@ struct UpbitRowView: View {
             vm.showTicker = false
 //            vm.deleteCode(market: vm.market)
         }
-        .background(vm.backgroundColor)
     }
 }
 
@@ -50,37 +45,44 @@ private extension UpbitRowView {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(vm.koreanName())
-                    .font(.system(size: 15))
-                    .fontWeight(.light)
+                    .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(Color.theme.textColor)
                     .padding(.bottom, 3)
                 Text(vm.symbol)
                     .foregroundColor(Color.theme.accent)
                     .font(.system(size: 12))
                     .fontWeight(.regular)
+                    .padding(.top, 10)
             }
         }
     }
     
     var rightColmn: some View {
-        HStack(alignment:.top, spacing: 0) {
-            Text(vm.price)
-                .font(.system(size: 15))
-                .fontWeight(.medium)
-                .foregroundColor(vm.color)
-                .frame(width: UIScreen.main.bounds.width / 4.5, alignment: .trailing)
+        VStack(alignment:.trailing, spacing: 0) {
             Text(vm.changeRate)
-                .font(.system(size: 15))
-                .fontWeight(.medium)
+                .font(.headline)
+                .fontWeight(.bold)
+                .padding(.vertical, 5)
+                .padding(.trailing, 3)
                 .foregroundColor(vm.changeRate.contains("-") ? Color.theme.fallingColor : Color.theme.risingColor)
-                .frame(width: UIScreen.main.bounds.width / 5, alignment: .trailing)
-            
-            Text(vm.volume + "백만")
-                .font(.system(size: 14))
-                .fontWeight(.regular)
-                .foregroundColor(Color.gray.opacity(1))
-                .frame(width: UIScreen.main.bounds.width / 4.5, alignment: .trailing)
+                .frame(width: UIScreen.main.bounds.width / 3.7, alignment: .trailing)
+                .background(
+                    vm.changeRate.contains("+") ? Color.theme.risingColor.opacity(vm.opacity) : Color.theme.fallingColor.opacity(vm.opacity)
+                )
+                .cornerRadius(5)
+            Text(vm.price + "원")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundColor(Color.theme.accent)
+                .padding(.top, 3)
+//            Text(vm.volume + "백만")
+//                .font(.system(size: 14))
+//                .fontWeight(.regular)
+//                .foregroundColor(Color.gray.opacity(1))
+//                .frame(width: UIScreen.main.bounds.width / 4.5, alignment: .trailing)
         }
+        .padding(.top, -4)
     }
 }
 
