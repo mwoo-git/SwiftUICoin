@@ -30,19 +30,17 @@ class WatchlistDataService {
         return savedEntities.isEmpty
     }
     
-    func isWatchlistExists(coin: CoinModel?, backup: BackupCoinEntity?) -> Bool {
-        return savedEntities.first(where: {$0.coinID == coin?.id ?? backup?.id }) != nil
+    func isWatchlistExists(coin: String) -> Bool {
+        return savedEntities.first(where: {$0.coinID == coin }) != nil
     }
     
-    func updateWatchlist(coin: CoinModel?, backup: BackupCoinEntity?) {
+    func updateWatchlist(coin: String) {
         // saveEntities 어레이에 저장된 객체 중에 coinID와 coin.id가 같은 객체가 있다면 그 중 첫번째를 가져와서 저장하고 진행하라. (first(where:)는 조건에 부합하는 첫번재 원소를 가져옵니다.)
-        if let id = coin?.id ?? backup?.id {
-            if let index = savedEntities.firstIndex(where: { $0.coinID == id }) {
+            if let index = savedEntities.firstIndex(where: { $0.coinID == coin }) {
                 delete(at: index)
             } else {
-                add(coin: coin, backup: backup)
+                add(coin: coin)
             }
-        }
     }
     
     // MARK: PRIVATE
@@ -59,12 +57,12 @@ class WatchlistDataService {
     }
     
     // Create
-    private func add(coin: CoinModel?, backup: BackupCoinEntity?) {
+    private func add(coin: String) {
         // context는 조건, 환경을 의미합니다. 상수로 지정했던 container의 모델을 가져오게 됩니다.
         let entity = WatchlistEntity(context: container.viewContext)
         
         // entity.coinID에 coin.id를 저장하라.
-        entity.coinID = coin?.id ?? backup?.id
+        entity.coinID = coin
         
         savedEntities.append(entity)
         

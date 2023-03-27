@@ -18,8 +18,9 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             homeHeader
-            GlobalScrollView()
-            UpbitTabView()
+            HomeCoinListView()
+//            GlobalScrollView()
+//            UpbitTabView()
         }
         .background(Color.theme.background.ignoresSafeArea())
         .environment(\.colorScheme, .dark)

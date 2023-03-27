@@ -28,18 +28,18 @@ struct DetailHeaderView: View {
             }
             Spacer()
             if viewModel.coin == nil {
-                Image(systemName: homeViewModel.isWatchlistExists(coin: nil, backup: viewModel.backup) ? "star.fill" : "star")
-                    .foregroundColor(homeViewModel.isWatchlistExists(coin: nil, backup: viewModel.backup) ? Color.theme.binanceColor : Color.theme.accent)
+                Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.backup?.symbol ?? "") ? "star.fill" : "star")
+                    .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.backup?.symbol ?? "") ? Color.theme.binanceColor : Color.theme.accent)
                     .padding()
                     .onTapGesture {
-                        homeViewModel.updateWatchlist(coin: nil, backup: viewModel.backup)
+                        homeViewModel.updateWatchlist(coin: viewModel.backup?.symbol ?? "")
                     }
             } else {
-                Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin, backup: nil) ? "star.fill" : "star")
-                    .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin, backup: nil) ? Color.theme.binanceColor : Color.theme.accent)
+                Image(systemName: homeViewModel.isWatchlistExists(coin: viewModel.coin?.symbol ?? "") ? "star.fill" : "star")
+                    .foregroundColor(homeViewModel.isWatchlistExists(coin: viewModel.coin?.symbol ?? "") ? Color.theme.binanceColor : Color.theme.accent)
                     .padding()
                     .onTapGesture {
-                        homeViewModel.updateWatchlist(coin: viewModel.coin, backup: nil)
+                        homeViewModel.updateWatchlist(coin: viewModel.coin?.symbol ?? "")
                     }
             }
         }

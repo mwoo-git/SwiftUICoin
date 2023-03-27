@@ -156,13 +156,13 @@ class HomeViewModel: ObservableObject {
         mainWatchlistBackup = subWatchlistBackup.sorted(by: { $0.rank < $1.rank })
     }
     
-    func isWatchlistExists(coin: CoinModel?, backup: BackupCoinEntity?) -> Bool {
-        watchlistDataService.isWatchlistExists(coin: coin, backup: backup)
+    func isWatchlistExists(coin: String) -> Bool {
+        watchlistDataService.isWatchlistExists(coin: coin)
     }
     
     // Update Watchlist (Delete or add)
-    func updateWatchlist(coin: CoinModel?, backup: BackupCoinEntity?) {
-        watchlistDataService.updateWatchlist(coin: coin, backup: backup)
+    func updateWatchlist(coin: String) {
+        watchlistDataService.updateWatchlist(coin: coin)
     }
     
     
@@ -175,13 +175,13 @@ class HomeViewModel: ObservableObject {
     // AllCoins 중에 Watchlist에 해당되는 코인만 리턴
     private func convertCoins(coinModels: [CoinModel], watchlistEntities: [WatchlistEntity]) -> [CoinModel] {
         coinModels.filter { coin in
-            watchlistEntities.first(where: { $0.coinID == coin.id }) != nil
+            watchlistEntities.first(where: { $0.coinID == coin.symbol }) != nil
         }
     }
     
     private func convertCoinsBackup(coinModels: [BackupCoinEntity], watchlistEntities: [WatchlistEntity]) -> [BackupCoinEntity] {
         coinModels.filter { coin in
-            watchlistEntities.contains(where: { $0.coinID == coin.id })
+            watchlistEntities.contains(where: { $0.coinID == coin.symbol })
         }
     }
     

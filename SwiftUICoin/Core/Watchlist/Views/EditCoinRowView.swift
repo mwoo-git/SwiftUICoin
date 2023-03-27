@@ -64,7 +64,7 @@ private extension EditCoinRowView {
     private var rightColmn: some View {
         HStack {
             if coin == nil {
-                if !viewModel.isWatchlistExists(coin: nil, backup: backup) {
+                if !viewModel.isWatchlistExists(coin: backup?.symbol ?? "") {
                     Image(systemName: "star")
                         .foregroundColor(Color.theme.textColor)
                 } else {
@@ -72,7 +72,7 @@ private extension EditCoinRowView {
                         .foregroundColor(Color.theme.binanceColor)
                 }
             } else {
-                if !viewModel.isWatchlistExists(coin: coin, backup: nil) {
+                if !viewModel.isWatchlistExists(coin: coin?.symbol ?? "") {
                     Image(systemName: "star")
                         .foregroundColor(Color.theme.textColor)
                 } else {
@@ -84,11 +84,10 @@ private extension EditCoinRowView {
         }
         .onTapGesture {
             if coin == nil {
-                viewModel.updateWatchlist(coin: nil, backup: backup)
+                viewModel.updateWatchlist(coin: backup?.symbol ?? "")
             } else {
-                viewModel.updateWatchlist(coin: coin, backup: nil)
+                viewModel.updateWatchlist(coin: coin?.symbol ?? "")
             }
-             
         }
         .padding(.leading)
         .font(.subheadline)
