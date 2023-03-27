@@ -29,11 +29,11 @@ class DetailViewModel: ObservableObject {
     init(coin: CoinModel?, backup: BackupCoinEntity?) {
         if coin == nil {
             self.backup = backup
-            self.coinDatailDataService = CoinDetailDataService(coin: nil, backup: backup)
+            self.coinDatailDataService = CoinDetailDataService(coin: backup?.name?.lowercased() ?? "")
             self.articleDataService = BlockmediaDataService(coin: nil, backup: backup)
         } else {
             self.coin = coin
-            self.coinDatailDataService = CoinDetailDataService(coin: coin, backup: nil)
+            self.coinDatailDataService = CoinDetailDataService(coin: coin?.name.lowercased() ?? "")
             self.articleDataService = BlockmediaDataService(coin: coin, backup: nil)
         }
         
