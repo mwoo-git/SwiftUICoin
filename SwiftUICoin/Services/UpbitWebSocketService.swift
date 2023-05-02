@@ -19,10 +19,17 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     let tickerDictionarySubject = CurrentValueSubject<[String: UpbitTicker], Never>([:])
     var tickerDictionary: [String: UpbitTicker] { tickerDictionarySubject.value }
     
-    let codesSubject = CurrentValueSubject<[String], Never>([])
-    var codes: [String] { codesSubject.value }
+    var codes: [String]? 
     
     private var webSocket: URLSessionWebSocketTask?
+    
+    func connect(withCodes codes: [String]) {
+        self.codes = codes
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        let url = URL(string:"wss://api.upbit.com/websocket/v1")!
+        webSocket = session.webSocketTask(with: url)
+        webSocket?.resume()
+    }
     
     func connect() {
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
@@ -32,6 +39,7 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
     }
     
     func send() {
+        guard let codes = codes else { return }
         let markets = codes.joined(separator: ",")
         let message = """
         [{"ticket":"bw"},{"type":"ticker","codes":[\(markets)],"isOnlyRealtime":"true"},{"format":"SIMPLE"}]

@@ -22,14 +22,15 @@ class UpbitCoinRowViewModel: ObservableObject {
     @Published var opacity = 0.1
     
     private var ticker: UpbitTicker
+    private var coin: UpbitCoin
     private let main = DispatchQueue.main
     private let queue = DispatchQueue.global()
-    private let dataService = UpbitRestApiService.shared
     private let webSocketService = UpbitWebSocketService.shared
     private var cancellables = Set<AnyCancellable>()
     
-    init(ticker: UpbitTicker) {
+    init(ticker: UpbitTicker, coin: UpbitCoin) {
         self.ticker = ticker
+        self.coin = coin
         self.price = ticker.formattedTradePrice
         self.changeRate = ticker.formattedChangeRate
         self.volume = ticker.formattedAccTradePrice24H
@@ -63,22 +64,22 @@ class UpbitCoinRowViewModel: ObservableObject {
                 let newPrice = updatedTicker.formattedTradePrice
                 self.main.async {
                     if self.price < newPrice {
-//                        self.color = Color.theme.risingColor
-//                        self.backgroundColor = Color.theme.risingColor.opacity(0.05)
-                            self.opacity = 0.2
+                        //                        self.color = Color.theme.risingColor
+                        //                        self.backgroundColor = Color.theme.risingColor.opacity(0.05)
+                        self.opacity = 0.2
                         
                     } else {
-//                        self.color = Color.theme.fallingColor
-//                        self.backgroundColor = Color.theme.fallingColor.opacity(0.05)
-                            self.opacity = 0.2
+                        //                        self.color = Color.theme.fallingColor
+                        //                        self.backgroundColor = Color.theme.fallingColor.opacity(0.05)
+                        self.opacity = 0.2
                     }
                     self.price = updatedTicker.formattedTradePrice
                     self.changeRate = updatedTicker.formattedChangeRate
                     self.volume = updatedTicker.formattedAccTradePrice24H
                 }
                 self.main.asyncAfter(deadline: .now() + 0.2) {
-//                    self.color = Color.theme.textColor
-//                    self.backgroundColor = Color.theme.background
+                    //                    self.color = Color.theme.textColor
+                    //                    self.backgroundColor = Color.theme.background
                     withAnimation {
                         self.opacity = 0.1
                     }
@@ -100,22 +101,7 @@ class UpbitCoinRowViewModel: ObservableObject {
         }
     }
     
-    func appendCode(market: String) {
-        queue.async {
-            if !self.webSocketService.codes.contains(market) {
-                self.webSocketService.codesSubject.value.append(market)
-            }
-        }
-    }
-    
-    func deleteCode(market: String) {
-        queue.async {
-            self.webSocketService.codesSubject.value.removeAll(where: { $0 == market })
-        }
-    }
-    
     func koreanName() -> String {
-        let coin = dataService.coins.first(where: { $0.market == market })
-        return coin?.korean_name ?? ""
+        return coin.korean_name
     }
 }

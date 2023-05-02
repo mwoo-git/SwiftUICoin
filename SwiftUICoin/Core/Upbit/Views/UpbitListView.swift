@@ -10,11 +10,14 @@ import SwiftUI
 struct UpbitListView: View {
     
     let tickers: [UpbitTicker]
+    let coins: [UpbitCoin]
     
     var body: some View {
         List {
             ForEach(tickers) { ticker in
-                UpbitRowView(ticker: ticker)
+                if let coin = coins.first(where: { $0.market == ticker.market }) {
+                    UpbitRowView(ticker: ticker, coin: coin)
+                }
             }
             .listRowBackground(Color.theme.background)
             .listRowInsets(EdgeInsets())

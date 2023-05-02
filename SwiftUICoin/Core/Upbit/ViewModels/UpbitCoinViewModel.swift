@@ -10,65 +10,84 @@ import SwiftUI
 import Combine
 
 class UpbitViewModel: ObservableObject {
+    // MARK: - Properties
     
     @Published var winners = [UpbitTicker]()
     @Published var lossers = [UpbitTicker]()
     @Published var volume = [UpbitTicker]()
     
-    private let queue = DispatchQueue.global()
-    private let main = DispatchQueue.main
-    private let dataService = UpbitRestApiService.shared
-    private var cancellables = Set<AnyCancellable>()
+    var coins = [UpbitCoin]()
+
     let webSocketService = UpbitWebSocketService.shared
     
+    // MARK: - Init
+    
     init() {
-        fetchTickersFromRestApi()
-        webSocketService.connect()
-        sendToWebSocket()
-    }
-    
-    func sendToWebSocket() {
-        webSocketService.codesSubject
-            .sink { [weak self] codes in
-                self?.webSocketService.send()
-            }
-            .store(in: &cancellables)
-    }
-    
-    func fetchTickersFromRestApi() {
-        dataService.$tickers
-            .sink { [weak self] tickers in
-                self?.updateWinners(tickers: tickers)
-                self?.updateLossers(tickers: tickers)
-                self?.updateVolume(tickers: tickers)
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func updateWinners(tickers: [String: UpbitTicker]) {
-        queue.async {
-            let newArray = tickers.values.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
-            self.main.async {
-                self.winners = newArray
-            }
+        Task {
+            await fetchCoins()
+            await fetchTickers()
+            await socketConnect()
         }
     }
     
-    private func updateLossers(tickers: [String: UpbitTicker]) {
-        queue.async {
-            let newArray = tickers.values.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
-            self.main.async {
-                self.lossers = newArray
-            }
+    // MARK: - RestAPI
+    
+    func fetchCoins() async {
+        do {
+            let coins = try await UpbitRestApiService.fetchCoins()
+            self.coins = coins
+        } catch {
+            print("DEBUG: fetchCoinsFromRestApi() Failed")
         }
     }
     
-    private func updateVolume(tickers: [String: UpbitTicker]) {
-        queue.async {
-            let newArray = tickers.values.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
-            self.main.async {
-                self.volume = newArray
-            }
+    func fetchTickers() async {
+        do {
+            let tickers = try await UpbitRestApiService.fetchTickers(withCoins: coins)
+            Task { await updateWinners(tickers: tickers) }
+            Task { await updateLossers(tickers: tickers) }
+            Task { await updateVolume(tickers: tickers) }
+        } catch {
+            print("DEBUG: fetchTickersFromRestApi() Failed")
+        }
+    }
+    
+    // MARK: - Array
+    
+    private func updateWinners(tickers: [String: UpbitTicker]) async {
+        let newArray = tickers.values.sorted(by: { $0.signedChangeRate > $1.signedChangeRate })
+        await MainActor.run {
+            self.winners = newArray
+        }
+    }
+    
+    private func updateLossers(tickers: [String: UpbitTicker]) async {
+        let newArray = tickers.values.sorted(by: { $0.signedChangeRate < $1.signedChangeRate })
+        await MainActor.run {
+            self.lossers = newArray
+        }
+    }
+    
+    private func updateVolume(tickers: [String: UpbitTicker]) async {
+        let newArray = tickers.values.sorted(by: { $0.accTradePrice24H > $1.accTradePrice24H })
+        await MainActor.run {
+            self.volume = newArray
+        }
+    }
+    
+    // MARK: - WebSocket
+    
+    func socketConnect() async {
+        let codes = coins.map { $0.market }
+        webSocketService.connect(withCodes: codes)
+    }
+    
+    // MARK: - Reload
+    
+    func reload() {
+        Task {
+            await fetchTickers()
+            await socketConnect()
         }
     }
 }

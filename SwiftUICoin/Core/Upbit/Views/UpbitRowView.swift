@@ -12,8 +12,8 @@ struct UpbitRowView: View {
     
     @StateObject var vm: UpbitCoinRowViewModel
     
-    init(ticker: UpbitTicker) {
-        _vm = StateObject(wrappedValue: UpbitCoinRowViewModel(ticker: ticker))
+    init(ticker: UpbitTicker, coin: UpbitCoin) {
+        _vm = StateObject(wrappedValue: UpbitCoinRowViewModel(ticker: ticker, coin: coin))
     }
     
     var body: some View {
@@ -86,12 +86,12 @@ private extension UpbitRowView {
     }
 }
 
-struct UpbitRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        UpbitRowView(ticker: dev.upbitTicker)
-            .previewLayout(.sizeThatFits)
-    }
-}
+//struct UpbitRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UpbitRowView(ticker: dev.upbitTicker)
+//            .previewLayout(.sizeThatFits)
+//    }
+//}
 
 
 

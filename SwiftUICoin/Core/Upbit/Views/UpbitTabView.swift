@@ -13,13 +13,12 @@ struct UpbitTabView: View {
     
     var body: some View {
         TabView {
-            UpbitListView(tickers: vm.volume)
-            UpbitListView(tickers: vm.winners)
-            UpbitListView(tickers: vm.lossers)
+            UpbitListView(tickers: vm.volume, coins: vm.coins)
+            UpbitListView(tickers: vm.winners, coins: vm.coins)
+            UpbitListView(tickers: vm.lossers, coins: vm.coins)
         }
         .onAppear {
-            print("리스트 보여짐")
-            vm.webSocketService.connect()
+            vm.reload()
         }
         .onDisappear {
             vm.webSocketService.close()
