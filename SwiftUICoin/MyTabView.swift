@@ -10,38 +10,31 @@ import SwiftUI
 struct MyTabView: View {
     
     @State private var isNavigationBarHidden: Bool = true
+    @Environment(\.colorScheme) var colorScheme
     @State private var selection = 0
-    @EnvironmentObject private var viewModel: HomeViewModel
     
     init() {
-        let appearance = UITabBar.appearance()
-//        appearance.unselectedItemTintColor = UIColor(Color.theme.textColor)
-        appearance.backgroundColor = UIColor(named: "TabbarBackgroundColor")
+//        let appearance = UITabBar.appearance()
+//        appearance.backgroundColor = UIColor(named: "TabbarBackgroundColor")
+//        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground() // <- HERE
+        appearance.stackedLayoutAppearance.normal.iconColor = .white
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color.accentColor)
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.accentColor)]
+        
+        UITabBar.appearance().standardAppearance = appearance
     }
     
     var body: some View {
-        
         TabView(selection: $selection) {
-            
-//            WatchlistView()
-//                .tabItem {
-//                    Image(systemName: selection == 0 ? "heart.fill" : "heart")
-////                        .environment(\.symbolVariants, .none)
-//                    Text("Watchlist")
-//                }
-//                .environmentObject(viewModel)
-//                .navigationTitle("")
-//                .navigationBarHidden(self.isNavigationBarHidden)
-//                .onAppear(perform: {
-//                    self.isNavigationBarHidden = true
-//                            viewModel.addSubscribers()
-//                })
-//                .tag(0)
-//
             HomeView()
                 .tabItem {
-                    Image(systemName: selection  == 0 ? "house.fill" : "house")
-//                        .environment(\.symbolVariants, .none)
+                    Image(selection  == 0 ? "home_selected" : "home_unselected")
+                        .renderingMode(.template)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     Text("홈")
                 }
                 .navigationTitle("")
@@ -53,8 +46,9 @@ struct MyTabView: View {
             
             HeadlineView()
                 .tabItem {
-                    Image(systemName: selection  == 1 ? "newspaper.fill" : "newspaper")
-//                        .environment(\.symbolVariants, .none)
+                    Image(selection  == 1 ? "search_selected" : "search_unselected")
+                        .renderingMode(.template)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     Text("뉴스")
                 }
                 .navigationTitle("")
@@ -63,9 +57,6 @@ struct MyTabView: View {
                     self.isNavigationBarHidden = true
                 })
                 .tag(1)
-            
-           
-            
         }
         .accentColor(Color.theme.textColor)
     }

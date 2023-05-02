@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 import Combine
-import Starscream
 
 class UpbitRestApiService {
     
@@ -23,28 +22,33 @@ class UpbitRestApiService {
     private var tickerCancellables = Set<AnyCancellable>()
     
     private init() {
-        fetchCoins()
+        Task {
+            await fetchCoins()
+        }
     }
     
-    private func fetchCoins() {
-        AF.request("\(baseUrl)/market/all")
-            .validate(statusCode: 200..<300)
-            .publishDecodable(type: [UpbitCoin].self, decoder: JSONDecoder())
-            .compactMap { $0.value }
-            .map { $0.filter { $0.market.hasPrefix("KRW") } }
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error fetching upbit coins: \(error)")
-                case .finished:
-                    print("Upbit coin data fetching finished.")
-                    self.fetchTickers()
-                    self.updateCodes()
-                }
-            }, receiveValue: { [weak self] coins in
-                self?.coins = coins
-            })
-            .store(in: &coinCancellables)
+    private func fetchCoins() async {
+        let url = URL(string: "\(baseUrl)/market/all")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
+            guard let httpResponse = response as? HTTPURLResponse,
+                  200...299 ~= httpResponse.statusCode else {
+                throw NSError(domain: "Server Error", code: 0, userInfo: nil)
+            }
+            
+            let coins = try JSONDecoder().decode([UpbitCoin].self, from: data)
+                .filter { $0.market.hasPrefix("KRW") }
+            
+            self.coins = coins
+            self.fetchTickers()
+            self.updateCodes()
+            
+        } catch {
+            print("Error fetching upbit coins: \(error)")
+        }
     }
     
     func fetchTickers() {

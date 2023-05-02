@@ -7,6 +7,5 @@ target 'SwiftUICoin' do
 
   # Pods for SwiftUICoin
   pod 'Alamofire'
-  pod 'Starscream'
 
 end
