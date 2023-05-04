@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UpbitRestApiService {
+struct UpbitService {
     static func fetchCoins() async throws -> [UpbitCoin] {
         let baseUrl = "https://api.upbit.com/v1"
         let url = URL(string: "\(baseUrl)/market/all")!

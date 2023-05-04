@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
+class UpbitWebSocketService: NSObject {
     
     static let shared = UpbitWebSocketService()
     
@@ -102,7 +102,11 @@ class UpbitWebSocketService: NSObject, URLSessionWebSocketDelegate {
         webSocket?.cancel(with: .goingAway, reason: nil)
         webSocket = nil
     }
-    
+}
+
+// MARK: - URLSessionWebSocketDelegate
+
+extension UpbitWebSocketService: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("UPbit websocket connection opened.")
         isConnected = true

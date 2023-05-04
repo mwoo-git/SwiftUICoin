@@ -31,30 +31,40 @@ class HomeViewModel: ObservableObject {
     @Published var isDark = true
     @Published var searchText = ""
     
-    private lazy var dataService = CoinDataService()
     private lazy var backupDataService = CoinBackupDataService()
     private lazy var watchlistDataService = WatchlistDataService()
-    private lazy var trendCoinsDataService = TrendDataService()
     private var cancellables = Set<AnyCancellable>()
     
     init() {
+        fetchCoins()
         addSubscribers()
     }
     
-    func addSubscribers() {
-        
-        // AllCoins Update
-        dataService.$allCoins
-            .combineLatest($sortOption) // Subcriber
-            .map(sortCoins)
-            .sink { [weak self] (returnedCoins) in
-                self?.allCoins = returnedCoins
-                self?.updateBackup(coins: returnedCoins)
-                self?.configureTopMovingCoins()
-                self?.configureLowMovingCoins()
-                self?.loadWatchlist()
+    func fetchCoins() {
+        Task {
+            let coins = try await CoinGeckoService.fetchCoins()
+            await MainActor.run {
+                allCoins = coins
             }
-            .store(in: &cancellables)
+            updateBackup(coins: coins)
+            configureTopMovingCoins()
+            configureLowMovingCoins()
+            loadWatchlist()
+            fetchCoinMarketCap()
+        }
+    }
+    
+    func fetchCoinMarketCap() {
+        Task {
+            let fetchCoins = try await CoinMarketCapService.fetchTrends()
+            let trends = convertTrendCoins(trendModels: fetchCoins, coinModels: allCoins)
+            await MainActor.run {
+                self.trendCoins = trends
+            }
+        }
+    }
+    
+    func addSubscribers() {
         
         // Watchlist Update
         $allCoins
@@ -64,8 +74,6 @@ class HomeViewModel: ObservableObject {
                 self?.subWatchlist = returnedCoins
             }
             .store(in: &cancellables)
-        
-        
         
         // SearchCoins Update
         $searchText // Subcriber
@@ -77,14 +85,6 @@ class HomeViewModel: ObservableObject {
                 self?.searchCoins = returnedCoins
             }
             .store(in: &cancellables)
-        
-        // Status Update
-        dataService.$status
-            .sink { [weak self] (statusCode) in
-                self?.status = statusCode
-            }
-            .store(in: &cancellables)
-        
         
         // BackupCoins Update
         backupDataService.$backupCoins
@@ -99,17 +99,9 @@ class HomeViewModel: ObservableObject {
                 self?.subWatchlistBackup = returnedCoins
             }
             .store(in: &cancellables)
-        
-        trendCoinsDataService.$trendCoins
-            .combineLatest($allCoins)
-            .map(convertTrendCoins)
-            .sink { [weak self] (returnedCoins) in
-                self?.trendCoins = returnedCoins
-            }
-            .store(in: &cancellables)
-        
+
     }
-    
+
     func updateBackup(coins: [CoinModel]) {
         if backupDataService.backupCoins.isEmpty {
             backupDataService.updateBackup(coins: coins)
@@ -123,7 +115,7 @@ class HomeViewModel: ObservableObject {
         isRefreshing = true
         
         let refreshInterval: TimeInterval = allCoins.isEmpty ? 3 : 60
-        dataService.getCoin()
+        fetchCoins()
         DispatchQueue.main.asyncAfter(deadline: .now() + refreshInterval) {
             self.isRefreshing = false
         }
@@ -152,8 +144,10 @@ class HomeViewModel: ObservableObject {
     
     // reloadWatchlist
     func loadWatchlist() {
-        mainWatchlist = subWatchlist.sorted(by: { $0.marketCapRank ?? 0 < $1.marketCapRank ?? 0 })
-        mainWatchlistBackup = subWatchlistBackup.sorted(by: { $0.rank < $1.rank })
+        DispatchQueue.main.async {
+            self.mainWatchlist = self.subWatchlist.sorted(by: { $0.marketCapRank ?? 0 < $1.marketCapRank ?? 0 })
+            self.mainWatchlistBackup = self.subWatchlistBackup.sorted(by: { $0.rank < $1.rank })
+        }
     }
     
     func isWatchlistExists(coin: String) -> Bool {
@@ -210,8 +204,10 @@ class HomeViewModel: ObservableObject {
             let priceChange2 = $1.priceChangePercentage24H ?? 0
             return isTop ? (priceChange1 > priceChange2) : (priceChange1 < priceChange2)
         })
-        self.topMovingCoins = isTop ? Array(sortedCoins.prefix(10)) : []
-        self.lowMovingCoins = !isTop ? Array(sortedCoins.prefix(10)) : []
+        DispatchQueue.main.sync {
+            self.topMovingCoins = isTop ? Array(sortedCoins.prefix(10)) : []
+            self.lowMovingCoins = !isTop ? Array(sortedCoins.prefix(10)) : []
+        }
     }
     
     private func configureTopMovingCoins() {

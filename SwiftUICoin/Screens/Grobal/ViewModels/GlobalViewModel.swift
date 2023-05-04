@@ -10,49 +10,64 @@ import Combine
 
 final class GlobalViewModel: ObservableObject {
     
+    var globals: [GlobalModel]?
+    
     @Published var indices: [GlobalModel] = []
     @Published var commodities: [GlobalModel] = []
     @Published var stocks: [GlobalModel] = []
-    @Published var isRefreshing = false
     
-    private let usaDataService = GlobalDataService()
+    @Published var isRefreshing = false
+
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        addSubscribers()
+        fetchInvesting()
     }
     
-    func addSubscribers() {
-        
-        usaDataService.$globals
-            .sink { [weak self] (returnedItems) in
-                self?.indices(globals: returnedItems)
-                self?.commodities(globals: returnedItems)
-                self?.stocks(globals: returnedItems)
-            }
-            .store(in: &cancellables)
+    func fetchInvesting() {
+        Task {
+            let globals = try await InvestingService.fetchGlobals()
+            self.globals = globals
+            Task { await fillterIndices() }
+            Task { await fillterCommodities() }
+            Task { await fillterStocks() }
+        }
     }
     
-    private func indices(globals: [GlobalModel]) {
-        self.indices = Array(globals.filter { $0.name != "S&P 500 VIX" }.prefix(6))
-    }
-
-    private func commodities(globals: [GlobalModel]) {
-//         if 문으로 배열에 해당 범위가 있는지 체크하여 "Index out of range" 오류를 방지합니다.
-        if 7 >= globals.startIndex && 13 < globals.endIndex {
-            self.commodities = globals[7...13].filter { $0.name != "Brent Oil" }
+    private func fillterIndices() async {
+        guard let globals = globals else { return }
+        let array = Array(globals.filter { $0.name != "S&P 500 VIX" }.prefix(6))
+        await MainActor.run {
+            self.indices = array
         }
     }
 
-    private func stocks(globals: [GlobalModel]) {
+    private func fillterCommodities() async {
+//         if 문으로 배열에 해당 범위가 있는지 체크하여 "Index out of range" 오류를 방지합니다.
+        guard let globals = globals else { return }
+        
+        if 7 >= globals.startIndex && 13 < globals.endIndex {
+            let array = globals[7...13].filter { $0.name != "Brent Oil" }
+            await MainActor.run {
+                self.commodities = array
+            }
+        }
+    }
+
+    private func fillterStocks() async {
+        guard let globals = globals else { return }
+        
         if 21 >= globals.startIndex && 26 < globals.endIndex {
-            self.stocks = Array(globals[21...26])
+            let array = Array(globals[21...26])
+            await MainActor.run {
+                self.stocks = array
+            }
         }
     }
     
     func fetchGlobalList() {
         if !isRefreshing {
-            usaDataService.getItem()
+            fetchInvesting()
             isRefreshing = true
             DispatchQueue.main.asyncAfter(deadline: .now() + (indices.isEmpty ? 3 : 60)) {
                 self.isRefreshing = false

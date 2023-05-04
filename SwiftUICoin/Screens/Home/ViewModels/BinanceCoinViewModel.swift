@@ -9,21 +9,20 @@ import Foundation
 import Combine
 
 class BinanceCoinViewModel: ObservableObject {
-    @Published var coins = [BinanceCoin]()
     
-    private lazy var dataService = BinanceCoinDataService()
-    private var cancellables: Set<AnyCancellable> = []
+    @Published var coins = [BinanceCoin]()
     
     init() {
         fetchCoins()
     }
     
     func fetchCoins() {
-        dataService.$coins
-            .sink { [weak self] (coins) in
-                self?.coins = coins
+        Task {
+            let coins = try await BinanceService.fetchCoins()
+            await MainActor.run {
+                self.coins = coins
             }
-            .store(in: &cancellables)
+        }
     }
     
     // 코인겍코에서 받은 코인 중에서 바이낸스에 상장된 코인만 보여줍니다.

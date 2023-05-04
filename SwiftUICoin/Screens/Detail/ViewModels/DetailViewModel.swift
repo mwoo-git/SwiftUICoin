@@ -18,8 +18,6 @@ class DetailViewModel: ObservableObject {
     @Published var coin: CoinModel?
     @Published var backup: BackupCoinEntity?
     
-    private let coinDatailDataService: CoinDetailDataService
-    private let articleDataService: BlockmediaDataService
     private var cancellables = Set<AnyCancellable>()
     
     enum InfoOption {
@@ -29,30 +27,35 @@ class DetailViewModel: ObservableObject {
     init(coin: CoinModel?, backup: BackupCoinEntity?) {
         if coin == nil {
             self.backup = backup
-            self.coinDatailDataService = CoinDetailDataService(coin: backup?.name?.lowercased() ?? "")
-            self.articleDataService = BlockmediaDataService(coin: nil, backup: backup)
         } else {
             self.coin = coin
-            self.coinDatailDataService = CoinDetailDataService(coin: coin?.name.lowercased() ?? "")
-            self.articleDataService = BlockmediaDataService(coin: coin, backup: nil)
         }
-        
-        self.addSubscribers()
+        fetchCoinDetail()
+        fetchBlockMedia()
+        addSubscribers()
+    }
+    
+    private func fetchCoinDetail() {
+        Task {
+            guard let coin = coin else { return }
+            let detail = try await CoinGeckoService.fetchCoinDetails(withCoin: coin.name.lowercased())
+            await MainActor.run {
+                self.websiteURL = detail.links?.homepage?.first
+            }
+        }
+    }
+    
+    private func fetchBlockMedia() {
+        Task {
+            guard let coin = coin else { return }
+            let articles = try await BlockMediaService.fetchArticles(withCoin: coin)
+            await MainActor.run {
+                self.articles = articles
+            }
+        }
     }
     
     private func addSubscribers() {
-        
-        coinDatailDataService.$coinDetails
-            .sink { [weak self] (returnedCoinDetails) in
-                self?.websiteURL = returnedCoinDetails?.links?.homepage?.first
-            }
-            .store(in: &cancellables)
-        
-        articleDataService.$articles
-            .sink { [weak self] (returnedArticles) in
-                self?.articles = returnedArticles
-            }
-            .store(in: &cancellables)
         
         if coin != nil {
             $coin

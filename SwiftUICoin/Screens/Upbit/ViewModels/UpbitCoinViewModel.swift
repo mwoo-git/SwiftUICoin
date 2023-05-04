@@ -34,7 +34,7 @@ class UpbitViewModel: ObservableObject {
     
     func fetchCoins() async {
         do {
-            let coins = try await UpbitRestApiService.fetchCoins()
+            let coins = try await UpbitService.fetchCoins()
             self.coins = coins
         } catch {
             print("DEBUG: fetchCoinsFromRestApi() Failed")
@@ -43,7 +43,7 @@ class UpbitViewModel: ObservableObject {
     
     func fetchTickers() async {
         do {
-            let tickers = try await UpbitRestApiService.fetchTickers(withCoins: coins)
+            let tickers = try await UpbitService.fetchTickers(withCoins: coins)
             Task { await updateWinners(tickers: tickers) }
             Task { await updateLossers(tickers: tickers) }
             Task { await updateVolume(tickers: tickers) }
